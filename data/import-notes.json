@@ -1,0 +1,3379 @@
+{
+  "missingReferences": [
+    {
+      "source": "source/report.md",
+      "reference": "game.ts:444",
+      "kind": "local-reference"
+    },
+    {
+      "source": "source/report.md",
+      "reference": "game.ts:1062",
+      "kind": "local-reference"
+    },
+    {
+      "source": "early-tests/local-llm-shoping-mvp-test/README.md",
+      "reference": "REQUIREMENT.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/jev-tests/notes/jev-vs-local-laya-comparison-2026-09-21.md",
+      "reference": "cloud-jev-service-deep-evaluation-2026-09-21.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/laya-mlx/notes/local-service-deep-evaluation-2026-09-21.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/arcology-control-room-round-1-review.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/first-successful-qwen-code-test.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01.md",
+      "reference": "3d-gare-saint-lazare.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/json-lens-round-3-final-comparison-2026-08-26.md",
+      "reference": "json-lens.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "report.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "report-source.md.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "archive-manifest.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r1-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r1-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r3-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r3-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-pi-test-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-layout.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-resize.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-natural-wide.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-natural-portrait.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-self-review-audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "model-engine-identity.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "model-engine-identity.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r1-compaction.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-compaction.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-probe-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-probe-after-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-natural-play.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r3-pi-natural-sessions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r3-pursuit-observer.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r3-natural-final.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r1-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r2-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r3-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "model-engine-identity.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-regression-failure.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "reference": "r4-regression-final.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mlx-dspark-vision-unavailable-2026-09-03.md",
+      "reference": "mlx-dspark-memory-guard-negative-kv-dim.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "curves.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "short-decode-curve.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "metrics.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "reference": "mtplx-sustained-128k-telemetry-2026-09-20.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "curves.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "curves.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "mtplx-sustained-128k-telemetry-2026-09-20.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "ReportContent.jsx",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-pi-frog-choir-test.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "curves.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "short-decode-curve.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "metrics.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "reference": "mtplx-sustained-128k-telemetry-2026-09-20.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "mtplx-toolcall-degrades-to-text.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-final-summary-2026-09-04.md",
+      "reference": "mlx-dspark-memory-guard-negative-kv-dim.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-mlx-dspark-pi-review-2026-09-01.md",
+      "reference": "3d-team-arena.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-1-review-2026-09-01.md",
+      "reference": "3d-team-arena.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "arcology-narrow-overflow.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "mtplx-pi-explicit-cancel.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "mtplx-pi-explicit-cancel.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "reference": "arcology-narrow-overflow.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "tide-isle-move-direction-sign-error.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "mtplx-toolcall-degrades-to-text.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "reference": "backlog.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "pi-final-answer.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "supervisor.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "analyze.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "observer-smoke.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "observer-play.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "observer-aim.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "observer-boundary.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "play-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "smoke-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "aim-results-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "aim-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "boundary-results-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "boundary-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "interventions.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "commands.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "timeline.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "pi-events.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "per-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "cpu-telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "engine-before.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "engine-after.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "engine-run.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "analysis.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "game-manifest.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "reference": "experiment-notes.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "REPORT.round-1.zh-CN.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "round-1-game-source.tar.gz",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "pi-final-answer.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "natural-play-before-ai.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "natural-play.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "wall-input.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "wall-target.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "controls.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "lifecycle.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "victory-fixture.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "probe-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "probe-after-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "interventions.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "pi-final-SELF-REVIEW.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "pi-events.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "timeline.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "cpu-telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "engine-before.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "engine-after.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "engine-run.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "analysis.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "per-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "game-manifest.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "base-idle.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "base-shelter-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "base-shelter.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "queue-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "reference": "round-2-game-source.tar.gz",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "REPORT.round-1.zh-CN.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "REPORT.round-2.zh-CN.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-natural-sessions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-bot-observed.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-natural-regression-1.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-natural-regression-2.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "natural-final.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pursuit-observer.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "wall-fixture.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "controls.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "tap-fire-before.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "tap-fire.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "capture.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-testall-final.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "self-review-audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "interventions.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "round-1-game-source.tar.gz",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "round-2-game-source.tar.gz",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "round-3-game-source.tar.gz",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "game-manifest.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "supervision-protocol.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-events.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "timeline.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "cpu-telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "engine-before.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "engine-after.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "engine-run.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "analysis.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "per-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "reference": "pi-final-answer.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "supervision-protocol.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "interventions.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "baseline-layout.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "release-layout.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "ui-observer.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "wide-final.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "portrait-final.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "natural-screen.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "live-resize.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "live-resize.mjs",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "pi-regression-first-failure.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "pi-regression-final.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "pi-test-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "timeline.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "self-review-audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "analysis.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "per-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "cpu-telemetry.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "engine-before.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "engine-after.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "timeline.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "game-manifest.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "round-4-game-source.tar.gz",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "REPORT.round-1.zh-CN.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "REPORT.round-2.zh-CN.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "reference": "REPORT.round-3.zh-CN.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r1-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r1-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r3-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r3-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-initial-prompt.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-interventions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-pi-test-results.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-layout.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-resize.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-natural-wide.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-natural-portrait.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-self-review-audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "model-engine-identity.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "model-engine-identity.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r1-compaction.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-compaction.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-probe-before-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-probe-after-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-natural-play.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r3-pi-natural-sessions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r3-pursuit-observer.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r3-natural-final.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r1-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r2-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r3-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-metrics.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "model-engine-identity.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-regression-failure.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "reference": "r4-regression-final.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "curves.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "curves.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "report.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "requests.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "system-state.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "mtplx-sustained-128k-telemetry-2026-09-20.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "reference": "ReportContent.jsx",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "cleanup-status.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "run_benchmark.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "telemetry.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "summarize_results.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "summary.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "benchmark.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "config-changes.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "hardware.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "start-server.before-256k.sh",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "start-server.sh",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "131072-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "131072-samples.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "131072-samples.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "131072-events.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "131072-server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "131072-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "262144-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "262144-samples.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "262144-samples.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "262144-events.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "262144-server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "262144-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "vision-notes.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "reference": "start-vision-server.sh",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "requests.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "clients-summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "requests.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "clients.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "resources-per-second.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "clients-summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "test-plan.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "production-clients-final-check.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "cleanup-status.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "status-restored-final.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "audit_cli_outputs.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "change.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "vision-capability-fix.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "followup-plan.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "followup16k",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "followup-requests.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "followup-clients.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "followup-resources-per-second.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "hermes-followup-summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "followup16k-independent-audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "invalid-adapter",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "runner-pi-hermes.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "runner.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "service-restored.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "live",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "live",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "reference": "live",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "setup-notes.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "model-verification.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "draft-source-comparison.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "hardware.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "test-plan.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "runs.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "hardware.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "summary.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "merged-per-second.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "allocator.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "allocator.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "128k-repeat-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "reference": "cleanup-status.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "independent-answer-audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "test-plan.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "method-audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "suite.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grades.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "thinking-budget-audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "math-thinking-requests.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "math-thinking-pairs.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "math-thinking-category-quality.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "math-thinking-resources-per-second.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grades-math-thinking.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "grade.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "supplemental-code.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "supplemental-code-diagnostic.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "supplemental-protocol.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "supplemental-protocol-amendment-01.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "manual-code-notes.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "retrieval-32k-complete-review.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "retrieval-32k-complete-review.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "retrieval-128k-complete-review.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "retrieval-128k-complete-review.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "validation-amendment.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "math-thinking-final-audit.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "final-service-audit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "requests.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "pairs.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "category-quality.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "resources-per-second.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "reference": "summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "vision-validation.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "test-plan.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "run_stability.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "start-server.sh",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "instrumented_server.py",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "summary.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "summary.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "merged-per-second.csv",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "hardware.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "run-sessions.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "32k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "32k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "32k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "32k-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "64k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "64k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "64k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "64k-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "96k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "96k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "96k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "96k-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-repeat-result.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-repeat-stream.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-repeat-output.txt",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "128k-repeat-request.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "allocator.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "allocator.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "resources.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "allocator.jsonl",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server.log",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "server-exit.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "reference": "cleanup.json",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "App.tsx:82",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "cart.ts:76",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "config-a-fromzero-01-local-cafe-pos.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "Cart.jsx:7",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "App.jsx:117",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "cart.js:100",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "config-b-fromzero-01-local-cafe-pos.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "Cart.jsx:94",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "App.jsx:61",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "cart.js:100",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "ProductCatalog.jsx:9",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "Cart.jsx:25",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "config-c-fromzero-01-local-cafe-pos.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "config-d-fromzero-01-local-cafe-pos.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "config-e-fromzero-01-local-cafe-pos.md",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "cart.js:6",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "cart.js:50",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "pricing.js:18",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "checkout.js:18",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "App.jsx:53",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "ProductCatalog.jsx:45",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "index.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "preview-day2-final.png",
+      "kind": "figure"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "preview-day2-final.png",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "index.html",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "preview-map-day2.png",
+      "kind": "figure"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "preview-map-day2.png",
+      "kind": "local-reference"
+    },
+    {
+      "source": "qwen-tests/local-llm-test-inventory-2026-10-20/SESSIONS.md",
+      "reference": "index.html",
+      "kind": "local-reference"
+    }
+  ],
+  "figureCount": 52,
+  "notes": [
+    "Historical results are unchanged. Local account paths and private LAN addresses are generalized.",
+    "Product code is maintained in separate repositories. Source availability does not imply public hosting."
+  ]
+}
