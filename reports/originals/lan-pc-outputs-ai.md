@@ -1,66 +1,85 @@
-内网 AI 服务实测
+LAN AI service evaluation
 
-# 内网 AI 服务实测
+# LAN AI service evaluation
 
-2026-10-06 · Qwen3.8 Flash Next IQ2\_XS · 单客户端顺序请求 · temperature=0 · SSE 流式
+[English](lan-pc-outputs-ai.md) | [简体中文](lan-pc-outputs-ai_CN.md)
 
-## 结论
+<!-- environment-context:start -->
 
-本次服务短提示词生成速度约 60–65 tokens/s，适合对话、摘要、信息提取和简单代码。关闭思考时两道数学题答错，开启 high 后两题均答对。需要准确计算或推理的任务，优先开启思考并核验结果。
+## Workstation and system (context added 2026-10-20)
 
-这是小规模自编功能测试，不能据此判断总体模型排名，也不能把表现归因于 IQ2\_XS 量化；未做同模型不同量化对照。服务端返回的模型 ID 不构成模型权重身份验证。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client; inference ran on a LAN PC |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-## 速度
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-| 请求 | 输入 tokens | 输出 tokens | 首字秒 | 总耗时秒 | 服务端生成 tok/s |
+<!-- environment-context:end -->
+
+2026-10-06 · Qwen3.8 Flash Next IQ2\_XS · One client, sequential requests · temperature=0 · SSE streaming
+
+## Conclusion
+
+Short-prompt generation was approximately 60–65 tokens/s, suitable for conversation, summaries, extraction and simple code. Both mathematics questions were wrong with thinking disabled and correct with high thinking. Enable thinking and verify results for tasks requiring accurate calculation or reasoning.
+
+This is a small, self-authored functional test. It cannot establish overall model rankings or attribute performance to IQ2\_XS quantization: no same-model quantization comparison was run. The server-returned model ID does not verify weight identity.
+
+## Speed
+
+| Request | Input tokens | Output tokens | First-token seconds | Total seconds | Server generation tok/s |
 | --- | --- | --- | --- | --- | --- |
 | speed\_1 | 44 | 512 | 0.754 | 9.248 | 60.2 |
 | speed\_2 | 44 | 512 | 0.904 | 8.67 | 65.1 |
 | speed\_3 | 44 | 512 | 0.827 | 8.609 | 65.1 |
 
-三次速度中位数：65.1 tok/s；首字 0.827 秒。速度测试固定生成 512 tokens，均因达到预算结束，这是预期测速截断，不计为质量失败。
+The median over three runs was 65.1 tok/s and 0.827 seconds to first token. Speed requests generated a fixed 512 tokens and all ended at the budget. This expected measurement truncation is not a quality failure.
 
-生成 tok/s 采用服务端 timings.predicted\_per\_second；首字和总耗时由客户端单调时钟测量。首字记录首个非空内容或思考增量；high 模式的首字不等于用户可见最终答案。12 个短质量请求首字中位数约 1.00 秒，其中一次摘要请求为 12.804 秒，原因未确定。所有请求回报 cached\_tokens=0。
+Generation tok/s uses server timings.predicted\_per\_second. First-token and total latency use the client monotonic clock. First token means the first nonempty content or thinking delta; in high mode it need not be a user-visible final answer. The 12 short quality requests had a median first-token latency of approximately 1.00 seconds; one summary request took 12.804 seconds for an undetermined reason. All requests reported cached\_tokens=0.
 
-## 回答质量
+## Answer quality
 
-12 个关闭思考的样例中，内容复核 10 个通过；如同时要求严格机器可解析输出，则为 9 个通过。high 复测的三道数学/逻辑题全部通过。这些小样本比例不是通用准确率。
+Of 12 examples with thinking disabled, 10 passed content review, or 9 when strict machine-parseable output was also required. All three mathematics/logic retests with high thinking passed. These small-sample proportions are not general accuracy estimates.
 
-| 用例 | 思考 | 判定 | 总耗时秒 | 实际回答 |
+| Case | Thinking | Assessment | Total seconds | Actual answer |
 | --- | --- | --- | --- | --- |
-| 折扣与服务费 | none | 未通过 | 1.346 | {"total":184.05} |
-| 真假话逻辑 | none | 通过 | 1.559 | {"truth\_teller":"丙"} |
-| 条件概率 | none | 未通过 | 1.776 | {"numerator": 1, "denominator": 2} |
-| 去重与格式遵循 | none | 通过 | 1.025 | ["杏", "梨", "桃"] |
-| 中文结构化提取 | none | 内容正确；纯 JSON 格式未通过 | 2.065 | ```json { "customer": "林某", "order\_id": "A07", "paid\_cny": 1050, "phone": null } ``` |
-| 资料不足时不猜测 | none | 通过 | 1.153 | {"budget": null} |
-| 忽略资料内指令 | none | 通过 | 1.133 | {"order\_id":"AB-731"} |
-| 任务调度 | none | 通过 | 1.118 | {"hours": 5} |
-| 代码语义 | none | 通过 | 0.826 | [2] |
-| 修复 None 过滤 | none | 人工复核通过 | 1.038 | return [x for x in items if x is not None] |
-| 区间合并函数 | none | 执行测试 8/8 通过，输入未修改 | 3.404 | ```python def merge\_intervals(intervals): if not intervals: return [] sorted\_intervals = sorted(intervals, key=lambda x: x[0]) merged = [] current\_start, current\_end = sorted\_intervals[0] for start, end in sorted\_intervals[1:]: if start <= current\_end: current\_end = max(current\_end, end) else: merged.append([current\_start, current\_end]) current\_start, current\_end = start, end merged.append([current\_start, current\_end]) return merged ``` |
-| 中文摘要 | none | 人工复核通过 | 13.562 | 新版签名校验不兼容导致安卓用户无法登录。团队已回滚校验恢复登录，并将增加兼容性测试后再上线。 |
-| 折扣与服务费 | high | 通过 | 4.089 | {"total":182.7} |
-| 真假话逻辑 | high | 通过 | 4.333 | {"truth\_teller":"丙"} |
-| 条件概率 | high | 通过 | 3.846 | {"numerator":1,"denominator":3} |
+| Discount and service charge | none | Fail | 1.346 | {"total":184.05} |
+| Truth-teller logic | none | Pass | 1.559 | {"truth\_teller":"丙"} |
+| Conditional probability | none | Fail | 1.776 | {"numerator": 1, "denominator": 2} |
+| Deduplication and format following | none | Pass | 1.025 | ["杏", "梨", "桃"] |
+| Chinese structured extraction | none | Content correct; strict JSON format failed | 2.065 | ```json { "customer": "林某", "order\_id": "A07", "paid\_cny": 1050, "phone": null } ``` |
+| Do not guess when information is missing | none | Pass | 1.153 | {"budget": null} |
+| Ignore instructions inside source material | none | Pass | 1.133 | {"order\_id":"AB-731"} |
+| Task scheduling | none | Pass | 1.118 | {"hours": 5} |
+| Code semantics | none | Pass | 0.826 | [2] |
+| Fix None filtering | none | Passed human review | 1.038 | return [x for x in items if x is not None] |
+| Interval-merging function | none | Execution tests 8/8 passed; input unchanged | 3.404 | ```python def merge\_intervals(intervals): if not intervals: return [] sorted\_intervals = sorted(intervals, key=lambda x: x[0]) merged = [] current\_start, current\_end = sorted\_intervals[0] for start, end in sorted\_intervals[1:]: if start <= current\_end: current\_end = max(current\_end, end) else: merged.append([current\_start, current\_end]) current\_start, current\_end = start, end merged.append([current\_start, current\_end]) return merged ``` |
+| Chinese summary | none | Passed human review | 13.562 | Incompatibility in the new signature verification prevented Android users from logging in. The team rolled verification back to restore login and will add compatibility tests before relaunching. |
+| Discount and service charge | high | Pass | 4.089 | {"total":182.7} |
+| Truth-teller logic | high | Pass | 4.333 | {"truth\_teller":"丙"} |
+| Conditional probability | high | Pass | 3.846 | {"numerator":1,"denominator":3} |
 
-折扣题正确结果为 240 × 0.85 = 204，减 30 得 174，再乘 1.05 得 182.7；none 回答 184.05。概率题共有 10 种两球组合，至少一个红球有 9 种，双红有 3 种，故答案为 1/3；none 回答 1/2。结构化提取字段全部正确，但额外输出 Markdown 代码块，需要清理或更严格的结构化约束。区间合并函数经过代码检查后执行 8 个空输入、嵌套、端点相接、无序、负数、重复区间等用例，全部通过。
+The correct discount calculation is 240 × 0.85 = 204, minus 30 gives 174, then multiplied by 1.05 gives 182.7; none returned 184.05. For probability, there are 10 two-ball combinations, 9 containing at least one red ball and 3 containing two red balls, so the answer is 1/3; none returned 1/2. Structured-extraction fields were all correct, but an extra Markdown code fence requires cleaning or stricter structured-output constraints. After code inspection, the interval-merging function passed all 8 cases covering empty input, nesting, touching endpoints, unsorted input, negatives and duplicates.
 
-## 长上下文检索
+## Long-context retrieval
 
-| 输入 tokens | 首字秒 | 总耗时秒 | Prefill tok/s | 判定 |
+| Input tokens | First-token seconds | Total seconds | Prefill tok/s | Assessment |
 | --- | --- | --- | --- | --- |
-| 20034 | 13.542 | 14.224 | 1500.1 | 3/3 校验码正确 |
-| 80034 | 51.4 | 52.053 | 1570.5 | 3/3 校验码正确 |
-| 130034 | 82.355 | 82.937 | 1594.5 | 3/3 校验码正确 |
+| 20034 | 13.542 | 14.224 | 1500.1 | 3/3 verification codes correct |
+| 80034 | 51.4 | 52.053 | 1570.5 | 3/3 verification codes correct |
+| 130034 | 82.355 | 82.937 | 1594.5 | 3/3 verification codes correct |
 
-资料由重复中文记录组成，在约 10%、50%、90% 的位置各放一个校验码，要求按顺序找全。此测试验证简单检索和请求容量，不等于复杂文档理解、跨段推理或真实业务 RAG 的表现。长上下文输出只有约 28 tokens，不能与 512 tokens 的短提示词生成测速直接比较。
+The material consists of repeated Chinese records with verification codes at approximately 10%, 50% and 90%, all to be retrieved in order. This tests simple retrieval and request capacity, not complex document understanding, reasoning across sections or real business RAG performance. Long-context outputs contain only approximately 28 tokens and cannot be directly compared with 512-token short-prompt generation measurements.
 
-## 使用建议与边界
+## Usage and limits
 
-* 摘要、简单提取可用 reasoning\_effort=none；数值计算、逻辑和复杂代码优先用 high，给思考留足输出预算。
-* 程序消费结果时验证 JSON，不能假定“只输出 JSON”的提示保证格式。
-* 长资料请求给足超时。当前仅测试单客户端，未验证排队、公平性、多小时稳定性和硬件资源峰值。
-* 本轮未验证图片、工具调用或外部知识时效；接口报告仅支持文本。
+* reasoning\_effort=none can serve summaries and simple extraction; prefer high for numerical calculation, logic and complex code, with enough output budget for thinking.
+* Validate JSON consumed by programs. A prompt asking for JSON only does not guarantee formatting.
+* Allow sufficient timeout for long material. Only a single client was tested; queuing, fairness, multi-hour stability and peak hardware resources were not verified.
+* Images, tool calls and external-knowledge freshness were not tested; the interface reports text-only support.
 
-测速结果受输入、输出内容、预热和机器负载影响。说明文档中 51–54 tok/s 来自不同长上下文负载；本次短提示词约 65 tok/s 不构成对该结果的否定。
+Speed depends on input, output content, warmup and machine load. The documentation's 51–54 tok/s comes from a different long-context workload; approximately 65 tok/s on short prompts here does not contradict it.

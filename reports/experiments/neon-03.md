@@ -1,21 +1,40 @@
-# Neon Bastion / ds-v4-flash-vision 55-task
+# Neon Bastion / ds-v4-flash-vision 55-task run
 
-| 项目 | 记录 |
+[English](neon-03.md) | [简体中文](neon-03_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | NEON-03 |
-| 日期 | 2026-09-08—09-16 |
-| 模型与运行方式 | ds-v4-flash-vision + DeepSeek Harness；云端对照 |
-| 推理位置 | 云端对照 |
+| ID | NEON-03 |
+| Date | 2026-09-08—09-16 |
+| Model and runtime | ds-v4-flash-vision + DeepSeek Harness; cloud comparison |
+| Inference location | cloud |
 
-## 历史结果
+<!-- environment-context:start -->
 
-55/55 任务完成；历史最终记录 550 单测、122 E2E；人工验收仍发现测试遗漏。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-- [Neon Bastion ds-v4-flash-vision run — A–G progress (35/55)](../originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md)
-- [Neon Bastion 三轮测试横向总结 — 8bit 七轮 / ds-v4-flash-vision / MTPLX 4bit](../originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16.md)
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 证据边界
+<!-- environment-context:end -->
 
-代码在本机，推理为云端；不能计作本机模型跑分。单轮 note 的旧标题与正文最终状态不一致，最终状态看三轮总结及验收文档。
+## Historical result
+
+All 55/55 tasks completed. The historical final record contains 550 unit tests and 122 E2E scenarios; human acceptance still found omissions in automated coverage.
+
+## Full reports
+
+- [Neon Bastion ds-v4-flash-vision run — A01–A03](../originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md)
+- [Neon Bastion Three-Round Test Cross-Sectional Summary](../originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16.md)
+
+## Evidence limits
+
+Source was stored locally, but inference was in the cloud. This is not a local-inference benchmark. The old single-run note title is stale; use the cross-run summary and acceptance documents for the final state.

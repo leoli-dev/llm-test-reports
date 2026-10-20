@@ -1,0 +1,22 @@
+{
+  "capturedAt": "2026-10-20T22:03:27Z",
+  "computer": "MacBook Pro",
+  "modelIdentifier": "Mac17,6",
+  "chip": "Apple M5 Max",
+  "cpuCores": 18,
+  "gpuCores": 40,
+  "memorySystemLabel": "128 GB",
+  "memoryBytes": 137438953472,
+  "memoryGiB": 128,
+  "architecture": "arm64",
+  "operatingSystem": "macOS",
+  "osVersion": "27.0.1",
+  "osBuild": "26A434",
+  "metal": "Metal 4",
+  "sources": [
+    "system_profiler SPHardwareDataType SPDisplaysDataType",
+    "sw_vers",
+    "sysctl hw.memsize hw.logicalcpu"
+  ],
+  "scope": "Current workstation snapshot. Historical OS is specified separately per test. Remote inference hardware is not inferred from the Mac client."
+}

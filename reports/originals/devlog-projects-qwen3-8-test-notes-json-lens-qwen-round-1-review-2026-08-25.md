@@ -1,13 +1,32 @@
 ---
 type: Note
-title: JSON Lens Qwen 3.8 Round 1 code review
+title: "JSON Lens Qwen 3.8 Round 1 code review"
 status: current
-description: Independent two-round review of the Qwen JSON Lens delivery: Round 1 defects are closed, but deep valid JSON still overflows the app stack.
+description: "Independent two-round review of the Qwen JSON Lens delivery: Round 1 defects are closed, but deep valid JSON still overflows the app stack."
 tags: [json-lens, qwen3.8, code-review, frontend, benchmark]
 timestamp: 2026-08-26T10:18:40Z
 ---
 
 # JSON Lens Qwen 3.8 Round 1 code review
+
+[English](devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25.md) | [简体中文](devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
 
 ## Scope and evidence
 
@@ -37,15 +56,15 @@ Fix by advancing the generation and cancelling any in-flight Worker before *ever
 
 `ParseStatus.value` uses `null` as the no-value sentinel, then `App` and `InputPanel` gate successful rendering and tools on `value !== null` (`json-lens-qwen/src/App.tsx:70-75,218`; `src/components/InputPanel.tsx:228`). A valid document containing only `null` parses successfully but renders no tree and leaves Format disabled. Represent parse success separately from the parsed value (the existing `parseState === 'done'` already provides the distinction).
 
-Persistence has a second integration gap: `useLocalStorage` restores `jsonlens:text`, but `useParse()` is never asked to parse that initial text. With localStorage preloaded to `{ "saved": true }` and a reload, the textarea is restored while the result panel says “输入 JSON 后在此显示树形视图” and has zero rows. Parse restored text on mount and clear or replace stale query state appropriately.
+Persistence has a second integration gap: `useLocalStorage` restores `jsonlens:text`, but `useParse()` is never asked to parse that initial text. With localStorage preloaded to `{ "saved": true }` and a reload, the textarea is restored while the result panel says “Input JSON Display the tree view here afterwards” and has zero rows. Parse restored text on mount and clear or replace stale query state appropriately.
 
 ### LIB-02 — Friendly structural errors report column numbers one character too high
 
 `toLineColumn()` returns `position - lastNewline + 1` in `jsonErrors.ts:14-26`. With `lastNewline === -1`, position 0 becomes column 2; in general, 1-based column is `position - lastNewline`, not an additional `+ 1`. The structural scanner overrides native locations, so this affects the advertised trailing-comma, single-quote and unquoted-key messages.
 
-Browser reproduction for a multiline object with a trailing comma reports that comma as “第 2 行，第 10 列”; it is column 9. Correct the formula and test first-character, single-line, and later-line error positions. The existing E2E expectation currently codifies the wrong number.
+Browser reproduction for a multiline object with a trailing comma reports that comma as “line 2, column 10”; it is column 9. Correct the formula and test first-character, single-line, and later-line error positions. The existing E2E expectation currently codifies the wrong number.
 
-### FE-14 — “只看差异” is a no-op
+### FE-14 — “Show differences only” is a no-op
 
 `DiffView` sets `const visible = onlyDiffs ? entries : entries` (`json-lens-qwen/src/components/DiffView.tsx:46-52`). Both settings render exactly the same collection, so toggling the checkbox cannot filter anything. The supplied E2E explicitly asserts unchanged count after toggling (`e2e/jsonlens.spec.ts:182-188`), which verifies the defect instead of the stated feature.
 
@@ -85,7 +104,7 @@ No delivery files were modified during this independent review.
 
 ### Re-verified closed items
 
-The claimed quality gates pass independently: **115/115 Vitest** across 9 files, `npm run build`, and **3/3 Playwright**. Browser checks also confirmed that a >5 MiB `stale` document no longer replaces an immediate small `fresh` edit, top-level `null` renders as one root row with Format enabled, localStorage-restored JSON produces its tree on reload, and disabling “只看差异” adds unchanged rows.
+The claimed quality gates pass independently: **115/115 Vitest** across 9 files, `npm run build`, and **3/3 Playwright**. Browser checks also confirmed that a >5 MiB `stale` document no longer replaces an immediate small `fresh` edit, top-level `null` renders as one root row with Format enabled, localStorage-restored JSON produces its tree on reload, and disabling “Show Differences Only” adds unchanged rows.
 
 The following Round-1 findings are therefore closed: FE-12 (request generation/cancellation), FE-13 (top-level null + restored parsing), LIB-02 (1-based columns), FE-14 (functional only-diffs), LIB-03 (duplicate-id fallback), and UX-05 (normal-document pre-order). The corresponding unit tests are focused and meaningful.
 

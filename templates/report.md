@@ -1,37 +1,44 @@
-# 实验名称
+# Experiment title
 
-日期：YYYY-MM-DD（时区）。
+[English](report.md) | [简体中文](report_CN.md)
 
-## 要回答的问题
+Test date: YYYY-MM-DD, timezone. Update language links after naming the report.
 
-描述本次要验证的具体问题与预先约定的成功标准。
+## Question and success criteria
 
-## 环境与固定条件
+State the question and the success criteria fixed before the run.
 
-| 项目 | 实际配置 |
+## Hardware, system and fixed conditions
+
+| Item | Actual configuration and evidence |
 |---|---|
-| 推理位置 | 本机 / 内网 PC / 云端 |
-| 硬件与系统 | 芯片、内存、系统版本 |
-| 模型 | 完整名称、来源、固定 revision |
-| 量化与缓存 | 权重、KV、prefix cache 设置 |
-| 引擎与 Agent | 名称、版本、固定提交 |
-| 请求条件 | context、max output、thinking、sampling |
+| Inference location | Local / LAN PC / cloud |
+| Inference host | Device, chip/CPU and core count, GPU and core count, unified/system memory |
+| Test-time OS | OS version, build, architecture; snapshot timestamp and evidence |
+| Client (if remote) | Client hardware/system, separately from the inference host |
+| Power and thermal state | Power source/profile, relevant thermal conditions; not recorded if unavailable |
+| Model | Full identifier, source, pinned revision |
+| Quantization and cache | Weight format, KV format, prefix cache and warm/cold state |
+| Engine and agent | Names, versions and fixed commits |
+| Request settings | Context, max output, thinking/reasoning, sampling, concurrency |
 
-## 任务与过程
+Use **not recorded** for missing evidence. A current machine snapshot must not be substituted for historical test conditions. See the dated [workstation reference](../environment.md); use `../../environment.md` from a saved report in `reports/originals/`.
 
-保留原始题目、各轮要求、模型实际交付、人为提示与失败重试。将模型实现和监督者修改分开说明。
+## Task and process
 
-## 结果与证据
+Retain the prompt, each round's requirements, actual model delivery, human instructions and failed retries. Distinguish model code from supervisor edits.
 
-| 检查项 | 结果 | 证据或命令 |
+## Results and evidence
+
+| Check | Result | Evidence or command |
 |---|---|---|
 
-图片存入 assets/，原始报告从 reports/originals/ 使用 ../../assets/ 相对链接。代码产物链接到独立仓库的固定提交。
+Put images in `assets/`; use `../../assets/...` from `reports/originals/`. Link artifact code to a fixed commit in its separate repository.
 
-## 性能与测量口径
+## Performance and measurement
 
-区分 prefill、decode、TTFT、端到端耗时，以及缓存冷热、样本数与系统遥测范围。保留原始失败，注明截断与缺样。
+Separate prefill, decode, TTFT and end-to-end time. Record cache state, sample counts, telemetry coverage, failed requests, truncation and missing samples.
 
-## 局限与结论
+## Limits and conclusion
 
-说明人工参与、未覆盖范围、对照差异与不能推出的结论。不要把自动测试通过等同于产品验收。
+State human involvement, missing coverage, comparison differences and unsupported conclusions. Automated checks passing do not establish product acceptance. Supply a full Chinese `_CN.md` counterpart, retaining numerical and code evidence.

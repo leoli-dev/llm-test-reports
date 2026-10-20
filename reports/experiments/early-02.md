@@ -1,21 +1,40 @@
-# Arcology 控制室 / Pi 尝试与 Qwen Code 交付
+# Arcology control room / Pi attempts and Qwen Code delivery
 
-| 项目 | 记录 |
+[English](early-02.md) | [简体中文](early-02_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | EARLY-02 |
-| 日期 | 2026-08-21 |
-| 模型与运行方式 | oMLX True2456/Qwen3.8-27B-AWQ-5.0bpw；Pi / Qwen Code coding-reason |
-| 推理位置 | 本机 |
+| ID | EARLY-02 |
+| Date | 2026-08-21 |
+| Model and runtime | oMLX True2456/Qwen3.8-27B-AWQ-5.0bpw; Pi / Qwen Code coding-reason |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-Qwen Code 交付并修复多项问题；最后仍有窄屏溢出及 QA 循环。Pi/MTPLX 前期另有 shape error 和重复 token 失败。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-- [First successful Qwen Code test on local Qwen3.8](../originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test.md)
-- [Arcology control room — Round 1 findings and Round 2 verification](../originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md)
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 证据边界
+<!-- environment-context:end -->
 
-报告与会话在；原始产品源码目录未找到，不能将其当作已恢复源码。
+## Historical result
+
+Qwen Code delivered the application and fixed several defects. Narrow-screen overflow and a QA loop remained; earlier Pi/MTPLX attempts also hit shape errors and repeated-token failures.
+
+## Full reports
+
+- [First successful Qwen Code test](../originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test.md)
+- [Arcology control room — Round 1 review](../originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md)
+
+## Evidence limits
+
+Reports and conversation evidence remain. The original product source directory was not found and must not be described as recovered code.

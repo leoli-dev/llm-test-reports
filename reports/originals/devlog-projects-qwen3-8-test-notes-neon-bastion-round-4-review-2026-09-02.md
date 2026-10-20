@@ -1,35 +1,54 @@
 ---
 type: Note
-title: Neon Bastion — Round 4 评审：玩法/场景重设计与十项任务拆解
+title: "Neon Bastion — Round 4 review: gameplay/scene redesign and ten-task decomposition"
 status: current
-description: 五项 Round 3 规格全部交付后的人工游玩反馈，转化为可执行的十个独立任务；含玻璃语义拆分、地图随机化确定性约束、AI 战略人格与画面亮度的可测量下限。
+description: "Human play feedback after five Round 3 specifications were delivered, translated into ten executable tasks covering glass semantics, deterministic random maps, strategic AI personalities and measurable minimum brightness."
 tags: [neon-bastion, qwen3.8-27b, mlx-dspark, pi, code-review, game-design]
 timestamp: 2026-09-02T23:40:00Z
 ---
 
-# Neon Bastion — Round 4 评审
+# Neon Bastion — Round 4 review
 
-## 本轮定位
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02_CN.md)
 
-Round 3 的五项权威规格（FX-02、FX-03、GAME-01/02/03、GAME-04）已全部交付，五个提交全部独立复核通过：
+<!-- environment-context:start -->
 
-| 提交 | 内容 | 复核 |
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Purpose of this round
+
+All five authoritative Round 3 specifications (FX-02, FX-03, GAME-01/02/03, GAME-04) are delivered, with all five commits independently verified:
+
+| Commit | Content | Verification |
 |---|---|---|
-| `b2737b6` | AI 开火并入统一事件总线 | 40/40 单测、6/6 E2E |
-| `2a0ef04` | 玩家受击反馈 + 开火后坐 | 48/48、7/7 |
-| `82f5dd4` | 射速统一 1 发/秒 + 玩家半自动 | 50/50、7/7 |
-| `2ecb605` | 完全移除换弹与弹药 | 49/49、7/7 |
-| `328dae6` | 子弹改为可闪避飞行弹丸（60 u/s） | 53/53、7/7 |
+| `b2737b6` | AI firing joins the shared event bus | 40/40 unit tests, 6/6 E2E |
+| `2a0ef04` | Player hit feedback + firing recoil | 48/48, 7/7 |
+| `82f5dd4` | Unified 1 shot/second + player semi-auto | 50/50, 7/7 |
+| `2ecb605` | Reloading and ammunition completely removed | 49/49, 7/7 |
+| `328dae6` | Bullets become dodgeable flying projectiles (60 u/s) | 53/53, 7/7 |
 
-用户裁定「基本功能没什么问题了」。**本轮不是缺陷评审，是玩法与场景的重设计**——需求全部来自用户人工游玩后的直接意见，与原始题面 `test-prompts/3d-team-arena.md` 冲突之处一律以本轮为准。
+The user judges the basic functionality largely sound. **This round redesigns gameplay and the scene rather than reviewing defects.** Requirements come directly from human play feedback and override conflicting parts of `test-prompts/3d-team-arena.md`.
 
-评分继续暂缓（PLAY-01 仍开），理由与 Round 3 相同且本轮更强：需求本身是「好不好玩、好不好看」，静态审查与 headless 断言在定义上无法回答。
+Scoring remains deferred (PLAY-01 is still open), for the same reason as Round 3, now stronger: the requirements concern enjoyment and appearance, which static review/headless assertions cannot answer by definition.
 
-## 唯一一项硬证据：画面确实过暗
+## The one hard measurement: the image is genuinely too dark
 
-用户第三次提出「画面还是太昏暗」。前两次（ART-03、ART-04）我给的都是定性建议，结果一次矫枉不足、一次矫枉过正——**根因是我从未给出可测量的验收下限**。本轮先测再提。
+The user reports excessive darkness for the third time. Earlier ART-03/ART-04 advice was qualitative, first undercorrecting and then overcorrecting. **I never supplied a measurable acceptance floor.** This round measures before specifying.
 
-探针：定 seed 20260212，玩家置于 `(0, 20)` 面向中央高台，取第 8 帧，320×180 采样，`L = 0.2126R + 0.7152G + 0.0722B`。
+Probe: fixed seed 20260212, player at `(0, 20)` facing the central platform, frame 8, 320×180 sample, `L = 0.2126R + 0.7152G + 0.0722B`.
 
 ```
 meanLuma  21.4 / 255
@@ -37,74 +56,74 @@ darkFrac  0.748          (L < 32 的像素占比)
 直方图    [0.748, 0.249, 0.002, 0, 0, 0, 0, 0]     每桶宽 32
 ```
 
-**整幅画面没有任何像素超过 L=96。** 这不是风格偏暗，是全图压在最低两桶里。ART-03/ART-04 两轮反复调 exposure 和材质色而始终没跳出这个区间，说明问题不在参数微调，而在场景本身没有主光源和亮背景——夜间 + 纯色近黑天空 + 近黑地面，怎么调都在底部。
+**No pixel in the entire image exceeds L=96.** This is more than a dark style: the whole image sits in the lowest two bins. Repeated exposure/material changes in ART-03/ART-04 never leave that range, pointing beyond fine parameter tuning to the scene's lack of a main light and bright background: night, near-black flat sky and near-black ground keep everything at the bottom.
 
-用户给出的方向（蓝天白云 + 黄沙地面）正好换掉了这两个最大面积的暗块，是对症的。因此本轮把亮度写成可测量的验收条件，而不是形容词。
+The user's blue-sky/white-cloud/yellow-sand direction replaces the two largest dark areas and directly addresses this. Brightness is therefore specified through measurable acceptance conditions rather than adjectives.
 
-## 需求转译与设计判断
+## Requirement translation and design judgments
 
-用户原话六条，转译为十个任务。三处需要工程判断，记录如下。
+Six user requests become ten tasks. Three engineering judgments are recorded below.
 
-### 1. 玻璃的语义是「视线穿透、弹道不穿透」——这会咬到 AI
+### 1. Glass means visible through, but not shootable through — affecting AI
 
-需求原文：「可以有玻璃墙体，看到对面是什么，但是子弹打不过去」。
+Original request: glass walls should let the player see the other side while blocking bullets.
 
-当前 `losClear()`（`src/game/map/geometry.ts`）与 `raycastMap()` 用同一份 solids，视线与弹道是同一条判定。玻璃要求**把这两者拆开**：视线忽略玻璃，弹道不忽略。
+Current `losClear()` (`src/game/map/geometry.ts`) and `raycastMap()` share the same solids and test. Glass requires **separating sight from ballistics**: sight ignores glass, projectiles do not.
 
-拆开之后立刻产生一个二阶后果：`aiPerception.canSee()` 会返回 true，AI 于是进入 engage 并开火，但子弹被玻璃挡下——**AI 会隔着玻璃对着看得见的敌人无限空放**。在 1 发/秒的射速下这不只是浪费，而是可能让整场比赛打不完（3 seed 终止性回归会挂）。
+This immediately has a second-order consequence: `aiPerception.canSee()` returns true, AI engages and fires, but glass blocks the shots. **AI can shoot endlessly at a visible enemy through glass.** At 1 shot/second this can prevent a match from ending, failing the 3-seed termination regression.
 
-因此 MAP-02 必须同时做两件事，缺一不可：拆分视线/弹道判定 **且** 在 `doShoot` 开火前加一次弹道畅通检查。这一点必须写进任务，不能指望模型自己推出来。
+MAP-02 must therefore both separate sight/ballistics **and** check ballistic clearance before `doShoot`. Both are mandatory and must be stated in the task rather than left for the model to infer.
 
-### 2. 「随机地图」必须是「由 seed 决定的确定性随机」
+### 2. Random maps must be deterministic randomness controlled by seed
 
-需求原文：「地图结构需要随机刷新（可以是有限个数的随机），墙体结构需要完全随机」。
+Original request: randomized map structure, possibly from a finite set, with fully randomized wall structure.
 
-项目现有的全部验证都建立在确定性之上：3 seed 全场终止性回归、`ai_fire_events` 的定 seed 1v1 头/身击杀、E2E 里大量硬编码坐标（`t.teleport(4, -3, 21)`、中央柱体在 `(0,0)`）。**如果地图用 `Math.random()` 刷新，这些验证会全部失效或变成 flaky。**
+Existing verification relies on determinism: 3-seed match termination, fixed-seed 1v1 head/body kills in `ai_fire_events`, and E2E hardcoded coordinates such as `t.teleport(4, -3, 21)` and central pillar `(0,0)`. **Refreshing maps with `Math.random()` invalidates or destabilizes these checks.**
 
-约束写死：布局与每面墙的材质都必须是 `match seed` 的纯函数。同 seed 必得同图。E2E 与单测各自 pin 自己的 seed。这样「随机」对玩家是随机（每局不同），对测试是完全可复现。
+Layout and every wall's material must be pure functions of `match seed`; the same seed must produce the same map. E2E/unit tests pin their own seeds. Maps vary across player matches while remaining reproducible for tests.
 
-### 3. 小地图视野需要一个新函数，不能复用 `canSee`
+### 3. Minimap vision needs a new function instead of reusing `canSee`
 
-需求原文：视线左右 45° 弧形范围，玩家共享队友视觉，敌人进入任一友方视野才上小地图。
+Original request: a 45° arc to each side, shared teammate vision, and enemy minimap visibility only inside any friendly unit's sight.
 
-`aiPerception.canSee()` 第一行就是 `if (target.team === observer.team) return false;`——它是「敌我」判定，不是「可见」判定。共享视野需要一个不带阵营前提的几何可见性函数，`canSee` 改为调用它。
+`aiPerception.canSee()` begins with `if (target.team === observer.team) return false;`: it tests enemies rather than visibility alone. Shared vision needs a geometric visibility function without a team precondition; `canSee` should delegate to it.
 
-另注意角度口径：现有 `CONFIG.ai.fovHalfDeg` 是 **AI 感知**的半角（100° 全锥），用户要的是 **小地图显示** 的 ±45°（90° 全锥）。两者是不同的旋钮，不要合并——AI 的感知范围是平衡性参数，小地图的视野弧是表现参数。
+Angle definitions also differ: `CONFIG.ai.fovHalfDeg` is the **AI-perception** half-angle (100° full cone), while the requested **minimap display** is ±45° (90° full cone). Keep these controls separate: AI perception is a balance parameter, whereas the minimap arc is presentation.
 
-## 任务拆解
+## Task decomposition
 
-十个任务，`~/Code/qwen3.8-tests/neon-bastion-tasks-r4/task-{1..10}.md`，按依赖顺序逐个交付、逐个提交。
+Ten tasks in `~/Code/qwen3.8-tests/neon-bastion-tasks-r4/task-{1..10}.md`, delivered and committed independently in dependency order.
 
-| # | ID | 任务 | 依赖 |
+| # | ID | Task | Dependencies |
 |---|---|---|---|
-| 1 | MAP-01 | `Solid.material`（`solid`/`hedge`/`glass`）数据模型 + 树叶墙与玻璃墙渲染 | — |
-| 2 | MAP-02 | 视线穿玻璃 / 弹道不穿 + AI 开火前弹道检查 | 1 |
-| 3 | MAP-03 | 移除半高障碍，全部提为全高墙体 | 1 |
-| 4 | MAP-04 | 有限随机布局（4 套）+ 墙体材质完全随机，均由 seed 决定 | 1,2,3 |
-| 5 | AI-01 | 战略人格：迂回偷袭 / 猛攻直冲，随机分配给全部 NPC | 4 |
-| 6 | UX-12 | 小地图视野锥（±45°）+ 队友共享视野 | — |
-| 7 | ART-05 | 蓝天 + 飘动白云 | — |
-| 8 | ART-06 | 黄沙地面 + 整体提亮（含可测量下限） | 7 |
-| 9 | AUD-01 | 沙地脚步声 | — |
-| 10 | AUD-02 | BGM（合成，无外部素材） | — |
+| 1 | MAP-01 | `Solid.material` (`solid`/`hedge`/`glass`) data model + hedge/glass rendering | — |
+| 2 | MAP-02 | Sight through glass / projectiles blocked + AI pre-fire ballistic check | 1 |
+| 3 | MAP-03 | Remove half-height obstacles; make all full-height walls | 1 |
+| 4 | MAP-04 | Finite random layouts (4 sets) + fully random wall materials, all seeded | 1,2,3 |
+| 5 | AI-01 | Strategic personalities: flanking ambush / direct assault, randomly assigned to all NPCs | 4 |
+| 6 | UX-12 | Minimap vision cone (±45°) + shared teammate sight | — |
+| 7 | ART-05 | Blue sky + moving white clouds | — |
+| 8 | ART-06 | Yellow sand + brighter overall scene, with measurable floor | 7 |
+| 9 | AUD-01 | Sand footsteps | — |
+| 10 | AUD-02 | Synthesized BGM, without external assets | — |
 
-**为什么 ART-05 与 ART-06 分开**：ART-04 的教训是我一次给出四项提亮改动、未要求逐项验证，导致场景整体过暖翻车。天空和地面是画面里最大的两块，各自单独交付、各自单独测量，中间那次提交画面可能不协调（蓝天配黑地），这是可接受的代价——它换来的是出问题时能立刻定位到是哪一块。
+**Why separate ART-05 and ART-06:** ART-04 gave four brightness changes at once without requiring individual verification and produced an overly warm scene. Sky and ground dominate the image; independent delivery/measurement can temporarily look inconsistent, such as blue sky over black ground, but localizes failures immediately.
 
-**为什么 AI-01 排在 MAP-04 之后**：迂回战术的价值取决于地图有没有可迂回的通路。在随机布局落地之后再做，AI 的路径选择才会在全部四套布局上被检验，而不是只对着一张固定图调参。
+**Why AI-01 follows MAP-04:** flanking only has value when routes permit it. Implementing it after random layouts tests path choices across all four layouts rather than tuning one fixed map.
 
-**AI-01 的平衡性风险**：「打一枪就跑」的人格如果不设约束，可能永远不与敌人交火到分出胜负——3 seed 终止性回归会挂。任务里写明：优先调整人格参数（偷袭者的交火意愿、脱离冷却），不要回退人格机制本身；若四套布局中有任何一套无法终止，视为该布局的连通性问题，改布局而不是改 AI。
+**AI-01 balance risk:** an unconstrained hit-and-run personality may never engage long enough to decide the match, failing the 3-seed termination regression. The task prioritizes personality parameters, including flankers' willingness to fight and disengagement cooldown, rather than removing the mechanism. If any of the four layouts fails termination, treat it as layout connectivity and fix the layout rather than AI.
 
-## 验收基线
+## Acceptance baseline
 
-每个任务独立验收，全部要求 `npx tsc --noEmit`、`npx vitest run`、`npx playwright test` 三项全绿后提交。跨任务必须始终保持的不变量：
+Accept each task independently and commit only after `npx tsc --noEmit`, `npx vitest run` and `npx playwright test` all pass. Cross-task invariants:
 
-- 命中判定四条：墙体优先、头/身命中体、友军免伤、单发只计一次
-- 3 seed 全场终止性回归
-- 同 seed → 同地图 → 同对局结果
-- `totalScore === hitScore + 3 × kills`
+- Four hit rules: wall priority, head/body hitboxes, no friendly damage, one score per shot.
+- 3-seed full-match termination regression.
+- Same seed → same map → same match result.
+- `totalScore === hitScore + 3 × kills`.
 
-## 方法论续记
+## Methodology continuation
 
-R1「agent 只验证自己写得出断言的部分」→ R2「静态审查 + headless 测试 + 截图三者叠加仍无法验证可玩性」→ R3「测试覆盖了因果，从未覆盖表现」。
+R1: agents verify only what they can express as assertions. R2: static review + headless tests + screenshots still do not establish playability. R3: tests cover causality, not presentation.
 
-R4 新增一条：**当同一类问题被人工反馈第三次（画面昏暗）时，问题不在实现，在验收条件的缺失。** 前两轮我给的是形容词（"提亮"、"降低暖色"），模型每次都照做了，每次都没解决——因为没有任何一方知道「够亮」是多少。本轮先建立可测量口径再提要求。这条对所有交给 agent 的主观需求都成立。
+R4 adds: **when humans report the same issue for the third time, the gap is in acceptance conditions, not implementation.** The previous adjectives, brighten and reduce warmth, were followed but did not resolve the issue because neither side knew what sufficiently bright meant. This round establishes measurement before requirements. The lesson applies to subjective requirements delegated to agents.

@@ -1,13 +1,32 @@
 ---
 type: Note
-title: Arcology control room — Round 1 findings and Round 2 verification
+title: "Arcology control room — Round 1 findings and Round 2 verification"
 status: current
-description: Round 1 findings and independent static verification of the Qwen Code fixes for Arcology 2049.
+description: "Round 1 findings and independent static verification of the Qwen Code fixes for Arcology 2049."
 tags: [review, frontend, qwen-code, arcology]
 timestamp: 2026-08-21T23:30:28Z
 ---
 
 # Arcology control room — Round 1 review
+
+[English](devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md) | [简体中文](devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
 
 Target: `$HOME/Downloads/qwen3.8_test/arcology-control-room`.
 
@@ -68,4 +87,4 @@ Qwen Code acted on the Round 1 findings. This reviewer inspected the resulting f
 
 ### Remaining evidence gap
 
-- **QA-01 remains open.** A human visible-browser pass should still exercise the desktop and narrow layouts, pointer drag/zoom, timeline, alert navigation and Load Shed/Restore. This is the only outstanding acceptance item in backlog.md（历史本机文件，未随本报告发布）.
+- **QA-01 remains open.** A human visible-browser pass should still exercise the desktop and narrow layouts, pointer drag/zoom, timeline, alert navigation and Load Shed/Restore. This is the only outstanding acceptance item in backlog.md (historical local file, not published with this report).

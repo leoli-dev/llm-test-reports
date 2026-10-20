@@ -1,123 +1,142 @@
 ---
 type: Note
-title: Neon Bastion — Round 5 评审：Qwen3.8-27B-8bit 能否独立完成一个中等复杂度的游戏
+title: "Neon Bastion — Round 5 review: can Qwen3.8-27B-8bit independently complete a moderately complex game"
 status: current
-description: Round 4 十项任务全部交付后的复核与结论；含每任务耗时/思考量/介入次数的完整统计，以及「一次一个自足小任务 + 可测量验收」这套方法的有效性证据。
+description: "Verification after all ten Round 4 tasks were delivered, with complete task-duration/thinking/intervention statistics and evidence for one self-contained task at a time with measurable acceptance."
 tags: [neon-bastion, qwen3.8-27b, mlx-dspark, pi, code-review, agent-evaluation]
 timestamp: 2026-09-03T07:00:00Z
 ---
 
-# Neon Bastion — Round 5 评审
+# Neon Bastion — Round 5 review
 
-## 本轮要回答的问题
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03_CN.md)
 
-用户对这次测试的定位是明确的：**「我想要的是测试 qwen3.8-27B-8bit 到底能不能做一个稍微复杂的游戏」**。因此本轮的评审对象不只是代码，还包括**模型在长链条工程任务中的行为特征**：它自己能走多远、在哪里失速、需要人介入几次、每次介入是因为推理不动还是只是机械操作失败。
+<!-- environment-context:start -->
 
-Round 4 的十项任务已全部交付，十个提交逐个经评审方独立复核（每次都先 `npm run build` 再跑 E2E，见下文「验证链的洞」）。
+## Workstation and system (context added 2026-10-20)
 
-## 交付结果
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-| # | ID | 提交 | 单测 | E2E | pi 耗时 | 评审方介入 |
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## The question this round answers
+
+The user explicitly wants to test **whether qwen3.8-27B-8bit can actually build a slightly complex game**. Review therefore covers code and **behavior across long engineering chains**: how far the model proceeds alone, where it stalls, how often people intervene, and whether intervention addresses reasoning limits or mechanical mistakes.
+
+All ten Round 4 tasks are delivered. The reviewer independently verifies each commit, always running `npm run build` before E2E; see the verification-chain gap below.
+
+## Delivery results
+
+| # | ID | Commit | Unit tests | E2E | pi duration | Reviewer intervention |
 |---|---|---|---:|---:|---:|---|
-| 1 | MAP-01 | `66847e5` | 53/53 | 8/8 | 12m | 无 |
-| 2 | MAP-02 | `3ea1946` | 56/56 | 8/8 | 11m | 无 |
-| 3 | MAP-03 | `33efc5d` | 58/58 | 8/8 | 10m | 无 |
-| 4 | MAP-04 | `a98eac9` | 68/68 | 8/8 | 40m | 无 |
-| 5 | AI-01 | `fa4f479` | 73/73 | 8/8 | **2h56m** | **给了根因** |
-| 6 | UX-12 | `9cd9a65` | 86/86 | 9/9 | 22m | 无 |
-| 7 | ART-05 | `9eebf65` | 86/86 | 10/10 | 22m | 无 |
-| 8 | ART-06 | `29f1ca8` | 86/86 | 11/11 | 27m | 无 |
-| 9 | AUD-01 | `bdf0d68` | 94/94 | 12/12 | 13m | 无 |
-| 10 | AUD-02 | `c501abf` | 106/106 | 13/13 | 17m | 无 |
-| 11 | ART-07 | `97d8264` | 106/106 | 15/15 | 30m | 无（收尾任务，由评审方看图发现后补发） |
+| 1 | MAP-01 | `66847e5` | 53/53 | 8/8 | 12m | None |
+| 2 | MAP-02 | `3ea1946` | 56/56 | 8/8 | 11m | None |
+| 3 | MAP-03 | `33efc5d` | 58/58 | 8/8 | 10m | None |
+| 4 | MAP-04 | `a98eac9` | 68/68 | 8/8 | 40m | None |
+| 5 | AI-01 | `fa4f479` | 73/73 | 8/8 | **2h56m** | **Root cause supplied** |
+| 6 | UX-12 | `9cd9a65` | 86/86 | 9/9 | 22m | None |
+| 7 | ART-05 | `9eebf65` | 86/86 | 10/10 | 22m | None |
+| 8 | ART-06 | `29f1ca8` | 86/86 | 11/11 | 27m | None |
+| 9 | AUD-01 | `bdf0d68` | 94/94 | 12/12 | 13m | None |
+| 10 | AUD-02 | `c501abf` | 106/106 | 13/13 | 17m | None |
+| 11 | ART-07 | `97d8264` | 106/106 | 15/15 | 30m | None; extra close-out task issued after reviewer image inspection |
 
-**合计**：36 文件、**+3164 / −218**；单测 53 → **106**，E2E 8 → **13**；pi 净工作 **5h50m**，输出约 **379K token**、思考约 **789K 字符**。
+**Totals:** 36 files, **+3164 / −218**; unit tests 53 → **106**, E2E 8 → **13**; pi net work **5h50m**, approximately **379K output tokens** and **789K thinking characters**.
 
-**十一个任务里十个零介入。** 唯一一次介入是任务 5，占了总耗时的近一半（2h56m）。
+**Ten of eleven tasks need no intervention.** Task 5 is the only intervention and takes nearly half the total time, 2h56m.
 
-## 结论：能做，但有明确的能力边界
+## Conclusion: capable, with clear boundaries
 
-### 它自己做得好的部分
+### What it handles well independently
 
-**局部的、有明确验收标准的工程任务，它做得又快又对**，而且经常超出要求：
+**Local engineering tasks with explicit acceptance criteria are completed quickly and correctly**, often beyond the requirement:
 
-- 任务 1 要求给墙加材质，它顺手用 solid id 做黄金比例 hash 扰动色相，让每面树叶墙的绿都不同
-- 任务 2 我只要求「打不到就别开火」，它额外实现了 `clearShotMove()`——看得见打不到时主动寻路到有射界的位置
-- 任务 3 我说从 `kind` 里移除 `'cover'`，它照做，但**保留了 `'platform'|'ramp'` 的机械并写注释说明为什么**（随机布局可能用得上）。这与 Round 3 那次「把 `hitKick`/`shotKick` 当死常量删掉」形成对照——它学会了区分「没有实例」与「机制该删」
-- 任务 9 它主动把触发逻辑拆成无 WebAudio 依赖的纯模块 `footstep.ts`，并处理了「出生瞬间被误判为落地」的边界情况
+- Task 1 asks for wall materials; it additionally uses solid ID and golden-ratio hash hue perturbation to give hedge walls different greens.
+- Task 2 only asks it not to fire when a shot cannot land; it additionally builds `clearShotMove()` to seek a firing position when the target is visible but blocked.
+- Task 3 removes `'cover'` from `kind` but **keeps `'platform'|'ramp'` mechanics and explains why**: random layouts may need them. Compared with deleting `hitKick`/`shotKick` as dead constants in Round 3, it now distinguishes absent instances from dispensable mechanics.
+- Task 9 separates triggers into WebAudio-independent `footstep.ts`, handling spawn frames being mistaken for landings.
 
-**它会把评审意见内化成回归测试**，这一点从 Round 2 起持续成立。任务 6 的 E2E 是双向断言（敌人在背后 → 红像素 0；转到正面 → 32 个且颜色精确为 `255,61,99`），比任务 1 那个单向断言更强。任务 7 为了绕开 headless 的 rAF 节流，加了 `fastForwardSky()` 测试钩子——**不是放宽断言，而是把不确定的东西变确定**。
+**Review feedback becomes regression tests**, consistently since Round 2. Task 6 E2E checks both directions: an enemy behind yields 0 red pixels, while turning toward it yields 32 with exact color `255,61,99`, stronger than task 1's one-way check. Task 7 adds `fastForwardSky()` to avoid headless rAF throttling, **making uncertainty deterministic rather than weakening assertions**.
 
-### 它自己走不出来的部分
+### Where it cannot escape independently
 
-任务 5（AI 战略人格）是唯一失控的任务：**2 小时 56 分，占总时长一半，思考量 369K 字符**（其余九个任务合计 420K）。
+Task 5, strategic AI personalities, is the only runaway task: **2 hours 56 minutes, half the total duration and 369K thinking characters**, versus 420K across the other nine tasks.
 
-失速的形态不是「不会写代码」，而是**在一个多因素耦合的动态系统里做归因时会打转**。它反复在「为什么只开了 2 枪」上换假设——FOV？reactUntil？目标切换？血量阈值？——每个都合理，但它无法从 300 秒的模拟中高效地缩小范围。
+The failure is not inability to code. It is **circling through attribution hypotheses in a coupled dynamic system**: why did the unit fire only 2 shots? FOV, reactUntil, target switching, HP thresholds—all plausible, without efficiently narrowing a 300-second simulation.
 
-评审方的介入是在**独立副本**里跑同一场景、逐 tick 打印状态，把三个失败点的根因直接交给它：
+The reviewer runs the same scene in an **independent copy**, prints per-tick state and supplies root causes for three failures:
 
-- 两个 pinned 测试的失败是**测试设定问题**（测试假设单位持续开火，而 flanker 天生开一枪就脱离），修法是在测试里把 doctrine 钉成 rusher，**不是削弱 flanker**
-- seed 99 是**真死锁**，并附上现场：红方 6 号从 t=130 到 t=299 位置零位移、开火数恒为 0、`path` 从 `1/1` 变成 `0/0`——空路径 livelock
+- Two pinned failures are **test-setup problems**: tests assume continuous firing, while flankers disengage after one shot. Pin doctrine to rusher in tests, **without weakening flankers**.
+- Seed 99 is a **real deadlock**, with evidence: red unit 6 never moves from t=130 to t=299, fires 0 shots, and `path` changes from `1/1` to `0/0`, an empty-path livelock.
 
-**拿到根因后它 30 分钟内收敛**，而且自己又挖出三个更深的缺陷：停滞处理器每 tick 重触发导致交战单位被永久拽回 patrol（**这才是 pinned 测试只开 2 枪的真正原因，评审方的归因只对了一半**）、目标抖动重置反应延迟、以及弹丸静默过期破坏「每颗子弹都要结算」的不变量（该缺陷自 `328dae6` 起就存在，只是此前没有测试去数 impact 事件）。
+**With the root cause, it converges within 30 minutes**, then independently finds three deeper defects: the stagnation handler retriggers every tick and permanently drags engaged units into patrol (**the actual reason pinned tests fire only 2 shots; the reviewer's attribution was only half right**); target jitter resets reaction delay; and silent projectile expiration violates every-bullet-settles, present since `328dae6` but previously untested through impact counts.
 
-**能力边界因此可以描述为**：给定明确的局部目标与可判定的验收，它能独立完成；一旦需要在多因素耦合系统里做**根因定位**，它会持续消耗而不收敛——但只要把根因交给它，它执行修复的能力仍然很强，甚至能顺藤发现更深的问题。
+**Capability boundary:** explicit local goals and decidable acceptance support independent completion. Multi-factor **root-cause localization** can consume resources without convergence. Supplying the cause restores strong execution and can lead to deeper discoveries.
 
-## 方法论：三条被本轮验证的结论
+## Methodology: three conclusions tested this round
 
-### 1. 主观需求必须先建立可测量口径
+### 1. Subjective requirements need measurement definitions first
 
-用户第三次反馈「画面还是太昏暗」时，评审方先测再提：`meanLuma 21.4/255`、`darkFrac 0.748`、**全图无任何像素超过 L=96**。
+At the third darkness complaint, the reviewer measures first: `meanLuma 21.4/255`, `darkFrac 0.748`, **no pixel above L=96**.
 
-前两轮（ART-03、ART-04）给的都是形容词——「提亮」「降低暖色」——模型每次都照做，每次都没解决，还翻车两次（一次过暗、一次过暖）。**根因不是模型不听话，是没有任何一方知道「够亮」是多少。**
+ART-03/ART-04 used adjectives—brighten and reduce warmth. The model followed both but failed, once too dark and once too warm. **Neither side knew what sufficiently bright meant.**
 
-本轮把验收写成五条数字并要求写进测试。结果一次到位：
+This round defines five numerical criteria and requires tests; the first implementation meets them:
 
-| 指标 | 下限 | 实测 |
+| Metric | Bound | Measured |
 |---|---|---|
 | meanLuma | ≥ 90 | 159.0 |
 | darkFrac | ≤ 0.15 | 0.008 |
-| 直方图非空桶 | ≥ 4/8 | 7/8 |
+| Nonempty histogram bins | ≥ 4/8 | 7/8 |
 | mean(R) − mean(B) | ≤ 40 | −7.0 |
-| 队色可辨（红队像素） | > 40 | 2259 |
+| Distinguishable team color: red-team pixels | > 40 | 2259 |
 
-其中 `mean(R) − mean(B) ≤ 40` 是专门为防止 ART-04 重演而设的**反向约束**——只给下限会诱导「把所有材质刷白」，必须同时给出不可越过的方向。
+`mean(R) − mean(B) ≤ 40` is a **reverse constraint** against repeating ART-04. A lower bound alone encourages whitening every material; forbidden directions must also be specified.
 
-**但全图指标有其盲区**：评审方查看原始画布截图时发现两处**局部**瑕疵（边界墙仍是夜景的近黑 `0x0e1013`，形成地平线暗带；沙地纹理有可见的矩形拼接缝），五条指标全部照常通过——因为它们是全图统计，而瑕疵是局部的。记为 ART-07。**全图指标能挡住系统性问题，挡不住局部不协调。**
+**Global metrics have blind spots:** original canvas inspection finds two **local** defects, a near-black `0x0e1013` night-style boundary wall making a dark horizon band and rectangular sand-texture seams. All five metrics still pass because they aggregate the whole image. Logged as ART-07: **global metrics prevent systemic problems, not local inconsistency**.
 
-补发的任务 11（`97d8264`）修掉了这两处，并且——**pi 自行为两条新断言做了反面对照**：边界墙实测 meanLuma 78.7，把颜色改回近黑时实测 2.0（连跑 3 次稳定失败）；接缝跳变修复后 0.91、临时移除环绕重绘后 2.42 正确失败。**这正是 MAP-01 的玻璃测试所缺的东西，而这次它没被要求就做了。**
+Extra task 11 (`97d8264`) repairs both. **pi independently adds negative controls**: boundary-wall meanLuma is 78.7, reverting near-black gives 2.0 with 3 consecutive stable failures; seam discontinuity is 0.91 after repair and correctly fails at 2.42 without wrapping redraw. **This is what MAP-01's glass test lacked, and pi now does it unprompted.**
 
-### 2. 随机化会让原本够用的确定性回归自动变薄，而不会有任何测试变红来提醒你
+### 2. Randomization silently thins previously sufficient deterministic regressions
 
-MAP-04 引入「4 套布局 × 每面墙独立随机材质」之后，项目原有的 3 seed 终止性回归覆盖率骤降。pi 的 3 seed 全绿，评审方顺手扫 40 个 seed 就抓到 **seed 27 永久活锁**。
+MAP-04 adds 4 layouts with independently randomized wall materials, sharply reducing coverage of the existing 3-seed termination regression. pi's 3 seeds pass; the reviewer scans 40 and finds **seed 27 permanent livelock**.
 
-该活锁的根因是评审方自己在 MAP-02 中留下的二阶后果：`retreat` 状态的两个出口是 `!seen && lostTime>searchTime → patrol` 与 `seen && !lowHp → engage`，`seen && lowHp` 无出路。玻璃让视线穿透使 `seen` 恒真、无回血使 `lowHp` 恒真、MAP-02 的弹道检查又让它们**正确地**不开火——三者叠加成稳定死锁。玻璃引入之前这个组合是不稳定态（能看见即在互射，总有一方先死）。
+The cause is a second-order consequence left by the reviewer in MAP-02. `retreat` exits through `!seen && lostTime>searchTime → patrol` or `seen && !lowHp → engage`; `seen && lowHp` has no exit. Glass keeps `seen` true, no healing keeps `lowHp` true, and MAP-02 ballistic checks **correctly** prevent shooting, producing stable deadlock. Before glass, visibility implied mutual fire and eventual death.
 
-**评审方当时只预判到「AI 会隔着玻璃浪费子弹」，没预判到状态机会出现不可达出口。** 拆分一个既有判定时，要检查的不只是直接调用点，还有依赖「这两件事等价」这一隐含前提的状态机。
+**The reviewer predicted wasted shots through glass but missed the unreachable state-machine exit.** Splitting a predicate requires checking state machines that assume two conditions are equivalent, beyond direct call sites.
 
-修复后评审方再扫 seed 41..160：119/120 通过，**seed 74 仍会僵持**（记为 BUG-02，在既定验收范围 seed 1..40 之外）。同时人格机制让对局显著变长：中位数 **20.2 s → 37.4 s**，p90 134 s。
+After repair, seeds 41..160 yield 119/120 passes; **seed 74 still stalls**, BUG-02, outside the agreed seed 1..40 range. Personality also lengthens games: median **20.2 s → 37.4 s**, p90 134 s.
 
-### 3. 绿色的测试不等于测了正确的东西
+### 3. Green tests do not establish that the right property was tested
 
-三处实例：
+Three examples:
 
-- **验证链的洞**：`playwright.config.ts` 的 `webServer.command` 是 `npm run preview` = `vite preview`，**只伺服 `dist/` 不构建**。单跑 `npx playwright test` 测的是上一次构建的产物。评审方发现后，此后每次复核都先 `npm run build`；pi 在任务 8 中也独立踩到同一个坑（「首轮 darkFrac 0.175 是误报」）。
-- **缺少反面对照**：任务 1 的玻璃测试只断言「玻璃后有红色像素 > 40」，而场景中存在一盏红色点光源（`0xff3d63`），断言可能被红光染色骗过。评审方利用地图对称性做 A/B——玻璃侧 149 个红像素、**树叶侧 0 个**——才确认它测的是穿透性。该反面对照至今未写进仓库。
-- **不变量无人核对**：弹丸静默过期（飞出射程不发事件）自 `328dae6` 起就破坏了「每颗子弹都要结算」，直到任务 5 中有测试去数 impact 事件才暴露。
+- **Verification-chain gap:** `playwright.config.ts` uses `webServer.command` = `npm run preview` = `vite preview`, **serving `dist/` without building**. Standalone `npx playwright test` checks old output. The reviewer thereafter runs `npm run build` first; pi independently encounters the same issue in task 8, identifying initial darkFrac 0.175 as a false alarm.
+- **Missing negative control:** task 1 only checks more than 40 red pixels behind glass, potentially fooled by a red point light (`0xff3d63`). Symmetry-based A/B gives 149 red pixels through glass versus **0 through hedge**, confirming transparency. This control is still absent from the repository.
+- **Unchecked invariant:** silent projectile expiration, with no event beyond range, violates every-bullet-settles from `328dae6` until task 5 counts impact events.
 
-## 仍未回答的问题
+## Unanswered questions
 
-**评分继续暂缓（PLAY-01）。** Round 4 的需求本身就是「好不好玩、好不好看」，而本轮全部证据仍是静态审查 + headless 断言 + 像素统计。以下三项只有事件层/像素层证据，无实机确认：
+**Scoring remains deferred, PLAY-01.** Round 4 asks about enjoyment/appearance, but evidence remains static review, headless assertions and pixel statistics. The following three original items lack real-play confirmation, with a fourth added:
 
-1. AI 的曳光、枪口火焰、枪声是否真的出现（FX-02）
-2. 受击红闪与来向弧是否读得懂（FX-03）
-3. 飞行子弹是否看得见、够不够时间闪避（GAME-04）——评审方尝试用 Playwright 抓取飞行中的曳光**失败**
-4. 新增：迂回/猛攻两种人格在实机上是否**感觉得出来**，以及对局时长翻倍是变有趣还是变拖沓
+1. Whether AI tracers, muzzle flashes and gunshots actually appear, FX-02.
+2. Whether hit-red-flash and incoming-direction arcs are readable, FX-03.
+3. Whether projectiles are visible and dodgeable, GAME-04; the reviewer's Playwright attempt to capture a flying tracer **fails**.
+4. New: whether flank/rush personalities are **perceptible** and doubled match duration feels more interesting or merely slower.
 
-第 4 项尤其重要：AI-01 是本轮耗时最多、代码改动最复杂的一项（`aiController.ts` +360 行），但它的价值完全取决于玩家能否感知到「这个 AI 在迂回」。单测只能证明 flanker 选的节点离队友重心更远，证明不了这件事在屏幕上成立。
+Item 4 is particularly important. AI-01 has the most time/complexity (`aiController.ts` +360 lines), but its value depends on perceiving flanking. Tests show flanker nodes farther from teammate centroid, not that this is evident on screen.
 
-## 附：环境与速度
+## Appendix: environment and speed
 
-服务端 mlx-dspark 0.18.0 + Qwen3.8-27B-8bit，M5 Max（40 GPU 核，实测带宽 461.9 GB/s，137 GB 统一内存），DFlash2 投机解码。
+Server: mlx-dspark 0.18.0 + Qwen3.8-27B-8bit, M5 Max, 40 GPU cores, measured bandwidth 461.9 GB/s, 137 GB unified memory, DFlash2 speculative decoding.
 
-本轮观察到一次显著降速（21 → 11 tok/s）并**误归因为上下文变长**。重测后拆解证明轮速几乎不变（5.59 → 5.55 轮/秒），全部差异来自投机解码接受长度（1.96 → 3.79 tok/轮）：`auto_cap` 的 `p` 从 0.601 回升到 0.865，控制器随之把草稿深度从 2 放开到 4。**接受率是内容相关的，不是上下文相关的——看速度要盯 `accept_len` 与 `auto_cap.p`，不要盯 context 百分比。** `predicted_rates` 把每轮耗时当常数，系统性偏乐观（预测 40.9 tok/s，实测 21），不可作为基准。
+A slowdown, 21 → 11 tok/s, is **initially misattributed to longer context**. Retesting finds nearly unchanged round speed, 5.59 → 5.55 rounds/second; acceptance length, 1.96 → 3.79 tokens/round, explains the difference. `auto_cap`'s `p` recovers from 0.601 to 0.865 and draft depth expands from 2 to 4. **Acceptance is content-dependent, not context-dependent: monitor `accept_len` and `auto_cap.p`, not context percentage.** `predicted_rates` assumes constant time per round and is systematically optimistic, predicting 40.9 tok/s versus measured 21; it is not a benchmark.

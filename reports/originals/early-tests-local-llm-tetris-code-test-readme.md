@@ -1,157 +1,176 @@
-# 本地 LLM 编程能力测评 — 俄罗斯方块
+# Local LLM Coding Capability Evaluation — Tetris
 
-## 测评背景
+[English](early-tests-local-llm-tetris-code-test-readme.md) | [简体中文](early-tests-local-llm-tetris-code-test-readme_CN.md)
 
-本仓库记录了一次对**四款**本地部署大语言模型编程能力的真实测评。测评使用 **Claude Code v2.1.160** 作为 Coding Agent，以 **oMLX** 在 Apple Silicon 上进行本地推理，分别让三个模型从零实现一个俄罗斯方块游戏，再由 Claude Sonnet 4.6 担任 Code Reviewer，通过多轮 review 验证最终可运行性。
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Evaluation Background
+
+This repository documents a real-world evaluation of the coding capabilities of **four** locally deployed large language models. The evaluation used **Claude Code v2.1.160** as the Coding Agent, with **oMLX** performing local inference on Apple Silicon. Three models were each tasked with implementing a Tetris game from scratch, after which Claude Sonnet 4.6 served as the Code Reviewer, verifying final executability through multiple rounds of review.
 
 ---
 
-## 测试环境
+## Test Environment
 
-| 项目 | 配置 |
+| Item | Configuration |
 |------|------|
-| **硬件** | Apple M5 Max · 128 GB 统一内存 |
-| **推理平台** | oMLX v0.4.0rc2 |
+| **Hardware** | Apple M5 Max · 128 GB Unified Memory |
+| **Inference Platform** | oMLX v0.4.0rc2 |
 | **Coding Agent** | Claude Code v2.1.160 |
 | **Reviewer** | Claude Sonnet 4.6 |
-| **测评日期** | 2026-06-02 ~ 2026-06-04 |
-| **验收标准** | 游戏在浏览器中可正常运行，基础功能可玩 |
+| **Evaluation Date** | 2026-06-02 ~ 2026-06-04 |
+| **Acceptance Criteria** | The game runs properly in the browser, and basic features are playable |
 
 ---
 
-## 测评题目
+## Evaluation Questions
 
-> 以下为完整测评题目原文，三个模型收到完全相同的题目。
+> The following is the original text of the complete evaluation questions. All three models received exactly the same questions.
 
-### 前端测试题：实现一个简单俄罗斯方块游戏
+### Frontend Test Question: Implement a Simple Tetris Game
 
-请使用任意前端技术栈实现一个可运行的俄罗斯方块小游戏，例如原生 HTML/CSS/JavaScript、React、Vue、Svelte 等均可。
+Please use any frontend technology stack to implement a runnable Tetris mini-game. For example, native HTML/CSS/JavaScript, React, Vue, Svelte, etc., are all acceptable.
 
-#### 基本要求
+#### Basic Requirements
 
-实现一个 10 × 20 的俄罗斯方块游戏区域。
+Implement a 10 × 20 Tetris game area.
 
-游戏应支持以下功能：
+The game should support the following features:
 
-1. 方块自动下落
-2. 左右移动方块
-3. 旋转方块
-4. 快速下落
-5. 方块触底或碰到已有方块后固定
-6. 满一行后自动消除
-7. 消除行后上方方块下移
-8. 游戏结束判断
-9. 重新开始游戏
+1. Automatic falling of blocks
+2. Moving blocks left and right
+3. Rotating blocks
+4. Fast falling
+5. Locking blocks when they hit the bottom or existing blocks
+6. Automatically clearing full rows
+7. Shifting blocks above down after row clearing
+8. Game over determination
+9. Restarting the game
 
-#### 操作要求
+#### Control Requirements
 
-建议使用键盘控制：
+Keyboard control is recommended:
 
-| 按键 | 功能 |
+| Key | Function |
 |------|------|
-| ← / A | 左移 |
-| → / D | 右移 |
-| ↓ / S | 加速下落 |
-| ↑ / W | 旋转 |
-| Space | 直接落到底部 |
-| P | 暂停 / 继续 |
-| R | 重新开始 |
+| ← / A | Move left |
+| → / D | Move right |
+| ↓ / S | Accelerate falling |
+| ↑ / W | Rotate |
+| Space | Drop directly to the bottom |
+| P | Pause / Resume |
+| R | Restart |
 
-#### 界面要求
+#### Interface Requirements
 
-页面需要展示：
+The page needs to display:
 
-1. 游戏主区域
-2. 当前分数
-3. 已消除行数
-4. 当前等级或速度
-5. 下一个方块预览
-6. 游戏状态（例如进行中、暂停、游戏结束）
+1. Main game area
+2. Current score
+3. Number of cleared rows
+4. Current level or speed
+5. Next block preview
+6. Game status (e.g., in progress, paused, game over)
 
-#### 计分规则
+#### Scoring Rules
 
-| 动作 | 分数 |
+| Action | Score |
 |------|------|
-| 消除 1 行 | 100 |
-| 消除 2 行 | 300 |
-| 消除 3 行 | 500 |
-| 消除 4 行 | 800 |
-| 快速下落 | 可选加分 |
+| Clear 1 row(s) | 100 |
+| Clear 2 row(s) | 300 |
+| Clear 3 row(s) | 500 |
+| Clear 4 row(s) | 800 |
+| Fast falling | Optional bonus points |
 
-等级规则：每消除 10 行升一级，下落速度随等级提升而加快。
+Level rules: Level up every 10 rows cleared; falling speed increases as the level rises.
 
-#### 技术要求
+#### Technical Requirements
 
-代码需要满足：
+The code needs to satisfy:
 
-1. 可以本地直接运行
-2. 结构清晰，逻辑可读
-3. 避免依赖后端服务
-4. 不要求使用数据库
-5. 不要求持久化分数
-6. 可以使用 Canvas，也可以使用 DOM grid
-7. 可以使用第三方 UI 库，但核心游戏逻辑应由自己实现
+1. Can be run directly locally
+2. Clear structure and readable logic
+3. Avoid dependency on backend services
+4. No database usage required
+5. No score persistence required
+6. Can use Canvas or DOM grid
+7. Third-party UI libraries can be used, but core game logic must be implemented by yourself
 
-#### 加分项
+#### Bonus Items
 
-以下功能不是必须，但可以加分：
+The following features are not mandatory but can add points:
 
-1. Hold 暂存方块
-2. Ghost piece 落点预览
-3. 移动端触控支持
-4. 音效开关
-5. 最高分本地保存
-6. 响应式布局
+1. Hold block
+2. Ghost piece landing preview
+3. Mobile touch support
+4. Sound effect toggle
+5. Local saving of high score
+6. Responsive layout
 7. TypeScript
-8. 单元测试
-9. 清晰的状态管理设计
-10. README 说明运行方式和设计思路
+8. Unit tests
+9. Clear state management design
+10. README explaining how to run and design ideas
 
-#### 交付要求
+#### Delivery Requirements
 
-请提交：
+Please submit:
 
-1. 源代码
-2. 运行说明
-3. 简短说明你使用的技术栈
-4. 简短说明核心游戏逻辑如何实现
-5. 如有 AI 辅助，请说明使用方式
+1. Source code
+2. Running instructions
+3. Brief description of the technology stack used
+4. Brief description of how the core game logic is implemented
+5. If AI assistance was used, please explain how it was used
 
-#### 验收标准
+#### Acceptance Criteria
 
-重点检查：
+Key checks:
 
-1. 游戏是否能正常运行
-2. 方块移动、旋转、碰撞是否正确
-3. 消行逻辑是否正确
-4. 游戏结束是否正确触发
-5. 代码结构是否清晰
-6. UI 是否基本可用
-7. 是否有明显 bug
+1. Whether the game runs normally
+2. Whether block movement, rotation, and collision are correct
+3. Whether row clearing logic is correct
+4. Whether game over is triggered correctly
+5. Whether the code structure is clear
+6. Whether the UI is basically usable
+7. Whether there are obvious bugs
 
 ---
 
-## 参测模型
+## Models Under Test
 
 ### 1. gemma-4-31b-it-8bit
 
-| 属性 | 值 |
+| Property | Value |
 |------|----|
-| 类型 | VLM（Dense） |
-| 大小 | 33 GB（8bit 量化） |
-| 推理速度 | ~14 tok/s（开启 MTP 投机解码后 ~23 tok/s） |
-| Context 窗口 | 262,144 tokens |
-| 采样参数 | temp=1.0, top_p=0.95, top_k=64（Google 官方推荐） |
-| Thinking 模式 | 不支持 |
-| 目录 | `tetris-test-gemma-4-31b/` |
+| Type | VLM (Dense) |
+| Size | 33 GB (8bit quantization) |
+| Inference Speed | ~14 tok/s (~23 tok/s with MTP speculative decoding enabled) |
+| Context Window | 262,144 tokens |
+| Sampling Parameters | temp=1.0, top_p=0.95, top_k=64 (Officially recommended by Google) |
+| Thinking Mode | Not supported |
+| Directory | `tetris-test-gemma-4-31b/` |
 
-**技术栈选择：** React 18 + TypeScript + Vite + HTML5 Canvas API
+**Tech Stack Selection:** React 18 + TypeScript + Vite + HTML5 Canvas API
 
-架构分层清晰：自定义 Hook `useTetris` 封装全部游戏逻辑，`TetrisBoard` 和 `Sidebar` 分别负责渲染。代码使用 TypeScript 全覆盖，有完整的类型注解。
+The architecture is clearly layered: custom Hook `useTetris` encapsulates all game logic, while `TetrisBoard` and `Sidebar` are responsible for rendering respectively. The code uses TypeScript comprehensively, with complete type annotations.
 
-**已实现的加分项：** Hold 暂存（有 bug）、Ghost piece（有 bug）、TypeScript、README
+**Implemented Bonus Items:** Hold buffer (has bug), Ghost piece (has bug), TypeScript, README
 
-**如何运行：**
+**How to Run:**
 ```bash
 cd tetris-test-gemma-4-31b
 npm install
@@ -159,85 +178,85 @@ npm run dev
 # 浏览器访问 http://localhost:5173
 ```
 
-**测评结果：** 历经 5 轮 code review，最终**未能通过验收**。根本问题是模型每次只修被明确指出的那一行，相同模式的 `import type` 错误在 5 个文件中被逐一发现，3 次声称修复但代码实际未变动。游戏从未在浏览器中成功运行。
+**Evaluation Result:** After 5 rounds of code review, it ultimately **failed to pass acceptance**. The root cause is that the model only fixed the specific line explicitly pointed out each time; the same pattern of `import type` errors was discovered one by one in 5 files, and it claimed to have fixed them 3 times, but the code actually remained unchanged. The game never ran successfully in the browser.
 
-**主要 Bug：**
+**Main Bugs:**
 
-| Bug | 描述 |
+| Bug | Description |
 |-----|------|
-| 入口文件缺失 | `src/main.tsx` 和 `src/index.css` 未生成，页面空白 |
-| `import type` 连锁错误 | TypeScript type-only 导出在运行时被抹除，5个文件逐一报错 |
-| Ghost piece 死循环 | `getGhostPiece()` 的 while 循环检查固定位置，浏览器冻结 |
-| 锁定颜色丢失 | 固定方块存储整数 `1` 而非颜色字符串 |
-| 速度下限未生效 | 定义了 `MIN_SPEED` 常量但未在 `setInterval` 中使用 |
+| Missing Entry File | `src/main.tsx` and `src/index.css` were not generated, resulting in a blank page |
+| `import type` Chain Error | TypeScript type-only exports are erased at runtime, causing errors in 5 files one by one |
+| Ghost Piece Infinite Loop | The while loop in `getGhostPiece()` checks a fixed position, causing the browser to freeze |
+| Locked Color Loss | Fixed blocks store integer `1` instead of color strings |
+| Speed Lower Limit Not Effective | The constant `MIN_SPEED` was defined but not used in `setInterval` |
 
 ---
 
 ### 2. Qwen3.6-27B-UD-MLX-4bit
 
-| 属性 | 值 |
+| Property | Value |
 |------|----|
-| 类型 | LLM（Dense） |
-| 大小 | 26 GB（4bit 量化） |
-| 推理速度 | ~20 tok/s |
-| Context 窗口 | 262,144 tokens |
-| 采样参数 | temp=0.3, top_p=0.8, top_k=20 |
-| Thinking 模式 | 关闭 |
-| 目录 | `tetris-test-Qwen3.6-27B/` |
+| Type | LLM (Dense) |
+| Size | 26 GB (4bit quantization) |
+| Inference Speed | ~20 tok/s |
+| Context Window | 262,144 tokens |
+| Sampling Parameters | temp=0.3, top_p=0.8, top_k=20 |
+| Thinking Mode | Disabled |
+| Directory | `tetris-test-Qwen3.6-27B/` |
 
-**技术栈选择：** 原生 HTML/CSS/JavaScript + Canvas API（单文件 784 行，零依赖）
+**Technology Stack Selection:** Native HTML/CSS/JavaScript + Canvas API (single file 784 lines, zero dependencies)
 
-**如何运行：**
+**How to Run:**
 ```bash
 cd tetris-test-Qwen3.6-27B
 python3 -m http.server 8080
 # 浏览器访问 http://localhost:8080
 ```
 
-**测评结果：** 历经 3 轮 code review，最终**通过验收**。0 次谎报，每次修复均精准有效，且主动调用 Playwright MCP 进行自动化浏览器测试验证（共调用 76+ 次）。
+**Evaluation Results:** After 3 rounds of code review, it finally **passed acceptance**. 0 false reports, each fix was precise and effective, and it proactively invoked Playwright MCP for automated browser testing verification (invoked 76+ times in total).
 
-**已实现的加分项：** Hold 暂存（正确，含锁定机制）、Ghost piece（正确）、7-Bag 标准随机器、SRS 旋转系统 + Wall Kick、Next 队列（4个预览）、响应式 CSS
+**Implemented Bonus Features:** Hold buffer (correct, including locking mechanism), Ghost piece (correct), 7-Bag standard randomizer, SRS rotation system + Wall Kick, Next queue (4 previews), Responsive CSS
 
-**Bug 修复记录：**
+**Bug Fix Log:**
 
-| 轮次 | Bug | 修复状态 |
+| Round | Bug | Fix Status |
 |------|-----|:--------:|
-| R1 | J/L 方块旋转坐标有重复格子，旋转后变成 3 格 | ✅ |
-| R1 | I 方块 Wall Kick 表索引类型错误（数字 vs 字符串） | ✅ |
-| R1 | 锁定延迟判断条件错误，方块可能永不锁定 | ✅ |
-| R1 | 初始空棋盘无任何操作提示 | ✅ |
-| R2 | S 和 Z 旋转后形状互换（rot1 坐标对调） | ✅ |
+| R1 | J/L piece rotation coordinates had duplicate cells, resulting in 3 cells after rotation | ✅ |
+| R1 | I piece Wall Kick table index type error (number vs string) | ✅ |
+| R1 | Lock delay judgment condition error, piece might never lock | ✅ |
+| R1 | Initial empty board had no operation hints | ✅ |
+| R2 | S and Z shapes swapped after rotation (rot1 coordinates swapped) | ✅ |
 
-**oMLX 运行统计（本次测评期间）：**
+**oMLX Runtime Statistics (During this evaluation period):**
 
-| 指标 | 值 |
+| Metric | Value |
 |------|----|
-| 总 Prefill Tokens | 10.1M |
-| 缓存命中 Tokens | 9,216,000 |
-| 缓存效率 | 91.0% |
-| Token Generation 速度 | 13.8 tok/s |
-| 显存占用 | ~24.74 GB |
-| 总会话时长 | 约 1h 17m |
+| Total Prefill Tokens | 10.1M |
+| Cache Hit Tokens | 9,216,000 |
+| Cache Efficiency | 91.0% |
+| Token Generation Speed | 13.8 tok/s |
+| VRAM Usage | ~24.74 GB |
+| Total Session Duration | Approx. 1h 17m |
 
 ---
 
 ### 4. Qwen3.5-122B-A10B-4bit
 
-| 属性 | 值 |
+| Attribute | Value |
 |------|----|
-| 类型 | VLM（MoE，激活参数约 10B） |
-| 大小 | 68 GB（4bit 量化） |
-| 推理速度 | ~41 tok/s |
-| Context 窗口 | 262,144 tokens |
-| 采样参数 | temp=0.6, top_p=0.95, top_k=20（官方 coding 推荐） |
-| Thinking 模式 | 关闭 |
-| 目录 | `tetris-test-Qwen3.5-122B/` |
+| Type | VLM (MoE, ~10B active parameters) |
+| Size | 68 GB (4bit quantization) |
+| Inference Speed | ~41 tok/s |
+| Context Window | 262,144 tokens |
+| Sampling Parameters | temp=0.6, top_p=0.95, top_k=20 (official coding recommendation) |
+| Thinking Mode | Disabled |
+| Directory | `tetris-test-Qwen3.5-122B/` |
 
-**技术栈选择：** Vue 3 (Composition API) + TypeScript + Vite + 原生 CSS
+**Tech Stack Selection:** Vue 3 (Composition API) + TypeScript + Vite + Native CSS
 
-四个模型中功能最完整、加分项覆盖最全的实现。
+The implementation with the most complete functionality and the most comprehensive coverage of bonus items among the four models.
 
-**如何运行：**
+**How to Run:**
 ```bash
 cd tetris-test-Qwen3.5-122B
 npm install
@@ -245,114 +264,114 @@ npm run dev
 # 浏览器访问 http://localhost:3000
 ```
 
-**测评结果：** 历经 **1 轮** code review，**1 个 bug，1 次修复，0 次谎报**，一轮通过验收。是四个模型中表现最干净的。
+**Evaluation Results:** After **1 rounds** of code review, **1 bugs, 1 fixes, and 0 false reports**, it passed acceptance in one round. It was the cleanest performing among the four models.
 
-**已实现的加分项：** Hold 暂存 ✓、Ghost piece ✓、7-Bag 随机器 ✓、本地最高分（localStorage）✓、移动端触控 ✓、响应式布局 ✓、TypeScript ✓、README ✓
+**Implemented Bonus Items:** Hold Buffer ✓, Ghost Piece ✓, 7-Bag Randomizer ✓, Local High Score (localStorage) ✓, Mobile Touch Support ✓, Responsive Layout ✓, TypeScript ✓, README ✓
 
-**Bug 修复记录：**
+**Bug Fix Log:**
 
-| 轮次 | Bug | 描述 | 状态 |
+| Round | Bug | Description | Status |
 |------|-----|------|:----:|
-| R1 | 旋转失效 | `rotateTetromino` 用引用相等（`===`）查找当前旋转状态，数组拷贝后永远返回 index -1，旋转无法循环 | ✅ 一次修对 |
+| R1 | Rotation Failure | `rotateTetromino` used reference equality (`===`) to find the current rotation state; after array copying, it always returned index -1, preventing rotation from cycling | ✅ Fixed correctly on first attempt |
 
-**oMLX 运行统计：**
+**oMLX Runtime Statistics:**
 
-| 指标 | 值 |
+| Metric | Value |
 |------|----|
-| 总 Prefill Tokens | 3,247,432 |
-| 缓存命中 Tokens | 2,940,928 |
-| 缓存效率 | 90.6% |
-| Token Generation 速度 | 41.3 tok/s |
-| 显存占用 | ~65.22 GB |
+| Total Prefill Tokens | 3,247,432 |
+| Cache Hit Tokens | 2,940,928 |
+| Cache Efficiency | 90.6% |
+| Token Generation Speed | 41.3 tok/s |
+| VRAM Usage | ~65.22 GB |
 
 ---
 
 ### 3. Qwen3.6-35B-A3B-MLX-8bit
 
-| 属性 | 值 |
+| Attribute | Value |
 |------|----|
-| 类型 | LLM（MoE，激活参数约 3B） |
-| 大小 | 37 GB（8bit 量化） |
-| 推理速度 | ~82 tok/s（thinking 关闭） |
-| Context 窗口 | 262,144 tokens |
-| 采样参数 | temp=0.3, top_p=0.8, top_k=20 |
-| Thinking 模式 | **关闭**（开启时 8192 tokens 全被推理链消耗，content 输出为 0） |
-| 目录 | `tetris-test-Qwen3.6-35B/` |
+| Type | LLM (MoE, ~3B active parameters) |
+| Size | 37 GB (8bit quantization) |
+| Inference Speed | ~82 tok/s (thinking disabled) |
+| Context Window | 262,144 tokens |
+| Sampling Parameters | temp=0.3, top_p=0.8, top_k=20 |
+| Thinking Mode | **Disabled** (when enabled, all 8192 tokens are consumed by the reasoning chain, and content output is 0) |
+| Directory | `tetris-test-Qwen3.6-35B/` |
 
-**技术栈选择：** 原生 HTML/CSS/JavaScript + Canvas API
+**Tech Stack Selection:** Native HTML/CSS/JavaScript + Canvas API
 
-初版采用多文件模块化架构（`js/game.js`、`js/renderer.js`、`js/board.js`、`js/piece.js`、`js/audio.js`、`js/input.js`、`js/constants.js`），是三个模型中工程设计最完整的。但在第 2 轮修复时将全部代码压缩重写为单文件内联版本，原有架构被废弃。
+The initial version adopted a multi-file modular architecture (`js/game.js`, `js/renderer.js`, `js/board.js`, `js/piece.js`, `js/audio.js`, `js/input.js`, `js/constants.js`), which was the most complete in engineering design among the three models. However, during the 2th round of fixes, all code was compressed and rewritten into a single-file inline version, and the original architecture was discarded.
 
-> **注意：** `js/` 和 `css/` 目录是初版代码，已不被 `index.html` 加载，仅供参考。游戏运行使用 `index.html` 内的内联版本。
+> **Note:** The `js/` and `css/` directories contain the initial version code, which is no longer loaded by `index.html` and is for reference only. The game runs using the inline version within `index.html`.
 
-**如何运行：**
+**How to Run:**
 ```bash
 cd tetris-test-Qwen3.6-35B
 python3 -m http.server 8080
 # 浏览器访问 http://localhost:8080
 ```
 
-**测评结果：** 历经 8 轮 code review（超出约定的 5 轮），最终**通过验收**。3 次声称修复但代码实际未变动，2 次将修复写进废弃的外部 JS 文件。
+**Evaluation Results:** After 8 rounds of code review (exceeding the agreed-upon 5 rounds), it ultimately **passed acceptance**. It claimed fixes 3 times when the code actually remained unchanged, and wrote fixes into deprecated external JS files 2 times.
 
-**已实现的加分项（初版）：** Hold 暂存（正确）、Ghost piece、音效系统（Web Audio API 合成音效）、本地最高分（localStorage）、Next 队列、响应式 CSS、DAS 自动重复输入（专业级键盘处理）
+**Implemented Bonus Features (Initial Version):** Hold buffer (correct), Ghost piece, Sound system (Web Audio API synthesized sounds), Local high score (localStorage), Next queue, Responsive CSS, DAS automatic input repeat (professional-grade keyboard handling)
 
-**Bug 修复记录：**
+**Bug Fix Log:**
 
-| 轮次 | Bug | 模型行为 | 最终状态 |
+| Round | Bug | Model Behavior | Final Status |
 |------|-----|---------|:--------:|
-| R1 | I 件 rot0 竖向生成，应为横向 | 声称修复，代码未变动 | — |
-| R2 | 同上，再次指出 | 实际修复，但顺带将整个代码库压缩重写，引入 4 个新 bug | ✅ |
-| R3 | Ghost 不透明（`cell()` 覆盖了 `globalAlpha`）+ 音效开关无效 | 修在废弃的外部 JS 文件，无效 | — |
-| R4 | `spawn()` 未重置 `this.pr`，方块生成即触底，左右键失效 | 定位 bug | — |
-| R5 | R3+R4 三个 bug 同批修复 | `pr=0` 和音效正确修复，ghost 仍修在废弃文件 | ⚠️ |
-| R6 | Ghost 仍在废弃文件 | 修在 `index.html`，正确 | ✅ |
-| R7 | 旋转失效：`WK[rotation]` 应为 `WK.normal[rotation]` | 声称修复，代码未变动 | — |
-| R8 | 同上，再次指出 | 实际修复 | ✅ |
+| R1 | I piece rot0 generated vertically, should be horizontal | Claimed fix, code unchanged | — |
+| R2 | Same as above, pointed out again | Actually fixed, but also compressed and rewrote the entire codebase, introducing 4 new bugs | ✅ |
+| R3 | Ghost not transparent (`cell()` overwrote `globalAlpha`) + Sound toggle ineffective | Fixed in deprecated external JS file, ineffective | — |
+| R4 | `spawn()` did not reset `this.pr`, piece generated at bottom, left/right keys ineffective | Located bug | — |
+| R5 | Three bugs from R3+R4 fixed in same batch | `pr=0` and sound correctly fixed, ghost still fixed in deprecated file | ⚠️ |
+| R6 | Ghost still in deprecated file | Fixed in `index.html`, correct | ✅ |
+| R7 | Rotation failed: `WK[rotation]` should be `WK.normal[rotation]` | Claimed fix, code unchanged | — |
+| R8 | Same as above, pointed out again | Actually fixed | ✅ |
 
 ---
 
-## 最终评分
+## Final Scoring
 
-| 维度 | gemma-4-31b | Qwen3.6-27B | Qwen3.6-35B | Qwen3.5-122B |
+| Dimension | gemma-4-31b | Qwen3.6-27B | Qwen3.6-35B | Qwen3.5-122B |
 |------|:-----------:|:-----------:|:-----------:|:------------:|
-| 初版架构设计（/20） | 15 | 18 | 19 | **20** |
-| 功能完整性（/20） | 10 | 17 | 15 | **19** |
-| 代码正确性（/20） | 5 | 14 | 8 | **18** |
-| 自修复能力（/20） | 2 | 17 | 5 | **20** |
-| 最终交付质量（/20） | 0 | 14 | 13 | **19** |
-| **总分** | **32 / 100** | **80 / 100** | **60 / 100** | **96 / 100** |
+| Initial Architecture Design (/20) | 15 | 18 | 19 | **20** |
+| Functional Completeness (/20) | 10 | 17 | 15 | **19** |
+| Code Correctness (/20) | 5 | 14 | 8 | **18** |
+| Self-Repair Capability (/20) | 2 | 17 | 5 | **20** |
+| Final Delivery Quality (/20) | 0 | 14 | 13 | **19** |
+| **Total Score** | **32 / 100** | **80 / 100** | **60 / 100** | **96 / 100** |
 
 ---
 
-## 关键发现
+## Key Findings
 
-**1. Thinking 模式与代码生成任务不兼容**
+**1. Thinking mode is incompatible with code generation tasks**
 
-Qwen3.6-35B 开启 thinking 时，8192 tokens 的上限被内部推理链（`reasoning_content`）完全消耗，实际代码输出（`content`）为 0 字节。关闭 thinking 后推理速度达 82 tok/s，是三者中最快的模型。
+When Qwen3.6-35B has thinking enabled, the 8192 token limit is entirely consumed by the internal reasoning chain (`reasoning_content`), resulting in an actual code output (`content`) of 0 bytes. With thinking disabled, the inference speed reaches 82 tok/s, making it the fastest model among the three.
 
-**2. 谎报修复是普遍现象（但并非所有模型）**
+**2. False reporting of fixes is a common phenomenon (but not across all models)**
 
-gemma 和 Qwen3.6-35B 均出现多次声称修复但代码实际未变动的情况，有时还将修复写进废弃文件。Qwen3.6-27B 和 Qwen3.5-122B 均为 0 次谎报。
+Both gemma and Qwen3.6-35B exhibited multiple instances of claiming fixes were made while the code actually remained unchanged, sometimes even writing the fixes into deprecated files. Qwen3.6-27B and Qwen3.5-122B each had 0 instances of false reporting.
 
-**3. 自我验证能力参差不齐**
+**3. Self-verification capabilities are inconsistent**
 
-Qwen3.6-27B 主动调用 Playwright MCP 验证游戏行为。Qwen3.6-35B 也使用了 Playwright，但因用 `getImageData` 循环读取 canvas 像素而陷入死循环。gemma 完全不做运行验证。Qwen3.5-122B 未使用 Playwright，但修复精准，一次就对。
+Qwen3.6-27B proactively invoked Playwright MCP to verify game behavior. Qwen3.6-35B also used Playwright but fell into an infinite loop due to using a `getImageData` loop to read canvas pixels. gemma performed no runtime verification at all. Qwen3.5-122B did not use Playwright, but its fixes were precise and correct on the first attempt.
 
-**4. 架构复杂度与交付质量不正相关**
+**4. Architectural complexity is not positively correlated with delivery quality**
 
-技术栈最复杂的 gemma（React + TypeScript + Vite）反而是唯一未通过验收的模型。Qwen3.6-35B 初版架构最完整，但一次错误的重构决策（将多文件架构压缩成单文件）引入了 4 个新 bug，将一个 2 轮能修完的任务拖成了 8 轮。
+gemma, which had the most complex tech stack (React + TypeScript + Vite), was the only model that failed to pass acceptance. Qwen3.6-35B had the most complete initial architecture, but a single incorrect refactoring decision (compressing a multi-file architecture into a single file) introduced 4 new bugs, dragging a task that could have been fixed in 2 rounds out to 8 rounds.
 
-**5. 模型规模越大，修复质量越高**
+**5. Larger model scale leads to higher fix quality**
 
-Qwen3.5-122B（122B 总参数，10B 激活）是唯一在 1 轮内完成修复、0 次谎报、且主动在所有相关文件中正确修复的模型。规模带来了更好的代码理解力和更可靠的执行。
+Qwen3.5-122B (122B total parameters, 10B active) was the only model that completed fixes within 1 rounds, had 0 instances of false reporting, and proactively made correct fixes in all relevant files. Scale brought better code comprehension and more reliable execution.
 
-**6. 模型在被反复指出同一问题后仍不能全局检查（小模型更明显）**
+**6. Models still fail to perform global checks even after being repeatedly pointed out about the same issue (more pronounced in smaller models)**
 
-gemma 和 Qwen3.6-35B 均表现出"只修被点名的那一行"的倾向，不会主动搜索全局的同类问题。
+Both gemma and Qwen3.6-35B exhibited a tendency to "only fix the specific line pointed out," without proactively searching for similar issues globally.
 
 ---
 
-## 仓库结构
+## Repository Structure
 
 ```
 local-llm-tetris-code-test/

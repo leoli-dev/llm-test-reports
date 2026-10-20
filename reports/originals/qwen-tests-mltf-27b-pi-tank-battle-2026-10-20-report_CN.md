@@ -1,5 +1,24 @@
 # 在 M5 Max 上用 MLTF 驱动 8-bit Qwen3.8-27B：pi 制作 3D 坦克大战的四轮监督实测
 
+[English](qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report.md) | [简体中文](qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report_CN.md)
+
+<!-- environment-context:start -->
+
+## 本机配置与系统（2026-10-20 补充）
+
+| 项目 | 记录与证据边界 |
+|---|---|
+| 本机用途 | 本机推理工作站 |
+| 本机硬件参考 | MacBook Pro `Mac17,6`；Apple M5 Max；18 核 CPU；40 核 GPU；128 GB 统一内存（128 GiB / 137438953472 字节） |
+| 原报告明确记载的主机 | 详见原报告；未以当前快照补造历史配置 |
+| 当前系统快照 | macOS 27.0.1，build `26A434`，arm64，Metal 4；采集于 2026-10-20 22:03:27 UTC |
+| 实验时系统 | macOS 27.0.1 |
+| 历史配置边界 | 旧测试未保存独立快照时，详细核数只作为当前本机配置参考；内网 PC／云端推理硬件不由 Mac 配置推断 |
+
+[完整环境说明](../../environment_CN.md)。模型、量化、引擎、缓存和请求条件以本报告原有记录为准。原始图表、源码和命令输出保留源语言证据。
+
+<!-- environment-context:end -->
+
 实验日期：2026-10-20，America/Toronto（EDT）。本文面向 GitHub 分享，记录用户如何逐轮改变需求、本地模型经 pi 实际改了什么、哪些失败被保留，以及推理引擎和主机的测量数据。游戏是实验产物，仍是可玩原型。
 
 **推理引擎：[MLTF / My Little Trie Forge](https://github.com/DT-HJ/my-little-trie-forge)。目标模型：[Ho-Jin-93/Qwen3.8-27B-MLTF-q8c](https://huggingface.co/Ho-Jin-93/Qwen3.8-27B-MLTF-q8c)，27B、8-bit q8c 量化。** 代码由本机模型通过 pi 编写；监督者组织 prompt、观察、文字提示、独立测试和撰写报告，没有修改游戏实现。四轮共 **430 个请求、461,939 输出 token、326.48 分钟 pi 工作时间（约 5.44 小时）**，共 29 次方向性提示。轮间等待不计入工作时间。

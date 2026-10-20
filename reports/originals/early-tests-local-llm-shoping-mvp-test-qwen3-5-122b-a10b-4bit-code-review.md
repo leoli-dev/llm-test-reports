@@ -1,30 +1,49 @@
 # Code Review — Round 2
 
-**总体评价：** MVP 已完成并通过 Playwright E2E 验证，所有核心功能正常工作。Round 1 的 PrismaClient 多实例问题已修复。
+[English](early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review.md) | [简体中文](early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+**Overall Assessment:** The MVP has been completed and passed Playwright E2E verification, with all core functionalities operating normally. The PrismaClient multi-instance issue in Round 1 has been resolved.
 
 ---
 
-## ✅ 验收线：六步流程全部通过
+## ✅ Acceptance Line: All Six-Step Process Passed
 
-Playwright E2E 已验证：
-1. **用户注册/登录** ✅
-2. **浏览商品列表（分页）** ✅
-3. **查看商品详情** ✅
-4. **购物车（持久化）** ✅
-5. **提交订单（库存扣减）** ✅
-6. **查看订单列表及详情** ✅
+Playwright E2E verified:
+1. **User Registration/Login** ✅
+2. **Browse Product List (Pagination)** ✅
+3. **View Product Details** ✅
+4. **Shopping Cart (Persistence)** ✅
+5. **Submit Order (Inventory Deduction)** ✅
+6. **View Order List and Details** ✅
 
 ---
 
-## Round 1 → Round 2 修复内容
+## Round 1 → Round 2 Fixes
 
-### ✅ 已修复：PrismaClient 多实例问题
+### ✅ Fixed: PrismaClient Multiple Instance Issue
 
-**之前的问题：**
-每个路由文件各自实例化 `new PrismaClient()`，可能导致连接池问题
+**Previous Issue:**
+Each route file instantiated `new PrismaClient()` individually, which could lead to connection pool issues
 
-**修复方案：**
-创建 `src/lib/prisma.js` 导出全局单例：
+**Fix:**
+Created `src/lib/prisma.js` to export a global singleton:
 
 ```javascript
 // src/lib/prisma.js
@@ -37,75 +56,75 @@ export const prisma = globalForPrisma.prisma || new PrismaClient();
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 ```
 
-所有路由文件改为：
+All route files were changed to:
 ```javascript
 import { prisma } from '../lib/prisma.js';
 ```
 
-### ✅ 已修复：订单创建事务 API
+### ✅ Fixed: Order Creation Transaction API
 
-**之前的问题：**
-`prisma.$startTransaction()` 在 Prisma 5.x 中不可用
+**Previous Issue:**
+`prisma.$startTransaction()` is not available in Prisma 5.x
 
-**修复方案：**
-改用 `prisma.$transaction(async (tx) => {...})` 交互式事务 API
-
----
-
-## 后端亮点
-
-**数据库设计（schema.prisma）**
-
-- `CartItem` 有 `@@unique([cartId, productId])` 数据库层唯一约束 ✅
-- `OrderItem` 保存下单时的历史价格 `price: Float` ✅
-- Cascade delete 设置正确 ✅
-
-**认证（auth.js）**
-
-- bcrypt 加密，salt rounds=10 ✅
-- 统一错误消息 `"Invalid email or password"` ✅
-- 密码最短 6 位校验 ✅
-
-**订单创建（orders.js）**
-
-- 使用 `prisma.$transaction(async (tx) => {...})` 事务 ✅
-- 库存验证 → 创建订单 → 扣减库存 → 清空购物车 ✅
-- 库存不足返回 409，购物车为空返回 400 ✅
-- 取消订单在事务内回滚库存 ✅
-
-**商品接口（products.js）**
-
-- 分页、关键词搜索、分类筛选 ✅
-- `/categories` 独立端点 ✅
+**Fix:**
+Switched to the `prisma.$transaction(async (tx) => {...})` interactive transaction API
 
 ---
 
-## ⚠️ 未修复（技术债务，MVP 可接受）
+## Backend Highlights
 
-**1. 库存并发保护（SQLite 下可接受）**
+**Database Design (schema.prisma)**
 
-事务内先 `SELECT` 再 `UPDATE`，没有行锁（`SELECT FOR UPDATE`）。SQLite 因文件锁天然串行，不会超卖；换 PostgreSQL 后高并发下理论上存在超卖风险。
+- `CartItem` has a `@@unique([cartId, productId])` database-level unique constraint ✅
+- `OrderItem` saves the historical price at the time of order placement `price: Float` ✅
+- Cascade delete is configured correctly ✅
 
-**2. 前端无 TypeScript**
+**Authentication (auth.js)**
 
-JS 原生写法，无类型保障。考题加分项。
+- bcrypt encryption, salt rounds=10 ✅
+- Unified error message `"Invalid email or password"` ✅
+- Minimum password length of 6 characters validation ✅
+
+**Order Creation (orders.js)**
+
+- Uses `prisma.$transaction(async (tx) => {...})` transaction ✅
+- Inventory validation → create order → deduct inventory → clear shopping cart ✅
+- Returns 409 for insufficient inventory, returns 400 for empty shopping cart ✅
+- Order cancellation rolls back inventory within the transaction ✅
+
+**Product API (products.js)**
+
+- Pagination, keyword search, category filtering ✅
+- `/categories` independent endpoint ✅
 
 ---
 
-## 总结
+## ⚠️ Unfixed (Technical Debt, Acceptable for MVP)
 
-| 维度 | 评价 |
+**1. Inventory Concurrency Protection (Acceptable under SQLite)**
+
+Within the transaction, `SELECT` is performed before `UPDATE`, with no row-level locking (`SELECT FOR UPDATE`). SQLite naturally serializes operations due to file locking, preventing overselling; however, after switching to PostgreSQL, there is a theoretical risk of overselling under high concurrency.
+
+**2. No TypeScript on the Frontend**
+
+Native JavaScript implementation, lacking type safety. A bonus item for the exam.
+
+---
+
+## Summary
+
+| Dimension | Evaluation |
 |------|------|
-| 六步流程可用 | ✅ 全部通过 |
-| 密码加密 | ✅ bcrypt |
-| 历史价格保存 | ✅ OrderItem.price |
-| 库存事务 | ✅ $transaction |
-| 取消 + 回滚 | ✅ 含加分项 |
-| 分类/搜索 | ✅ 含加分项 |
-| Docker Compose | ✅ 含加分项 |
-| API 错误码规范 | ✅ |
-| PrismaClient 单例 | ✅ 已修复 |
-| 并发超卖（PostgreSQL） | ⚠️ 低风险 |
-| TypeScript | ❌ 未使用 |
+| Six-step process usability | ✅ All passed |
+| Password encryption | ✅ bcrypt |
+| Historical price preservation | ✅ OrderItem.price |
+| Inventory transactions | ✅ $transaction |
+| Cancellation + rollback | ✅ Includes bonus items |
+| Categories/Search | ✅ Includes bonus items |
+| Docker Compose | ✅ Includes bonus items |
+| API error code standards | ✅ |
+| PrismaClient singleton | ✅ Fixed |
+| Concurrent overselling (PostgreSQL) | ⚠️ Low risk |
+| TypeScript | ❌ Not used |
 
-**Round 2 结论：✅ 通过验收，所有核心功能正常，PrismaClient 单例问题已修复。**
+**Round 2 Conclusion: ✅ Passed acceptance, all core functions are normal, and the PrismaClient singleton issue has been fixed.**

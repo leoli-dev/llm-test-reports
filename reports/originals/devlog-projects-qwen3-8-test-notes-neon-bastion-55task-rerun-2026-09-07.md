@@ -1,70 +1,89 @@
 ---
 type: Note
-title: Neon Bastion 55-task rerun — A01–D05 progress with measured time/token/tps
+title: "Neon Bastion 55-task rerun — A01–D05 progress with measured time/token/tps"
 status: current
-description: 用 55 份细拆任务书从零重跑 Neon Bastion，前 16 个任务（A01–D05）逐任务耗时、token 与 mtplx 推理速度实测；含「挂钟时间≈输出token/decode速率」的定量结论。
+description: "Rerun Neon Bastion from scratch using 55 finely decomposed task specifications; measured per-task duration, token count, and mtplx inference speed for the first 16 tasks (A01–D05); includes the quantitative conclusion that \"wall-clock time ≈ output tokens / decode rate\"."
 tags: [neon-bastion, mtplx, pi, benchmark, throughput, task-decomposition]
 timestamp: 2026-09-07T22:40:00Z
 ---
 
 # Neon Bastion 55-task rerun — A01–D05
 
-前七轮 Neon Bastion（见[七轮总结](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md)）用的是粗粒度任务书。
-本轮把同一份规格切成 **55 份自足任务书**（`~/Code/qwen3.8-tests/test-prompts/neon-bastion/`，附 `INDEX.md`），
-在**全空目录**从零重跑，验证 OPS-09（历史本机文件，未随本报告发布）「一次一个自足小任务」在更细粒度下是否仍成立。
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07_CN.md)
 
-- 部署：MTPLX `mtplx-qwen38-27b-optimized-speed`，131K context，medium
-- 执行器：pi v0.85.1，跑在 zellij `main` 会话的 `qwen3.8-test-pi` 标签（pane 2）
-- 工作目录：`~/Code/qwen3.8-tests/mtplx-27B-optimized-speed-with-pi-neon-bastion`
-- 编排：本 session 用 `zellij action write-chars -p 2` 直接投喂，每轮 `/new` 清空 context，
-  按 12s 采样 / 连续 5 次无 spinner 判定空闲
-- **本轮进度：16/55（A01–D05），用户主动叫停于 E01 之前**
+<!-- environment-context:start -->
 
-## 交付事实
+## Workstation and system (context added 2026-10-20)
 
-16 次提交、46 文件、**+11,666 / −2**。末态 `npm run build` 退出码 0、**单测 265（15 文件）**、E2E 6（2 文件）。
-单测数量与构建退出码由本 session 在段落收尾处**独立复跑验证**（A04/B04/C03/D05 四个检查点），非仅采信 pi 自述；
-E2E 的 6/6 只有 pi 自述，未独立复跑。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-## 逐任务耗时与 token
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-时间为 **commit-to-commit**，含约 1 分钟空闲检测延迟与 `/new`+投喂间隔，比纯模型时间高 1–2 分钟。
-token 为每轮 TASK-DONE 后从 pi 状态栏抓的单次读数（`/new` 每轮重置，故是该任务的会话用量），
-**不是权威计费数字**。
+<!-- environment-context:end -->
 
-| 任务 | 完成 | 耗时 | ↑ | ↓ | R | CH | 末 ctx |
+The first seven rounds of Neon Bastion (see [Seven-Round Summary](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md)) used coarse-grained task specifications.
+This round splits the same specification into **55 self-contained task briefs** (`~/Code/qwen3.8-tests/test-prompts/neon-bastion/`, with `INDEX.md`),
+reruns from scratch in a **completely empty directory**, to verify whether OPS-09 (historical local files, not published with this report) "one self-contained small task at a time" still holds at a finer granularity.
+
+- Deployment: MTPLX `mtplx-qwen38-27b-optimized-speed`, 131K context, medium
+- Executor: pi v0.85.1, running in the `qwen3.8-test-pi` tab (pane 2) of the zellij `main` session
+- Working directory: `~/Code/qwen3.8-tests/mtplx-27B-optimized-speed-with-pi-neon-bastion`
+- Orchestration: This session feeds directly via `zellij action write-chars -p 2`, clearing context with `/new` each round,
+  sampling every 12s / determining idle after 5 consecutive no-spinner instances
+- **Progress this round: 16/55 (A01–D05), user actively stopped before E01**
+
+## Delivery Facts
+
+16 commits, 46 files, **+11,666 / −2**. Final state `npm run build` exit code 0, **unit tests 265 (15 files)**, E2E 6 (2 files).
+The number of unit tests and build exit code were **independently re-run and verified** by this session at the end of the paragraph (four checkpoints at A04/B04/C03/D05), not merely relying on pi's self-report;
+the 6/6 for E2E are only pi's self-report, not independently re-run.
+
+## Per-Task Duration and Tokens
+
+Time is **commit-to-commit**, including approximately 1 minutes of idle detection delay and `/new`+ feeding intervals, which is 1–2 minutes higher than pure model time.
+Tokens are single readings captured from the pi status bar after each round's TASK-DONE (`/new` resets each round, so this is the session usage for that task),
+**not authoritative billing figures**.
+
+| Task | Completed | Duration | ↑ | ↓ | R | CH | Final ctx |
 |---|---|---|---|---|---|---|---|
-| A01 项目简报 | 12:14:34 | ~5m34s | 6.3k | 2.2k | 34k | 99.0% | 6.5% |
-| A02 脚手架与构建门禁 | 12:20:25 | 5m51s | 8.9k | 12k | 396k | 98.7% | 17.1% |
-| A03 类型与 CONFIG | 12:30:32 | 10m07s | 9.3k | 23k | 356k | 99.4% | 26.4% |
-| A04 seeded RNG | 12:39:53 | 9m21s | 14k | 19k | 779k | 99.7% | 26.5% |
-| B01 地图数据模型 | 13:00:28 | 20m35s | 24k | 42k | 1.2M | 99.7% | 47.0% |
-| B02 几何查询 | 13:19:23 | 18m55s | 40k | 33k | 634k | 99.5% | 43.2% |
-| B03 导航图 | 13:56:37 | 37m14s | 85k | 29k | 2.1M | 99.8% | 64.6% |
-| B04 四布局 seed 生成 | 14:30:51 | 34m14s | 72k | 56k | 1.9M | 99.4% | 70.7% |
-| C01 碰撞移动 | 15:28:24 | **57m33s** | 188k | 53k | 3.6M | 99.8% | 47.7% |
-| C02 四向自洽输入 | 15:46:17 | 17m53s | 35k | 36k | 1.5M | 99.8% | 55.1% |
-| C03 第一人称镜头 | 16:15:12 | 28m55s | 56k | 54k | 2.4M | 99.9% | 63.8% |
-| D01 武器散布 | 16:22:42 | 7m30s | 25k | 15k | 655k | 100.0% | 28.0% |
-| D02 弹道弹丸 | 16:45:21 | 22m39s | 31k | 51k | 1.5M | 100.0% | 60.1% |
-| D03 命中判定 | 17:04:44 | 19m23s | 36k | 37k | 1.7M | 99.0% | 51.8% |
-| D04 开火管线与计分 | 17:48:49 | 44m05s | 151k | 79k | 4.9M | **6.0%** | 26.8% |
-| D05 Match 编排 | 18:36:27 | 47m38s | 143k | 62k | 2.1M | 97.7% | 51.2% |
+| A01 Project Brief | 12:14:34 | ~5m34s | 6.3k | 2.2k | 34k | 99.0% | 6.5% |
+| A02 Scaffolding and Build Gate | 12:20:25 | 5m51s | 8.9k | 12k | 396k | 98.7% | 17.1% |
+| A03 Types and CONFIG | 12:30:32 | 10m07s | 9.3k | 23k | 356k | 99.4% | 26.4% |
+| A04 Seeded RNG | 12:39:53 | 9m21s | 14k | 19k | 779k | 99.7% | 26.5% |
+| B01 Map Data Model | 13:00:28 | 20m35s | 24k | 42k | 1.2M | 99.7% | 47.0% |
+| B02 Geometric Queries | 13:19:23 | 18m55s | 40k | 33k | 634k | 99.5% | 43.2% |
+| B03 Navigation Graph | 13:56:37 | 37m14s | 85k | 29k | 2.1M | 99.8% | 64.6% |
+| B04 Four-Layout Seed Generation | 14:30:51 | 34m14s | 72k | 56k | 1.9M | 99.4% | 70.7% |
+| C01 Collision Movement | 15:28:24 | **57m33s** | 188k | 53k | 3.6M | 99.8% | 47.7% |
+| C02 Four-Directional Self-Consistent Input | 15:46:17 | 17m53s | 35k | 36k | 1.5M | 99.8% | 55.1% |
+| C03 First-Person Camera | 16:15:12 | 28m55s | 56k | 54k | 2.4M | 99.9% | 63.8% |
+| D01 Weapon Spread | 16:22:42 | 7m30s | 25k | 15k | 655k | 100.0% | 28.0% |
+| D02 Ballistic Projectiles | 16:45:21 | 22m39s | 31k | 51k | 1.5M | 100.0% | 60.1% |
+| D03 Hit Detection | 17:04:44 | 19m23s | 36k | 37k | 1.7M | 99.0% | 51.8% |
+| D04 Firing Pipeline and Scoring | 17:48:49 | 44m05s | 151k | 79k | 4.9M | **6.0%** | 26.8% |
+| D05 Match Orchestration | 18:36:27 | 47m38s | 143k | 62k | 2.1M | 97.7% | 51.2% |
 
-合计挂钟 **6h27m**（12:09 → 18:36），中位 **~20m**，累计 ↑ ~925k、↓ **~603k**。
-段落合计：A 段 31m、B 段 1h51m、C 段 1h44m、D 段 2h21m。
+Total wall-clock **6h27m** (12:09 → 18:36), median **~20m**, cumulative ↑ ~925k, ↓ **~603k**.
+Paragraph totals: A section 31m, B section 1h51m, C section 1h44m, D section 2h21m.
 
-**D04 的 CH 只有 6.0%**、末 context 反降到 26.8% —— 几乎确定中途触发 auto-compact，
-它的 ↑151k / R4.9M 与其他行不同口径。它也正好是唯一一个自查出两个真 bug 的任务。
+**D04's CH is only 6.0%**, and final context dropped to 26.8% —— almost certainly triggered auto-compact midway,
+its ↑151k / R4.9M is on a different scale than other rows. It is also exactly the only task that self-checked and found two real bugs.
 
-## ★ mtplx 推理速度实测
+## ★ mtplx Inference Speed Measurement
 
-mtplx 在 `http://127.0.0.1:8001/metrics` 暴露**逐请求**指标（`recent` 为 32 条滚动窗口，带唯一 `request_id`），
-可直接编程采样，不必读 Dashboard。本 session 写了 `tps_collect.py` 按 `request_id` 去重落 JSONL。
+mtplx exposes **per-request** metrics at `http://127.0.0.1:8001/metrics` (`recent` is a rolling window of 32 entries, with unique `request_id`),
+which can be sampled programmatically without reading the Dashboard. This session wrote `tps_collect.py` to deduplicate by `request_id` and write to JSONL.
 
-44 条样本（覆盖 D05 期间），按 context 分桶：
+44 samples (covering the D05 period), bucketed by context:
 
-| context | n | decode 均值 | 中位 | min | max | 端到端均值 |
+| context | n | decode mean | median | min | max | end-to-end mean |
 |---|---|---|---|---|---|---|
 | 0–20K | 4 | **56.1** | 60.3 | 47.1 | 61.6 | 17.6 |
 | 20–40K | 6 | 38.5 | 39.1 | 34.2 | 45.6 | 17.4 |
@@ -73,70 +92,70 @@ mtplx 在 `http://127.0.0.1:8001/metrics` 暴露**逐请求**指标（`recent` �
 | 80–100K | 2 | 29.6 | 30.6 | 28.6 | 30.6 | 29.5 |
 | 100–120K | 17 | **27.5** | 25.5 | 19.1 | 43.7 | 23.4 |
 
-**decode 随 context 单调衰减很干净：56 → 28 tok/s，context 翻倍约掉三成。**
-端到端列噪声大，因为短回复里 TTFT 占比高（40–60K 桶的 9.3 是 138-token 短回复被 prefill 拖的）。
+**decode decays monotonically and cleanly with context: 56 → 28 tok/s, roughly a 30% drop per context doubling.**
+The end-to-end column is noisy because TTFT accounts for a high proportion in short responses (the 9.3 in the 40–60K bucket is dragged down by prefill for 138-token short responses).
 
-同期机器状态：cached 24.3M tok 全 RAM 命中、内存 79.8/128 GB（62%）、
-prefill 均值 485 tok/s 峰值 841、MTP 接受率 D1 91.4% / D2 60.5% / D3 51.6%（mean P=68.1%）、
-lifetime 26M tok、all-time max 84.3 tps。
+Machine state during the same period: cached 24.3M tok all RAM hits, memory 79.8/128 GB (62%),
+prefill mean 485 tok/s peak 841, MTP acceptance rate D1 91.4% / D2 60.5% / D3 51.6% (mean P=68.1%),
+lifetime 26M tok, all-time max 84.3 tps.
 
-### ⚠️ Dashboard 主表盘标签与取值错位
+### ⚠️ Dashboard main dial label and value mismatch
 
-截图里 84mm 大表盘显示 **18.6，标注 "tps decode"**，但它精确等于 `latest.request_tok_s = 18.6215`；
-**同一时刻 `latest.decode_tok_s` 是 23.63**。下方 "5-MIN MIN/MAX 22.5/28.6" 才是真正的 decode。
-即主表盘展示的是含 prefill 等待的端到端速率却标成 decode。
-用户凭印象给的「一般 13–32 tok/s」对应的是这个端到端口径，纯 decode 要更高。
+The 84mm large dial in the screenshot displays **18.6, labeled "tps decode"**, but it is exactly equal to `latest.request_tok_s = 18.6215`;
+**at the same moment `latest.decode_tok_s` is 23.63**. The "5-MIN MIN/MAX 22.5/28.6" below is the actual decode.
+That is, the main dial displays the end-to-end rate including prefill wait but labels it as decode.
+The "usually 13–32 tok/s" given by the user from memory corresponds to this end-to-end metric; pure decode is higher.
 
-### ★ 挂钟时间 ≈ 输出 token ÷ decode 速率
+### ★ Wall-clock time ≈ output tokens ÷ decode rate
 
-↓ 累计 ~603k token ÷ 6h27m = **平均 26 tok/s**，与实测高 context 段 decode **27.5 tok/s** 几乎重合。
-含义：**这 6.5 小时几乎全是解码时间**，工具执行、prefill、编排间隔加起来占比很小
-——CH 普遍 99%+ 让 prefill 基本免费（24.3M cached tok 全 RAM 命中）。
+↓ Cumulative ~603k tokens ÷ 6h27m = **average 26 tok/s**, which almost coincides with the measured high-context segment decode **27.5 tok/s**.
+Implication: **these 6.5 hours were almost entirely decoding time**; tool execution, prefill, and orchestration intervals combined account for a very small proportion
+——CH is generally 99%+ making prefill basically free (24.3M cached tok all RAM hits).
 
-**据此可做容量估算**：`预计耗时 ≈ 预计输出 token ÷ 25`。剩余 39 个任务若按已观测的
-平均 ~38k ↓/任务计，约需 **1.48M token ≈ 16.5 小时**。
+**Based on this, capacity estimation can be made**: `预计耗时 ≈ 预计输出 token ÷ 25`. The remaining 39 tasks, if calculated at the observed
+average ~38k ↓/task, will require approximately **1.48M tokens ≈ 16.5 hours**.
 
-> ⚠️ 该估算只有 16 个样本，且 E–M 段（AI / UI / 美术 / 音频）的任务性质与 A–D（纯逻辑）不同；
-> 历史上美术任务中位耗时是逻辑任务的 2.4 倍（见[七轮总结](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md)），
-> 所以 16.5h 应视为**下界**。
+> ⚠️ This estimate has only 16 samples, and the nature of tasks in the E–M segment (AI / UI / Art / Audio) differs from A–D (pure logic);
+> historically, the median duration of art tasks is 2.4 times that of logic tasks (see [Seven-Round Summary](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md)),
+> so 16.5h should be considered a **lower bound**.
 
-## 模型表现
+## Model Performance
 
-**质量明显好于前几轮同期。** 每个任务都自觉执行了 A01 要求的**负对照**（破坏被测属性 → 确认断言变红 → 恢复），
-并在 commit message 里逐条记录，累计 50+ 组。这正面回应了 OPS-12（历史本机文件，未随本报告发布）
-「绿色的测试可能与被测代码无关」——本轮 A02 就把 `reuseExistingServer: false` + `E2E_PORT` 端口隔离写进了脚手架，
-是任务书把历史踩坑固化成验收条件的直接效果。
+**Quality is clearly better than the same period in previous rounds.** Each task consciously executed the **negative control** required by A01 (break the property under test → confirm assertion turns red → restore),
+and recorded each item in the commit message, accumulating 50+ groups. This directly addresses OPS-12 (historical local file, not published with this report)
+"green tests may be unrelated to the code under test"——this round's A02 wrote `reuseExistingServer: false` + `E2E_PORT` port isolation into the scaffold,
+which is the direct effect of the task specification solidifying historical pitfalls into acceptance criteria.
 
-### D04 自查出两个真 bug（未被任何断言覆盖）
+### D04 Self-identified two real bugs (not covered by any assertion)
 
-1. **`fireFrom` 未归一化 `aim.dir`**：调用方传原始向量时俯仰角被距离放大，远射全部下坠成 miss
-   ⇒ **AI 对 AI 的整局比赛永远不会结束**。
-2. **互灭竞态**：双方最后一名在同一飞行窗口内先后倒下时，「获胜方」可能零存活。
-   改为按确定性结算序裁定（先全灭者输）+ 终局后状态冻结。
+1. **`fireFrom` does not normalize `aim.dir`**: when the caller passes a raw vector, the pitch angle is amplified by distance, causing all long-range shots to drop and miss
+   ⇒ **An entire AI-vs-AI match will never end**.
+2. **Mutual destruction race condition**: when the last remaining units of both sides fall in the same flight window, the "winner" may have zero survivors.
+   Changed to adjudicate by deterministic settlement order (the first to be completely wiped out loses) + state freeze after the endgame.
 
-两者都是**跑通整局模拟才会暴露**的问题，说明「写一个完整 AI-vs-AI 比赛的单测」这条要求本身有效。
+Both are issues that **would only be exposed by running a full match simulation**, indicating that the requirement "write a unit test for a complete AI-vs-AI match" itself is effective.
 
-### B01 主动声明规格内部冲突
+### B01 Proactively declared internal specification conflict
 
-任务书同时要求「坐标一字不差」与「16 对蓝红出生点两两连线全部被阻挡」。
-pi 指出固定坐标下 x=±3 同列的连线不经过任何 solid（中央立柱只覆盖 x=0），二者几何上不可兼得；
-选择保坐标，把断言降级为出生区级证明并在测试注释写明原因。
-**这是任务书自身的缺陷，不是模型失败**——值得记下的是它选择了声明而不是悄悄改数值。
+The task specification simultaneously requires "coordinates exactly matching" and "all pairwise lines between the 16 blue and red spawn points are blocked".
+pi pointed out that with fixed coordinates, the lines in the same column at x=±3 do not pass through any solid (the central pillar only covers x=0), making the two geometrically incompatible;
+chose to keep the coordinates, downgraded the assertion to a spawn-zone level proof, and stated the reason in the test comments.
+**This is a defect in the task specification itself, not a model failure**——what is worth noting is that it chose to declare it rather than silently change the values.
 
-## 当前不可玩
+## Currently Unplayable
 
-逻辑层已相当完整（265 单测，弹道/命中/计分/事件总线/终局裁定齐备，能跑完整 AI-vs-AI 模拟比赛），
-但**表现层与输入层几乎没接线**。浏览器里点 Deploy 只有一块 `0x05070d` 底色 + 一个能 WASD 平移的相机：
+The logic layer is already quite complete (265 unit tests, with ballistics/hit detection/scoring/event bus/endgame adjudication all in place, capable of running a full AI-vs-AI simulation match),
+but **the presentation layer and input layer are almost entirely unwired**. In the browser, clicking Deploy only yields a `0x05070d` background color + a camera that can be panned with WASD:
 
-- `src/app.ts` 一个 `Mesh` 都没建、`scene.add()` 一次没调 —— 墙只存在于碰撞盒，会撞到看不见的墙
-- 全仓 grep 不到 `requestPointerLock` / `mousemove` —— C02 的 `applyLook` 写好也测了但没接浏览器事件
-- `app.ts` 不引用 `fireFrom`，只有 `testHooks` 的 `fireShot` 能触发
-- 无敌人（E 段未开始）、无 HUD（G 段）、无死亡观战与结算（F03/G05）
+- `src/app.ts` has not created a single `Mesh`, and `scene.add()` has never been called — walls exist only as collision boxes, so you will collide with invisible walls
+- A grep across the entire repository finds no `requestPointerLock` / `mousemove` — C02's `applyLook` is written and tested but not connected to browser events
+- `app.ts` does not reference `fireFrom`; only `testHooks`'s `fireShot` can trigger it
+- No enemies (Section E not started), no HUD (Section G), no death spectating and settlement (F03/G05)
 
-符合 `INDEX.md` 的路线图：关键路径 A→B→C→D→E→F，**F03 才是「能跑能打能死能重开」那一刻**。
-离可玩还差 E 段 7 个 + F 段 3 个 = 10 个任务。
+This aligns with the roadmap in `INDEX.md`: critical path A→B→C→D→E→F, **F03 is the moment when it becomes "runnable, playable, killable, and restartable"**.
+It is still 7 tasks in Section E + 3 tasks in Section F = 10 tasks away from being playable.
 
-## 复现方法
+## Reproduction Steps
 
 ```
 # 投喂（pane 2 = pi）
@@ -148,62 +167,62 @@ zellij action write -p 2 13
 # 速度采样：GET http://127.0.0.1:8001/metrics -> recent[] 按 request_id 去重
 ```
 
-按 `INDEX.md` 建议，`/new` 之后模型不记得全局约定，故每轮把 A01 与当前任务**一起**投喂。
+As suggested in `INDEX.md`, the model does not remember global conventions after `/new`, so A01 and the current task are fed **together** in each round.
 
-## 下一步
+## Next Steps
 
-从 **E01** 继续（E 段 7 个 AI 任务）。恢复前重启 `tps_collect.py` 才有逐请求速度数据；
-`feed.sh` / `done.sh` 已加时间戳记录，E 段起时间与 token 是直接测的，不必事后重建。
+Continue from **E01** (7 AI tasks in Section E). Restart `tps_collect.py` before resuming to obtain per-request speed data;
+timestamps have been added to `feed.sh` / `done.sh`, so time and tokens are measured directly from Section E onward, eliminating the need for post-hoc reconstruction.
 
 ---
 
-# 续跑 2026-09-10 — E 段（E01–E06），22/55
+# Resume 2026-09-10 — Segment E (E01–E06), 22/55
 
-2026-09-07 暂停后于 09-10 恢复。**E07 之前再次按用户要求暂停**（"今天干了一整天了"）。
+Resumed on 09-10 after the pause on 2026-09-07. **Paused again before E07 at user's request** ("I've been working all day today").
 
-## 恢复时踩的两个坑
+## Two pitfalls encountered upon resumption
 
-**1. 环境全变了，且没有任何提示。** 恢复时 mtplx 服务未运行（`:8001` 无监听、无 mtplx/mlx 进程）、
-pi 已退出（`qwen3.8-test-pi` 标签里只剩 shell 提示符）。用户手动重启了两者。
+**1. The environment had completely changed, with no indication whatsoever.** Upon resumption, the mtplx service was not running (no listener on `:8001`, no mtplx/mlx processes),
+and pi had exited (only the shell prompt remained in the `qwen3.8-test-pi` tab). The user manually restarted both.
 
-**2. ★ zellij 面板号不是稳定标识——投喂打进了编排方自己的输入框。**
-上一轮 pi=pane 2、编排方=pane 1；重启后**两者对调**（编排方=2、pi=1）。
-`feed.sh` 仍写死 `PANE=2`，于是那条"先读全局约定 @A01…"直接被打进了 Claude Code 的输入框，
-以用户消息的形式回到编排方自己手里。**没有任何报错**——写入成功了，只是写错了地方。
-修法：每次恢复前用 `zellij action dump-layout` + 逐号 `dump-screen -p N` 重新探测，
-不要复用上一轮的面板号。已并入 OPS-22（历史本机文件，未随本报告发布）。
+**2. ★ Zellij pane numbers are not stable identifiers—feeding was directed into the orchestrator's own input box.**
+In the previous round, pi=pane 2, orchestrator=pane 1; after the restart, **the two were swapped** (orchestrator=2, pi=1).
+`feed.sh` still had `PANE=2` hardcoded, so the instruction "First read global conventions @A01…" was directly typed into Claude Code's input box,
+returning to the orchestrator itself in the form of a user message. **There were no errors**—the write succeeded, it just went to the wrong place.
+Fix: Before each resumption, use `zellij action dump-layout` + per-number `dump-screen -p N` to re-probe,
+do not reuse pane numbers from the previous round. This has been merged into OPS-22 (historical local file, not published with this report).
 
-## E 段逐任务
+## Segment E Task-by-Task
 
-| 任务 | 完成 | 耗时 | ↑ | ↓ | R | CH |
+| Task | Completed | Duration | ↑ | ↓ | R | CH |
 |---|---|---|---|---|---|---|
-| E01 感知 | 07:12:04 | 15m45s | 41k | 30k | 1.5M | 98.6% |
-| E02 状态机 | 09:30:04 | **2h17m53s** | 548k | 196k | 8.9M | 99.9% |
-| E03 doctrine | 10:33:24 | 1h03m12s | 182k | 91k | 4.8M | 100% |
-| E04 开火决策 | 11:36:44 | 1h03m12s | 177k | 59k | 2.3M | 4.9% |
-| E05 防僵持 | 15:02:03 | **3h25m12s** | 539k | 195k | 11M | 98.9% |
-| E06 防卡死 | 19:40:19 | **4h38m08s** | 878k | 369k | 11M | 99.6% |
+| E01 Perception | 07:12:04 | 15m45s | 41k | 30k | 1.5M | 98.6% |
+| E02 State Machine | 09:30:04 | **2h17m53s** | 548k | 196k | 8.9M | 99.9% |
+| E03 Doctrine | 10:33:24 | 1h03m12s | 182k | 91k | 4.8M | 100% |
+| E04 Firing Decision | 11:36:44 | 1h03m12s | 177k | 59k | 2.3M | 4.9% |
+| E05 Anti-Stall | 15:02:03 | **3h25m12s** | 539k | 195k | 11M | 98.9% |
+| E06 Anti-Deadlock | 19:40:19 | **4h38m08s** | 878k | 369k | 11M | 99.6% |
 
-E 段合计挂钟 **12h44m**、输出 **940k token**、中位 **1h40m**。
-末态：22 提交、54 文件、**+15,963/−2**、单测 **363**（21 文件）、E2E 6、`npm run build` 退出码 0。
-每个任务完成后由编排方独立复跑 build + 单测验证，非仅采信自述。
+Segment E total wall-clock **12h44m**, output **940k tokens**, median **1h40m**.
+Final state: 22 commits, 54 files, **+15,963/−2**, unit tests **363** (21 files), E2E 6, `npm run build` exit code 0.
+After each task completion, the orchestrator independently re-ran build + unit tests for verification, rather than merely trusting self-reports.
 
-### ★ E 段推翻了 A–D 段的耗时模型
+### ★ Segment E overturned the duration model of Segments A–D
 
-| 段 | 任务数 | 中位耗时 | 合计 |
+| Segment | Tasks | Median Duration | Total |
 |---|---|---|---|
-| A–D（纯逻辑） | 16 | **20m** | 6h27m |
-| E（AI） | 6 | **1h40m** | 12h44m |
+| A–D (Pure Logic) | 16 | **20m** | 6h27m |
+| E (AI) | 6 | **1h40m** | 12h44m |
 
-**六个 AI 任务的耗时是前十六个任务总和的两倍。** 中位耗时相差 5 倍。
-原 PERF-01（历史本机文件，未随本报告发布） 的估算式在 E 段也失准：
-940k ÷ 12h44m = **20.5 tok/s**，低于 A–D 段的 26；按公式预测应为 10h27m，实际 12h44m，**低估 22%**。
-差额来自三处公式没覆盖的开销：auto-compact 后的重新 prefill、两次人工介入的往返、
-以及回合结束但任务未完成时的空转。**修正：`预计耗时 ≈ 输出 token ÷ 20`，且仅对无失速的任务成立。**
+**The duration of the six AI tasks is twice the sum of the previous sixteen tasks.** The median duration differs by a factor of 5.
+The estimation formula from the original PERF-01 (historical local file, not published with this report) was also inaccurate for Segment E:
+940k ÷ 12h44m = **20.5 tok/s**, lower than the 26 for Segments A–D; the formula predicted 10h27m, actual was 12h44m, **underestimated by 22%**.
+The discrepancy comes from three overheads not covered by the formula: re-prefill after auto-compact, round-trips for two manual interventions,
+and idle spinning when the turn ends but the task is not complete. **Correction: `预计耗时 ≈ 输出 token ÷ 20`, and this only holds for tasks without stalling.**
 
-E 段 tps 实测（634 条逐请求样本，远多于 09-07 的 44 条）：
+Segment E tps measurements (634 per-request samples, far more than the 44 on 09-07):
 
-| context | n | decode 中位 |
+| context | n | decode median |
 |---|---|---|
 | 0–20K | 33 | 47.1 |
 | 20–40K | 41 | 30.7 |
@@ -212,103 +231,103 @@ E 段 tps 实测（634 条逐请求样本，远多于 09-07 的 44 条）：
 | 80–100K | 124 | 26.3 |
 | 100–120K | 119 | 25.5 |
 
-衰减曲线与 09-07 的 44 条样本一致（**47 → 25 tok/s**），样本量扩大 14 倍后结论不变。
+The decay curve is consistent with the 44 samples from 09-07 (**47 → 25 tok/s**), and the conclusion remains unchanged after expanding the sample size by 14 times.
 
-## ★ 两次失速：形态不同，判据也不同
+## ★ Two stalls: Different forms, different criteria
 
-E 段出现两次需要人工介入的失速，**外部表现都是"很久没进展"，但性质完全相反**。
-区分判据：**看它在读什么**。
+Two stalls requiring manual intervention occurred in Segment E; **externally both manifested as "no progress for a long time," but their nature was completely opposite**.
+Distinguishing criterion: **Look at what it is reading**.
 
-### 失速一：工具调用退化成纯文本（E05）
+### Stall 1: Tool calls degenerated into plain text (E05)
 
-pi 要写一段 python heredoc 改 `constants.ts`，**整段以纯文本输出、没有产生工具调用**，
-然后正常结束回合。诱因与已归档的
-bug 页（历史本机文件，未随本报告发布）一致：长复合 shell 命令。
+pi was to write a python heredoc to modify `constants.ts`, but **the entire segment was output as plain text, generating no tool calls**,
+then the turn ended normally. The trigger was consistent with the archived
+bug page (historical local file, not published with this report): long composite shell commands.
 
-**这次暴露了编排方自己的判据缺陷**：原 `wait.sh` 只判断"屏幕无 spinner"，
-那只能判断**回合结束**，判断不了**任务完成**——差点把这次失速当成"E05 完成"记账。
-**修法（已实施）**：完成判据改为硬判据——空闲后必须 **HEAD 前进** 或 **屏幕出现 TASK-DONE**，
-否则 exit 2 报失速。E05 最终以 `DONE (HEAD 50793d3 -> 85512a4)` 通过。
-新增 OPS-24（历史本机文件，未随本报告发布）。
+**This exposed a flaw in the orchestrator's own criteria**: The original `wait.sh` only checked for "no spinner on screen,"
+which could only determine **turn end**, not **task completion**—it nearly recorded this stall as "E05 complete."
+**Fix (implemented)**: The completion criterion was changed to a hard criterion—after idle, **HEAD must advance** or **TASK-DONE must appear on screen**,
+otherwise exit 2 reports a stall. E05 finally passed with `DONE (HEAD 50793d3 -> 85512a4)`.
+New OPS-24 added (historical local file, not published with this report).
 
-### 失速二：设计卡住 → 工具卡住（E06，两次介入）
+### Stall 2: Design stuck → Tool stuck (E06, two interventions)
 
-E06 是任务书里**唯一明写"上一次交付没解决"**的任务（原文："本项目最终交付时
-『AI 偶尔卡墙角』仍未完全消除"），验收要求 seed 1..40 卡墙扫描为 0。
+E06 was the **only task in the specification explicitly stating "the previous delivery did not resolve it"** (original text: "In the final delivery of this project,
+'AI occasionally gets stuck in corners' has not been completely eliminated"), with acceptance requiring a seed 1..40 corner-stuck scan of 0.
 
-**第一次介入（3h25m 处，设计卡住）**：pi 反复重推同一个墙角的几何方向。
-它自己的调试轨迹已经算出了根因，但没跳出"切向滑出"这个框架。编排方从它的 trace 里读出两条：
-(a) **episode 之间有静止死区**——episode 在 t=6.0 结束、下次触发要等 t=9.0，
-中间明确写了 `v=0`，这 3 秒直接喂给"连续 5s 位移<0.3m"的扫描；
-(b) **slideSign 是盲目交替而非探测**——翻转后选中了它自己算出"完全堵死"的角落象限。
-**关键洞察：切向滑出在墙角无解**（两个面在此交汇，两个切向候选可能同时被堵），
-角落唯一的出路是**先反向退一步**。
+**First intervention (at 3h25m, design stuck)**: pi repeatedly re-derived the geometric direction of the same corner.
+Its own debug trace had already calculated the root cause, but it did not break out of the "tangential slide-out" framework. The orchestrator read two things from its trace:
+(a) **There is a static dead zone between episodes**—the episode ends at t=6.0, the next trigger waits until t=9.0,
+with `v=0` explicitly written in between; these 3 seconds were directly fed into the "continuous 5s displacement <0.3m" scan;
+(b) **slideSign is blind alternation rather than probing**—after flipping, it selected the corner quadrant it had calculated as "completely blocked."
+**Key insight: Tangential slide-out is unsolvable in corners** (two faces meet here, and both tangential candidates may be blocked simultaneously),
+the only way out of a corner is to **back up one step first**.
 
-**第二次介入（4h01m 处，工具卡住）**：设计已定、`types.ts` 已落盘，
-但 `aiController.ts` 的编辑调用持续失败——pi 在纠结一段**文档注释**的 `oldText` 精确匹配
-（"两段文字看起来一样但匹配不上"，差别在空白/换行），并自述
-"the earlier edit call was atomic (all-or-nothing), so nothing was applied"。
-**这是纯粹的工具链浪费，靠等不会自愈。** 介入内容：先别改注释（不参与验收）、
-直接落功能改动、编辑失败时改用短而唯一的锚点或整函数替换。
+**Second intervention (at 4h01m, tool stuck)**: Design was finalized, `types.ts` was written to disk,
+but edit calls to `aiController.ts` continued to fail—pi was struggling with the exact match of `oldText` for a **documentation comment**
+("Two pieces of text look the same but don't match," the difference being whitespace/newlines), and self-reported
+"the earlier edit call was atomic (all-or-nothing), so nothing was applied."
+**This was pure toolchain waste, waiting would not self-heal.** Intervention content: Don't modify the comment first (not part of acceptance),
+directly implement functional changes, and when editing fails, use short and unique anchors or whole-function replacement.
 
-> **通则**：外部表现同为"停滞"，但**重推几何 = 设计卡住（可能自愈，E05 就是自主收敛的）**；
-> **反复 grep 找原文 = 工具卡住（不会自愈，必须介入）**。
-> 介入前按 OPS-16（历史本机文件，未随本报告发布） 重新采集当下状态，不拿旧证据下判断。
+> **General Rule**: External manifestation is the same "stagnation," but **re-deriving geometry = design stuck (may self-heal, E05 converged autonomously)**;
+> **repeatedly grepping for original text = tool stuck (will not self-heal, must intervene)**.
+> Before intervening, re-collect the current state according to OPS-16 (historical local file, not published with this report), do not make judgments based on old evidence.
 
-## ★ E06 自己发现的两处连锁反应
+## ★ Two chain reactions discovered by E06 itself
 
-pi 在 E06 超出要求做了两件事，**都是编排方没预见到的**：
+pi did two things beyond requirements in E06, **both were unforeseen by the orchestrator**:
 
-1. **纯 90° 切向探测打坏了 E05**：单位转 90° 后目标脱出 50° 视锥 → 退回 search 来回摆 →
-   整局零击杀。改为"先试 30°，不行再 90°/后退"，常见情况保住目标可见性，墙角仍能脱困。
-2. **`aiFire` 的 2 m 免杀测试原来是假绿**：E06 之前贴脸单位被卡住（0 发），
-   测试"通过"是因为它**根本动不了**；修复后它会退开并在 ≥3 m 合法开火。
-   pi 把断言改成真正的契约——每一发的决策距离 ≥ `minFireDist`（实测首发 3.12 m）。
+1. **Pure 90° tangential probing broke E05**: After rotating the unit 90°, the target exited the 50° frustum → fell back to search and oscillated →
+   zero kills for the entire game. Changed to "try 30° first, then 90°/back up if that fails," maintaining target visibility in common cases while still allowing escape from corners.
+2. **The 2 m no-kill test for `aiFire` was originally a false green**: Before E06, close-range units were stuck (0 shots),
+   the test "passed" because they **could not move at all**; after the fix, they back away and legally fire at ≥3 m.
+   pi changed the assertion to the true contract—decision distance for every shot ≥ `minFireDist` (measured first shot 3.12 m).
 
-第 2 条是 OPS-12（历史本机文件，未随本报告发布）「绿色的测试可能与被测代码无关」的又一实例，
-**且是本项目首次由模型自己发现**（历史上四次实例全部由人或评审方发现）。
-E05 的防僵持也给出了同类的可判定证据：seed 27（Twin Mazes）原本 300 s 零击杀僵局
-→ 加闸后 140 s 结束、6 杀，多种子稳定收敛在 125–137 s。
+Item 2 is another instance of OPS-12 (historical local file, not published with this report) "Green tests may be unrelated to the code under test,"
+**and it was the first time in this project discovered by the model itself** (historically, all four instances were discovered by humans or reviewers).
+The anti-stall in E05 also provided similar decidable evidence: seed 27 (Twin Mazes) originally had a 300 s zero-kill stalemate
+→ after adding the gate, it ended in 140 s with 6 kills, stably converging to 125–137 s across multiple seeds.
 
-## 仍然不可玩
+## Still not playable
 
-E 段只补齐了 AI 逻辑，**表现层与输入层依旧没接线**（`app.ts` 无 `Mesh`/`scene.add()`、
-无 `requestPointerLock`、不引用 `fireFrom`）。距 `INDEX.md` 关键路径的 F03
-（"能跑能打能死能重开"）还差 **E07 + F 段 3 个**。
+Segment E only completed the AI logic; **the presentation layer and input layer are still not wired up** (`app.ts` has no `Mesh`/`scene.add()`,
+no `requestPointerLock`, does not reference `fireFrom`). Still **E07 + 3 tasks in Segment F** away from the critical path of `INDEX.md` F03
+("can run, can shoot, can die, can restart").
 
-## 下一步
+## Next Steps
 
-从 **E07** 恢复（E 段最后一个：seed 1..40 扫描）。恢复前必做：
-1. 确认 mtplx `:8001` 在线、pi 已启动；
-2. **重新探测面板号**并改 `feed.sh`/`wait.sh`/`done.sh` 的 `PANE`；
-3. 起 `tps_collect.py`。
+Resume from **E07** (the last in Segment E: seed 1..40 scan). Mandatory before resumption:
+1. Confirm mtplx `:8001` is online, pi is started;
+2. **Re-probe pane numbers** and update `PANE` in `feed.sh`/`wait.sh`/`done.sh`;
+3. Start `tps_collect.py`.
 
-**剩余 33 个任务**（E07 · F×3 · G×8 · H×5 · I×4 · J×3 · K×4 · L×3 · M×2）。
-按 E 段中位 1h40m 外推约 **35–55 小时**，但 F–M 是外壳/UI/美术/音频，性质异于 AI，
-该区间不确定性很大——唯一可靠的结论是 **09-07 记的"16.5 小时"已被证伪，且低估幅度很大**。
+**33 tasks remaining** (E07 · F×3 · G×8 · H×5 · I×4 · J×3 · K×4 · L×3 · M×2).
+Extrapolating from the Segment E median of 1h40m gives approximately **35–55 hours**, but F–M are shell/UI/art/audio, different in nature from AI,
+so the uncertainty in this range is high—the only reliable conclusion is that the **"16.5 hours" recorded on 09-07 has been falsified, and the underestimation is significant**.
 
 ---
 
-# 续跑 2026-09-12 — E07 + F 段 + G01–G06，32/55
+# Resumed 2026-09-12 — E07 + F Section + G01–G06, 32/55
 
-09-10 暂停后于 09-12 恢复。**G07 之前再次按用户要求暂停。**
-本日完成 **10 个任务**（E07、F01–F03、G01–G06），挂钟 **8h41m**、输出 **713k token**、中位 **49m**。
+Resumed on 09-12 after the 09-10 pause. **Paused again before G07 at user request.**
+Completed **10 tasks** today (E07, F01–F03, G01–G06), wall-clock **8h41m**, output **713k token**, median **49m**.
 
-末态：**32 提交、85 文件、+24,079/−2、单测 469（33 文件）、E2E 49、`npm run build` 退出码 0**。
-每任务完成后由编排方独立复跑 build + 单测验证。
+Final state: **32 commits, 85 files, +24,079/−2, 469 unit tests (33 files), 49 E2E, `npm run build` exit code 0**.
+After each task completion, the orchestrator independently re-ran build + unit tests for verification.
 
-## 恢复时又踩一次「环境不保证还在」
+## Stepped on "environment not guaranteed to persist" again upon resumption
 
-mtplx 服务再次未运行（`:8001` 无监听），pi 存活但无后端。**面板号这次没变**（pi=1），
-但仍按 OPS-22（历史本机文件，未随本报告发布） 重新探测后才动手。
-编排方自行重启服务：`mtplx serve --model Youssofal/Qwen3.8-27B-MTPLX-Optimized-Speed
---port 8001 --context-window 131072 --max-tokens 32768`，profile 不手动指定（让它按模型自动解析，
-避免偏离此前的性能基线），并按 OPS-13（历史本机文件，未随本报告发布） 用 `/v1/models` 核对
-服务端 ctx 与 pi `models.json` 一致后才投喂。
+The mtplx service was not running again (no listener on `:8001`), pi was alive but had no backend. **The panel number did not change this time** (pi=1),
+but still followed OPS-22 (historical local file, not published with this report) to re-probe before proceeding.
+The orchestrator restarted the service itself: `mtplx serve --model Youssofal/Qwen3.8-27B-MTPLX-Optimized-Speed
+--port 8001 --context-window 131072 --max-tokens 32768`, without manually specifying the profile (letting it auto-resolve based on the model,
+to avoid deviating from the previous performance baseline), and verified via `/v1/models` per OPS-13 (historical local file, not published with this report) that
+the server-side ctx matched pi's `models.json` before feeding input.
 
-### ★ 新故障：mtplx 后台持久化任务饿死前台流（OPS-27）
+### ★ New Failure: mtplx background persistence task starves foreground stream (OPS-27)
 
-编排方启动的服务在第一次投喂 E07 时出现 `mtplx_stream_stall_break`：
+The service started by the orchestrator encountered `mtplx_stream_stall_break` on the first feed of E07:
 
 ```
 owner_frozen_s: 300.2   deadline_s: 300.0   streamed_tokens: 0
@@ -316,229 +335,229 @@ active_kind: "idle_persistence"   active_batch_key: "ssd.cold_enqueue"
 active_run_s: 300.28   foreground_pending: 1
 ```
 
-一个 **SSD session-cache 冷写入任务占住调度器 owner 线程整整 300 秒**，
-pi 的前台请求排在后面从未开始流式输出（`streamed_tokens: 0`），服务端 300 s 看门狗把流掐断。
-**pi 一侧是次生故障**：流被掐断后它不清理会话状态，继续认为 session 在飞、拒收一切新输入
-（`already in flight`），计数器冻结、不超时也不自愈，**必须人工按 Esc 才解得开**。
+A **SSD session-cache cold write task occupied the scheduler owner thread for a full 300 seconds**,
+pi's foreground request queued behind it never started streaming output (`streamed_tokens: 0`), and the server-side 300 s watchdog cut the stream.
+**The pi side suffered a secondary failure**: after the stream was cut, it did not clean up session state, continued to believe the session was in flight, and rejected all new input
+(`already in flight`), with counters frozen, no timeout and no self-healing, **requiring manual Esc press to unlock**.
 
-频率：本次服务会话 1 次，`~/.mtplx/logs/request-log-8001.jsonl` 历史 **0 次**
-——可能与编排方的启动参数有关（用户平时的启动方式未复现）。规避：`--ssd-session-cache off`。
+Frequency: 1 occurrence in this service session, **0 occurrences** in `~/.mtplx/logs/request-log-8001.jsonl` history
+— possibly related to the orchestrator's startup parameters (user's usual startup method did not reproduce it). Workaround: `--ssd-session-cache off`.
 
-**处置**：用户接管重启服务；编排方按 Esc 解锁 pi → `/new` → **把 E07 的半成品
-（`e07Sweep.test.ts` + `aiController.ts` 改动）全部丢弃，回滚到 E06 的干净已提交状态后重投**。
-理由：其余 31 个任务都从干净状态起跑，带残留续跑会让耗时与 token 数据不可比
-——这是性能对照项目，可比性优先于省下的重写时间。重投后 E07 仅用 **14m02s** 一次通过。
+**Action**: User took over and restarted the service; orchestrator pressed Esc to unlock pi → `/new` → **discarded all of E07's half-finished work
+(`e07Sweep.test.ts` + `aiController.ts` changes), rolled back to E06's clean committed state and re-fed**.
+Reason: The other 31 tasks all started from a clean state; continuing with residuals would make time and token data incomparable
+— this is a performance comparison project, and comparability takes precedence over saved rewrite time. After re-feeding, E07 passed in one go using only **14m02s**.
 
-## 逐任务
+## Per-Task
 
-| 任务 | 耗时 | ↓ | 备注 |
+| Task | Duration | ↓ | Notes |
 |---|---|---|---|
-| E07 终止性扫描 | 14m02s | 23k | 重投后一次通过 |
-| F01 应用外壳 | 32m32s | 57k | E2E 6→10 |
-| F02 渲染器骨架 | 37m24s | 59k | **场景里第一次真的有东西** |
-| F03 死亡观战 | 1h26m29s | 127k | **关键路径终点**，E2E →15 |
-| G01 HUD 基础 | 56m44s | 90k | E2E →22 |
-| G02 排行榜 | 37m06s | 54k | E2E →30 |
-| G03 小地图 | 1h38m34s | 117k | 本日最长 |
-| G04 受击反馈 | 1h11m56s | 83k | E2E →37 |
-| G05 结算与 restart | 38m42s | 49k | E2E →43 |
-| G06 导演/调试模式 | 42m29s | 54k | 期间 auto-compact 一次 |
+| E07 Termination Scan | 14m02s | 23k | Passed in one go after re-feed |
+| F01 App Shell | 32m32s | 57k | E2E 6→10 |
+| F02 Renderer Skeleton | 37m24s | 59k | **First time there was actually something in the scene** |
+| F03 Death Spectating | 1h26m29s | 127k | **End of critical path**, E2E →15 |
+| G01 HUD Basics | 56m44s | 90k | E2E →22 |
+| G02 Leaderboard | 37m06s | 54k | E2E →30 |
+| G03 Minimap | 1h38m34s | 117k | Longest of the day |
+| G04 Hit Feedback | 1h11m56s | 83k | E2E →37 |
+| G05 Settlement and Restart | 38m42s | 49k | E2E →43 |
+| G06 Director/Debug Mode | 42m29s | 54k | One auto-compact during this |
 
-**F–G 段中位 49m，介于 A–D（20m）与 E（1h40m）之间。**
-713k ÷ 8h41m = **22.8 tok/s**，与 PERF-01（历史本机文件，未随本报告发布） 修正后的 ÷20 系数吻合
-（E 段 20.5、A–D 段 26）。**三段合计可给出经验区间：22–26 tok/s，AI 类任务取下限。**
+**F–G section median 49m, between A–D (20m) and E (1h40m).**
+713k ÷ 8h41m = **22.8 tok/s**, consistent with the corrected ÷20 coefficient in PERF-01 (historical local file, not published with this report)
+(E section 20.5, A–D section 26). **The three sections combined yield an empirical range: 22–26 tok/s, with AI-type tasks taking the lower bound.**
 
-tps 累计样本 **1333 条**，衰减曲线第三次复核不变：**55 → 26 tok/s**（0–20K → 100–120K）。
+Cumulative tps samples **1333 entries**, decay curve re-verified for the third time with no change: **55 → 26 tok/s** (0–20K → 100–120K).
 
-## ★ 实机验收抓到一个所有测试都没抓到的缺陷（PLAY-05）
+## ★ Real-machine acceptance caught a defect missed by all tests (PLAY-05)
 
-F03 落地后编排方**没有只看测试**，实际起 `vite preview` + Playwright 跑了一局：
-快进 10 秒后 8 人剩 6 人存活、HP `[100,0,30,100,100,100,80,0]`，战斗逻辑真实运行。
-**但截图显示：`state` 已是 `running`，菜单标题 H1 "Neon Bastion" 仍被绘制在画面正中**
-（rect 480,344,320×33）。Deploy 按钮正确消失，PAUSED / VICTORY / ELIMINATED 三个面板也都正确隐藏
-——**只有标题漏了**。当时 397 单测 + 15 E2E 全绿，无一条覆盖。
+After F03 landed, the orchestrator **did not just look at tests**, but actually started `vite preview` + Playwright to run a game:
+After fast-forwarding 10 seconds, 6 out of 8 players were alive, HP `[100,0,30,100,100,100,80,0]`, combat logic was running for real.
+**But the screenshot showed: `state` was already `running`, yet the menu title H1 "Neon Bastion" was still drawn in the center of the screen**
+(rect 480,344,320×33). The Deploy button correctly disappeared, and the PAUSED / VICTORY / ELIMINATED panels were all correctly hidden
+— **only the title was missed**. At that time, 397 unit tests + 15 E2E were all green, with no coverage for this.
 
-> **编排方自身的一次误判，值得记**：第一次检测时用 `getComputedStyle` 逐元素判可见性，
-> 得出「PAUSED/VICTORY 也都露着」的结论——**错的**。父元素 `display:none` 时子元素的
-> computed display 仍是自己的值。换成 `checkVisibility()`（计入祖先）后才得到上面的准确结论。
-> **通则：判断「是否真的画在屏幕上」只能用计入祖先的 API 或截图，不能用元素自身的 computed style。**
+> **A misjudgment by the orchestrator itself, worth noting**: The first detection used `getComputedStyle` to check visibility element by element,
+> concluding that "PAUSED/VICTORY were also exposed" — **wrong**. When the parent element is `display:none`, the child element's
+> computed display remains its own value. Switching to `checkVisibility()` (accounting for ancestors) yielded the accurate conclusion above.
+> **General rule: To determine "is it really drawn on the screen," only APIs that account for ancestors or screenshots can be used, not the element's own computed style.**
 
-这是 PLAY-03（历史本机文件，未随本报告发布）「视觉闭环降低不了『玩起来不对』的漏检」的又一实例，
-但**这次是在任务当轮、由自动化实机截图抓到的**，不是等到人工游玩阶段。
-缺陷未修——它不在任何任务书的验收里，按用户指示继续跑任务列表，记录在案。
+This is another instance of PLAY-03 (historical local file, not published with this report)'s "visual closed-loop cannot reduce missed detections of 'plays wrong',"
+but **this time it was caught in the task's own round by automated real-machine screenshots**, not waiting until the manual playtesting phase.
+The defect was not fixed — it was not in any task's acceptance criteria, so per user instruction, the task list continued, and it was recorded.
 
-## 模型侧两个自查发现（G03）
+## Two self-check findings on the model side (G03)
 
-pi 在 G03 的 commit message 里主动记下两个调试发现：
+pi proactively noted two debugging findings in G03's commit message:
 
-1. **`vite preview` 服务的是 `dist/`，改 `src` 后必须 rebuild，否则 E2E 跑在旧构建上**
-   ——它自述这是「E2E 卡住的主因」。**这正是 OPS-12（历史本机文件，未随本报告发布） 的第五次实例，
-   且是第二次由模型自己撞上并记录**（第一次是 09-10 的 `aiFire` 假绿）。
-   A02 脚手架已有构建门禁 + 端口隔离，但挡不住手动跑 preview 的场景。
-2. **玩家出生点距边界墙仅 3 m**：测试想把单位 teleport 到正后方 4 m，会落进边界墙足印、
-   被摆到墙顶（y=4），视线从墙顶飞过造成几何退化。改用 2 m 解决。这是地图数据的真实约束。
+1. **`vite preview` serves `dist/`, so after modifying `src`, a rebuild is mandatory, otherwise E2E runs on the old build**
+   — it self-reported this as "the main cause of E2E getting stuck." **This is exactly the fifth instance of OPS-12 (historical local file, not published with this report),
+   and the second time the model itself hit and recorded it** (the first was the `aiFire` false green on 09-10).
+   A02 scaffolding already has build gates + port isolation, but it cannot prevent scenarios where preview is run manually.
+2. **Player spawn point is only 3 m from the boundary wall**: Tests wanted to teleport units to 4 m directly behind, which would land in the boundary wall's footprint,
+   placing them on top of the wall (y=4), causing line of sight to fly over the wall top and resulting in geometric degeneration. Changing to 2 m solved it. This is a real constraint of the map data.
 
-## 值得记的验收设计（G04）
+## Notable acceptance design (G04)
 
-G04 把**「反馈缺席」当作「事件总线被绕过」的探测器**：用 seed 4 跑真实全 AI 对局，
-断言 AI 开火必然触发受击闪烁与命中特效。若有人绕过 `fireFrom` 直接改 HP，画面上不会有反馈、
-这条断言就会红——**给 D04 那条「唯一开火入口」的源码扫描加了一道运行时保险**。
+G04 used **"absence of feedback" as a detector for "event bus being bypassed"**: ran a real full-AI match with seed 4,
+asserting that AI firing must trigger hit flash and hit effects. If someone bypassed `fireFrom` to directly modify HP, there would be no feedback on screen,
+and this assertion would fail — **adding a runtime safety net to D04's "single firing entry" source code scan**.
 
-## 下一步
+## Next Steps
 
-从 **G07** 恢复（fallback）。剩余 **23 个**：G07–G08 · H×5 · I×4 · J×3 · K×4 · L×3 · M×2。
-按 F–G 段中位 49m 外推约 **19–23 小时**，但 **H 段 5 个美术任务是最大变数**——
-历史上美术任务耗时是逻辑任务的 2.4 倍。
+Resume from **G07** (fallback). Remaining **23**: G07–G08 · H×5 · I×4 · J×3 · K×4 · L×3 · M×2.
+Extrapolating from the F–G section median of 49m, approximately **19–23 hours**, but **the 5 art tasks in H section are the biggest variable** —
+historically, art tasks take 2.4 times as long as logic tasks.
 
-**视觉能力：MTPLX 部署下 Qwen3.8-27B 能看图，视觉闭环是通的。**
-OPS-11（历史本机文件，未随本报告发布）（模型看不到图、且是静默丢弃）是 **mlx-dspark 特有的部署缺陷，不是模型能力问题**；
-[Tide Isle R1](devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05.md) 已在 MTPLX 上验证过——
-task-1 它靠读回自己的截图抓到一个任何断言都测不到的致命渲染缺陷（顶面 y/z 互换致整岛成「网格篮子」）。
-本轮 A–G 段全是逻辑与 DOM UI，没有用到读图，**故 Neon Bastion 侧尚无本轮实证**。
+**Visual capability: Under MTPLX deployment, Qwen3.8-27B can see images, and the visual closed-loop is working.**
+OPS-11 (historical local file, not published with this report) (model cannot see images, and it is silently dropped) is a **deployment-specific defect of mlx-dspark, not a model capability issue**;
+[Tide Isle R1](devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05.md) has been verified on MTPLX —
+in task-1, it caught a fatal rendering defect (top face y/z swap causing the entire island to become a "grid basket") that no assertion could test, by reading back its own screenshots.
+This round's A–G sections were all logic and DOM UI, with no image reading used, **so there is no empirical evidence for the Neon Bastion side in this round yet**.
 
-> **恢复时先做一次视觉 smoke test 再进 H 段**（一次请求即可）：
-> 造一张特征明确的小图（如纯色底 + 一个偏心色块），经 `/v1/chat/completions` 以 base64 data URI 送入，
-> 看回答是否说得出颜色与位置。**理由**：OPS-11 那次是**静默失败**——模型回「No image was provided」、
-> `prompt_tokens: 17`、无任何错误。**能力存在不等于这次链路通**，而 H 段五个任务全靠它读回截图自检，
-> 链路若断会在五个任务后才被人发现。
+> **Perform a visual smoke test before entering H section upon resumption** (one request is sufficient):
+> Create a small image with distinct features (e.g., solid color background + one off-center color block), send it via `/v1/chat/completions` as a base64 data URI,
+> and check if the response can state the color and position. **Reason**: OPS-11 was a **silent failure** — the model replied "No image was provided",
+> `prompt_tokens: 17`, with no error. **Capability existing does not mean the link is working this time**, and the five tasks in H section all rely on it to read back screenshots for self-check,
+> so if the link is broken, it will only be discovered by humans after the five tasks.
 
 ---
 
-# 续跑 2026-09-13 — G07–G08 + H01–H03，38/55
+# Resumed Run 2026-09-13 — G07–G08 + H01–H03, 38/55
 
-今日净产出 5 个 task（G07 G08 H01 H02 H03），挂钟 08:33–16:10 共 **7h37m**，
-其中 **1h47m 是我方监控 bug 造成的纯空转**（见下）。代码增量 23 文件 +3254/−64，
-测试 469→**519 unit** / 49→**70 E2E**，每个 task 均由我独立跑 `build + vitest + playwright` 复核，
-不采信模型自报。
+Today's net output was 5 tasks (G07 G08 H01 H02 H03), with a wall-clock duration of 08:33–16:10 totaling **7h37m**,
+of which **1h47m was pure idle time caused by a bug in our monitoring** (see below). Code delta: 23 files +3254/−64,
+tests 469→**519 unit** / 49→**70 E2E**. Each task was independently verified by me running `build + vitest + playwright`,
+without relying on the model's self-reported status.
 
-## 逐任务
+## Per-Task
 
-| task | 挂钟 | ↑ / ↓ | 结果 | 备注 |
+| task | Wall-clock | ↑ / ↓ | Result | Notes |
 |---|---|---|---|---|
-| G07 reduced-motion + no-WebGL fallback | 83 min | 156k / 52k | 482 unit / 53 e2e | 4 次工具调用失效，交接式 `/new` 后 33 min 收工 |
-| G08 favicon / theme-color | 11 min | 22k / 17k | 482 / 58 | 零失速 |
-| H01 天空云带与雾 | 104 min | — | 490 / 63 | 3 次 nudge 用尽，交接重置后 10 min 收工 |
-| H02 沙地三层程序化纹理 | 47 min | 152k / 72k | 503 / 67 | 零失速 |
-| H03 墙面明度阶梯 | 97 min | 320k / 151k | 519 / 70 | 零失速，但大量 token 花在手算上（见下） |
+| G07 reduced-motion + no-WebGL fallback | 83 min | 156k / 52k | 482 unit / 53 e2e | 4 tool call failures; finished in 33 min after handoff-style `/new` |
+| G08 favicon / theme-color | 11 min | 22k / 17k | 482 / 58 | Zero stalls |
+| H01 Sky cloud bands and fog | 104 min | — | 490 / 63 | 3 nudges exhausted; finished in 10 min after handoff reset |
+| H02 Sand three-layer procedural texture | 47 min | 152k / 72k | 503 / 67 | Zero stalls |
+| H03 Wall brightness ladder | 97 min | 320k / 151k | 519 / 70 | Zero stalls, but a large number of tokens were spent on manual calculations (see below) |
 
-## ★ 今天最大的教训：观测通道本身不可信（我方三次翻车）
+## ★ Today's Biggest Lesson: The Observation Channel Itself Is Unreliable (Three Failures on Our Side)
 
-三次都不是模型的问题，是**我用来判断模型状态的信号被污染了**，
-且三次的表现都是「看起来一切正常」：
+None of the three were the model's fault; rather, **the signals I used to judge the model's state were contaminated**,
+and in all three cases, the appearance was "everything looks normal":
 
-### 1. 完成判据被自己的提示词污染
+### 1. Completion Criteria Contaminated by Our Own Prompt
 
-投喂语里含「完成后回复 **TASK-DONE**」，这串字留在屏幕上被完成判据 grep 命中，
-G07 开跑 120 秒就被判定完成。之前没发作，只因模型输出够长把提示词顶出了窗口。
-→ 改为要求 `TASK-DONE` **独占一行**（提示词里的带句号且不独占行）。
+The prompt included "Reply **TASK-DONE** upon completion." This string remained on the screen and was hit by the completion criteria grep,
+causing G07 to be judged as complete 120 seconds after starting. It had not triggered previously only because the model's output was long enough to push the prompt out of the window.
+→ Changed to require `TASK-DONE` to be **on its own line** (the one in the prompt has a period and is not on its own line).
 
-### 2. `zellij dump-screen` 返回冻结帧
+### 2. `zellij dump-screen` Returned Frozen Frames
 
-连续 5 分钟 md5 完全一致、内容停在「准备读 renderer.ts」，
-而同期 mtplx 每 25s 收一个新请求、prompt 从 46k 涨到 62k。**屏幕通道不可单独依赖。**
-→ 活跃判定改为三路并集：mtplx 新 `request_id` / 屏幕 md5 变化 / spinner 在场。
+For 5 consecutive minutes, the md5 was identical, and the content was stuck at "preparing to read renderer.ts",
+while during the same period, mtplx received a new request every 25s, and the prompt grew from 46k to 62k. **The screen channel cannot be relied upon alone.**
+→ Activity detection changed to a three-way union: new mtplx `request_id` / screen md5 change / spinner present.
 
-### 3. ★ `Working` 一词命中 spinner 正则 → 空转 1h47m
+### 3. ★ The Word `Working` Hit the Spinner Regex → 1h47m Idle
 
-pi 完工总结里有一句 `Working tree is clean (git status is empty).`，
-`Working` 命中了检测转轮的正则 → 每轮轮询都判定「还在干活」→ 静默计数永不累积 →
-**完成判据永远不触发**。pi 11:56:43 就提交完工，驱动进程一路健康空转到 13:43 我被问起才发现。
-→ 只认 braille 转轮字符 `[⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏]` 与 `esc to interrupt`，
-**不得匹配 `Working`/`Thinking` 这类会出现在正文里的普通英文词**。
+The pi completion summary contained the sentence `Working tree is clean (git status is empty).`,
+and `Working` hit the regex for the detection spinner → every polling round judged "still working" → the silent counter never accumulated →
+**the completion criteria never triggered**. pi submitted completion at 11:56:43, and the driver process idled healthily until 13:43 when I was asked about it and discovered it.
+→ Only recognize braille spinner characters `[⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏]` and `esc to interrupt`,
+**do not match common English words like `Working`/`Thinking` that appear in the body text**.
 
-**同构的坑模型也踩了一次**（H01，见下）：构建失败被静默吞掉，测试跑在旧产物上恒绿。
-人与模型在同一类陷阱上栽跟头——**「没有报错」不等于「正常」**，
-凡是用来判断状态的信号，都要先问一句「它失效的时候长什么样」。
+**The model also fell into an isomorphic pitfall once** (H01, see below): a build failure was silently swallowed, and tests ran on old artifacts, remaining green.
+Humans and models stumble on the same type of trap—**"no error" does not equal "normal"**.
+For any signal used to judge state, one must first ask, "What does it look like when it fails?"
 
-## ★ 工具调用失效：两个假设先后被证伪
+## ★ Tool Call Failures: Two Hypotheses Successively Falsified
 
-### 原假设「命令复杂度」——证伪
+### Original Hypothesis "Command Complexity" — Falsified
 
-9/05 的 bug 文档归因于长复合 shell 命令。今天第四次实例的命令是
-**单行、单命令、无串联、无管道**，且是模型**显式推理并确认**「一次一条、不串联、单行」
-这条纪律之后才发出的。复杂度解释不了。
+The 9/05 bug documentation attributed it to long compound shell commands. The command for today's fourth instance was
+**single-line, single-command, no chaining, no pipes**, and was issued only after the model **explicitly reasoned and confirmed**
+the discipline of "one at a time, no chaining, single-line." Complexity cannot explain it.
 
-### 继起假设「上下文长度」——也证伪
+### Subsequent Hypothesis "Context Length" — Also Falsified
 
-四次失速的 `prompt_tokens` 落在 70k–88k，交接重置后故障消失，一度据此认为
-「工具调用可靠性在窗口 ~60% 处开始塌」。**被同一份数据推翻**：
-重置后 G07 的 71 个请求中有 **41 个跑在 80k–108710**（高于失速段），
-`unclosed_tool_call` 增量为 **0**。
-推理漏洞：只看到「重置后不再失速」，未核对重置后实际也达到了同等甚至更高的 context。
+The `prompt_tokens` for the four stalls fell in the 70k–88k range. After a handoff reset, the failures disappeared, leading to the initial belief that
+"tool call reliability starts to collapse at ~60% of the window." **This was overturned by the same data**:
+After the reset, 41 of the 71 requests for G07 ran at 80k–108710 (higher than the stall range),
+with an increment of **0** for `unclosed_tool_call`.
+Reasoning flaw: Only observed "no more stalls after reset," without verifying that the context actually reached an equivalent or higher level after the reset.
 
-### 已能确定：故障不在 pi 侧
+### Confirmed: The Fault Is Not on the pi Side
 
-`unclosed_tool_call` 是 **mtplx 解析器自身的计数**——故障在 token 流到达 pi 之前即已存在。
-pi 收到纯文本、据此结束回合属正确行为；其缺陷只在于**静默**，外观与正常完工无异。
-mtplx 服务栈 vs 模型权重仍无法分离：已排除截断
-（失败请求 `completion_tokens` 为 80/91/106/126 等零散值，而 `request_max_tokens` = 32768）。
+`unclosed_tool_call` is **a count from the mtplx parser itself**—the fault existed before the token stream reached pi.
+pi receiving plain text and ending the turn based on it is correct behavior; its defect lies only in being **silent**, with an appearance indistinguishable from normal completion.
+The mtplx service stack vs. model weights still cannot be separated: truncation has been ruled out
+(failed request `completion_tokens` values were scattered numbers like 80/91/106/126, while `request_max_tokens` = 32768).
 
-### 新增仪器：逐请求归属
+### New Instrument: Per-Request Attribution
 
-mtplx 的 `trace request` receipt 有 **333 个字段**（含 `finish_stop_origin`、MTP 逐层接受率、
-采样参数、缓存恢复细节），却**没有任何字段记录该请求的 tool 解析结果**——
-`unclosed_tool_call` 只存在于全局累计计数器，无法归属到具体请求。
+The `trace request` receipt from mtplx has **333 fields** (including `finish_stop_origin`, MTP per-layer acceptance rate,
+sampling parameters, cache recovery details), but **no field records the tool parsing result for that request**—
+`unclosed_tool_call` exists only in global cumulative counters and cannot be attributed to specific requests.
 
-绕过办法：`parse_watch.py` 每 3s 轮询计数器，任一项增长即把 `recent` 尾部快照落盘。
-请求间隔 ~15s，3s 轮询足以钉唯一。**今日 4 起全部锁定**：
+Workaround: `parse_watch.py` polls counters every 3s; if any item increases, it saves a snapshot of the `recent` tail to disk.
+Request intervals are ~15s, so 3s polling is sufficient to pin down uniqueness. **All 4 instances today were locked in**:
 
-| 时刻 | 计数器 | rid | prompt | completion | success_delta |
+| Time | Counter | rid | prompt | completion | success_delta |
 |---|---|---|---|---|---|
 | 10:49:55 | fallback + **malformed** | `2faeefa3` | 100011 | 5611 | **0** |
 | 11:22:12 | unclosed + fallback | `99eedc3e` | 79032 | 836 | **0** |
 | 11:37:21 | unclosed + fallback | `e3e68cf5` | 101196 | 602 | **0** |
 | 11:41:05 | unclosed + fallback | `d121bccd` | 102302 | 975 | **0** |
 
-`success_delta` 全为 0 —— 这些请求**一个成功的工具调用都没产出**，整个响应作废，
-不是「调了三个成功一个失败」。另首次出现 `malformed_tool_call`（格式本身就错），
-说明故障至少有三个亚型。
+All `success_delta` were 0 —— these requests **produced zero successful tool calls**, the entire response was invalidated,
+it was not "three calls succeeded and one failed." Also, `malformed_tool_call` appeared for the first time (the format itself was wrong),
+indicating that the fault has at least three subtypes.
 
-一条**未站住**的线索留作备忘：某失败请求的 `finish_stop_origin = bonus`
-（MTP 投机解码的 bonus token），看似指向收尾 token 出错；
-但拉今日全部 152 个请求做对照后，四次失速分布在 `primary` / `context_copy` /
-`accepted_draft` / `residual_correction` / `bonus` **五种**停止来源上，无聚集。**单样本线索不可信。**
+One **unsubstantiated** clue is kept as a memo: a failed request's `finish_stop_origin = bonus`
+(bonus token from MTP speculative decoding) seemed to point to an error in the closing token;
+but after pulling all 152 requests from today for comparison, the four stalls were distributed across **five** stop sources: `primary` / `context_copy` /
+`accepted_draft` / `residual_correction` / `bonus`, with no clustering. **Single-sample clues are unreliable.**
 
-### 结论：暂不向 mtplx 提 issue
+### Conclusion: Do Not File an Issue with mtplx for Now
 
-无最小复现、两个根因假设均自我证伪，此时断言根因只会浪费维护者时间。
-真正边界清晰、成本低、明确属 mtplx 职责的缺口是**逐请求 tool 解析结果缺失**；
-待 `parse_watch.py` 攒够十余个样本、与成功组做 333 字段比对之后再议。
+Without a minimal reproduction, and with both root cause hypotheses self-falsified, asserting a root cause now would only waste the maintainer's time.
+The gap that is truly clearly bounded, low-cost, and explicitly within mtplx's responsibility is the **lack of per-request tool parsing results**;
+we will revisit this after `parse_watch.py` accumulates a dozen or so samples and performs a 333-field comparison with the success group.
 
-## ★ 模型侧亮点
+## ★ Model-Side Highlights
 
-### H01：负对照不变红，模型自己查出根因（OPS-29 第六次实例）
+### H01: Negative Control Did Not Turn Red, Model Found the Root Cause Itself (OPS-29 Sixth Instance)
 
-把 `setReducedMotion(reduce)` 改成恒 `false` 后，E2E 第 5 条**仍然绿**。
-模型未就此放过，追出根因：朴素变异使参数 `reduce` 未被使用 →
-**TS6133 触发 `noUnusedParameters` → `npm run build` exit 1 → `vite preview` 继续提供旧 `dist/`**
-→ 测试一直跑在干净代码上。
-改用类型合法的等效变异 `false && reduce`，并用 minify 后仍存活的 sentinel 核对 dist 内容，
-第 5 条如期变红（像素差 450152 ≫ 阈值 5000）。教训已固化进 spec 头注释。
+After changing `setReducedMotion(reduce)` to always be `false`, E2E test #5 **remained green**.
+The model did not let it go and traced the root cause: the naive mutation caused parameter `reduce` to be unused →
+**TS6133 triggered `noUnusedParameters` → `npm run build` exit 1 → `vite preview` continued to serve the old `dist/`**
+→ tests kept running on clean code.
+Switched to a type-legal equivalent mutation `false && reduce`, and verified dist content using a sentinel that survived minification,
+test #5 turned red as expected (pixel diff 450152 ≫ threshold 5000). The lesson has been solidified into the spec header comment.
 
-**这是本项目第六次撞上「E2E 跑的是 dist 不是源码」，而这次形态最隐蔽：
-构建失败被静默吞掉，表现为测试通过。** 一个会让人误以为负对照有效、实际什么都没验证的假绿。
+**This is the sixth time this project has hit "E2E runs on dist, not source code," and this form was the most subtle:
+the build failure was silently swallowed, manifesting as passing tests.** A false green that would lead one to believe the negative control was effective, when in fact nothing was verified.
 
-### H03：动手前用解析法预测跨任务回归
+### H03: Predicted Cross-Task Regression Analytically Before Starting
 
-H03 要求的是**渲染像素**的明度阶梯（沙地 193 > 边界 145 > 出生房 118 > 绿篱 107），
-而代码里的常量是 albedo，中间隔着
-`线性化 → ×半球光辐照度 → ACES 色调映射 → 回 sRGB → L8(BT.601)`。
-ACES 非线性，albedo 上排好的阶梯渲染完不一定成立。
-模型反解光强 S，逐色跑完整条管线，并算出 S=3.2 时沙地会被压到 (243,240,227)≈L240
-**过曝成近白**，进而预判这可能打破 H02 已有的沙色 E2E 断言。
-**动手写代码之前就预测到跨任务回归**，且没走 H03 卡片明令禁止的「拉曝光救场景」捷径。
+H03 required a brightness ladder for **rendered pixels** (sand 193 > boundary 145 > spawn room 118 > hedge 107),
+while the constants in the code are albedo, with
+`线性化 → ×半球光辐照度 → ACES 色调映射 → 回 sRGB → L8(BT.601)` in between.
+ACES is non-linear, so a ladder arranged on albedo may not hold after rendering.
+The model back-solved for light intensity S, ran the full pipeline for each color, and calculated that at S=3.2, the sand would be compressed to (243,240,227)≈L240,
+**overexposed to near-white**, and further predicted this might break the existing sand color E2E assertions in H02.
+**Predicted a cross-task regression before writing any code**, and did not take the "boost exposure to save the scene" shortcut explicitly forbidden by the H03 card.
 
-### ⚠️ 但代价是纯手算
+### ⚠️ But the Cost Was Pure Manual Calculation
 
-上述四位数超越函数运算**全部在推理流里手算**（ACES 有理逼近、`^0.4167` 伽马、
-sRGB 8-bit 往返），至少两次自己发现算错并回头重推
-（"the discrepancy was from the arithmetic mistakes back then"、"I confused them earlier"）。
-这活写十行脚本一秒出结果。H03 耗时 97 分钟、↓151k token，相当一部分花在这上面。
-**下次遇到同类数值求解直接要求它用脚本算**——这是效率问题，不涉及替它做设计。
+The above four-digit transcendental function operations were **all manually calculated in the reasoning stream** (ACES rational approximation, `^0.4167` gamma,
+sRGB 8-bit round-trip), with at least two instances where it discovered its own calculation errors and went back to re-derive
+("the discrepancy was from the arithmetic mistakes back then", "I confused them earlier").
+This work would take ten lines of script and one second to produce a result. H03 took 97 minutes, ↓151k tokens, a significant portion of which was spent on this.
+**Next time, for similar numerical solving, directly require it to use a script**—this is an efficiency issue, not about doing the design for it.
 
-## 推理速度（今日 391 个请求）
+## Inference Speed (391 Requests Today)
 
-| context | 样本 | decode 中位 | 均值 | prefill 中位 |
+| context | Samples | decode median | mean | prefill median |
 |---|---|---|---|---|
 | 0–20k | 35 | **55.6** | 55.6 | 680 |
 | 20–40k | 90 | **35.6** | 37.2 | 320 |
@@ -547,14 +566,14 @@ sRGB 8-bit 往返），至少两次自己发现算错并回头重推
 | 80–100k | 80 | **29.3** | 29.9 | 224 |
 | 100–140k | 50 | **28.7** | 29.1 | 201 |
 
-全体中位 **32.5 tok/s**；今日累计输出 **388,545** completion tokens。
+Overall median **32.5 tok/s**; today's cumulative output **388,545** completion tokens.
 
-形状与前几日一致（55 → 29），但**衰减更早更陡**：20k 即砸到 35.6，之后趋于平缓，
-**不是线性下滑**，更接近「20k 之前是甜区，之后进入平台」。
-用户观感中的「13–32 tok/s」对应 dashboard 那个标错的 `request_tok_s` 表盘（见 OPS-20），
-纯 decode 实测区间是 **29–56**。
+The shape is consistent with previous days (55 → 29), but **the decay is earlier and steeper**: it drops to 35.6 at 20k, then flattens out,
+**it is not a linear decline**, but closer to "before 20k is the sweet spot, after which it enters a plateau".
+The "13–32 tok/s" in user perception corresponds to the mislabeled `request_tok_s` gauge on the dashboard (see OPS-20),
+the measured pure decode range is **29–56**.
 
-## 恢复方法（今晚续跑）
+## Recovery Method (Resuming Tonight)
 
 ```bash
 # 1. 确认 mtplx 在线（由用户自行启动，勿代劳）
@@ -573,445 +592,444 @@ nohup python3 parse_watch.py >> parse_watch.out 2>&1 &
 ./status.sh              # 随时看进度
 ```
 
-失速处理：`run_task.sh` 自动 nudge 至多 3 次；用尽后退 2，
-此时写 `<TASK>-HANDOFF.md`（已完成部分 + 剩余步骤 + 目标文件锚点行号 + 操作纪律），
-`/new` 清空后以 `--resume` 续跑。G07 与 H01 均按此救回，重置后分别 33 / 10 分钟收工。
+Stall handling: `run_task.sh` automatically nudges up to 3 times; if exhausted, back off by 2,
+then write `<TASK>-HANDOFF.md` (completed parts + remaining steps + target file anchor line numbers + operational discipline),
+clear with `/new` and resume with `--resume`. Both G07 and H01 were rescued this way, finishing in 33 / 10 minutes respectively after reset.
 
-## 剩余 17 个
+## Remaining 17
 
 H04 H05 · I01–I04 · J01–J03 · K01–K04 · L01–L03 · M01 M02
 
-按今日实际速率 **71 分钟/task**（含撞墙与救援）估算，**还需 15–22 小时机时**。
-I 段（人形角色 / 行走动画 / 持枪 / FPS 视图模型）最重；
-J 段接 FX 对象池，G06 预留的 `fxPools` 探针在此通电；
-L03「验证完整性审计」要回头复查全部负对照与阈值余量——
-按今日 H01 查出的假绿来看，此任务大概率会翻出旧账，可能显著超时。
+At today's actual rate of **71 minutes/task** (including wall-hits and rescues), an estimated **15–22 hours of machine time** remain.
+Section I (humanoid characters / walking animations / weapon holding / FPS view models) is the heaviest;
+Section J connects to the FX object pool, where the `fxPools` probe reserved in G06 is powered on;
+L03 "Verification Integrity Audit" requires a retrospective review of all negative controls and threshold margins—
+Given the false positives identified in today's H01, this task is highly likely to uncover past issues and may significantly exceed the time limit.
 
-## 仍未修
+## Still Unfixed
 
-**PLAY-05**：菜单 H1「Neon Bastion」在 `running` 态仍被绘制（rect 480,344,320×33）。
-不在任何卡片的验收清单内，按「不提前做后续任务」保留原样。
+**PLAY-05**: The menu H1 "Neon Bastion" is still rendered in the `running` state (rect 480,344,320×33).
+It is not included in the acceptance checklist of any card; per the "do not perform subsequent tasks prematurely" policy, it is left as is.
 
 ---
 
-# 续跑 2026-09-13 夜 → 09-14 — H04–H05 + I01–I04，43/55
+# Resumed 2026-09-13 Night → 09-14 — H04–H05 + I01–I04, 43/55
 
-通宵段 23:58–10:48（10.8 h），净产出 6 个 task。
-测试 519→**615 unit** / 70→**93 E2E**，每个 task 均由编排方独立复跑 build + vitest + playwright。
-**场景与人物全部到位**：白天天空/沙地/四类墙/绿篱/玻璃 + 人形单位/步态/第三人称持枪/第一人称视图模型。
+Overnight segment 23:58–10:48 (10.8 h), net output 6 tasks.
+Tests 519→**615 unit** / 70→**93 E2E**, each task independently re-run by the orchestrator for build + vitest + playwright.
+**All scenes and characters in place**: daytime sky/sand/four types of walls/hedges/glass + humanoid units/gait/third-person weapon holding/first-person view model.
 
-## 逐任务
+## Per-Task
 
-| task | 挂钟 | 结果 | 备注 |
+| task | Wall-clock | Result | Notes |
 |---|---|---|---|
-| H04 绿篱叶簇纹理 | 149 min | 535 unit / 71 e2e | 零失速 |
-| H05 玻璃（窗框+反光） | 71 min | 552 / 78 | 零失速；不透明度 0.3，守住 B02 的 ≤0.5 透明度断言 |
-| I01 人形贴合命中体 | 59 min | 563 / 83 | 零失速；6 基本体 + 队伍标记 + 地面环 |
-| I02 行走步态 | 33 min | 580 / 83 | 零失速；相位只在渲染层，不进 Unit/snapshot |
-| I03 第三人称持枪 | 69 min | 594 / 86 | 零失速；武器排除在命中体包围盒外 |
-| **I04 第一人称视图模型** | **259 min** | 615 / 93 | **两次人工介入**，见下 |
+| H04 Hedge leaf cluster texture | 149 min | 535 unit / 71 e2e | Zero stalls |
+| H05 Glass (window frame + reflection) | 71 min | 552 / 78 | Zero stalls; opacity 0.3, upheld B02's ≤0.5 transparency assertion |
+| I01 Humanoid fit hitbox | 59 min | 563 / 83 | Zero stalls; 6 primitives + team marker + ground ring |
+| I02 Walking gait | 33 min | 580 / 83 | Zero stalls; phase only in rendering layer, not in Unit/snapshot |
+| I03 Third-person weapon holding | 69 min | 594 / 86 | Zero stalls; weapon excluded from hitbox bounding box |
+| **I04 First-person view model** | **259 min** | 615 / 93 | **Two human interventions**, see below |
 
-**H04–I03 五连零失速**：1149 次工具调用，`unclosed_tool_call` 全程停在 6，
-`parse_watch.py` 一条事件未记。对比 09-13 白天那种十几分钟卡一次的状态，差异显著，
-但**不据此下结论**——前一日已吃过「相关性看着强、一放大就散」的亏。
+**H04–I03 five consecutive zero stalls**: 1149 tool calls, `unclosed_tool_call` stayed at 6 throughout,
+`parse_watch.py` recorded no events. Compared to the 09-13 daytime state of stalling every ten-plus minutes, the difference is significant,
+but **no conclusion is drawn from this** — the previous day already suffered the loss of "correlation looks strong, but falls apart when zoomed in."
 
-## ★ I04：模型缺乏成本感知（当日最重要的观察）
+## ★ I04: Model Lacks Cost Awareness (Most Important Observation of the Day)
 
-I04 耗时 **4h19m**，是同段中位数（69 min）的 **3.7 倍**，两次人工介入才收敛。
-失控过程分三阶段：
+I04 took **4h19m**, which is **3.7 times** the median of the same segment (69 min), and only converged after two human interventions.
+The out-of-control process was divided into three stages:
 
-1. **暴力穷举**：把「占屏面积 vs 缩放」这个**单调、近似平方、可解析**的一维问题，
-   做成 12,150 组合的浏览器往返网格搜索。自估「12,096 × 4 ms ≈ 48 秒」，
-   实际单轮 21 分钟以上——**Playwright 进程间往返开销漏算 25 倍**。连跑三轮
-   （第一轮发现自己的覆盖率公式漏除采样点数，第二轮改 stride，第三轮调阈值）。
-2. **介入一**（09:55，已跑 3h26m）：指出方法不对，建议固定其余参数、对缩放做一维拟合求解。
-   消息进入 pi 队列，它当时阻塞在 30 min 超时的网格命令上，约 13 分钟后才读到。
-   读到后**完全采纳**：删两个临时 spec、改为「3 候选 × 3 缩放 → 拟合 cov=k·scale^p → 解出目标」。
-3. **介入二**（10:30，驱动撞 4h 硬上限退出后）：它又开始**手推投影几何**，
-   想解释实测 px/m≈300 与理论≈990 的差异——**用解析推导去验证一个经验拟合**，
-   而拟合的全部意义正是不必反推常数。要求立即停止该推导线、用实测值定阈值并标注余量、直接收尾。
-   **50 分钟后提交。**
+1. **Brute-force enumeration**: Turned the **monotonic, approximately quadratic, analytically solvable** one-dimensional problem of "screen area vs. scaling"
+   into a browser round-trip grid search of 12,150 combinations. Self-estimated "12,096 × 4 ms ≈ 48 seconds",
+   actual single round took over 21 minutes — **Playwright inter-process round-trip overhead underestimated by 25 times**. Ran three consecutive rounds
+   (first round discovered its own coverage formula missed dividing by sample points, second round changed stride, third round adjusted threshold).
+2. **Intervention 1** (09:55, after 3h26m run): Pointed out the method was wrong, suggested fixing other parameters and solving for scaling via one-dimensional fitting.
+   Message entered pi queue, it was then blocked on a 30 min timeout grid command, and only read it about 13 minutes later.
+   After reading, it **fully adopted** the suggestion: deleted two temporary specs, changed to "3 candidates × 3 scales → fit cov=k·scale^p → solve for target".
+3. **Intervention 2** (10:30, after driver hit 4h hard limit and exited): It started **manually deriving projection geometry** again,
+   trying to explain the difference between measured px/m≈300 and theoretical ≈990 — **using analytical derivation to verify an empirical fit**,
+   while the entire meaning of the fit is precisely that there is no need to back-calculate constants. Required to immediately stop that derivation line, use measured values to set thresholds and annotate margins, and wrap up directly.
+   **Committed 50 minutes later.**
 
-**三次同形态**（含前一日 H03 手算 ACES/sRGB 超越函数）：
-**工程判断始终正确**（该标定、该留余量、该验证负对照），
-坏的只是**对「这条路要走多久、值不值得」的估算**。
-这比工具调用失效那个 bug 更值得作为模型能力结论——后者是部署层问题，这个是模型本身的。
-→ AI-04（历史本机文件，未随本报告发布）
+**Three instances of the same pattern** (including previous day's H03 manual calculation of ACES/sRGB transcendental functions):
+**Engineering judgment was always correct** (should calibrate, should leave margin, should verify negative control),
+only the **estimation of "how long this path will take, and whether it is worth it"** was bad.
+This is more worthy of being a model capability conclusion than the tool call failure bug — the latter is a deployment layer issue, this one is inherent to the model itself.
+→ AI-04 (historical local file, not published with this report)
 
-## ★ 但交付质量是本轮最好的之一：I04 避开了上一轮的假绿陷阱
+## ★ But Delivery Quality Was One of the Best This Round: I04 Avoided the Previous Round's False Green Trap
 
-OPS-24（历史本机文件，未随本报告发布） 记录的陷阱：卡片给区间 6%–18%，
-负对照是「×1.5 放大则断言变红」（面积 ×2.25），两者**隐含下界 18%/2.25 = 8%**。
-上一轮（ds-v4）贴着 6% 下界标定出 **6.17%**，放大后 13.9% 仍在区间内，
-**负对照永远不会变红**——「负对照通过」本身是假的。
+The trap recorded in OPS-24 (historical local file, not published with this report): Card gave interval 6%–18%,
+negative control was "×1.5 magnification turns assertion red" (area ×2.25), both **implicitly lower bound 18%/2.25 = 8%**.
+Previous round (ds-v4) calibrated to **6.17%** close to the 6% lower bound, after magnification 13.9% was still within the interval,
+**negative control would never turn red** — "negative control passed" itself was false.
 
-本轮：标定到 **≈9.1%**，×1.5 后实测 **20.5% > 18%**，负对照真实变红；
-且该负对照**作为常驻测试提交进仓库**（`tests/e2e/i04.spec.ts:216`），
-注释写明余量 ≈2.5 个百分点。**编排侧全程未作任何提示**——模型自主达成。
-→ QA-12（历史本机文件，未随本报告发布）
+This round: calibrated to **≈9.1%**, after ×1.5 measured **20.5% > 18%**, negative control truly turned red;
+and this negative control **was committed to the repository as a resident test** (`tests/e2e/i04.spec.ts:216`),
+comment explicitly states margin ≈2.5 percentage points. **Orchestrator side gave no hints throughout** — model achieved this autonomously.
+→ QA-12 (historical local file, not published with this report)
 
-（编排侧有意不提示：这正是基准该测的东西——模型能否自己发现「我的负对照是空转的」。）
+(Orchestrator side intentionally did not hint: this is exactly what the benchmark should test — whether the model can discover on its own that "my negative control is spinning its wheels".)
 
-## ★ 监控补课：失速探测 ≠ 空转探测
+## ★ Monitoring Make-up: Stall Detection ≠ Idle Detection
 
-驱动脚本的失速判据是「三路信号全静」，对**持续活跃但不产出**的死循环完全失明
-（E06 曾因此空转 4h38m，I04 又一次）。新增 `loop_watch.sh`，判据相反：
-**mtplx 有新请求（活跃）+ 工作区内容 20 min 不变 = 空转嫌疑**，
-另含静默 15 min 与 150/210/270 min 定点长跑告警。
+The driver script's stall criterion is "all three signals silent", completely blind to **continuously active but non-productive** dead loops
+(E06 once idled for 4h38m because of this, I04 again). Added `loop_watch.sh`, with opposite criterion:
+**mtplx has new requests (active) + workspace content unchanged for 20 min = idle suspicion**,
+also includes 15 min silence and 150/210/270 min fixed-point long-run alerts.
 
-两次误报，两条经验：
+Two false positives, two lessons:
 
-- **哈希必须覆盖未跟踪文件**：第一版 `treehash` 用 `git status --porcelain` + `git diff`，
-  而 **`git diff` 不含未跟踪文件的内容** → pi 编辑未跟踪的 `calib-i04.spec.ts` 时完全失明。
-  改为直接哈希工作区所有 `.ts/.js/.html` 的 mtime+size。
-- **静默阈值不能太紧**：长标定子进程可合法阻塞 30 min。
-  区分判据：屏幕命令行有 `$` 前缀且 `Elapsed` 计数器在走 = 真在执行，
-  与「命令变成裸文本、回合静默结束」的失速形态完全不同。
+- **Hash must cover untracked files**: First version of `treehash` used `git status --porcelain` + `git diff`,
+  while **`git diff` does not include content of untracked files** → completely blind when pi edited untracked `calib-i04.spec.ts`.
+  Changed to directly hashing mtime+size of all `.ts/.js/.html` in the workspace.
+- **Silence threshold cannot be too tight**: Long calibration subprocesses can legitimately block for 30 min.
+  Distinguishing criterion: Screen command line has `$` prefix and `Elapsed` counter is moving = truly executing,
+  completely different from the stall pattern of "command becomes bare text, turn ends silently".
 
-**这是连续第二天出现同一类问题**：观测通道自身有盲区，且失效时表现为「看起来一切正常」。
-→ OPS-42（历史本机文件，未随本报告发布）
+**This is the second consecutive day of the same type of problem**: The observation channel itself has blind spots, and when it fails, it manifests as "everything looks normal".
+→ OPS-42 (historical local file, not published with this report)
 
-## 累计
+## Cumulative
 
 | | |
 |---|---|
-| 机时 | 约 **47 小时**（5 个工作段，横跨 09-07 → 09-14） |
-| 完成 | **43/55**，平均 66 min/task |
-| 规模 | 43 提交 · 615 unit（38 文件）· 93 E2E |
-| 最快 / 最慢 | G08 11 min / E06 278 min（I04 259 min 次之） |
+| Machine time | Approx. **47 hours** (5 work segments, spanning 09-07 → 09-14) |
+| Completed | **43/55**, average 66 min/task |
+| Scale | 43 commits · 615 unit (38 files) · 93 E2E |
+| Fastest / Slowest | G08 11 min / E06 278 min (I04 259 min second) |
 
-## 剩余 12 个
+## Remaining 12
 
-- **J×3 特效** —— 当前**一颗粒子都没有**。G06 调试面板的「粒子占用」行仍为空，
-  I03 已把枪口火焰锚点定在枪管末端，两条接口都铺好等通电。
-  J02「曳光必须有真实屏幕宽度」有来历：往轮实测渲染出 **0 像素**而测试全绿。
-- **K×4 音频** —— 当前**完全无声**。
-- **L×3 审计** —— L03 要求找出「恒真的绿与不可信的红」，
-  且**负对照必须提交进仓库**，点名覆盖十一项。
-  按 09-13 H01 查出的假绿来看，此任务大概率翻出旧账，可能显著超时。
-- **M×2 收尾** —— **M02 含不可省略的人工游玩验收**（13 条清单）。
-  理由写在卡片里：本项目三个决定性缺陷（移动方向左右颠倒、曳线完全不可见、
-  AI 开火完全没声音）**全部由人工游玩发现，没有一个由自动化证据发现**。
-  自动化部分编排方可代跑，**人工游玩必须用户实际操作**——代劳则该项失去意义。
+- **J×3 Effects** — Currently **not a single particle**. The "Particle Occupancy" row in G06 debug panel is still empty,
+  I03 has anchored the muzzle flash to the end of the barrel, both interfaces are laid out waiting for power.
+  J02 "Tracers must have real screen width" has a history: previous round measured rendering of **0 pixels** while all tests were green.
+- **K×4 Audio** — Currently **completely silent**.
+- **L×3 Audit** — L03 requires finding "always-true greens and untrustworthy reds",
+  and **negative controls must be committed to the repository**, specifically covering eleven items.
+  Judging by the false green found in 09-13 H01, this task will likely dig up old accounts, possibly significantly exceeding time limits.
+- **M×2 Wrap-up** — **M02 includes non-omittable human playthrough acceptance** (13-item checklist).
+  Reason written in the card: The three decisive defects of this project (movement direction left-right reversed, tracer lines completely invisible,
+  AI firing completely silent) **were all discovered by human playthrough, none were discovered by automated evidence**.
+  The automated part can be run by the orchestrator, **human playthrough must be operated by the user** — doing it on their behalf would make the item meaningless.
 
-估 12–18 小时机时。
+Estimated 12–18 hours of machine time.
 
 ---
 
-# 收官段：J01 → M02（2026-09-14 19:45 → 09-15 18:23，12 个 task）
+# Closing Segment: J01 → M02 (2026-09-14 19:45 → 09-15 18:23, 12 tasks)
 
-**55/55 全部完成。** 55 提交，HEAD `503e921`，工作树干净。
-793 单测 · 202 E2E · 9 负对照 · build exit 0。
-独立复验：全量 E2E ×3 轮各 202/202。
+**55/55 all completed.** 55 commits, HEAD `503e921`, working tree clean.
+793 unit tests · 202 E2E · 9 negative controls · build exit 0.
+Independent re-verification: Full E2E ×3 rounds, each 202/202.
 
-## 逐项
+## Itemized
 
-| task | 提交 | 耗时 | 备注 |
+| task | commit | duration | notes |
 |---|---|---|---|
-| J01 FX 池 + 枪口火焰 | 602bcfa | 122 min | 淘汰策略写对（剩余寿命最短，非最先 spawn） |
-| J02 曳光 | 61eca09 | 188 min | 禁 THREE.Line/linewidth，用定向圆柱 |
-| J03 血滴 + 火花 | 37816c3 | 100 min | **介入一次后阈值全部实测定标** |
-| K01 音频骨架 | 2cfa034 | 49 min | 手势门控，Deploy 前 contextsCreated=0 |
-| K02 脚步 | 9b6b7d0 | 55 min | 距离驱动而非时间驱动 |
-| K03 BGM 数学 | 2b02d09 | 20 min | **自觉做 4 组负对照并记录变红数** |
-| K04 BGM 播放 + 静音 | d1a1d2b | 43 min | |
-| L01 测试钩子契约 | e4be64b | 109 min | 33 键 manifest |
-| L02 E2E 编排 + 截图 | 6f9e85e | 180 min | E2E 133→201；**做完未提交，需人工提示** |
-| L03 验证完整性审计 | fd055a6 | 160 min | 负对照机械化（NEG-FAIL/RESTORE-FAIL） |
-| M01 README + 诚实清单 | 2e6eafa | 48 min | 加了 readmeAudit.test.ts |
-| M02 最终验收会话 E2E | 503e921 | 236 min | 1332 行，14 正 + 4 反 |
+| J01 FX pool + muzzle flash | 602bcfa | 122 min | Culling strategy implemented correctly (shortest remaining lifetime, not first spawned) |
+| J02 Tracers | 61eca09 | 188 min | THREE.Line/linewidth prohibited, used directional cylinders |
+| J03 Blood drops + sparks | 37816c3 | 100 min | **After one intervention, all thresholds calibrated via empirical measurement** |
+| K01 Audio skeleton | 2cfa034 | 49 min | Gesture-gated, contextsCreated=0 before Deploy |
+| K02 Footsteps | 9b6b7d0 | 55 min | Distance-driven rather than time-driven |
+| K03 BGM math | 2b02d09 | 20 min | **Proactively performed 4 sets of negative controls and recorded the number of failures** |
+| K04 BGM playback + mute | d1a1d2b | 43 min | |
+| L01 Test hook contract | e4be64b | 109 min | 33-key manifest |
+| L02 E2E orchestration + screenshots | 6f9e85e | 180 min | E2E 133→201; **completed but not committed, required manual prompt** |
+| L03 Verification integrity audit | fd055a6 | 160 min | Mechanized negative controls (NEG-FAIL/RESTORE-FAIL) |
+| M01 README + honest checklist | 2e6eafa | 48 min | Added readmeAudit.test.ts |
+| M02 Final acceptance session E2E | 503e921 | 236 min | 1332 lines, 14 positive + 4 negative |
 
-累计约 **70 小时 / 55 task**，平均 76 min/task。最快 K03 20 min，最慢 E06 278 min。
+Cumulative approx. **70 hours / 55 tasks**, average 76 min/task. Fastest K03 20 min, slowest E06 278 min.
 
-## 结论一：自我审计的边界不在能力，在是否会质疑自己先前的决定
+## Conclusion 1: The boundary of self-audit lies not in capability, but in whether one questions one's own prior decisions
 
-L03 的任务是「审计已有测试到底测没测到东西」。它交付的东西是真货：
-10 个可重跑的负对照 + harness（break 后不变红即抛 `NEG-FAIL`），
-`docs/PROBE-AUDIT.md` 逐探针写明独占性假设与阈值余量。
-**恒真断言从此被机械化捕捉，比人工逐条检查强一个层级。**
+L03's task was to "audit whether existing tests actually test anything." What it delivered was genuine:
+10 re-runnable negative controls + harness (throws `NEG-FAIL` if it doesn't turn red after break),
+`docs/PROBE-AUDIT.md` explicitly documents exclusivity assumptions and threshold margins for each probe.
+**Tautological assertions are now mechanically captured, a level stronger than manual line-by-line checking.**
 
-但对照我提前攒的 5 条缺口清单（全程未提示），只命中 1.5 条：
+However, compared to the 5-item gap list I had pre-compiled (never prompted throughout), only 1.5 items were hit:
 
-| 缺口 | 类型 | 结果 |
+| Gap | Type | Result |
 |---|---|---|
-| I04 象限阈值 75%→50% 迁就实现 | 调判据就实现 | **半中**：记下 `qRatio 58.9% vs 50%（1.2×）`，定性为"抗锯齿敏感"，未回溯卡片原文 |
-| K02 `toBe(0)`→`toBeLessThan(10)` | 判据钝化 | 漏（明确落在卡片 §3 范围内） |
-| 分层纯净性测试非递归（15 个 .ts 未扫） | 判据盲区 | 漏 |
-| 该测试不查 AudioContext | 判据盲区 | 漏 |
-| 截图暴露的 5 个缺陷无断言覆盖 | 覆盖缺口 | 漏（卡片范围外，不计） |
+| I04 quadrant threshold 75%→50% accommodated implementation | Adjusting criteria to fit implementation | **Half-hit**: recorded `qRatio 58.9% vs 50%（1.2×）`, characterized as "anti-aliasing sensitive", did not trace back to original card text |
+| K02 `toBe(0)`→`toBeLessThan(10)` | Criterion blunting | Missed (explicitly within card §3 scope) |
+| Layer purity test non-recursive (15 .ts files not scanned) | Criterion blind spot | Missed |
+| Test does not check AudioContext | Criterion blind spot | Missed |
+| 5 defects exposed by screenshots have no assertion coverage | Coverage gap | Missed (outside card scope, not counted) |
 
-**分界线很清楚**：
-- 「我的断言是不是真的（非恒真）」——向内、可机械化，**做得很好**
-- 「我的断言是不是对的（该不该是这条）」——要跳出测试回到规格，**没做**
+**The dividing line is clear**:
+- "Are my assertions true (non-tautological)" — inward, mechanizable, **done well**
+- "Are my assertions correct (should it be this one)" — requires stepping out of tests back to spec, **not done**
 
-第一条尤其说明问题：它**手里已经有那个数字**（58.9% vs 50%），
-只差回头问一句「这根杆子当初为什么从 75% 挪下来」。缺的不是信息，是质疑自己的动机。
+The first point is particularly illustrative: it **already had that number** (58.9% vs 50%),
+only missing the step of asking "why was this bar moved down from 75% initially". What was lacking was not information, but the motivation to question oneself.
 
-## 结论二：绿色测试挡不住肉眼可见的缺陷
+## Conclusion 2: Green tests cannot stop visually obvious defects
 
-L02 产出的 8 张截图（仓库内 `screenshots/`）里至少 5 个缺陷：
+At least 5 defects in the 8 screenshots (in repo `screenshots/`) produced by L02:
 
-1. 菜单大标题「NEON BASTION」在 running 状态下横贯画面中央（PLAY-05，久已记录）
-2. 枪体从右上角斜贯到右下 —— I04 卡片原文要求「屏幕右下角」「**不是斜跨中央**」
-3. 记分板表头渲染成 `STATEK`（文字重叠）
-4. 底部 HUD `100` 压在血条分段上，弹药条下方文字糊成一团
-5. 出生点有队友正对镜头挡住视线
+1. Menu main title "NEON BASTION" spans the center of the screen in running state (PLAY-05, long recorded)
+2. Gun body slants from top-right to bottom-right — I04 card original text requires "bottom-right of screen" and "**not slanting across center**"
+3. Scoreboard header rendered as `STATEK` (text overlap)
+4. Bottom HUD `100` overlaps health bar segments, text below ammo bar is a blur
+5. Teammate at spawn point facing camera blocks line of sight
 
-**995 条断言（793+202）没有一条拦下它们**，
-**M01 的「诚实清单」也一条都没列** —— 尽管卡片明写「把真实的取舍与已知缺陷列出来」。
+**None of the 995 assertions (793+202) caught them**,
+**M01's "honest checklist" listed none of them** — despite the card explicitly stating "list real trade-offs and known defects".
 
-M01 那节的开场白就是破绽：「A–L 各段都已完成，**所以这一节很短**」。
-它把「任务卡全部做完」等同于「缺陷所剩无几」。
-证据基础是任务卡和绿色测试，不是渲染出来的产品——而截图就在它自己生成的目录里。
+The opening of M01's section is the tell: "All segments A–L are completed, **so this section is short**".
+It equated "all task cards done" with "few remaining defects".
+The evidence base was task cards and green tests, not the rendered product — yet the screenshots were in its own generated directory.
 
-这与结论一是同一个盲区的两次独立显现。
+This is the same blind spot as Conclusion 1, manifesting independently twice.
 
-## 结论三：AI-04 的介入成本极低，收益是小时级
+## Conclusion 3: AI-04 intervention cost is extremely low, benefit is hour-scale
 
-J03 开局 20 分钟即见手推投影几何预估像素阈值（`360/1.5/tan(39°)=296.3 px/m`），
-是 H03/I04 同一形态。给了一句方法提示（「先跑一次，从实测定阈值，注释标余量」），
-**1h40m 收敛**，阈值全部带实测值与 2.8–3.9× 余量，并自带有效负对照。
+J03 saw hand-calculated projection geometry estimated pixel thresholds (`360/1.5/tan(39°)=296.3 px/m`) within 20 minutes of start,
+same form as H03/I04. Given a method hint ("run once first, calibrate thresholds from empirical data, annotate margins in comments"),
+**converged in 1h40m**, all thresholds with empirical values and 2.8–3.9× margins, and included valid negative controls.
 
-对比 I04 同类工作 **4h19m + 两次介入**。两个数据点，
-介入成本一句话，收益两三个小时。判据与话术已在
-`neon-bastion-55task-run/README.md` 的「见到这些立即介入（AI-04）」节。
+Compared to I04 similar work **4h19m + two interventions**. Two data points,
+intervention cost one sentence, benefit two to three hours. Criteria and phrasing are in
+the "Intervene immediately upon seeing these (AI-04)" section of `neon-bastion-55task-run/README.md`.
 
-## 结论四：mtplx 崩溃一次，死因未定
+## Conclusion 4: mtplx crashed once, cause of death undetermined
 
-09-14 18:22:10 最后一条飞行遥测，18:25:40 探测器报警，约一小时不可用（由用户重启）。
+Last flight telemetry at 09-14 18:22:10, detector alarm at 18:25:40, unavailable for about one hour (restarted by user).
 
-排除：OOM（最后 10 分钟 active 死平 44.5 G，peak 77.6 G 不动，128 G 机器，swap 未启用）·
-jetsam（当日唯一事件在 13:30，无关）· 硬崩（当日无 python `.ips`）·
-撞窗口上限（死时 ctx 122,373 / 131,072，且全程曾稳过 127,362）。
+Excluded: OOM (last 10 min active flat at 44.5 G, peak 77.6 G static, 128 G machine, swap not enabled) ·
+jetsam (only event of the day at 13:30, unrelated) · hard crash (no python `.ips` that day) ·
+hitting window limit (ctx 122,373 / 131,072 at death, and had stably exceeded 127,362 throughout).
 
-死于一次**连续 10 分钟、约 16,650 token 的单次生成**中途，
-全程 `repetition_stop_triggered=False`。是否为死因无法判定。
-mtplx 由 **MTPLX.app（GUI）** 托管，worker 的 traceback 归 app，
-`~/.mtplx/logs` 与 `~/.mtplx/metrics` 按构造在死亡瞬间截断，
-app 的 `Diagnostics/` 只记 daemon 启动事件。**唯一可能有 traceback 的地方是 app 自身的日志窗口。**
+Died mid-way through a **single generation of ~16,650 tokens over 10 consecutive minutes**,
+with `repetition_stop_triggered=False` throughout. Cannot determine if this was the cause of death.
+mtplx is hosted by **MTPLX.app (GUI)**, worker traceback belongs to app,
+`~/.mtplx/logs` and `~/.mtplx/metrics` are truncated by construction at the moment of death,
+app's `Diagnostics/` only records daemon startup events. **The only place that might have a traceback is the app's own log window.**
 
-## 结论五：工具调用失败呈簇状（详见 bugs/mtplx-toolcall-degrades-to-text.md）
+## Conclusion 5: Tool call failures occur in clusters (see bugs/mtplx-toolcall-degrades-to-text.md)
 
-n=9，落在 3 个紧凑簇里，簇间是大段零失败（最长 7.5 小时 / 5 个 task）。
-否定了「每次调用独立同概率」。累计五个假设全部被自己的数据否定，
-仅存「服务端瞬态」与「任务阶段/调用频率」两个候选，且已知需要什么仪器才能分开。
-本轮终值：`tool_parse_success 1469 / unclosed 6 / fallback 6 / malformed 0`。
+n=9, falling into 3 compact clusters, with long stretches of zero failures between clusters (longest 7.5 hours / 5 tasks).
+Refuted "each call has independent equal probability". All five cumulative hypotheses were refuted by its own data,
+only "server-side transient" and "task phase/call frequency" remain as candidates, and it is known what instrumentation is needed to separate them.
+Final values for this round: `tool_parse_success 1469 / unclosed 6 / fallback 6 / malformed 0`.
 
-## 我自己的观测失误（第 7、8 次）
+## My own observation errors (7th, 8th)
 
-**第 7 次 —— 「完成但未提交」无判据覆盖。** L02 写完验收报告就停手，HEAD 不动。
-完成判据是 `HEAD != BASE && 静默`，永不触发；而静默 + 无失败计数增量又被判成疑似工具失效。
-**用户比我先发现**（"隔壁做完了，你没监控？"）。已补：静默 + 无计数增量 + 工作区有未提交产出
-→ 发**正确**的提示（去提交），独立额度。
+**7th — "Completed but not committed" has no criterion coverage.** L02 stopped after writing the acceptance report, HEAD did not move.
+Completion criterion is `HEAD != BASE && 静默`, never triggered; while silence + no failure count increment was judged as suspected tool failure.
+**User discovered it before me** ("The neighbor finished, you didn't monitor?"). Added: silence + no count increment + uncommitted output in workspace
+→ send **correct** prompt (to commit), independent quota.
 
-**第 8 次 —— 新补的判据自己变成假阳性源。** L03 在 `sleep 300` 等 5 轮稳定性验证的第 4、5 轮，
-被上述新判据判成「做完没提交」，险些让它跳过验证。已发更正并补判据：
-屏幕有 `Elapsed NNNs` 跳动计时即为「正在执行」，不发提交提示。
+**8th — Newly added criterion itself became a false positive source.** L03 in rounds 4 and 5 of 5-round stability verification during `sleep 300`,
+was judged as "done but not committed" by the above new criterion, nearly causing it to skip verification. Correction sent and criterion added:
+if screen shows `Elapsed NNNs` ticking timer, it is "executing", do not send commit prompt.
 
-**另：`loop_watch.sh` 需要 task id 参数，我两次空手启动，它立刻退出，
-而我在报告里把它列进了"监控栈"** —— 根因是只数进程总数（5），其中两个是 Monitor 自己的。
-J01 那两小时实际无空转保护。此后每次启动逐个确认进程名。
+**Also: `loop_watch.sh` requires task id parameter, I started it empty-handed twice, it exited immediately,
+and I listed it in the "monitoring stack" in my report** — root cause was only counting total process count (5), two of which were Monitor's own.
+J01's two hours actually had no idle protection. From now on, verify process names one by one at each startup.
 
-**教训**：我一直在用「静默」这种间接信号去推断「状态」，每补一个盲区就可能开一个新的。
-真正稳的信号是 **pi 自己屏幕上那份验收报告**。驱动应改成读该信号，而非猜进程静默。
+**Lesson**: I have been using indirect signals like "silence" to infer "state", and each blind spot patched may open a new one.
+The truly stable signal is **the acceptance report on pi's own screen**. The driver should be changed to read that signal, rather than guessing process silence.
 
-## 待人工验收
+## Pending manual acceptance
 
-M02 的 13 条人工游玩 + 5 条反面检查**必须由人完成**（卡片明写：本项目三个决定性缺陷
-——移动方向颠倒、曳光不可见、AI 开火无声——全部由人工游玩发现，无一由自动化证据发现）。
+M02's 13 manual playthroughs + 5 negative checks **must be completed by humans** (card explicitly states: the three decisive defects of this project
+— inverted movement direction, invisible tracers, silent AI firing — were all discovered by manual playthrough, none by automated evidence).
 `npm run build && npx vite preview --port 4173` → http://localhost:4173
 
-**最有信息量的数据点尚未产生**：这个测试密度是前两轮数倍的版本，玩起来是否也更好。
+**The most informative data point has not yet been generated**: whether this version, with test density several times that of the previous two rounds, also plays better.
 
 ---
 
-# 人工游玩验收结果（2026-09-15，用户实测）
+# Manual Playthrough Acceptance Results (2026-09-15, User-Tested)
 
-**这是本轮基准最有信息量的一段。四个缺陷全部由人工游玩发现，编排方的截图复核只预判到其中一个（第 4 条）。**
+**This is the most informative segment of this benchmark round. All four defects were discovered through manual playtesting; the orchestrator's screenshot review only anticipated one of them (Item 4).**
 
-## 用户报告原文
+## Original User Report
 
-1. **AI 智障** —— 对比 8bit 与 ds-flash 版本，这一版 NPC 只会射两枪（无论对敌人还是队友），
-   然后卡在原地或者满地乱走，就是不攻击。
-2. **友伤逻辑错乱** —— 打到队友身上有出血特效但不扣血（队友应当直接忽略攻击）；
-   击杀敌人**没有倒地效果**，只是原地变灰。
-3. **UI 中英文混用**，乱七八糟。
-4. **开始之后 `NEON BASTION` 标题还在**，一直挡着视线。
+1. **AI is unintelligent** —— Compared to the 8bit and ds-flash versions, the NPCs in this version only fire two shots (whether at enemies or teammates),
+   then get stuck in place or wander around randomly, refusing to attack.
+2. **Friendly fire logic is broken** —— Hitting a teammate triggers a bleeding effect but does not deduct health (teammates should directly ignore attacks);
+   killing an enemy **has no falling-down effect**, it just turns gray in place.
+3. **UI mixes Chinese and English**, it is a mess.
+4. **After starting, the `NEON BASTION` title is still there**, constantly blocking the view.
 
-（用户明确要求：先记录，不修改。）
+(The user explicitly requested: record first, do not modify.)
 
-## 为什么 793 单测 + 202 E2E 一条都没拦下
+## Why 793 Unit Tests + 202 E2E Tests Failed to Catch Any of These
 
-### 第 1 条：终止性判据可被一个勉强能动的 AI 满足
+### Item 1: The Termination Criterion Can Be Satisfied by a Barely Functional AI
 
-`checkEnd()` 的结束条件是**任意一方 4 人全部死亡**（纯歼灭），
-`e07Termination` 扫 seed 1..40，断言「300 **逻辑**秒内 `state === 'ended'` 且 `winner` 非空」。
+The termination condition for `checkEnd()` is **all 4 members of either side dying** (pure annihilation),
+`e07Termination` scans seeds 1..40, asserting that "within 300 **logical** seconds, `state === 'ended'` is true and `winner` is non-empty".
 
-300 逻辑秒是 fastForward 压缩出来的 5 分钟游戏时间。
-**一个偶尔开两枪的 AI，在 5 分钟里累计也足以打死 4 个人。** 判据因此绿。
+300 logical seconds is 5 minutes of game time compressed by fastForward.
+**An AI that occasionally fires two shots is sufficient to kill 4 people cumulatively within 5 minutes.** Therefore, the criterion passes (green).
 
-测试从未测量：交战率、首次接火时间、持续压制、单位时间开火次数。
-M02 的 M6 项（AI 开火有声光）测的是**存在性**——「restart 后 10.4 s 内 17 枪」——
-而用户看到的是**持续性**问题。存在性绿，持续性没被定义过。
+The tests never measured: engagement rate, time to first contact, sustained suppression, or firing rate per unit time.
+The M6 item in M02 (AI firing has sound and light) tests **existence**——"17 shots within 10.4 s after restart"——
+while what the user observed was a **persistence** issue. Existence is green, but persistence was never defined.
 
-**判据说的是「比赛会结束」，用户要的是「AI 会打架」。这两者不等价，而且差距大到肉眼可见。**
+**The criterion states that "the match will end," but the user wants "the AI will fight." These two are not equivalent, and the gap is visible to the naked eye.**
 
-### 第 2 条：测试把当前行为当成了规格
+### Item 2: The Tests Treated Current Behavior as the Specification
 
-`i01` 的像素探针断言尸体呈「尸灰」：
-`blueN ≤ 0.7×before && ≥30 && neutralN > 80`（见 `docs/PROBE-AUDIT.md:36`）。
+The pixel probe assertion in `i01` asserts that corpses appear as "corpse gray":
+`blueN ≤ 0.7×before && ≥30 && neutralN > 80` (see `docs/PROBE-AUDIT.md:36`).
 
-**「原地变灰」被写成了通过条件。** 倒地/死亡动画从未被要求过，
-于是「没有倒地效果」不是回归——它是被断言固定下来的现状。
+**"Turning gray in place" was written as the pass condition.** The falling-down/death animation was never required,
+so "no falling-down effect" is not a regression—it is the current state fixed by the assertion.
 
-L03 的审计能证明这条断言**非恒真**（破坏颜色它会红），
-但证明不了这条断言**本该断言别的东西**。这正是 QA-13 记的那条边界，
-这次有了后果：一条尽职的断言，把一个手感缺陷焊死成了规格。
+The L03 audit can prove that this assertion is **not tautological** (it turns red if the color is broken),
+but it cannot prove that this assertion **should have asserted something else**. This is exactly the boundary noted in QA-13,
+which now has consequences: a diligent assertion has welded a feel-defect into the specification.
 
-友伤方面：出血特效走 D04 `hit` 事件，伤害结算另走队伍判定，
-两条路径对「同队命中」的处理不一致——FX 层认了，伤害层拒了。
-没有任何测试交叉核对这两层在同一事件上的结论。
+Regarding friendly fire: the bleeding effect goes through the D04 `hit` event, while damage settlement goes through a separate team check,
+and the two paths handle "same-team hit" inconsistently—the FX layer accepts it, while the damage layer rejects it.
+No test cross-checks the conclusions of these two layers on the same event.
 
-### 第 3 条：中英混用——无人定义过何为正确
+### Item 3: Mixed Chinese and English——No One Defined What Is Correct
 
-56 张卡片里没有一条规定 UI 语言。截图里 HUD 全英文
-（`BLUE 4 · 0` / `LIVE` / `NAME STATEK H SCORE` / `ALIVE` / `SCORE 0`），
-菜单与提示为中文。**没有规格 → 没有断言 → 不会红。**
-这是任务书的覆盖缺口，不是模型的执行失误。
+None of the 56 cards specify the UI language. The HUD in the screenshots is entirely in English
+(`BLUE 4 · 0` / `LIVE` / `NAME STATEK H SCORE` / `ALIVE` / `SCORE 0`),
+while menus and prompts are in Chinese. **No specification → no assertion → it will not turn red.**
+This is a coverage gap in the task document, not an execution error by the model.
 
-### 第 4 条：PLAY-05，唯一被预判到的一条
+### Item 4: PLAY-05, the Only One That Was Anticipated
 
-编排方在 L02 截图复核时已标出（见 QA-14 ①），并在交付给用户的清单里列为「已知会不合格」。
-它长期在 backlog 里挂着，**不在任何一张卡片的验收清单上**，因此 55 个 task 无一会碰它。
+The orchestrator had already flagged this during the L02 screenshot review (see QA-14 ①) and listed it as "known to be non-compliant" in the checklist delivered to the user.
+It has been hanging in the backlog for a long time, **not on the acceptance checklist of any card**, so none of the 55 tasks would touch it.
 
-## 汇总：四条缺陷的失守层级各不相同
+## Summary: The Failure Levels of the Four Defects Are Different
 
-| # | 缺陷 | 失守在哪一层 |
+| # | Defect | Where It Failed |
 |---|---|---|
-| 1 | AI 不交战 | **判据选错了量**（测「会结束」而非「会打架」） |
-| 2a | 友伤出血不扣血 | **两层路径无交叉核对** |
-| 2b | 死亡无倒地 | **测试把现状写成了规格** |
-| 3 | UI 中英混用 | **任务书从未定义** |
-| 4 | 标题挡视线 | **任务书从未覆盖**（已知缺陷长期挂账） |
+| 1 | AI does not engage | **Wrong metric chosen** (tested "will end" instead of "will fight") |
+| 2a | Friendly fire bleeding does not deduct health | **No cross-check between two layers** |
+| 2b | No falling-down on death | **Tests wrote current state as specification** |
+| 3 | UI mixes Chinese and English | **Never defined in task document** |
+| 4 | Title blocks view | **Never covered in task document** (known defect left in backlog for long) |
 
-**没有一条是「模型写错了代码」。** 四条全部是验证体系的问题：
-选错量、缺交叉、把现状当规格、规格本身有洞。
+**None of them are "the model wrote the code wrong."** All four are issues with the verification system:
+wrong metric, lack of cross-checking, treating current state as specification, and holes in the specification itself.
 
-## 对三轮对比的意义
+## Significance for the Three-Round Comparison
 
-用户主观排序：**8bit > ds-flash > 本轮（mtplx 4bit）**，
-而本轮的机械指标（代码量、测试数、测试密度、分层纪律、负对照覆盖）**三轮最高**。
+User's subjective ranking: **8bit > ds-flash > this round (mtplx 4bit)**,
+while this round's mechanical metrics (code volume, number of tests, test density, layering discipline, negative control coverage) are **the highest of the three rounds**.
 
-之前记过的两个混淆项仍然成立且现在更清楚了：
-- 8bit 那轮是 **89 行单份任务书**（本轮 3,289 行 × 56 张），产出规模不可比；
-- 8bit 那轮用户**深度参与、边玩边 debug**——用户本人就是人工游玩回路。
+The two confounding factors noted previously still hold and are now clearer:
+- The 8bit round used an **89-line single task document** (this round: 3,289 lines × 56 cards), so the output scale is not comparable;
+- In the 8bit round, the user was **deeply involved, debugging while playing**——the user themselves was the manual playthrough loop.
 
-**这一轮把那个回路拿掉了，于是暴露出：自动化验收的上限，等于任务书的覆盖率。**
-56 张卡片、3,289 行规格、995 条断言，仍然漏掉了「AI 要会打架」「人死了要倒下」
-「UI 用一种语言」这类没人想到要写下来的东西——
-因为它们**太显然**，显然到不会有人把它们写进验收清单。
+**This round removed that loop, thereby exposing: the upper limit of automated acceptance is equal to the coverage of the task document.**
+56 cards, 3,289 lines of specification, 995 assertions, still missed things like "AI must be able to fight," "people must fall down when they die,"
+and "UI should use one language"——
+because they are **too obvious**, so obvious that no one would think to write them into the acceptance checklist.
 
-这是本轮基准可以给出的最强结论：
-**细粒度任务卡 + 自动化验收，优化的是"测试变绿"，不是"玩起来对"。
-两者的差距不随测试密度增加而收敛——本轮测试密度是前两轮的数倍，主观体验却是三轮最低。**
+This is the strongest conclusion this benchmark round can offer:
+**Fine-grained task cards + automated acceptance optimize for "tests turning green," not for "playing correctly."
+The gap between the two does not converge as test density increases——this round's test density is several times that of the previous two rounds, yet the subjective experience is the lowest of the three rounds.**
 
 ---
 
-# 用户观察汇总（全程，2026-09-07 → 09-15）
+# User Observation Summary (Full Duration, 2026-09-07 → 09-15)
 
-> 本节只收**用户本人**的观察与判断，与编排方的推断分开记。
-> 编排方的分析见上文各节；此处若有分析，标注为「编排方注」。
+> This section records only the **user's own** observations and judgments, kept separate from the orchestrator's inferences.
+> The orchestrator's analysis is found in the preceding sections; any analysis included here is labeled as "Orchestrator Note".
 
-## 一、对三轮基准的横向判断
+## I. Cross-Sectional Judgment on the Three Benchmark Rounds
 
-**用户主观排序：`8bit` > `ds-flash` > `本轮（mtplx 4bit）`。**
+**User's subjective ranking: `8bit` > `ds-flash` > `本轮（mtplx 4bit）`.**
 
-| 轮次 | repo | 模型/部署 | 任务书 |
+| Round | repo | Model/Deployment | Task Spec |
 |---|---|---|---|
-| 一 | `mlx-dspark-27B-8bit-with-pi-3d-team-arena` | mlx-dspark 27B **8bit** | `3d-team-arena.md`，**89 行单份** |
-| 二 | `ds-v4-flash-vision-with-dsh-neon-bastion` | 云端低配模型（参考基准） | neon-bastion 56 卡 |
-| 三 | `mtplx-27B-optimized-speed-with-pi-neon-bastion` | mtplx 27B **4bit**（本轮） | neon-bastion 56 卡，**3,289 行** |
+| 1 | `mlx-dspark-27B-8bit-with-pi-3d-team-arena` | mlx-dspark 27B **8bit** | `3d-team-arena.md`, **89 lines, single file** |
+| 2 | `ds-v4-flash-vision-with-dsh-neon-bastion` | Cloud low-spec model (reference baseline) | neon-bastion 56 cards |
+| 3 | `mtplx-27B-optimized-speed-with-pi-neon-bastion` | mtplx 27B **4bit** (current round) | neon-bastion 56 cards, **3,289 lines** |
 
-### 用户原话与自述的混淆项
+### User's Verbatim Quotes and Self-Reported Confounders
 
-- 「8bit model 出来的效果非常好，而且用时没有现在这个 repo 久」
-- 「这个 repo 用的是 4bit，**token/s 更快，但是好像更慢了**」
-- 「ds-v4-flash-vision 是另一个基准，那个是**云端低配模型出品作为参考**」
-- 「我觉得 8bit 那个效果更好，**但因为 8bit 测试是第一次，整个流程和后两次不一样，
-  我自己深度参与和 debug，会更加人为 involve**」
-- 「**8bit 没有视觉，是 mlx-dspark 问题**」（8bit 那轮模型无视觉能力，属部署侧限制）
+- "The 8bit model produced very good results, and it didn't take as long as the current repo."
+- "This repo uses 4bit, **token/s is faster, but it seems slower overall**."
+- "ds-v4-flash-vision is another baseline; that one is **output from a cloud low-spec model used as a reference**."
+- "I think the 8bit one had better results, **but since the 8bit test was the first time, the entire process was different from the last two rounds. I was deeply involved and debugging, which made it more artificially involved**."
+- "**8bit has no vision; that is an mlx-dspark issue**" (The model in the 8bit round lacked vision capabilities, a deployment-side limitation).
 
-**用户自己点出了两个关键混淆项**（深度人为参与、流程不同），这两点后来被证明是解释力最强的变量。
+**The user themselves identified two key confounders** (deep human involvement, different process), which were later proven to be the most explanatory variables.
 
-### 编排方注：「更快却更慢」的量化
+### Orchestrator Note: Quantifying "Faster Yet Slower"
 
-| repo | 提交 | src 行数 | 测试文件 | 测试行数 |
+| repo | Commits | src lines | Test files | Test lines |
 |---|---|---|---|---|
 | 8bit / team-arena | 34 | 8,157 | 20 | 4,839 |
 | ds-v4 / neon-bastion | 55 | 13,401 | 76 | 16,204 |
-| **本轮 / neon-bastion** | **55** | **16,224** | **108** | **26,721** |
+| **Current / neon-bastion** | **55** | **16,224** | **108** | **26,721** |
 
-规格量差 **37 倍**（89 行 vs 3,289 行），测试产出差 **5.5 倍**。
-**墙钟时间从来没在测模型** —— 三轮做的不是同一份工作。
-「tok/s 更快却更慢」这个矛盾至此消解：本轮单位时间产出更高，但被要求做的事多得多。
+The specification size difference is **37x** (89 lines vs 3,289 lines), and the test output difference is **5.5x**.
+**Wall-clock time was never measuring the model** — the three rounds did not perform the same work.
+The contradiction of "faster tok/s yet slower" is resolved here: the current round had higher output per unit time, but was required to do much more work.
 
-## 二、人工游玩实测（09-15，四条）
+## II. Manual Playtesting Results (09-15, Four Items)
 
-1. **AI 智障** —— 对比 8bit 与 ds-flash 两版，本版 NPC 只会射两枪
-   （**无论对敌人还是队友**），然后卡在原地或满地走，就是不攻击。
-2. **友伤/死亡表现错乱** —— 打到队友身上有出血效果但不扣血（队友应忽略攻击）；
-   攻击敌人至死亡**没有倒地效果，只有原地变灰**。
-3. **UI 里英文和中文混用**，乱七八糟。
-4. **开始之后 `NEON BASTION` 的 title 还在，一直挡着视线。**
+1. **AI is unintelligent** — Comparing the 8bit and ds-flash versions, the NPCs in this version only fire two shots
+   (**regardless of whether at enemies or teammates**), then get stuck in place or wander around, refusing to attack.
+2. **Friendly fire/death representation is chaotic** — Hitting a teammate produces a bleeding effect but does not reduce HP (teammates should ignore attacks);
+   attacking an enemy to death **has no falling-down effect, only turning gray in place**.
+3. **English and Chinese are mixed in the UI**, in a messy manner.
+4. **After starting, the title of `NEON BASTION` remains, constantly blocking the view.**
 
-用户指示：**先记录，不要修改。**
-失守层级分析见上一节与 QA-15 / PLAY-06～09。
+User instruction: **Record first, do not modify.**
+Analysis of the failure hierarchy is in the previous section and QA-15 / PLAY-06～09.
 
-## 三、用户两次先于编排方发现监控失效
+## III. User Detected Monitoring Failure Before the Orchestrator (Twice)
 
-两次都是用户先察觉 pi 已停而编排方仍在等：
+Both times, the user noticed that pi had stopped while the orchestrator was still waiting:
 
-- **09-13** 「pi session 停止了，什么情况？没有任何更新好久了」
-  → 后查明为 `Working` 撞 spinner 正则，编排方空等 1h47m（OPS-39）。
-- **09-13 稍晚** 「你为什么没有继续，pi session 都做完了」
-- **09-15** 「**隔壁做完了，你没监控？**」
-  → L02 写完验收报告即停手、HEAD 不动，「完成但未提交」无判据覆盖（OPS-44 第 7 次）。
+- **09-13** "The pi session stopped, what's going on? No updates for a long time."
+  → Later determined to be `Working` hitting the spinner regex; the orchestrator waited idly for 1h47m (OPS-39).
+- **09-13, slightly later** "Why didn't you continue? The pi session is already done."
+- **09-15** "**The neighbor is done, you weren't monitoring?**"
+  → L02 stopped after writing the acceptance report, HEAD did not move; "completed but not committed" was not covered by any criterion (OPS-44, 7th occurrence).
 
-**编排方的完成判据依赖 HEAD 前进 + 进程静默这类间接信号，
-而用户用的是「屏幕上那份报告」这个直接信号。三次都是直接信号赢。**
+**The orchestrator's completion criteria relied on indirect signals such as HEAD advancement + process silence,
+while the user used the direct signal of "the report on the screen." The direct signal won all three times.**
 
-## 四、用户定下的操作约束（全程有效）
+## IV. Operational Constraints Set by the User (Valid Throughout)
 
-- **「把你开启的 mtplx 关闭，我自己打开 mtplx」** —— mtplx 一律由用户启动，
-  编排方不得自行拉起。09-14 崩溃后即按此执行：编排方停驱动、报告、等待用户重启（OPS-43）。
-- **「如果佢有困难你要介入一下」** —— 授权在模型受阻时介入。
-  据此有 I04 两次、J03 一次方法介入（AI-04 / AI-05）。
-- **「你需要密切关注，以免它再次死循环出不来」** —— 据此建 `loop_watch.sh` 空转探测器。
-- **「先不发，继续观察吧」**（关于是否给 mtplx 提 issue）—— 未提 issue，改为自建
-  `parse_watch.py` 做逐请求归因，累计 n=9 后得出簇状结论。
+- **"Turn off the mtplx you started; I will start mtplx myself"** — mtplx must always be started by the user;
+  the orchestrator must not launch it independently. After the 09-14 crash, this was executed accordingly: the orchestrator stopped the driver, reported, and waited for the user to restart (OPS-43).
+- **"If it has difficulties, you need to intervene"** — Authorization to intervene when the model is blocked.
+  This led to two method interventions in I04 and one in J03 (AI-04 / AI-05).
+- **"You need to monitor closely to prevent it from getting stuck in a dead loop again"** — Based on this, the `loop_watch.sh` idle detector was built.
+- **"Don't submit yet, let's continue observing"** (regarding whether to file an issue for mtplx) — No issue was filed; instead,
+  `parse_watch.py` was built for per-request attribution, leading to a clustered conclusion after accumulating n=9.
 
-## 五、用户在过程中的其他观察
+## V. Other Observations by the User During the Process
 
-- **「pi 到底在算什么？看着好复杂」**（09-13，I04 期间）
-  → 编排方核查后确认为 12,150 点暴力穷举一个单调可解析的量，
-  往返开销漏算 25 倍、连跑三轮 —— 直接促成 AI-04 这条结论的成形。
-- **「今天工作了几个小时啦？离完成还差多少？」** 等进度追问，
-  促成按 task 记录耗时/token 的习惯（`timing.log`、`tps.jsonl`）。
+- **"What is pi actually calculating? It looks very complex"** (09-13, during I04)
+  → After verification by the orchestrator, it was confirmed to be a brute-force enumeration of 12,150 points for a monotonically analyzable quantity,
+  with round-trip overhead underestimated by 25x and run for three consecutive rounds — directly contributing to the formation of the AI-04 conclusion.
+- **"How many hours have you worked today? How much is left until completion?"** and other progress inquiries,
+  which led to the habit of recording time/tokens per task (`timing.log`, `tps.jsonl`).
 
-## 六、用户观察对本轮结论的贡献
+## VI. Contribution of User Observations to the Current Round's Conclusions
 
-**QA-15 这条最强结论，四个支撑点里有三个来自用户：**
+**For QA-15, the strongest conclusion, three of the four supporting points came from the user:**
 
-1. 主观排序与机械指标**反向**（用户实测） ← 用户
-2. 8bit 那轮的人为参与是关键混淆项 ← **用户自己指出**
-3. AI 不交战、死亡无倒地等四条缺陷 ← 用户
-4. 995 条断言无一拦下、且无一是代码写错 ← 编排方核查
+1. Subjective ranking is **inverse** to mechanical metrics (user's manual test) ← User
+2. Human involvement in the 8bit round was a key confounder ← **Pointed out by the user themselves**
+3. Four defects including AI not engaging, no falling-down on death, etc. ← User
+4. None of the 995 assertions caught it, and none were due to code errors ← Orchestrator verification
 
-**编排方独立预判到的只有第 4 条缺陷（标题挡视线）**，
-其余三条（AI 行为、友伤/倒地、UI 语言）均只在交互中暴露，
-与 M02 卡片开篇那句判断完全吻合：
+**The orchestrator independently predicted only the 4th defect (title blocking the view)**;
+the other three (AI behavior, friendly fire/falling-down, UI language) were only exposed during interaction,
+fully consistent with the judgment at the beginning of the M02 card:
 
-> 本项目实测：三个不同轮次里的决定性缺陷——移动方向左右颠倒、曳光完全不可见、
-> AI 开火完全没有声音——**全部由人工游玩发现，没有一个由自动化证据发现**。
+> Empirical test of this project: The decisive defects in three different rounds — movement direction reversed left/right, tracers completely invisible,
+> AI firing completely silent — **were all discovered by manual playtesting, none by automated evidence**.
 
-**本轮为这句话添了第四个轮次的佐证。**
+**This round adds a fourth round of evidence to this statement.**

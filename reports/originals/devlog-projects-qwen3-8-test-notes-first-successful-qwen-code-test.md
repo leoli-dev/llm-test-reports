@@ -1,95 +1,114 @@
 ---
 type: Note
-title: First successful Qwen Code test on local Qwen3.8
+title: "First successful Qwen Code test on local Qwen3.8"
 status: current
-description: First end-to-end successful coding-agent task using local oMLX Qwen3.8-27B and Qwen Code.
+description: "First end-to-end successful coding-agent task using local oMLX Qwen3.8-27B and Qwen Code."
 tags: [qwen3.8, omlx, qwen-code, benchmark, arcology]
 timestamp: 2026-08-21T23:36:00Z
 ---
 
 # First successful Qwen Code test
 
+[English](devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test.md) | [简体中文](devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
 ## Result
 
-首次成功的端到端 coding task：在当前测试根目录创建 `arcology-control-room`，实现可直接打开的 **Arcology 2049 / 未来城市能源调度中心**。成品为纯 HTML/CSS/原生 JS，不依赖 npm、框架、外部图片或 API。
+First successful end-to-end coding task: Create `arcology-control-room` in the current test root directory, implementing a directly openable **Arcology 2049 / Future City Energy Dispatch Center**. The deliverable is pure HTML/CSS/vanilla JS, with no dependencies on npm, frameworks, external images, or APIs.
 
-代码位置：`$HOME/Downloads/qwen3.8_test/arcology-control-room`。
+Code location: `$HOME/Downloads/qwen3.8_test/arcology-control-room`.
 
 ## Fixed evaluation prompt
 
-后续 agent / profile 横向比较必须复用这份题面，不以压缩版替代：
+Subsequent agent / profile cross-comparisons must reuse this exact prompt; do not substitute a compressed version:
 
-> 在当前文件夹创建子文件夹 `arcology-control-room`，完成一个可直接打开运行的纯前端项目：**Arcology 2049 / 未来城市能源调度中心**。
+> Create a subfolder `arcology-control-room` in the current folder and complete a pure front-end project that can be opened and run directly: **Arcology 2049 / Future City Energy Dispatch Center**.
 >
-> 技术约束：
+> Technical constraints:
 >
-> - 只用 HTML、CSS、原生 JavaScript，不用 npm、不用框架、不用外部图片或 API。
-> - 可以使用内联 SVG、Canvas 和 Web Audio API。
-> - 文件拆分为 `index.html`、`style.css`、`app.js`；代码必须完整可运行。
-> - 不要写长篇解释。先实现，再自行检查浏览器控制台报错和交互。
+> - Use only HTML, CSS, and vanilla JavaScript; do not use npm, frameworks, external images, or APIs.
+> - Inline SVG, Canvas, and the Web Audio API may be used.
+> - Split files into `index.html`, `style.css`, and `app.js`; the code must be complete and runnable.
+> - Do not write lengthy explanations. Implement first, then self-check browser console errors and interactions.
 >
-> 视觉目标：
+> Visual goals:
 >
-> - 深色高级控制室界面，不要做成普通 dashboard。
-> - 中央是可缩放、可拖拽的等距未来城市 SVG 地图：包含 6 个能源区域、建筑群、道路、轨道交通线、能源管线。
-> - 城市要有持续动画：车辆沿道路移动、轨道列车循环、建筑窗光随机闪烁、能量流在管线中流动、轻微雨雾/粒子背景。
-> - 左侧为区域列表与实时能源总览；右侧为告警流、天气与一张动态折线图；底部为时间轴与调度控制台。
-> - 有启动时的短暂 loading / boot sequence 动画。
+> - A dark, high-end control room interface; do not make it a generic dashboard.
+> - Center: a zoomable, draggable isometric future city SVG map containing 6 energy zones, building clusters, roads, rail transit lines, and energy pipelines.
+> - The city must have continuous animations: vehicles moving along roads, rail trains looping, random flickering of building window lights, energy flow moving through pipelines, and a subtle rain/fog/particle background.
+> - Left side: zone list and real-time energy overview; right side: alert stream, weather, and a dynamic line chart; bottom: timeline and dispatch console.
+> - Include a brief loading / boot sequence animation on startup.
 >
-> 交互要求：
+> Interaction requirements:
 >
-> 1. 点击地图区域或左侧区域列表，地图聚焦并高亮该区域，右侧详情面板更新。
-> 2. 地图支持滚轮缩放、拖拽平移、Reset View 按钮。
-> 3. 顶部有 “LIVE / SIMULATION” 开关：
->    - LIVE：数据自动每 1–2 秒波动，图表和能量管线随之变化。
->    - SIMULATION：暂停自动变化，用户可拖动底部时间轴模拟未来 24 小时。
-> 4. 每个区域有能源状态：normal / warning / critical。随机但合理地产生告警；点击告警可定位到对应区域。
-> 5. 有一个 “Emergency Load Shed” 按钮：弹出确认模态框；确认后随机区域进入限电状态，城市灯光明显变暗，告警增加，并能用 “Restore Grid” 恢复。
-> 6. 加入轻微的按钮音效和告警音效，首次用户交互后才启用音频。
-> 7. 数据刷新、切换区域、打开模态框都要有自然过渡动画。
-> 8. 响应式：桌面优先；窄屏时左右面板可折叠，地图仍可使用。
+> 1. Clicking a map zone or an item in the left-side zone list focuses and highlights that zone on the map and updates the right-side detail panel.
+> 2. The map supports wheel zoom, drag panning, and a Reset View button.
+> 3. Top bar has a “LIVE / SIMULATION” toggle:
+>    - LIVE: data automatically fluctuates every 1–2 seconds; charts and energy pipelines change accordingly.
+>    - SIMULATION: pauses automatic changes; the user can drag the bottom timeline to simulate the next 24 hours.
+> 4. Each zone has an energy status: normal / warning / critical. Alerts are generated randomly but reasonably; clicking an alert locates the corresponding zone.
+> 5. Include an “Emergency Load Shed” button: it opens a confirmation modal; upon confirmation, a random zone enters a power-restriction state, city lights visibly dim, alerts increase, and the state can be restored via “Restore Grid”.
+> 6. Add subtle button click sounds and alert sounds; enable audio only after the first user interaction.
+> 7. Data refreshes, zone switching, and opening modals must have natural transition animations.
+> 8. Responsive: desktop-first; on narrow screens, left and right panels can be collapsed, and the map remains usable.
 >
-> 验收：
+> Acceptance criteria:
 >
-> - 打开 `index.html` 即可运行。
-> - 不出现占位文字、未实现按钮或控制台报错。
-> - 所有模拟数据在 JS 中生成。
-> - 最后简短报告实现了哪些文件，以及你实际测试过的交互。
+> - Opening `index.html` runs the project.
+> - No placeholder text, unimplemented buttons, or console errors.
+> - All simulated data is generated in JS.
+> - Finally, provide a brief report on which files were implemented and which interactions were actually tested.
 
 ## Runtime setup
 
 | Field | Value |
 |---|---|
-| Model | `True2456/Qwen3.8-27B-AWQ-5.0bpw`，通过 oMLX 本机 OpenAI-compatible endpoint 使用 |
-| oMLX profile | `Qwen3.8-27B-AWQ-5.0bpw:coding-reason`：131,072 context / 32,768 output / thinking low |
+| Model | `True2456/Qwen3.8-27B-AWQ-5.0bpw`, used via oMLX local OpenAI-compatible endpoint |
+| oMLX profile | `Qwen3.8-27B-AWQ-5.0bpw:coding-reason`: 131,072 context / 32,768 output / thinking low |
 | Agent tool | `@qwen-code/qwen-code` v0.21.15 |
 | Agent mode | YOLO / auto approval |
 | Machine | MacBook Pro M5 Max, 128 GB unified memory |
 
 ## What the agent shipped
 
-- `index.html`：boot sequence、三栏控制室布局、地图 HUD、模式切换、时间轴、控制台与确认 modal。
-- `style.css`：深色高密度控制室视觉、响应式侧栏、动画及状态样式。
-- `app.js`：程序化 SVG 等距城市、车辆/列车/窗光/管线/雨雾动画，LIVE/SIM 模拟，区域与告警交互，缩放拖拽，Emergency Load Shed/Restore 和 Web Audio。
+- `index.html`: boot sequence, three-column control room layout, map HUD, mode switching, timeline, console, and confirmation modal.
+- `style.css`: dark high-density control room visuals, responsive sidebar, animations, and state styles.
+- `app.js`: procedural SVG isometric city, vehicle/train/window light/pipeline/rain-fog animations, LIVE/SIM simulation, zone and alert interactions, zoom and drag, Emergency Load Shed/Restore, and Web Audio.
 
-生成后 agent 自行运行 JS 解析、headless Chrome/CDP console 检查，并修复了 FX canvas backing-store 与 pointer-capture 相关的两个运行时问题；其报告为 0 console errors/warnings。
+After generation, the agent independently ran JS parsing and headless Chrome/CDP console checks, and fixed two runtime issues related to the FX canvas backing-store and pointer-capture; its report is 0 console errors/warnings.
 
 ## Performance observation
 
-此次是质量与稳定性试验，不宜作为稳定吞吐基准：Reason 首轮输出记录为约 19,827 completion tokens（其中 16,334 reasoning tokens），单次请求约 980 秒，长上下文下约 20 tok/s；较短写文件阶段的生成后 decode 约 28.5 tok/s。原因 profile 的 `low` thinking 不是硬 token 上限。
+This is a quality and stability test, and should not be used as a stable throughput benchmark: The Reason first-round output is recorded as approximately 19,827 completion tokens (of which 16,334 are reasoning tokens), with a single request taking approximately 980 seconds, and approximately 20 tok/s under long-context conditions; the post-generation decode during the shorter file-writing phase is approximately 28.5 tok/s. The `low` thinking in the cause profile is not a hard token limit.
 
 ### Long-running-session slowdown
 
-在 Round 2 后继续进行可视 QA 的同一条 Qwen Code session 中，用户提供的 oMLX v0.6.2 Dashboard 截图记录：累计 prefill **3,074,861 tokens**，其中 cached **2,760,704**，cache efficiency **89.8%**；未缓存 prefill **355.4 tok/s**，token generation 平均只剩 **18.1 tok/s**。这比首轮短写文件阶段约 28.5 tok/s 低约 36%，也略低于首轮长请求约 20 tok/s。
+In the same Qwen Code session that continued visual QA after Round 2, the oMLX v0.6.2 Dashboard screenshot provided by the user recorded: cumulative prefill **3,074,861 tokens**, of which **2,760,704** were cached, with a cache efficiency of **89.8%**; uncached prefill was **355.4 tok/s**, and average token generation dropped to only **18.1 tok/s**. This is approximately 36% lower than the roughly 28.5 tok/s observed during the initial short file-writing phase, and also slightly lower than the approximately 20 tok/s observed during the initial long-request phase.
 
-这个数字说明持续多轮 coding / review / CDP QA 后的**端到端生成体验确实在变慢**；但 Dashboard 的 “Total Prefill Tokens” 是多次请求的累计量，不能误读成单次 307 万 token context，也不能据此单独判定模型或硬件退化。高缓存命中意味着重复上下文的 prefill 已被有效复用；仍变慢的主要观察对象是长会话下的 decode / reasoning 工作量。下一次横向测试应以新 session、固定题面和固定 profile 单独记录首请求与第 N 轮请求的 tok/s。
+This figure indicates that the **end-to-end generation experience is indeed slowing down** after sustained multi-round coding / review / CDP QA; however, the Dashboard’s “Total Prefill Tokens” represents the cumulative total across multiple requests and should not be misinterpreted as a single 307 ten-thousand-token context, nor should it be used in isolation to determine model or hardware degradation. High cache hit rates imply that prefill for repeated contexts has been effectively reused; the primary observation target for the continued slowdown is the decode / reasoning workload in long sessions. The next cross-comparison test should use a new session, fixed prompts, and a fixed profile to separately record the tok/s for the first request and the Nth-round request.
 
 ### QA continuation: cancelled, not a code regression
 
-用户在该轮继续约 3 小时后取消任务。检查实际文件确认：`index.html`、`style.css` 和 `app.js` 均停留在 Round 2 修复时的修改时间，**没有发生新的产品代码改动**。Qwen 的后续工作主要是构建/重跑 Chrome CDP QA：留下 14 张 desktop、交互、Load Shed、窄屏截图（临时目录 `/tmp/arcology-qa`），并多次纠正测试自身的错误——包括错误的元素 id、读错 CSS 属性、以及点击已选 region 导致的无效断言。
+The user continued for approximately 3 hours in this round before canceling the task. Inspection of the actual files confirmed that the modification times for `index.html`, `style.css`, and `app.js` all remained at the times of the Round 2 fixes, with **no new product code changes**. Qwen's subsequent work primarily involved building/rerunning Chrome CDP QA: it left 14 desktop, interaction, Load Shed, and narrow-screen screenshots (in the temporary directory `/tmp/arcology-qa`), and repeatedly corrected errors in the tests themselves—including incorrect element IDs, misreading CSS properties, and invalid assertions caused by clicking an already selected region.
 
-这说明这次不是模型“把代码越修越坏”，而是 agent 在缺乏明确测试预算时陷入了**验证循环**：反复重建 Chrome profile、重抓截图、对不确定的 pointer 点击继续推理。唯一实际新增发现是 1000px 窄屏的横向 overflow，已作为 UX-02（历史本机文件，未随本报告发布） 记录；用户取消是合理的止损。
+This indicates that the issue was not the model "making the code worse with each fix," but rather the agent falling into a **verification loop** due to the lack of a clear testing budget: repeatedly rebuilding the Chrome profile, recapturing screenshots, and continuing to reason about uncertain pointer clicks. The only actual new finding was horizontal overflow at the 1000px narrow screen, which was recorded as UX-02 (a historical local file, not published with this report); the user's cancellation was a reasonable stop-loss.
 
 ## Quality verdict
 
-Round 2 verdict：**B+ implementation review**。静态解析通过，地图命中正确性、初始告警文案与键盘/modal 无障碍问题均已闭环；生成 agent 的 CDP 功能验证也支持这些结论。独立 desktop / 窄屏可视验收正在由 Qwen 继续执行，完成前不把它当作最终 production-quality 交付。详见 [Round 1 findings / Round 2 verification](devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md)。
+Round 2 verdict: **B+ implementation review**. Static parsing passed; map hit correctness, initial alert copy, and keyboard/modal accessibility issues have all been closed; the generated agent's CDP functional verification also supports these conclusions. Independent desktop / narrow-screen visual acceptance is still being executed by Qwen, and it is not treated as a final production-quality delivery until completed. See [Round 1 findings / Round 2 verification](devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md) for details.

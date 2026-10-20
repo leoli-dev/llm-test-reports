@@ -1,0 +1,22 @@
+{
+  "capturedAt": "2026-10-20T22:03:27Z",
+  "computer": "MacBook Pro",
+  "modelIdentifier": "Mac17,6",
+  "chip": "Apple M5 Max",
+  "cpuCores": 18,
+  "gpuCores": 40,
+  "memorySystemLabel": "128 GB",
+  "memoryBytes": 137438953472,
+  "memoryGiB": 128,
+  "architecture": "arm64",
+  "operatingSystem": "macOS",
+  "osVersion": "27.0.1",
+  "osBuild": "26A434",
+  "metal": "Metal 4",
+  "sources": [
+    "system_profiler SPHardwareDataType SPDisplaysDataType",
+    "sw_vers",
+    "sysctl hw.memsize hw.logicalcpu"
+  ],
+  "scope": "当前本机快照；实验时的系统版本逐项记录。不得根据 Mac 客户端配置推断远端推理硬件。"
+}

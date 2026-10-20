@@ -1,156 +1,175 @@
 ---
 type: Note
-title: Neon Bastion 三轮测试横向总结 — 8bit 七轮 / ds-v4-flash-vision / MTPLX 4bit
+title: "Neon Bastion Three-Round Test Cross-Sectional Summary — 8bit Seven Rounds / ds-v4-flash-vision / MTPLX 4bit"
 status: current
-description: 同一款 3D FPS 在三种模型/部署下的三轮完整测试横向对比：规模与机械指标、人工游玩结果、用户主观排序与机械指标反向的解释，以及最大发现「人为 involve 比细致化 prompt 更能有效完成任务」及其机制「自动化验收上限等于任务书覆盖率」。
+description: "A cross-sectional comparison of three complete test rounds of the same 3D FPS under three different models/deployments: scale and mechanical metrics, human playtest results, an explanation of the inverse relationship between user subjective ranking and mechanical metrics, and the biggest finding that \"human involvement is more effective at completing tasks than detailed prompts\" and its mechanism that \"the upper limit of automated acceptance equals task specification coverage.\""
 tags: [neon-bastion, qwen3.8-27b, mlx-dspark, mtplx, ds-v4, cross-round-comparison, benchmark, human-evaluation, methodology]
 timestamp: 2026-09-16T03:30:00Z
 ---
 
-# Neon Bastion 三轮测试横向总结
+# Neon Bastion Three-Round Test Cross-Sectional Summary
 
-> 本页是跨三轮的横向综合。单轮细节见：
-> [七轮总结（8bit）](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md) ·
-> [55-task rerun（MTPLX 4bit）](devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07.md) ·
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+> This page is a cross-round synthesis. For details on individual rounds, see:
+> [Seven-Round Summary (8bit)](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md) ·
+> [55-task rerun (MTPLX 4bit)](devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07.md) ·
 > [ds-v4-flash-vision run](devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md) ·
-> backlog（历史本机文件，未随本报告发布）（BENCH-01 / QA-15 / AI-04 / OPS-* / PLAY-* 条目）。
+> backlog (historical local files, not published with this report) (BENCH-01 / QA-15 / AI-04 / OPS-* / PLAY-* entries).
 
-## 一句话结论
+## One-Sentence Conclusion
 
-**这次测试最大的发现：人为 involve 比细致化 prompt 更能有效完成任务。**
-8bit 轮（89 行粗任务书 + 用户深度参与、本人即人工游玩回路）主观体验三轮最好；ds-v4 / mtplx 轮（3,289 行 ×56 细粒度卡 + 自动化验收，人集中在最后那次游玩）机械指标最高、主观体验最低，决定性缺陷全部由最后那次人工游玩捞出。
+**The biggest finding from this test: human involvement is more effective at completing tasks than detailed prompts.**
+The 8bit round (89-line coarse task specification + deep user participation, where the user themselves was the human playtest loop) had the best subjective experience across the three rounds; the ds-v4 / mtplx rounds (3,289 lines × 56 fine-grained cards + automated acceptance, with humans concentrated in the final playtest) had the highest mechanical metrics and the lowest subjective experience, with all decisive defects uncovered by that final human playtest.
 
-机制（QA-15）：细粒度卡片 + 自动化验收优化的是「测试变绿」，不是「玩起来对」；自动化验收的上限等于任务书覆盖率，且差距不随测试密度增加而收敛。
+Mechanism (QA-15): Fine-grained cards + automated acceptance optimize for "tests turning green," not for "playing correctly"; the upper limit of automated acceptance equals task specification coverage, and the gap does not converge as test density increases.
 
-## 三轮设置
+## Three-Round Setup
 
-| | 轮一 | 轮二 | 轮三 |
+| | Round 1 | Round 2 | Round 3 |
 |---|---|---|---|
-| 代号 | **8bit 七轮** | **ds-v4** | **mtplx 4bit** |
-| 模型 / 部署 | Qwen3.8-27B-8bit + mlx-dspark（DFlash2） | `ds-v4-flash-vision`（云端低配，参考基准） | Qwen3.8-27B 4bit（MTPLX optimized-speed） |
-| 执行器 | pi + 评审方逐轮人审 | 云端 agent（dsh） | pi + zellij 自动编排 |
-| 任务书 | `test-prompts/3d-team-arena.md`，**89 行单份** | `test-prompts/neon-bastion/`，**56 卡 / 3,289 行** | 同轮二（同一套 55 份任务书） |
-| repo | `~/Code/qwen3.8-tests/mlx-dspark-27B-8bit-with-pi-3d-team-arena` | `~/Code/qwen3.8-tests/ds-v4-flash-vision-with-dsh-neon-bastion` | `~/Code/qwen3.8-tests/mtplx-27B-optimized-speed-with-pi-neon-bastion` |
-| 时间 | 2026-09-01 → 09-04 | 2026-09-08 起（55/55 完成） | 2026-09-07 → 09-15 |
-| 用户参与 | **深度参与，边玩边 debug（用户本人即人工游玩回路）** | 正常 | 正常（M02 强制人工游玩由用户执行） |
-| 视觉能力 | **无**（mlx-dspark 部署静默丢图，OPS-11，部署侧限制） | 有 | **有**（VIS-03 实测 prompt_tokens 141 vs OPS-11 的 17） |
+| Codename | **8bit Seven Rounds** | **ds-v4** | **mtplx 4bit** |
+| Model / Deployment | Qwen3.8-27B-8bit + mlx-dspark (DFlash2) | `ds-v4-flash-vision` (cloud low-spec, reference baseline) | Qwen3.8-27B 4bit (MTPLX optimized-speed) |
+| Executor | pi + reviewer per-round human audit | Cloud agent (dsh) | pi + zellij automated orchestration |
+| Task Specification | `test-prompts/3d-team-arena.md`, **89 lines single document** | `test-prompts/neon-bastion/`, **56 cards / 3,289 lines** | Same as Round 2 (same set of 55 task specifications) |
+| Repo | `~/Code/qwen3.8-tests/mlx-dspark-27B-8bit-with-pi-3d-team-arena` | `~/Code/qwen3.8-tests/ds-v4-flash-vision-with-dsh-neon-bastion` | `~/Code/qwen3.8-tests/mtplx-27B-optimized-speed-with-pi-neon-bastion` |
+| Time | 2026-09-01 → 09-04 | Starting 2026-09-08 (55/55 completed) | 2026-09-07 → 09-15 |
+| User Participation | **Deep participation, playing and debugging simultaneously (user themselves was the human playtest loop)** | Normal | Normal (M02 mandatory human playtest executed by user) |
+| Visual Capability | **None** (mlx-dspark deployment silently dropped images, OPS-11, deployment-side limitation) | Yes | **Yes** (VIS-03 measured prompt_tokens 141 vs OPS-11's 17) |
 
-## 轮一 · 8bit 七轮（2026-09-01 → 09-04）
+## Round 1 · 8bit Seven Rounds (2026-09-01 → 09-04)
 
-粗粒度任务书，评审方七轮人审迭代（R1–R7），每轮独立复核 + 人工游玩。
+Coarse-grained task specification, seven rounds of human audit iteration by the reviewer (R1–R7), with independent re-verification + human playtest for each round.
 
-**交付**：34 提交、67 文件、+10,056/−886（仓库终态；七轮总结截稿时为 31 提交/+9,766）、src 8,157 行、单测 31→149、E2E 5→26。
-pi 净工作 **30.0 小时**、1,688 请求、输出 181 万 token、工具调用 1,836 次（失败率 3.4%）。
-服务端：decode ~19 tok/s、accept_len 3.17、draft 接受率 55.9%、prefix cache 复用 94.6%、MLX 峰值 72.1 GB。
+**Deliverables**: 34 commits, 67 files, +10,056/−886 (final repo state; at the time of the Seven-Round Summary cutoff it was 31 commits/+9,766), src 8,157 lines, unit tests 31→149, E2E 5→26.
+pi net work **30.0 hours**, 1,688 requests, 1.81 million output tokens (181 × 10,000), 1,836 tool calls (failure rate 3.4%).
+Server-side: decode ~19 tok/s, accept_len 3.17, draft acceptance rate 55.9%, prefix cache reuse 94.6%, MLX peak 72.1 GB.
 
-**过程要点**：
-- 评分轨迹 **77（R1 盲评）→ 87（R2 盲评）→ 74（人工游玩修正）**，R3–R7 暂缓评分（PLAY-01）。
-- R1 盲评漏掉的：平移 A/D 反向、曳光不可见、README 虚构 6 个不存在操作——全部由人工游玩/细查发现。
-- 二十二个任务仅两次失速（AI-01 176m、R7 收尾 206m），共同点不是难度而是**要求模型自己找根因**；根因交给它后 30 分钟收敛，还顺藤挖出更深的缺陷（弹丸静默过期破坏不变量）。
-- R6 全是美术任务：5 个视觉缺陷**全部由人看截图发现，pi 一个都没发现**——mlx-dspark 静默丢图（OPS-11）。
-- 逻辑任务中位 22m vs 美术任务 52m，差 2.4 倍。
-- 成本折算 ~¥226（Qwen Max 价目）；「¥226 买 30 小时」——省钱是真的，省时间是反的。
+**Process Highlights**:
+- Scoring trajectory **77 (R1 blind review) → 87 (R2 blind review) → 74 (human playtest correction)**, R3–R7 scoring deferred (PLAY-01).
+- Missed by R1 blind review: A/D translation reversed, tracers invisible, README fabricated 6 non-existent operations—all discovered by human playtest/detailed inspection.
+- Of twenty-two tasks, only two stalled (AI-01 176m, R7 wrap-up 206m); the commonality was not difficulty but **requiring the model to find the root cause itself**; after handing over the root cause, it converged in 30 minutes and also dug up deeper defects (silent projectile expiration breaking invariants).
+- R6 was all art tasks: 5 visual defects **all discovered by humans looking at screenshots, pi found none**—mlx-dspark silently dropped images (OPS-11).
+- Median time for logic tasks 22m vs art tasks 52m, a 2.4x difference.
+- Cost conversion ~¥226 (Qwen Max pricing); "¥226 for 30 hours"—saving money is real, saving time is the opposite.
 
-**两条能力边界**（当时以为只是这一轮的特性，后两轮验证它们是普适的）：
-1. **根因定位不收敛**——多因素耦合系统里它会持续消耗而不收敛。
-2. **它看不见图**——当时归因于部署，MTPLX 轮证明确实是部署侧，不是模型。
+**Two capability boundaries** (initially thought to be specific to this round, later verified in the next two rounds to be universal):
+1. **Root cause localization does not converge**—in multi-factor coupled systems, it continues to consume resources without converging.
+2. **It cannot see images**—initially attributed to deployment, the MTPLX round confirmed it was indeed deployment-side, not the model.
 
-## 轮二 · ds-v4-flash-vision（2026-09-08 起）
+## Round 2 · ds-v4-flash-vision (Starting 2026-09-08)
 
-同一套 55 卡任务书从零重跑，验证任务书与方法论对另一模型是否成立；云端低配模型作参考基准。
+Re-ran the same set of 55-card task specifications from scratch to verify whether the task specifications and methodology hold for another model; cloud low-spec model used as reference baseline.
 
-**交付（55/55 全部完成）**：55 提交、147 文件、+33,809/−5、src 13,401 行、**单测 550（43 文件）、E2E 122（30 spec）、`test:suite` 5 轮 ×108 全绿**、截图 8 张。
+**Deliverables (55/55 all completed)**: 55 commits, 147 files, +33,809/−5, src 13,401 lines, **unit tests 550 (43 files), E2E 122 (30 specs), `test:suite` 5 rounds × 108 all green**, 8 screenshots.
 
-**过程要点**：
-- 每任务自觉做负对照并在仓库留痕；E 段 40 seed 终止性扫描全通过。
-- L03 交付负对照总检 + 探针独占性与阈值余量审计（`docs/NEGATIVE-CONTROLS.md` / `PROBE-AUDIT.md` + 可重跑脚本）。
-- **M02 人工游玩玩出 2 个自动化全绿的缺陷，当场修掉**：
-  - 结算页 Play Again 点不动——Pointer Lock 从不释放（OPS-37）；
-  - 镜头离开玩家后第一人称武器仍悬挂——渲染循环只在该状态更新（OPS-38）。
-- 也踩出了任务书自身的坑：I04 贴着区间下界标定出 6.17%，×1.5 放大后 13.9% 仍在区间内——**任务书要求的负对照永远不会变红**（OPS-24，任务书写法缺陷，不是模型错误）。
+**Process Highlights**:
+- Each task consciously performed negative controls and left traces in the repo; E segment 40-seed termination scan all passed.
+- L03 delivered negative control general inspection + probe exclusivity and threshold margin audit (`docs/NEGATIVE-CONTROLS.md` / `PROBE-AUDIT.md` + re-runnable scripts).
+- **M02 human playtest uncovered 2 defects that were all green in automation, fixed on the spot**:
+  - Settlement page Play Again unclickable—Pointer Lock never released (OPS-37);
+  - First-person weapon still hanging after camera leaves player—render loop only updates in that state (OPS-38).
+- Also stepped into the task specification's own pitfall: I04 calibrated at 6.17% near the lower bound of the interval, ×1.5 amplification resulted in 13.9% still within the interval—the **negative control required by the task specification would never turn red** (OPS-24, task specification writing defect, not model error).
 
-## 轮三 · MTPLX 4bit（2026-09-07 → 09-15）
+## Round 3 · MTPLX 4bit (2026-09-07 → 09-15)
 
-同一套 55 卡任务书，zellij 自动编排（每任务 `/new` + 投喂 + 独立验收），机时最长、观测最密的一轮。
+Same set of 55-card task specifications, zellij automated orchestration (each task `/new` + feeding + independent acceptance), the round with the longest machine time and densest observation.
 
-**交付（55/55 全部完成）**：55 提交、191 文件、+47,803/−8、src 16,224 行、**793 单测 + 202 E2E + 9 负对照**（测试总行 29,185 / 120 文件，仓库终态；BENCH-01 记的 26,721/108 为收官段截稿值）。独立复验：全量 E2E ×3 轮各 202/202。累计约 **70 小时**，平均 76 min/task（最快 K03 20 min，最慢 E06 278 min）。
+**Deliverables (55/55 all completed)**: 55 commits, 191 files, +47,803/−8, src 16,224 lines, **793 unit tests + 202 E2E + 9 negative controls** (total test lines 29,185 / 120 files, final repo state; BENCH-01 recorded 26,721/108 as the wrap-up segment cutoff value). Independent re-verification: full E2E × 3 rounds, each 202/202. Cumulative approx. **70 hours**, average 76 min/task (fastest K03 20 min, slowest E06 278 min).
 
-**定量产出**：
-- 挂钟 ≈ 输出 token ÷ decode 速率，系数随任务性质变：A–D（纯逻辑）26 / E（AI）20.5 / F–G（外壳+UI）22.8，经验区间 **22–26 tok/s，AI 类取下限**（PERF-01）。
-- decode 随 context 衰减曲线 55 → 26 tok/s，经 **1,333 条逐请求样本三次复核**不变。
-- Dashboard 主表盘标 "tps decode" 实为端到端 `request_tok_s`（OPS-20）——引用速度必须写明口径。
+**Quantitative Outputs**:
+- Wall clock ≈ output tokens ÷ decode rate, coefficient varies with task nature: A–D (pure logic) 26 / E (AI) 20.5 / F–G (shell+UI) 22.8, empirical range **22–26 tok/s, AI category takes the lower limit** (PERF-01).
+- Decode decay curve with context 55 → 26 tok/s, unchanged after **three re-verifications of 1,333 per-request samples**.
+- Dashboard main dial labeled "tps decode" is actually end-to-end `request_tok_s` (OPS-20)—citing speed must specify the metric.
 
-**模型侧结论**：
-- **AI-04 缺乏成本感知**（模型本身的结论，非部署问题）：三次同形态——H03 手算 ACES/sRGB 超越函数、I04 用 12,150 组合暴力穷举一个可解析量（往返开销漏算 25 倍）、I04 又手推投影几何去验证经验拟合。**工程判断每次都是对的，坏的只是对「这条路要走多久、值不值得」的估算。** 介入成本一句话、收益两三个小时（AI-05：J03 一句提示后 1h40m 收敛，对比 I04 的 4h19m + 两次介入）。
-- **QA-13 自我审计的边界不在能力，在是否会质疑自己先前的决定**：「我的断言是不是真的（非恒真）」做得很好（L03 把负对照机械化，恒真断言从此可自动捕捉）；「我的断言是不是对的（该不该是这条）」没做——手里已经有 58.9% vs 50% 的数字，只差回头问一句「这根杆子当初为什么从 75% 挪下来」。缺的不是信息，是质疑自己的动机。
-- **QA-12 对轮二的反超**：I04 自主标定到 ≈9.1%，×1.5 后 20.5% 越界、负对照真实变红并作为常驻测试进仓库——**编排侧未作任何提示**。同一张卡，轮二栽进 OPS-24 的假绿陷阱，轮三避开了。
-- OPS-12「绿色测试与被测代码无关」系列在本轮多次由模型自查（aiFire 假绿、构建失败被静默吞掉），历史上前四次全部由人发现。
+**Model-Side Conclusions**:
+- **AI-04 lacks cost awareness** (conclusion about the model itself, not a deployment issue): three instances of the same form—H03 manually calculated ACES/sRGB transcendental functions, I04 used 12,150 combinations to brute-force enumerate an analytically solvable quantity (round-trip overhead underestimated by 25x), I04 again manually derived projection geometry to verify empirical fitting. **Engineering judgment was correct every time, only the estimation of "how long this path will take and whether it is worth it" was bad.** Intervention cost one sentence, benefit two to three hours (AI-05: J03 converged in 1h40m after one hint, compared to I04's 4h19m + two interventions).
+- **QA-13 The boundary of self-audit is not in capability, but in whether it questions its own prior decisions**: "Is my assertion true (not tautological)" was done well (L03 mechanized negative controls, tautological assertions can now be automatically captured); "Is my assertion correct (should it be this one)" was not done—already having the numbers 58.9% vs 50%, it only lacked looking back to ask "why was this pole moved down from 75% initially." What was missing was not information, but the motivation to question itself.
+- **QA-12 Overtaking Round 2**: I04 autonomously calibrated to ≈9.1%, ×1.5 resulted in 20.5% out of bounds, negative control truly turned red and entered the repo as a permanent test—**orchestration side gave no hints**. Same card, Round 2 fell into the OPS-24 false green trap, Round 3 avoided it.
+- OPS-12 "Green tests unrelated to tested code" series was self-checked by the model multiple times in this round (aiFire false green, build failure silently swallowed), historically the first four instances were all discovered by humans.
 
-**人工游玩（09-15）：四条缺陷全部由用户发现，995 条断言一条没拦下，且没有一条是「模型写错代码」：**
+**Human Playtest (09-15): All four defects discovered by the user, 995 assertions caught none, and none were "model wrote wrong code":**
 
-| # | 缺陷 | 失守层级 |
+| # | Defect | Failure Level |
 |---|---|---|
-| 1 | AI 只射两枪就不交战（PLAY-06） | **判据选错了量**——测「比赛会结束」而非「AI 会打架」；300 逻辑秒内偶尔开两枪也足以歼灭 4 人，判据因此绿 |
-| 2 | 打队友有出血特效但不扣血（PLAY-07） | **两层路径无交叉核对**——FX 层走 `hit` 事件认了，伤害结算走队伍判定拒了 |
-| 3 | 击杀无倒地，原地变灰（PLAY-08） | **测试把现状写成了规格**——i01 像素探针断言尸体呈「尸灰」，没有倒地不是回归，是被断言焊死的现状 |
-| 4 | UI 中英混用（PLAY-09） | **任务书从未定义**——56 卡无一条规定 UI 语言，无规格 → 无断言 → 不会红 |
+| 1 | AI only fires two shots and stops engaging (PLAY-06) | **Criterion chose the wrong quantity**—measured "match will end" instead of "AI will fight"; occasionally firing two shots within 300 logic seconds was enough to eliminate 4 people, so the criterion was green |
+| 2 | Hitting teammates has bleeding effects but no health deduction (PLAY-07) | **No cross-check between two path layers**—FX layer accepted via `hit` event, damage settlement rejected via team check |
+| 3 | No falling on kill, turns gray in place (PLAY-08) | **Test wrote current state as specification**—i01 pixel probe asserted corpse is "corpse gray," no falling is not a regression, but the current state welded in by the assertion |
+| 4 | UI mixes Chinese and English (PLAY-09) | **Task specification never defined**—56 cards had no rule for UI language, no spec → no assertion → won't turn red |
 
-（另 PLAY-05 菜单标题 running 态挡视线，当轮截图已抓到、挂账未修，因不在任何卡片验收内。）
+(Also PLAY-05 menu title running state blocks view, captured in that round's screenshots, logged but not fixed, as it was not in any card's acceptance criteria.)
 
-## 横向对比
+## Cross-Sectional Comparison
 
-### 机械指标（仓库实测，2026-09-16 复核）
+### Mechanical Metrics (Repo Measured, 2026-09-16 Re-verified)
 
-| | 8bit 七轮 | ds-v4 | mtplx 4bit |
+| | 8bit Seven Rounds | ds-v4 | mtplx 4bit |
 |---|---:|---:|---:|
-| 提交 | 34 | 55 | 55 |
-| 文件 | 67 | 147 | 191 |
-| 净增行 | +10,056/−886 | +33,809/−5 | +47,803/−8 |
-| src 行数 | 8,157 | 13,401 | **16,224** |
-| 测试行数 | 4,839 | 16,204 | **29,185** |
-| 测试文件 | 20 | 76 | 120 |
-| 最终测试（unit/E2E） | 149 / 26 | 550 / 122 | 793 / 202（+9 负对照） |
-| 任务书 | 89 行 ×1 | 3,289 行 ×56 | 3,289 行 ×56 |
+| Commits | 34 | 55 | 55 |
+| Files | 67 | 147 | 191 |
+| Net Lines Added | +10,056/−886 | +33,809/−5 | +47,803/−8 |
+| src Lines | 8,157 | 13,401 | **16,224** |
+| Test Lines | 4,839 | 16,204 | **29,185** |
+| Test Files | 20 | 76 | 120 |
+| Final Tests (unit/E2E) | 149 / 26 | 550 / 122 | 793 / 202 (+9 negative controls) |
+| Task Specification | 89 lines × 1 | 3,289 lines × 56 | 3,289 lines × 56 |
 
-### 人工游玩（三轮共同的裁决方式）
+### Human Playtest (Common adjudication method for all three rounds)
 
-| | 8bit 七轮 | ds-v4 | mtplx 4bit |
+| | 8bit Seven Rounds | ds-v4 | mtplx 4bit |
 |---|---|---|---|
-| 游玩发现的决定性缺陷 | 平移 A/D 反向、曳光不可见、AI 开火无声等（R2 起多轮） | 2 个（Pointer Lock、悬挂武器），**已修** | 4 个（AI 不交战、友伤/倒地、UI 语言、标题挡视线），记录未修 |
-| 自动化是否拦下 | 无一由自动化发现 | 无一由自动化发现 | 无一由 995 条断言发现 |
+| Decisive defects found by playtest | A/D translation reversed, tracers invisible, AI firing silent, etc. (multiple rounds from R2) | 2 (Pointer Lock, hanging weapon), **fixed** | 4 (AI not engaging, friendly fire/falling, UI language, title blocking view), logged not fixed |
+| Did automation catch them | None found by automation | None found by automation | None found by 995 assertions |
 
-**这是 M02 卡片那句话的第四个轮次佐证：决定性缺陷全部由人工游玩发现，没有一个由自动化证据发现。**
+**This is the fourth round of evidence for that sentence in the M02 card: all decisive defects were discovered by human playtest, none were discovered by automated evidence.**
 
-### 用户主观排序 vs 机械指标
+### User Subjective Ranking vs Mechanical Metrics
 
-**用户排序：8bit > ds-flash > mtplx 4bit——与机械指标完全反向。**
+**User Ranking: 8bit > ds-flash > mtplx 4bit—completely inverse to mechanical metrics.**
 
-用户自己点出的两个混淆项（后被证明解释力最强，BENCH-01）：
-1. 8bit 那轮是**89 行单份任务书**（后两轮 3,289 行 ×56 张），产出规模不可比——**规格量差 37 倍、测试产出差 5.5 倍，三轮做的根本不是同一份工作，墙钟时间从来没在测模型**。
-2. 8bit 那轮**用户深度参与、边玩边 debug**——用户本人就是人工游玩回路；后两轮把这个人回路拿掉了。
+Two confounding factors pointed out by the user themselves (later proven to have the strongest explanatory power, BENCH-01):
+1. The 8bit round used an **89-line single task specification** (next two rounds 3,289 lines × 56 cards), output scale is not comparable—**spec quantity differs by 37x, test output differs by 5.5x, the three rounds did not do the same job, wall clock time was never measuring the model**.
+2. In the 8bit round, the **user deeply participated, playing and debugging simultaneously**—the user themselves was the human playtest loop; the next two rounds removed this human loop.
 
-「tok/s 更快却更慢」的矛盾由此消解：mtplx 轮单位时间产出更高（decode 22–26 vs 8bit 的 ~19），但被要求做的事多得多，且缺了用户实时纠偏回路。
+The contradiction of "faster tok/s yet slower" is thus resolved: the mtplx round had higher output per unit time (decode 22–26 vs 8bit's ~19), but was required to do much more, and lacked the user's real-time correction loop.
 
-**这两个「混淆项」其实不是要排除的噪声，而是这组对照的自变量本身——它们正是本次测试最大的发现：人为 involve 比细致化 prompt 更能有效完成任务（QA-16）。** 8bit 轮的预算是「粗规格 + 人全程在回路里」；ds-v4 / mtplx 轮的预算是「细规格 + 自动化到底 + 最后一次人工游玩」。结果反向：规格粗、人工回路细的那轮主观体验最好；规格细、人工回路粗的那轮，决定性缺陷全部出现在最后那次游玩里（且 mtplx 轮只是记录、没修）。
+**These two "confounding factors" are actually not noise to be excluded, but the independent variables of this comparison themselves—they are precisely the biggest finding of this test: human involvement is more effective at completing tasks than detailed prompts (QA-16).** The budget for the 8bit round was "coarse spec + human in the loop throughout"; the budget for the ds-v4 / mtplx rounds was "fine spec + automation to the end + final human playtest." The result was inverse: the round with coarse spec and fine human loop had the best subjective experience; the round with fine spec and coarse human loop had all decisive defects appearing in that final playtest (and the mtplx round only logged them, didn't fix them).
 
-### 跨轮一致的模式
+### Cross-Round Consistent Patterns
 
-1. **模型自查能力逐轮变强**：OPS-12 系列前四次由人发现 → mtplx 轮多次模型自查（aiFire 假绿、构建失败假绿、OPS-29 第六次实例自己追出 TS6133 吞构建的链条）。
-2. **负对照纪律的差距在「隐含约束」处显形**：ds-v4 轮 I04 踩进任务书区间 + 放大负对照的隐含下界陷阱（OPS-24），mtplx 轮同卡自主避开并留常驻测试（QA-12）——但那是「断言真不真」层；「断言对不对」层两轮都没过（QA-13 / PLAY-08）。
-3. **「看得到」≠「判得对」**：8bit 轮没有视觉，R6 靠人当眼睛；mtplx 轮视觉闭环通了、四类视觉自检做满，人工游玩仍一次抓出全部四条——**视觉闭环降低的是「画面渲染错了」的漏检，对「玩起来不对」的漏检降低幅度为零**（PLAY-03，Tide Isle 亦有同构证据）。
-4. **根因定位是唯一走不出来的地方**（8bit 轮结论）在 mtplx 轮换形复现：不是 AI 根因，而是标定/求解类「该用什么方法、走多久」的判断（AI-04）——**给方法一句话，收益两三个小时**。
+1. **Model self-check capability strengthened round by round**: OPS-12 series first four instances discovered by humans → mtplx round multiple model self-checks (aiFire false green, build failure false green, OPS-29 sixth instance self-traced the chain of TS6133 swallowing builds).
+2. **The gap in negative control discipline manifests at "implicit constraints"**: ds-v4 round I04 stepped into the implicit lower bound trap of task specification interval + amplified negative control (OPS-24), mtplx round same card autonomously avoided it and left a permanent test (QA-12)—but that was the "is the assertion true" level; the "is the assertion correct" level failed in both rounds (QA-13 / PLAY-08).
+3. **"Can see" ≠ "Judges correctly"**: 8bit round had no vision, R6 relied on humans as eyes; mtplx round vision loop closed, four types of visual self-checks fully done, human playtest still caught all four defects in one go—**vision loop reduces missed detections of "screen rendered wrong," but reduces missed detections of "plays wrong" by zero** (PLAY-03, Tide Isle also has isomorphic evidence).
+4. **Root cause localization is the only place it cannot get out** (8bit round conclusion) reappeared in transformed form in the mtplx round: not AI root cause, but calibration/solving type judgments of "what method to use, how long to take" (AI-04)—**give the method in one sentence, benefit two to three hours**.
 
-## 对本项目方法论的沉淀
+## Methodology Precipitation for This Project
 
-1. **预算分配：人为 involve > 细致化 prompt（本次测试最大发现，QA-16）。** 同样一份人力，花在「人在回路」（逐轮评审、游玩、见到苗头立即给方法提示——AI-05 一句话省两三个小时；OPS-45 用户三次先于编排方发现停机）上，比花在「把规格写成细粒度卡」上更有效。**Caveat**：每配置 n=1，且三轮的任务书作者、执行器、用户参与方式都不同，因果是强推断不是受控结论；可操作结论是 **人工回路要前移、要高频、要进流程，细粒度卡不能替代人工验收**。
-2. **自动化验收的上限 = 任务书覆盖率。** 56 卡、3,289 行规格、995 条断言仍漏掉「AI 要会打架」「人死了要倒下」「UI 用一种语言」——因为它们太显然，显然到没人会写进验收清单。写卡片时要专门问一句：**哪些行为是「显然到不会写」的？**
-3. **人工游玩是每批任务后的强制环节，不可用自动化替代**（PLAY-02/03/15 四轮同构）。
-4. **终验必须包含「对照截图/实机，把可见缺陷写进诚实清单」**——mtplx 轮 M01 的诚实清单开场白「A–L 各段都已完成，所以这一节很短」就是反例（QA-14）：证据基础是任务卡与绿测，不是渲染出来的产品，而截图就在它自己生成的目录里。
-5. **性能口径必须固化**：decode vs 端到端（OPS-20）、挂钟 ≈ 输出 ÷ 速率且系数随任务性质变（PERF-01）、换部署后视觉链路先跑一次 smoke test（VIS-03，故障是静默的）。
-6. **成本感知缺失（AI-04）是模型层的稳定结论**，应对策已固化进 `neon-bastion-55task-run/README.md`「见到这些立即介入」节：手算超越函数 / 上万点网格 / 反推经验常数 → 立即给替代方法并要求收尾。
+1. **Budget Allocation: Human Involvement > Detailed Prompts (Biggest finding of this test, QA-16).** The same human effort spent on "human in the loop" (per-round review, playtest, giving method hints immediately upon seeing signs—AI-05 one sentence saves two to three hours; OPS-45 user discovered stoppages before orchestration side three times) is more effective than spending it on "writing specs as fine-grained cards." **Caveat**: n=1 per configuration, and the task specification authors, executors, and user participation methods were different across the three rounds, so causality is strong inference not controlled conclusion; the actionable conclusion is **human loop should be moved forward, be high-frequency, and enter the process, fine-grained cards cannot replace human acceptance**.
+2. **Upper limit of automated acceptance = task specification coverage.** 56 cards, 3,289 lines of specs, 995 assertions still missed "AI must be able to fight," "people must fall when dead," "UI uses one language"—because they are too obvious, so obvious that no one would write them into the acceptance checklist. When writing cards, specifically ask: **which behaviors are "too obvious to write"?**
+3. **Human playtest is a mandatory step after each batch of tasks, cannot be replaced by automation** (PLAY-02/03/15 four rounds isomorphic).
+4. **Final verification must include "compare screenshots/real machine, write visible defects into an honest list"**—the mtplx round M01 honest list opening "A–L segments are all completed, so this section is short" is a counter-example (QA-14): the evidence base is task cards and green tests, not the rendered product, and the screenshots are in the directory it generated itself.
+5. **Performance metrics must be solidified**: decode vs end-to-end (OPS-20), wall clock ≈ output ÷ rate and coefficient varies with task nature (PERF-01), after changing deployment, run a smoke test on the vision link first (VIS-03, failure is silent).
+6. **Lack of cost awareness (AI-04) is a stable conclusion at the model layer**, countermeasures have been solidified into the "Intervene immediately upon seeing these" section of `neon-bastion-55task-run/README.md`: manual calculation of transcendental functions / grid of tens of thousands of points / reverse-engineering empirical constants → immediately give alternative method and require wrap-up.
 
-## 未决事项
+## Open Items
 
-- mtplx 轮四个缺陷**已记录未修**（用户指示：先记录，不修改）：PLAY-06～09。若要修，注意 PLAY-08 需要动的是 i01 的断言本身（把现状从规格里拿出来）。
-- 8bit 与后两轮不可直接横比——若要做「同任务书三模型对照」，需在三份部署上各跑一遍同一套 56 卡并保留人工游玩回路；目前只有轮二/轮三这一对是严格同题。
-- 相关 backlog 条目：BENCH-01（历史本机文件，未随本报告发布）、QA-15（历史本机文件，未随本报告发布）、PLAY-06～09（历史本机文件，未随本报告发布）、OPS-37/38（历史本机文件，未随本报告发布）、AI-04/05（历史本机文件，未随本报告发布）。
+- The four defects in the mtplx round are **logged but not fixed** (user instruction: log first, do not modify): PLAY-06～09. If fixing, note that PLAY-08 requires changing the assertion itself in i01 (taking the current state out of the spec).
+- 8bit and the next two rounds cannot be directly compared horizontally—if doing "same task specification three-model comparison," need to run the same set of 56 cards on three deployments and retain the human playtest loop; currently only the Round 2/Round 3 pair is strictly the same question.
+- Related backlog entries: BENCH-01 (historical local file, not published with this report), QA-15 (historical local file, not published with this report), PLAY-06～09 (historical local file, not published with this report), OPS-37/38 (historical local file, not published with this report), AI-04/05 (historical local file, not published with this report).

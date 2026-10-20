@@ -1,20 +1,39 @@
 # Marble Workshop
 
-| 项目 | 记录 |
+[English](flash-02.md) | [简体中文](flash-02_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | FLASH-02 |
-| 日期 | 2026-08-31—09-01 |
-| 模型与运行方式 | MTPLX qwen3.8-flash-next-optimized-speed + Pi |
-| 推理位置 | 本机 |
+| ID | FLASH-02 |
+| Date | 2026-08-31—09-01 |
+| Model and runtime | MTPLX qwen3.8-flash-next-optimized-speed + Pi |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-10 项检查通过；替代托盘计分不满足真实物理结果要求。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Historical result
+
+Ten checks passed. Surrogate tray scoring did not meet the requirement for results derived from real physics.
+
+## Full reports
 
 - [Marble Workshop — MTPLX/Pi Flash Next independent acceptance and code review](../originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md)
 
-## 证据边界
+## Evidence limits
 
-旧报告目录名已失效；现目录由项目名与实现结构对应，不视为历史快照哈希验证。
+The old report directory name no longer resolves. The current directory matches the project and implementation structure; this is not a historical snapshot hash verification.

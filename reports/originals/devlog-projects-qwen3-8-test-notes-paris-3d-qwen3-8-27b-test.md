@@ -1,80 +1,99 @@
 ---
 type: Note
-title: Paris 3D Qwen3.8-27B benchmark
+title: "Paris 3D Qwen3.8-27B benchmark"
 status: current
-description: An in-progress, end-to-end coding-agent benchmark for local oMLX Qwen3.8-27B using a data-driven Three.js reconstruction of central Paris.
+description: "An in-progress, end-to-end coding-agent benchmark for local oMLX Qwen3.8-27B using a data-driven Three.js reconstruction of central Paris."
 tags: [qwen3.8, qwen3.8-27b, omlx, benchmark, threejs, osm, paris-3d]
 timestamp: 2026-08-22T19:48:06Z
 ---
 
-# Paris 3D — Qwen3.8-27B 测试
+# Paris 3D — Qwen3.8-27B test
 
-## 状态
+[English](devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test.md) | [简体中文](devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test_CN.md)
 
-Qwen 已宣布实现完成，但独立文件与浏览器验收结果为 **不通过（Request Changes）**；不得将本项目作为完成的 Paris 3D 交付。当前测试工作区为 `$HOME/Code/qwen3.8-tests`，题面与评分表分别位于：
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Status
+
+Qwen declared implementation complete, but independent file and browser acceptance resulted in **failure (Request Changes)**. This project must not be presented as a completed Paris 3D delivery. The test workspace is `$HOME/Code/qwen3.8-tests`; the task and rubric are:
 
 - `$HOME/Code/qwen3.8-tests/prompts/paris3d.md`
 - `$HOME/Code/qwen3.8-tests/prompts/paris3d-rubric.md`
 
-## 测试目标
+## Test objective
 
-用一个完整浏览器工程验证本机 oMLX 上 Qwen3.8-27B 的 coding-agent 能力：是否能基于真实 OSM/Overpass 数据建立巴黎中心城区 Three.js 场景，并完成地标程序化建模、真实路网交通、车/船/飞机三种游览模式、性能控制和浏览器自验收。
+Use a complete browser project to evaluate local oMLX Qwen3.8-27B coding-agent capability: building a central-Paris Three.js scene from real OSM/Overpass data, procedural landmarks, traffic on real roads, car/boat/aircraft touring modes, performance control and browser self-acceptance.
 
-这不是纯速度跑分。重点观察模型是否会先处理数据与坐标正确性、能否在长任务中持续运行/截图/修正，以及是否会在复杂度和外部 API 限流下缩小范围、伪造数据或留下半成品。
+This is not purely a speed benchmark. The focus is whether the model handles data and coordinates correctly first, continues running, capturing screenshots and correcting a long task, and whether complexity or external API rate limits cause scope reduction, fabricated data or unfinished work.
 
-## 题面中最具区分度的要求
+## Most discriminating requirements
 
-- Overpass 数据抓取、分块、重试/退避和本地缓存；禁止编造地理数据或使用 3D 地图引擎/现成地标模型。
-- 以卢浮宫为原点的局部米制坐标；`cos(phi)` 纬度修正及两组距离单测。
-- 5 万级建筑的挤出、坡屋顶、分块合批、LOD，以及带岛屿洞的塞纳河和桥下净空。
-- 埃菲尔铁塔曲线塔腿与实例化格构、可穿行的凯旋门十字拱洞、卢浮宫玻璃金字塔网格等程序化地标。
-- 尊重单行线的道路有向图、跟车行为、戴高乐广场环岛、船流和三种玩家载具。
-- Playwright/Puppeteer 无控制台 error、8 张固定场景截图、30 秒 FPS 采样和 README 性能证据。
+- Overpass fetching, chunking, retry/backoff and local caching; fabricated geographic data, 3D map engines and ready-made landmark models are prohibited.
+- Local metric coordinates with the Louvre as origin; `cos(phi)` latitude correction and two sets of distance unit tests.
+- Approximately 50,000 buildings (5 × 10,000), extrusions, pitched roofs, chunked batching and LOD, plus the Seine with island holes and bridge clearance.
+- Procedural landmarks: curved Eiffel Tower legs and instanced latticework, traversable crossing arches at the Arc de Triomphe, and the Louvre glass pyramid grid.
+- A directed road graph respecting one-way streets, car following, the Place Charles de Gaulle roundabout, boat traffic and three player vehicles.
+- Playwright/Puppeteer with no console errors, 8 prescribed-scene screenshots, 30-second FPS sampling and README performance evidence.
 
-## 启动前判断
+## Before-run assessment
 
-该题适合作为“极限工程执行力”横向测题，但对 27B 偏残酷：预计能做出可演示的城市骨架、部分 OSM 管线和若干重点地标；较高风险是完整数据规模、河流洞、多载具物理、真实有向路网/环岛、全套视觉验收和性能目标被简化或仅表面完成。
+This is suitable for comparing extreme engineering execution, but harsh for 27B. A demonstrable city skeleton, parts of the OSM pipeline and several key landmarks are plausible. High-risk areas are full data scale, river holes, multiple-vehicle physics, real directed roads/roundabouts, complete visual acceptance and performance targets being simplified or superficially completed.
 
-评估时不能只看截图，应检查抓取与缓存证据、投影测试、地标模块/`getInfo()`、路网单行线逻辑、Playwright 原始日志和性能采样。评分表标为 100 分，但现有各大项合计 **115 分**（20+12+15+25+15+15+13），后续正式横评前应归一或重配权重。
+Evaluation must check fetch/cache evidence, projection tests, landmark modules/`getInfo()`, one-way road logic, raw Playwright logs and performance samples, rather than screenshots alone. The rubric says 100 points, but its sections sum to **115 points** (20+12+15+25+15+15+13); normalize or rebalance them before a formal comparison.
 
-## 运行时速度快照
+## Runtime speed snapshot
 
-来自 oMLX v0.6.2 Dashboard 的当前 session / All Models 截图：
+Current session / All Models screenshot from oMLX v0.6.2 Dashboard:
 
-| 指标 | 数值 | 解读 |
+| Metric | Value | Interpretation |
 |---|---:|---|
-| Total prefill tokens | 10.4M | 会话累计预填充量，不等同一次性上下文长度。 |
-| Cached tokens | 9,547,776 | 长任务重复上下文的大部分命中缓存。 |
-| Cache efficiency | 91.8% | 很高；缓存有效降低反复携带上下文的等待。 |
-| Prompt processing（excl. cached） | 111.1 tok/s | 新题面/新上下文读入速度良好。 |
-| Token generation | 17.4 tok/s | 对 27B 本地模型足以进行长工程任务；约 10k 生成 token 需 9–10 分钟，未包含工具、构建、浏览器和网络等待。 |
+| Total prefill tokens | 10.4M | Cumulative session prefill, not a single context length. |
+| Cached tokens | 9,547,776 | Most repeated context in the long task hit the cache. |
+| Cache efficiency | 91.8% | High; caching reduces waits for repeatedly carried context. |
+| Prompt processing (excl. cached) | 111.1 tok/s | Good ingestion speed for new tasks/context. |
+| Token generation | 17.4 tok/s | Sufficient for long engineering tasks on a local 27B model; approximately 10k generated tokens require 9–10 minutes, excluding tools, builds, browsers and network waits. |
 
-该面板为 Session + All Models 平均值。要将本次结果严格归因给 Qwen3.8-27B，测试结束后应按单模型过滤并在运行前清零计数器；任务总耗时的主要变量将是 agent 的迭代质量与外部工具链，而非纯生成速度。
+This panel averages Session + All Models. Strict attribution to Qwen3.8-27B requires filtering by model after the test and resetting counters before the run. Agent iteration quality and the external toolchain, rather than generation speed alone, will be the main variables in total task time.
 
-## 待记录的结束证据
+## End-of-run evidence to record
 
-- 最终目录/提交状态与实际完成范围。
-- `fetch_data` 日志和 `data/` 真实数据证据。
-- 单元测试、开发服务器与浏览器 console 结果。
-- 8 张规定截图、FPS/draw call/三角数/加载时间原始结果。
-- 按 rubric 的逐项分数、扣分依据和是否出现伪造/偷范围/未实现路径。
+- Final directories/commits and actual completed scope.
+- `fetch_data` logs and genuine data evidence under `data/`.
+- Unit tests, development server and browser console results.
+- 8 required screenshots and raw FPS/draw-call/triangle/load-time results.
+- Per-rubric scores, reasons for deductions and fabricated data, reduced scope or unimplemented paths.
 
-## 结束验证（2026-08-22）
+## Closing verification (2026-08-22)
 
-Qwen 最终声称：18/18 测试通过、0 console error、8 张截图、6 类 OSM GeoJSON、headless 2 FPS。独立复核确认其中部分“成功”仅是表面产物：
+Qwen finally claimed 18/18 tests passed, 0 console errors, 8 screenshots, 6 OSM GeoJSON layers and headless 2 FPS. Independent review found some successes were merely surface artifacts:
 
-- `npm test` 的确为 18/18 通过，`npm run build` 也成功；但测试仅覆盖投影（7）与埃菲尔铁塔模块（11），没有验证真实 GeoJSON 坐标、场景、交通或三种载具。
-- `scripts/fetch_simple.mjs:82-90` 把 Overpass JSON 的 `el.nodes`（节点 ID）误当成 `{lon, lat}` 对象，而 `[out:json] ... out geom` 的坐标位于 `el.geometry`。因此 6 个生成的 GeoJSON 坐标全部序列化为 `[null, null]`：建筑 74,118、道路 9,745、水体 125 等要素计数真实存在，但没有一对有效坐标。浏览器场景不可能建立真实巴黎几何。
-- 浏览器手测开车、开船、开飞机模式均无法呈现可游览巴黎；画面出现空白/过曝天空、巨大错误平面或玩家载具遮挡视野。`src/city/water.js:105-141` 以 XZ 顶点建网格后又旋转 `-PI/2`，将水面转为垂直面，是船模式巨大墙体的直接原因之一。
-- 8 张所谓验收截图全部显示模式选择遮罩，而非题面指定机位。原因是 `scripts/screenshot.mjs:48-50` 在每次截图前强制 `mode-selector.classList.remove('hidden')`。它们不能作为地标、交通或视觉质量证据。
-- 性能也未达标：报告为 2 FPS、约 60 秒首屏加载，低于题面 ≥50 FPS、<8 秒的硬预算；README 中的“真实 GPU 预期 50–60”没有实测依据。
+- `npm test` did pass 18/18 and `npm run build` succeeded. Tests covered only projection (7) and the Eiffel Tower module (11), not real GeoJSON coordinates, scenes, traffic or the three vehicles.
+- `scripts/fetch_simple.mjs:82-90` misread Overpass JSON `el.nodes` (node IDs) as `{lon, lat}` objects, whereas coordinates from `[out:json] ... out geom` live in `el.geometry`. Thus all 6 generated GeoJSON coordinate sets serialized to `[null, null]`. Feature counts such as 74,118 buildings, 9,745 roads and 125 water features were real, but there was not a single valid coordinate pair. The browser scene could not construct real Paris geometry.
+- Manual browser checks of car, boat and aircraft modes could not show navigable Paris: blank/overexposed skies, huge incorrect planes or player vehicles obstructed the view. `src/city/water.js:105-141` created XZ vertices then rotated by `-PI/2`, making the water vertical, a direct cause of a huge wall in boat mode.
+- All 8 supposed acceptance screenshots showed the mode-selection overlay rather than prescribed viewpoints. `scripts/screenshot.mjs:48-50` forced `mode-selector.classList.remove('hidden')` before every screenshot. These cannot establish landmark, traffic or visual quality.
+- Performance also failed: reported 2 FPS and approximately 60 seconds to first load, versus hard budgets of ≥50 FPS and <8 seconds. The README expectation of 50–60 on a real GPU was unmeasured.
 
-结论：这是一个很有信息量的 27B coding-agent 压力测试。模型完成了大规模代码与文件产出、可编译构建和局部单测，却没有将外部数据契约、端到端视觉质量与验收产物闭环。详见 backlog 的 `QA-03`。
+Conclusion: an informative 27B coding-agent stress test. The model produced substantial code/files, a compilable build and local unit tests, but did not close the loop on external data contracts, end-to-end visuals and acceptance artifacts. See backlog `QA-03`.
 
-## 最终复核与停止决定（2026-08-22）
+## Final review and decision to stop (2026-08-22)
 
-用户决定停止整改。Qwen 在 review 后确实修复了数据坐标问题：正式 `fetch_data.mjs` 取代临时脚本，6 层 GeoJSON 的所有坐标均有限且落在 bbox 内；`dataIntegrity.test.js` 加入后共 46/46 单测和 build 通过。
+The user stopped remediation. After review, Qwen did fix coordinates: the formal `fetch_data.mjs` replaced the temporary script, all coordinates in 6 GeoJSON layers were finite and within the bbox, and adding `dataIntegrity.test.js` brought tests to 46/46 with a passing build.
 
-但第二次独立视觉复核仍拒绝验收：8 张重新生成的“规定机位”不再有模式选择遮罩，却呈现巨大方块、失真格构、黑暗立面或不对应机位的场景；车/船/机 live smoke 图分别出现近黑穿模、近黑船内/建筑内视角和无城市可见的暗景。`performance.json` 还记录 926 draw calls/帧（题面要求 <400）、6 FPS（要求 ≥50）以及大量 water earcut warning。Qwen 所称“所有修复关闭”与视觉证据矛盾。
+The second independent visual review still rejected delivery. The 8 regenerated prescribed-view screenshots no longer had the selection overlay, but showed huge blocks, distorted latticework, dark facades or scenes inconsistent with their viewpoints. Live car/boat/aircraft smoke screenshots respectively showed near-black clipping, a near-black view inside a boat/building, and a dark scene with no visible city. `performance.json` recorded 926 draw calls/frame (required <400), 6 FPS (required ≥50) and many water earcut warnings. Qwen's claim that all fixes were closed contradicted visual evidence.
 
-**最终结论：** Paris 3D 作为自主 coding-agent 端到端任务未通过；不再继续修复。这个 run 的主要发现是：模型可在明确 review 下修复局部数据契约并补齐测试，但仍不能可靠地以真实浏览器视觉证据为目标进行系统集成和质量收敛。
+**Final conclusion:** Paris 3D failed as an autonomous end-to-end coding-agent task; no further repairs. The main finding is that explicit review can drive local data-contract fixes and added tests, but the model still cannot reliably converge system integration and quality around actual browser visual evidence.

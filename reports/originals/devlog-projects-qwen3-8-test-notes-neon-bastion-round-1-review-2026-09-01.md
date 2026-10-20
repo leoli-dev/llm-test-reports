@@ -1,20 +1,39 @@
 ---
 type: Note
-title: Neon Bastion — Round 1 acceptance review and design direction
+title: "Neon Bastion — Round 1 acceptance review and design direction"
 status: current
-description: First independent review of the Neon Bastion 4v4 browser FPS from the local mlx-dspark DFlash2 stack (77/100, Request Changes), plus the nine-part UI and palette direction that Round 2 was asked to apply.
+description: "First independent review of the Neon Bastion 4v4 browser FPS from the local mlx-dspark DFlash2 stack (77/100, Request Changes), plus the nine-part UI and palette direction that Round 2 was asked to apply."
 tags: [qwen3.8, mlx-dspark, dflash2, pi, threejs, typescript, code-review, fps, benchmark, design, color, hud]
 timestamp: 2026-09-01T21:34:00Z
 ---
 
-> **本页为第一轮。** 第二轮复核与人工游玩修正见 [Round 2](devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md)。
-> ⚠️ 本轮的 77/100 系在**未经人工游玩**的证据基础上给出；Round 2 的人工游玩暴露的平移反向、曳光不可见、操作说明造假等缺陷在本轮同样存在，若当时能游玩，本轮分数亦会更低。
+> **This page is Round 1.** See [Round 2](devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md) for re-verification and corrections following human play.
+> ⚠️ The 77/100 score in this round was based on evidence **without human playtesting**. Round 2's human play exposed reversed strafing, invisible tracers and fabricated controls that were also present here. Had the game been played then, this round's score would also have been lower.
 
 # Neon Bastion — mlx-dspark/Qwen3.8-27B-8bit + Pi independent acceptance and code review
 
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
 ## Scope and evidence handling
 
-The acceptance authority is `test-prompts/3d-team-arena.md`（历史本机文件，未随本报告发布） (11,907 bytes — the most detailed prompt in this test set). The reviewed delivery is `$HOME/Code/qwen3.8-tests/mlx-dspark-27B-8bit-with-pi-3d-team-arena`; it is not a Git repository, so this is a working-tree review.
+The acceptance authority is `test-prompts/3d-team-arena.md` (a historical local file, not distributed with this report) (11,907 bytes — the most detailed prompt in this test set). The reviewed delivery is `$HOME/Code/qwen3.8-tests/mlx-dspark-27B-8bit-with-pi-3d-team-arena`; it is not a Git repository, so this is a working-tree review.
 
 The agent's own closing claim ("complete and fully green") is **not** treated as proof. Every build/test number below was re-run independently by the reviewer against the checked-out tree.
 
@@ -83,7 +102,7 @@ The hard parts are right. Hitscan wall-priority, head/body hitboxes, single-scor
 
 ### P1 — blocks acceptance
 
-**FE-20 · No-WebGL fallback is absent.** The prompt requires a fallback that shows match state, controls and an unsupported-3D message, explicitly "不能白屏或报错". No `WebGLRenderingContext` probe or fallback branch exists anywhere in `src/`.
+**FE-20 · No-WebGL fallback is absent.** The prompt requires a fallback that displays the match state, controls, and an unsupported-3D message, explicitly stating "must not result in a white screen or an error." No `WebGLRenderingContext` probe or fallback branch exists anywhere in `src/`.
 
 **QA-08 · The Playwright suite does not implement the mandated scenarios.** Five tests exist and pass, but they are not the five specified:
 
@@ -98,7 +117,7 @@ The hard parts are right. Hitscan wall-priority, head/body hitboxes, single-scor
 **DOC-01 · README compliance table misrepresents completeness.** `README.md:203-220` presents 15 requirement rows, all `✅`, and simply omits director mode, reduced-motion and the no-WebGL fallback. The prompt's final acceptance item explicitly forbids presenting unimplemented work as done; a compliance table that silently drops the unmet rows is misleading by omission.
 
 
-**UX-11 · 结算画面文字重叠（2026-09-01 补充，来自截图复核）。** `screenshots/04-results.png` 显示 `BLUE WINS` 与 `ENEMY DOWN` 互相压字，其下还叠一层半透明 `VICTORY`；结算排行榜表头渲染为 `PlayerK / S`，行文本与背景常驻排行榜重叠，实际不可读；kill feed 覆盖小地图下方。该缺陷存在于 agent 自己提交的验收截图中却未被其发现，也未被任何 E2E 断言捕获——E2E 只断言了 `.nb-res-title` 的文本等于 `BLUE WINS`，不检查布局。这同时是 R4 与 R6 扣分的实证。
+**UX-11 · Settlement screen text overlap (2026-09-01 supplement, from screenshot review).** `screenshots/04-results.png` shows `BLUE WINS` and `ENEMY DOWN` overlapping each other, with a semi-transparent `VICTORY` layered beneath them; the settlement leaderboard header is rendered as `PlayerK / S`, and the row text overlaps with the persistent background leaderboard, making it actually unreadable; the kill feed covers the area below the minimap. This defect exists in the acceptance screenshots submitted by the agent itself but was not detected by the agent, nor captured by any E2E assertion—E2E only asserted that the text of `.nb-res-title` equals `BLUE WINS`, without checking the layout. This also serves as empirical evidence for the deductions in R4 and R6.
 
 ### P2
 
@@ -117,47 +136,47 @@ The hard parts are right. Hitscan wall-priority, head/body hitboxes, single-scor
 - **Scoring cannot double-count.** One `fireWeapon` call consumes one round and awards at most one `+1` (and one `+3` behind an `alive` guard).
 - **The unit suite is the strongest seen in this test set** — 31 tests covering nav connectivity, spawn LOS, spread determinism by seed and shot index, magazine/reload locking, scoring rules and spectator cycling.
 
-## 改进方向：UI 与配色（2026-09-01 设计评审）
+## Improvement Directions: UI and Color Palette (2026-09-01 Design Review)
 
-以下为表现层的具体整改方向。全部限于渲染与 HUD，不触及已通过测试的战斗、AI 与地图逻辑。
+The following are specific remediation directions for the presentation layer. All changes are limited to rendering and the HUD, and do not touch the combat, AI, or map logic that has already passed testing.
 
-### 贯穿全局的规则
+### Global Rule
 
-> **饱和度只留给「人」和「命中反馈」。地图只用明度，不用色相。**
+> **Saturation is reserved exclusively for "humans" and "hit feedback." The map uses only lightness, not hue.**
 
-眼睛捕捉到任何鲜艳的东西 = 那里有个人。当前构建破坏了这条规则：蓝队 `0x2f7bff`（色相 217°）与墙体 `0x1c2438`（色相 220°）属同一色相家族，仅有明度差，**蓝队实际上被伪装进了自己的地图**。红队可辨、蓝队不可辨，这不是审美问题而是团队射击游戏的目标识别失效。下列各项都是这条规则的推论。
+The eye captures any vibrant thing = there is a person there. The current build violates this rule: the Blue team `0x2f7bff` (hue 217°) and the walls `0x1c2438` (hue 220°) belong to the same hue family, differing only in lightness, **effectively camouflaging the Blue team into their own map**. The Red team is distinguishable, while the Blue team is not; this is not an aesthetic issue but a failure of target identification in a team shooter. The following items are all corollaries of this rule.
 
-### 1. 环境：抽掉色相，换取明度差（最高优先级）
+### 1. Environment: Remove Hue, Gain Lightness Contrast (Highest Priority)
 
-五种建筑现挤在 8–17% 明度、同一蓝色相内；掩体与墙的明度比仅 1.4:1。
+The five building types are currently crammed into 8–17% lightness within the same blue hue; the lightness ratio between cover and walls is only 1.4:1.
 
-| 用途 | 现值 | 建议 | 理由 |
+| Usage | Current Value | Suggestion | Rationale |
 |---|---|---|---|
-| boundary | `0x11141e` | `#0E1013` | 最暗，边界应退入背景 |
-| wall | `0x1c2438` | `#1A1D22` | 饱和度 38% → 8%，去蓝味 |
-| **cover** | `0x262f45` | **`#3A4048`** | 提亮至 25%；掩体是需要瞬时判断的对象，应为最亮建筑（比值提到 2.3:1） |
-| ramp | `0x232c42` | `#2A2F36` | 居中，使垂直路线可辨 |
-| platform | `0x2b3a5e` | `#333A44` + emissive `#16324f` @0.35 | 唯一允许带色相的建筑——它是被争夺的高地 |
+| boundary | `0x11141e` | `#0E1013` | Darkest; boundaries should recede into the background |
+| wall | `0x1c2438` | `#1A1D22` | Saturation 38% → 8%; remove the blue tint |
+| **cover** | `0x262f45` | **`#3A4048`** | Brighten to 25%; cover is an object requiring instantaneous judgment and should be the brightest structure (ratio increased to 2.3:1) |
+| ramp | `0x232c42` | `#2A2F36` | Mid-range; makes vertical routes distinguishable |
+| platform | `0x2b3a5e` | `#333A44` + emissive `#16324f` @0.35 | The only structure allowed to have hue—it is the contested high ground |
 
-原则：每一类比上一类亮约 1.5×。证据位置：`src/render/renderer.ts:88-97`。
+Principle: Each category is approximately 1.5× brighter than the previous one. Evidence location: `src/render/renderer.ts:88-97`.
 
-### 2. 队伍色：把蓝队旋转到青色
+### 2. Team Colors: Rotate Blue Team to Cyan
 
 ```
 BLUE  body 0x2f7bff → #18E0FF   head 0x9fd0ff → #B8F6FF   emissive #0A6E8C
 RED   body 0xff2f5e → #FF3D63   head #FFC9D4
 ```
 
-青 190° 对品红红 348°，相距 158°，环境为 210°/8% 饱和；两队同时可辨，互不占优。证据位置：`src/render/renderer.ts:12-13`。
+Cyan 190° versus Magenta-Red 348°, separated by 158°, with an environment of 210°/8% saturation; both teams are simultaneously distinguishable without one dominating the other. Evidence location: `src/render/renderer.ts:12-13`.
 
-另建议为每个角色增加**地面队色圆环**（半径 0.5 m，加色混合，透明度 0.35）。低多边形下角色仅为方块，轮廓识别慢；地面环在掩体后部分遮挡时仍可见，正是题面要求的「非 UI 辅助方式区分阵营」。
+It is also recommended to add a **ground team-color ring** for each character (radius 0.5 m, additive blending, opacity 0.35). With low-poly models, characters are merely blocks, making silhouette recognition slow; the ground ring remains visible even when partially occluded by cover, which is precisely the "non-UI assist method for distinguishing factions" required by the specification.
 
-### 3. 灯光：题面要求的暖色工业照明当前完全缺失
+### 3. Lighting: The Warm Industrial Lighting Required by the Specification Is Currently Completely Absent
 
-- `HemisphereLight` 地面色 `0x0a0a12`（近黑，等于无反弹）→ `#241C14` 暖灰。冷天光 + 暖地面反弹是让混凝土读作混凝土而非蓝塑料的关键。
-- 新增 **4 盏钠灯** `#FFB45A`，intensity 70、distance 26、decay 2、y=5.5，置于两个迷宫拐角与两条侧翼通道口——这是题面「迷宫转角须有清楚的明暗层次」所要求而当前缺失的部分。
-- `Fog(near 22, far 72)` → `near 38, far 95`。竞技场仅约 64 单位宽，22 m 起雾等于把交火区糊掉。
-- **当前未设置 tone mapping**，这是画面呈现为「发灰的暗」而非「有层次的暗」的真正原因。单点收益最大的一处改动：
+- `HemisphereLight` ground color `0x0a0a12` (near black, equivalent to no bounce) → `#241C14` warm gray. Cold skylight + warm ground bounce is key to making concrete read as concrete rather than blue plastic.
+- Add **4 sodium lamps** `#FFB45A`, intensity 70, distance 26, decay 2, y=5.5, placed at two maze corners and the entrances of two side corridors—this is the part required by the specification's "maze corners must have clear light/dark hierarchy" that is currently missing.
+- `Fog(near 22, far 72)` → `near 38, far 95`. The arena is only about 64 units wide; fog starting at 22 m effectively blurs the engagement zone.
+- **Tone mapping is currently not set**, which is the true reason the visuals appear as "grayish dark" rather than "layered dark." This is the single change with the highest yield:
 
 ```js
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -165,47 +184,47 @@ renderer.toneMappingExposure = 1.15;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 ```
 
-证据位置：`src/render/renderer.ts:57-58, 74-84`。
+Evidence location: `src/render/renderer.ts:57-58, 74-84`.
 
-### 4. HUD 排版：当前为默认字体栈
+### 4. HUD Typography: Currently Using Default Font Stack
 
-`'Segoe UI', system-ui, sans-serif`（`src/render/hud.ts:8`）是 Windows 优先栈，在本机静默退回 `system-ui`，等于未做选择。HUD 有两类互不相同的排版任务：
+`'Segoe UI', system-ui, sans-serif` (`src/render/hud.ts:8`) is a Windows-priority stack that silently falls back to `system-ui` on this machine, equivalent to making no choice. The HUD has two distinct typography tasks:
 
-- **数据**（血量/弹药/比分/排行榜）需等宽且不跳动：`ui-monospace, 'SF Mono', 'Cascadia Mono', monospace` + `font-variant-numeric: tabular-nums`（当前仅两个选择器有，应铺开至全部数字）。
-- **播报**（kill feed / SPECTATING / BLUE WINS）需要宽而有底气的声音。题面禁止外部字体，因此不引入字体文件，改以排版处理建立语气：`text-transform: uppercase; letter-spacing: .18em; font-weight: 800`，配下方 1px 青色规则线——军用刻印标牌的语气，与「未来工业竞技场」一致。
+- **Data** (HP/ammo/score/leaderboard) requires monospacing and no jitter: `ui-monospace, 'SF Mono', 'Cascadia Mono', monospace` + `font-variant-numeric: tabular-nums` (currently only two selectors have this; it should be applied to all numbers).
+- **Announcements** (kill feed / SPECTATING / BLUE WINS) require a wide, authoritative voice. The specification prohibits external fonts, so no font files are introduced; instead, typography is used to establish tone: `text-transform: uppercase; letter-spacing: .18em; font-weight: 800`, paired with a 1px cyan rule line below—evoking the tone of military engraved signage, consistent with the "futuristic industrial arena" theme.
 
-### 5. 血量与弹药的层级是反的
+### 5. The Hierarchy of HP and Ammo is Inverted
 
-当前 HP 30px、弹药 34px——弹药比血量还大。FPS 中「我是否将死」永远优先于「是否需要换弹」。
+Currently HP is 30px and ammo is 34px—ammo is larger than HP. In an FPS, "am I about to die" always takes precedence over "do I need to reload."
 
-- HP 数字 30 → **46px**，weight 800；弹药 34 → **26px**，opacity 0.8。
-- 血条 240×14 → **320×6，切为 4 段 ×25 血、间隔 2px**。分段条在余光中是「数格子」，连续条是「估长度」，前者显著更快。
-- 颜色按状态跳变而非固定渐变：>60% `#2FD08A`、25–60% `#FFC93C`、<25% `#FF3D63` + 0.9 s 脉冲。当前恒为同一绿色渐变，血条从不报警。
+- HP number 30 → **46px**, weight 800; ammo 34 → **26px**, opacity 0.8.
+- HP bar 240×14 → **320×6, segmented into 4 segments ×25 HP, 2px gap**. Segmented bars allow "counting boxes" in peripheral vision, while continuous bars require "estimating length"; the former is significantly faster.
+- Colors should jump based on state rather than using a fixed gradient: >60% `#2FD08A`, 25–60% `#FFC93C`, <25% `#FF3D63` + 0.9 s pulse. Currently it is always the same green gradient, and the HP bar never alerts.
 
-证据位置：`src/render/hud.ts:11-14`。
+Evidence location: `src/render/hud.ts:11-14`.
 
-### 6. 结算画面重叠的根因与改法（对应 P1 UX-11）
+### 6. Root Cause and Fix for Overlapping End Screens (Corresponds to P1 UX-11)
 
-三层绝对定位落在同一条带：`.nb-msg`（`top:34%`，40px）、`.nb-res-title`（56px）、以及未关闭的常驻 `.nb-board`。
+Three layers of absolute positioning fall into the same band: `.nb-msg` (`top:34%`, 40px), `.nb-res-title` (56px), and the unclosed persistent `.nb-board`.
 
-1. 进入 `results` 时将 `.nb-msg`、`.nb-board`、`.nb-killfeed` 置为 `hidden`——它们是局内 chrome，不应存活到结算。此步即解决 `BLUE WINS / ENEMY DOWN / VICTORY` 叠字。
-2. `.nb-board-lg .h { gap: 16px }`——表头挤成 `PlayerK / S` 是因 `.h` 使用 `justify-content: space-between` 而在 420px 宽下两个 span 无最小间距。
-3. 结算面板给出真正的容器：`display:grid; gap:28px; place-items:center; padding:40px; max-width:560px`。
+1. When entering `results`, set `.nb-msg`, `.nb-board`, and `.nb-killfeed` to `hidden`—they are in-match chrome and should not survive to the end screen. This step alone resolves the overlapping text of `BLUE WINS / ENEMY DOWN / VICTORY`.
+2. `.nb-board-lg .h { gap: 16px }`—the header is squeezed into `PlayerK / S` because `.h` uses `justify-content: space-between`, resulting in no minimum spacing between the two spans at 420px width.
+3. Provide a true container for the end panel: `display:grid; gap:28px; place-items:center; padding:40px; max-width:560px`.
 
-### 7. 命中反馈规格（对应 P2 FE-22）
+### 7. Hit Feedback Specifications (Corresponds to P2 FE-22)
 
-- **准星 hitmarker**：4 条 45° 短线，长 8px、宽 2px，自中心 4px 扩张至 9px 用 90 ms，再淡出 120 ms。身体命中 `#FFFFFF`，爆头 `#FFC93C`。这是当前手感缺失最严重的一处。
-- **伤害数字**：命中点世界坐标投影至屏幕，上飘 42px、550 ms 淡出；身体 18px，爆头 26px 且用 `#FFC93C`。
-- **击杀**：准星 90 ms 内放大 6%；kill feed 行自 `x:-12px` 滑入。
+- **Crosshair hitmarker**: 4 short lines at 45°, length 8px, width 2px, expanding from 4px to 9px from the center in 90 ms, then fading out in 120 ms. Body hit `#FFFFFF`, headshot `#FFC93C`. This is the most severely missing aspect of current game feel.
+- **Damage numbers**: Project world coordinates of the hit point to the screen, float up 42px, fade out in 550 ms; body 18px, headshot 26px using `#FFC93C`.
+- **Kill**: Crosshair scales up by 6% within 90 ms; kill feed lines slide in from `x:-12px`.
 
-### 8. 签名元素：把小地图做成「要塞蓝图」
+### 8. Signature Element: Turn the Minimap into a "Fortress Blueprint"
 
-底 `#0A0D12`，结构线 1px `#2A3A5A`，两个出生区为 12% 队色填充楔形，存活单位 3px 实心点、阵亡为空心环。数据已全部在 `mapData.ts` 中，纯表现层改动。这是「Neon Bastion」这个名字唯一可以被兑现的地方。
+Background `#0A0D12`, structure lines 1px `#2A3A5A`, two spawn areas as 12% team-color filled wedges, surviving units as 3px solid dots, and eliminated units as hollow rings. All data is already in `mapData.ts`; this is a pure presentation-layer change. This is the only place where the name "Neon Bastion" can be truly fulfilled.
 
-### 9. 减一件配饰
+### 9. Remove One Accessory
 
-移除 `.nb-title` 的三段彩虹渐变（`#5bb0ff → #c48bff → #ff6d8a`，`src/render/hud.ts:44`）。紫粉渐变标题是最模板化的选择，且引入了紫色这一全游戏别处不存在的第三色系。改为青到白，或平涂 `#E8F4FF` 配青色规则线。
+Remove the three-segment rainbow gradient from `.nb-title` (`#5bb0ff → #c48bff → #ff6d8a`, `src/render/hud.ts:44`). The purple-pink gradient title is the most templated choice and introduces purple, a third color family that does not exist elsewhere in the game. Change to cyan-to-white, or flat fill `#E8F4FF` with a cyan rule line.
 
-### 若只做三件事
+### If Only Three Things Are Done
 
-按收益排序：**加 tone mapping** → **把 cover 提亮到 `#3A4048`** → **蓝队改青色 `#18E0FF`**。三项合计约二十行改动。
+Ordered by yield: **Add tone mapping** → **Brighten cover to `#3A4048`** → **Change Blue team to cyan `#18E0FF`**. The three items total approximately twenty lines of changes.

@@ -1,13 +1,32 @@
 ---
 type: Note
-title: JSON Lens — Ornith 1.5 35B-A3B code review
+title: "JSON Lens — Ornith 1.5 35B-A3B code review"
 status: current
-description: Independent review of the JSON Lens model test: automated checks pass, but multiple explicit product requirements are absent from the delivered UI.
+description: "Independent review of the JSON Lens model test: automated checks pass, but multiple explicit product requirements are absent from the delivered UI."
 tags: [json-lens, code-review, qwen3.8, ornith, frontend, benchmark]
 timestamp: 2026-08-25T16:52:38Z
 ---
 
 # JSON Lens — Ornith 1.5 35B-A3B code review
+
+[English](devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25.md) | [简体中文](devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
 
 ## Scope and evidence
 
@@ -38,9 +57,9 @@ For inputs above 5 MiB, `App` calls `parseInWorker`, but the visible UI only pri
 
 ### FE-11 — Query navigation and diff-tree requirements are missing
 
-`App` computes match paths but never updates `highlightedPath`; the “Run query” button is intentionally a no-op (`src/App.tsx:68-82,119-127`). `VirtualTree` can color a rendered match but cannot expand ancestors, scroll to, or step through hits (`src/components/VirtualTree.tsx:231-238`). This fails “逐个跳转”.
+`App` computes match paths but never updates `highlightedPath`; the “Run query” button is intentionally a no-op (`src/App.tsx:68-82,119-127`). `VirtualTree` can color a rendered match but cannot expand ancestors, scroll to, or step through hits (`src/components/VirtualTree.tsx:231-238`). This fails “Jump one by one”.
 
-The diff side is a flat list of changed entries, not a JSON tree with three-color node markings (`src/components/DiffView.tsx:111-157`). `showDiffsOnly` changes only report boilerplate (`src/lib/report.ts:51-65`); it cannot filter a tree because no full diff tree exists. The required “只看差异” control is therefore effectively meaningless in the displayed comparison.
+The diff side is a flat list of changed entries, not a JSON tree with three-color node markings (`src/components/DiffView.tsx:111-157`). `showDiffsOnly` changes only report boilerplate (`src/lib/report.ts:51-65`); it cannot filter a tree because no full diff tree exists. The required “Show only differences” control is therefore effectively meaningless in the displayed comparison.
 
 ## P2 correctness, accessibility, and test-quality findings
 

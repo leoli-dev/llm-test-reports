@@ -1,20 +1,39 @@
-# mlx-vlm 视觉 + DFlash2 阶梯稳定性
+# mlx-vlm / vision and DFlash2 stability ladder
 
-| 项目 | 记录 |
+[English](perf-05.md) | [简体中文](perf-05_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | PERF-05 |
-| 日期 | 2026-10-19 |
-| 模型与运行方式 | Qwen3.8-27B 8bit；mlx-vlm 视觉 + DFlash2 阶梯稳定性 |
-| 推理位置 | 本机 |
+| ID | PERF-05 |
+| Date | 2026-10-19 |
+| Model and runtime | Qwen3.8-27B 8bit; mlx-vlm vision + DFlash2 stepped stability |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-32K、64K、96K、128K、128K-repeat 五个阶段及恢复探针通过，另保留两个 greedy 失败样本。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | macOS 27.0.1 (26A434) |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-- [Qwen3.8-27B 视觉 + DFlash2 阶梯稳定性实测](../originals/engine-tests-2026-10-19-vision-stability-report.md)
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 证据边界
+<!-- environment-context:end -->
 
-主表跨进程与不同采样，不能解读为同进程连续单因素对比。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。
+## Historical result
+
+32K, 64K, 96K, 128K and 128K-repeat stages and recovery probes passed. Two failed greedy-decoding samples are retained.
+
+## Full reports
+
+- [Qwen3.8-27B vision + DFlash2 stepped stability measurements](../originals/engine-tests-2026-10-19-vision-stability-report.md)
+
+## Evidence limits
+
+The main table spans processes and different sampling conditions; it is not one continuous single-factor run. Historical files were migrated from the former mlx-dspark directory.

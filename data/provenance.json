@@ -3,652 +3,1692 @@
     "path": "reports/originals/source-report.md",
     "source": "source/report.md",
     "sourceSha256": "1e992310392a70ee5583cac9a0e0c74fd00c8296d07efddfc3ca4cc08138638a",
-    "publishedSha256": "d72e5797b3db5f261c3609b03332248f860ea1d73f594d58560856089e2d12ad",
+    "publishedSha256": "2d075fc242cf1c008b927d3ab554fe37540fd6d286f2a0de25e0b3bf71a8af60",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "d72e5797b3db5f261c3609b03332248f860ea1d73f594d58560856089e2d12ad",
+    "initialPublishedPath": "reports/originals/source-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/source-report.md",
+      "chinese": "reports/originals/source-report_CN.md",
+      "chineseSha256": "995754301828cfbae54b58afa628441f807d7c231ad2ff4d0d799ce26ff9a3ba",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/source-benchmarks.md",
     "source": "source/BENCHMARKS.md",
     "sourceSha256": "1e4437caaaf8d7f490226436b03b533c4cce9d9204ca6dae231a06f14d721b19",
-    "publishedSha256": "271074e06916c5116a05687ea08cb776e21926b3a4e608515cd739625e56cac5",
+    "publishedSha256": "1c6368a6d5216bf07e860fca7ba21059cf1a5c9f9f7b3d7abeeb469ab128488d",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "271074e06916c5116a05687ea08cb776e21926b3a4e608515cd739625e56cac5",
+    "initialPublishedPath": "reports/originals/source-benchmarks.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/source-benchmarks.md",
+      "chinese": "reports/originals/source-benchmarks_CN.md",
+      "chineseSha256": "f315a988b30b83c16a0fb48a9518ec78511229926c700fafadf964ec15e4955c",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme.md",
     "source": "early-tests/20260526_omlx-model-test_solar-system/README.md",
     "sourceSha256": "be7f841114535ccee079e6647f9ce4b3a92648084ecac9eea4bd6c62a8edee27",
-    "publishedSha256": "be7f841114535ccee079e6647f9ce4b3a92648084ecac9eea4bd6c62a8edee27",
+    "publishedSha256": "46ac465d4441f6d56d4873cdee718c1fae9b8f78fdd575bda10927c4bf1003d8",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "be7f841114535ccee079e6647f9ce4b3a92648084ecac9eea4bd6c62a8edee27",
+    "initialPublishedPath": "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme.md",
+      "chinese": "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md",
+      "chineseSha256": "f13764288089d9973779bb4c0e9f15cbbb69b97cf0355b2dcacd3c2de4c0eb80",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review.md",
     "source": "early-tests/local-llm-shoping-mvp-test/Qwen3.5-122B-A10B-4bit/CODE_REVIEW.md",
     "sourceSha256": "0549498b2ced949974a8778e3f7a8b9204b8d132b1a34e750cbb4afa33951169",
-    "publishedSha256": "0549498b2ced949974a8778e3f7a8b9204b8d132b1a34e750cbb4afa33951169",
+    "publishedSha256": "3ecccfcac765a70cf4e7871eefe0f36b22bfc68cbd8376e384e6a97725a51566",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "0549498b2ced949974a8778e3f7a8b9204b8d132b1a34e750cbb4afa33951169",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review.md",
+      "chinese": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review_CN.md",
+      "chineseSha256": "b78471a8c07d32e14b48543e837b4305c54d5186ba3313c9e87e81959e1fb07b",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review.md",
     "source": "early-tests/local-llm-shoping-mvp-test/Qwen3.6-35B-A3B-MLX-8bit/CODE_REVIEW.md",
     "sourceSha256": "9c7773e195fcaf4780bbd747a43ee4722313dc39e617e49992982bde0c0d7d29",
-    "publishedSha256": "9c7773e195fcaf4780bbd747a43ee4722313dc39e617e49992982bde0c0d7d29",
+    "publishedSha256": "6d6ad5027bc6c63f4e94e9a36ea9628a23c3ce546edf4b50fc8c33a51bb3988e",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "9c7773e195fcaf4780bbd747a43ee4722313dc39e617e49992982bde0c0d7d29",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review.md",
+      "chinese": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review_CN.md",
+      "chineseSha256": "79cb9d07335becc395bd1dbb02a7a930f79f073e8d88993445f4c0250fa38f67",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-shoping-mvp-test-readme.md",
     "source": "early-tests/local-llm-shoping-mvp-test/README.md",
     "sourceSha256": "898804736cbc8040c2c2609b42b737173e6e88c1b7b92965f5dead302902f074",
-    "publishedSha256": "1c3168c4d5b9c5e6d6bca77143b75fea6bf29bb2098188550fb5b1584b27cd45",
+    "publishedSha256": "9bc5d641e148b9f1a2e4bcfeac279cbf5d7346e4ab0b4362b66a6c1baffc38b8",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "1c3168c4d5b9c5e6d6bca77143b75fea6bf29bb2098188550fb5b1584b27cd45",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-shoping-mvp-test-readme.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-shoping-mvp-test-readme.md",
+      "chinese": "reports/originals/early-tests-local-llm-shoping-mvp-test-readme_CN.md",
+      "chineseSha256": "252c1106a4289f70e0d44ed97902aa14e8f8ff26614120cc5de8cdc5d12afa2b",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-tetris-code-test-readme.md",
     "source": "early-tests/local-llm-tetris-code-test/README.md",
     "sourceSha256": "a0b8f5d7a914a2726a31dd7c547c8d1671430e78ba86f5730be456574f4c1751",
-    "publishedSha256": "a0b8f5d7a914a2726a31dd7c547c8d1671430e78ba86f5730be456574f4c1751",
+    "publishedSha256": "b4a9bdf060fc65dbba3f7c58de7260116ec9c3135e5f07a978c8b5594d592910",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "a0b8f5d7a914a2726a31dd7c547c8d1671430e78ba86f5730be456574f4c1751",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-tetris-code-test-readme.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-tetris-code-test-readme.md",
+      "chinese": "reports/originals/early-tests-local-llm-tetris-code-test-readme_CN.md",
+      "chineseSha256": "5207ade0386a42a981ed1a8e75f9e10048c3289f571acc8e203f8415cc3ff0ae",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review.md",
     "source": "early-tests/local-llm-tetris-code-test/tetris-test-Qwen3.5-122B/CODE_REVIEW.md",
     "sourceSha256": "7e4d79e48a9de95a96d0d27b64d41a142aae78bc62a5f455cfc0a1fd1ad66762",
-    "publishedSha256": "7e4d79e48a9de95a96d0d27b64d41a142aae78bc62a5f455cfc0a1fd1ad66762",
+    "publishedSha256": "a496c477e64051803c36c87c98b04c8f30449aafa26a1e2648cf27075c73b545",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7e4d79e48a9de95a96d0d27b64d41a142aae78bc62a5f455cfc0a1fd1ad66762",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review.md",
+      "chinese": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review_CN.md",
+      "chineseSha256": "bc7b29790987fe2183c1fbb48a516eaf77cc8e09c8196ec96add429df273ab6c",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review.md",
     "source": "early-tests/local-llm-tetris-code-test/tetris-test-Qwen3.6-27B/CODE_REVIEW.md",
     "sourceSha256": "ab896d94ae8d7dfb0d1485775f9e134ded2e3d5956b2f7458b42089f31000560",
-    "publishedSha256": "ab896d94ae8d7dfb0d1485775f9e134ded2e3d5956b2f7458b42089f31000560",
+    "publishedSha256": "e8bfa7e3d6f236761057f8a7b8ad2f2c9f04f7ae80f805f261044f08e972d96c",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "ab896d94ae8d7dfb0d1485775f9e134ded2e3d5956b2f7458b42089f31000560",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review.md",
+      "chinese": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review_CN.md",
+      "chineseSha256": "3992b6806aa3e4a9fb0c11a843ecee9b2c0e612f69a237cd62dffff9939a3992",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review.md",
     "source": "early-tests/local-llm-tetris-code-test/tetris-test-Qwen3.6-35B/CODE_REVIEW.md",
     "sourceSha256": "61d5cbfb2e738239d4ed5647c3b7d382812c5f3ebb26f6271c412affb3682e45",
-    "publishedSha256": "61d5cbfb2e738239d4ed5647c3b7d382812c5f3ebb26f6271c412affb3682e45",
+    "publishedSha256": "701966d1cf4b15afdb05400ae26508ed424753ba004d3cd626100d9ecfb28c98",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "61d5cbfb2e738239d4ed5647c3b7d382812c5f3ebb26f6271c412affb3682e45",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review.md",
+      "chinese": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review_CN.md",
+      "chineseSha256": "726d14ba77bc75c5d2234e0c256e7c48b1b4755c5c8d4ad219fb0ec488ed9e83",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review.md",
     "source": "early-tests/local-llm-tetris-code-test/tetris-test-gemma-4-31b/CODE_REVIEW.md",
     "sourceSha256": "fd67b0ab010a258449e1f912ab13234891c7fbe9be07481c0f11dc1471cc2031",
-    "publishedSha256": "fd67b0ab010a258449e1f912ab13234891c7fbe9be07481c0f11dc1471cc2031",
+    "publishedSha256": "6895fc5120cb2020eab5ccc4c814d3c44680b77628b5d56be4400d2f5e367f47",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "fd67b0ab010a258449e1f912ab13234891c7fbe9be07481c0f11dc1471cc2031",
+    "initialPublishedPath": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review.md",
+      "chinese": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review_CN.md",
+      "chineseSha256": "c790ffeaa587e85a43147c9d91dac286957e0d6509947c42de4a2101dca44a9c",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark.md",
     "source": "devlog/projects/ai-werewolf/notes/deepseek-v4.1-flash-10-game-benchmark.md",
     "sourceSha256": "fe30cfc04dee45306b21e8f15dc9ee55ffb6096977eff5bf0f335b002d7db6e4",
-    "publishedSha256": "fe30cfc04dee45306b21e8f15dc9ee55ffb6096977eff5bf0f335b002d7db6e4",
+    "publishedSha256": "7379420297c14a1e1bb4f20a78e0a6b50132a37afd84ffb28ffe7fd92e383737",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "fe30cfc04dee45306b21e8f15dc9ee55ffb6096977eff5bf0f335b002d7db6e4",
+    "initialPublishedPath": "reports/originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark.md",
+      "chinese": "reports/originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark_CN.md",
+      "chineseSha256": "53ccb83b11b6ad67e07e7033fda9e679d7cc502fbc87e7de4f79387d53034456",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21.md",
     "source": "devlog/projects/jev-tests/notes/jev-vs-local-laya-comparison-2026-09-21.md",
     "sourceSha256": "7be2cb3394f1f1097af1353d740e7fca8c5ea90db8a6503ac335d87e445f45ed",
-    "publishedSha256": "aa1304bad37bad03bdc84a65e21692f7180ad0f0dd3a6f1793f1615e9299acb5",
+    "publishedSha256": "c283bf9a4645d7dd8c4e95c7175318d0430af4c6c4b31510fcd45ff0d4edaba6",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "aa1304bad37bad03bdc84a65e21692f7180ad0f0dd3a6f1793f1615e9299acb5",
+    "initialPublishedPath": "reports/originals/devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21.md",
+      "chinese": "reports/originals/devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21_CN.md",
+      "chineseSha256": "9b1c091035bc754c14675b7db28a6791f8e2e50b522ca81502d998990771399e",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21.md",
     "source": "devlog/projects/laya-mlx/notes/local-service-deep-evaluation-2026-09-21.md",
     "sourceSha256": "cf554ca0993032e8a66509c2ab806c953f18dbfbdfe7222ddedf952b170e823f",
-    "publishedSha256": "6997f9a843e6aff770085749130858bafb82e512bf098c5ace32c7c5b24901dc",
+    "publishedSha256": "79ea2fda9df6eb2dc188f34cd9029b8ac97c3d003f1ad92711866aa44c337311",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "6997f9a843e6aff770085749130858bafb82e512bf098c5ace32c7c5b24901dc",
+    "initialPublishedPath": "reports/originals/devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21.md",
+      "chinese": "reports/originals/devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21_CN.md",
+      "chineseSha256": "35adbf6a23fcbab686cd9b6b3026187613cc06f7dba751c0bee845b391d5c600",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md",
     "source": "devlog/projects/qwen3.8-test/notes/arcology-control-room-round-1-review.md",
     "sourceSha256": "48aa2eecc02cbedf48d3e90bb839c455265bd284cd47676a3589ff577e42c992",
-    "publishedSha256": "a52c45d0e2706ed6baef3133f9d197db703d6dd3ed7031810d5ff1d6e8db49fa",
+    "publishedSha256": "6af979abbe1ff85d9f0860eb3625c4f1a634b8792a3b66f49e4d8b30c29f4e14",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "a52c45d0e2706ed6baef3133f9d197db703d6dd3ed7031810d5ff1d6e8db49fa",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review_CN.md",
+      "chineseSha256": "f083237f07c921db814b048f4e292b340bf5d313e9edddf80a179fab8d838742",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test.md",
     "source": "devlog/projects/qwen3.8-test/notes/first-successful-qwen-code-test.md",
     "sourceSha256": "8174556c7544f870b2dcfcb5c5c8fd101452e56bd9a6f9b6760986d4b3537d6a",
-    "publishedSha256": "59e8193bb50684d113e3bb13a3c6ae45a06900197bef61d43f9739eeb04185dc",
+    "publishedSha256": "97f7feb5499464643cbd9d9b0b8b09d0692d2ac338166de5b74ed776db91f6b4",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "59e8193bb50684d113e3bb13a3c6ae45a06900197bef61d43f9739eeb04185dc",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test_CN.md",
+      "chineseSha256": "2387c061e7d41cea042f71d7f03a30702a2b7bfab4ef3a4899bd156d29de6fa0",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review.md",
     "source": "devlog/projects/qwen3.8-test/notes/frog-choir-round-1-review.md",
     "sourceSha256": "64a7906b15c5a84c87ecfc1d2ecce16dd165a2ccc7764a7f486ce4125be476bb",
-    "publishedSha256": "7b6e2c331b96b22554dcdcb40bbfe89be7876e2cafd61600a07389c01f3113a3",
+    "publishedSha256": "d7162ea219f5fda4cb451d6b810cffde880f1aa1d9b4fe32adbe1ce4d9487fad",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7b6e2c331b96b22554dcdcb40bbfe89be7876e2cafd61600a07389c01f3113a3",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review_CN.md",
+      "chineseSha256": "2a89c173d787bb53050cdcd27bf0a1183934ef9ca85e6ee74774bd8465ff38f7",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review.md",
     "source": "devlog/projects/qwen3.8-test/notes/frog-choir-round-2-review.md",
     "sourceSha256": "a35ccda17385d23dfdede2e79369f5bf25241323b00ade561c9c7e0fd83c7cc4",
-    "publishedSha256": "34650850bdcf4bf36922b8a83a18cdc4e4b3ae11c7bbbea94759116db5622fb9",
+    "publishedSha256": "4589ccbce42c12eb239ca14ed9941506837620724c26510eaa85626baf0701fc",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "34650850bdcf4bf36922b8a83a18cdc4e4b3ae11c7bbbea94759116db5622fb9",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review_CN.md",
+      "chineseSha256": "4c33e9bb33f5146a6b69f4d222a01a13838c27a07a524e2f521d04998c0077c9",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01.md",
     "source": "devlog/projects/qwen3.8-test/notes/gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01.md",
     "sourceSha256": "348a6ac6c4459ba94c4ea36e45aa871b1db7c245fcc94bad540980a26eb3eb90",
-    "publishedSha256": "5552801c847ef320f047664abaccabe7058c083d5f6a3d50e9fe9d9812fa965a",
+    "publishedSha256": "1c912ba7415247cb723a0edfee6e2c9f04d0d5f1d1e05e63f5093ae64f48b50c",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "5552801c847ef320f047664abaccabe7058c083d5f6a3d50e9fe9d9812fa965a",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01_CN.md",
+      "chineseSha256": "d8ab94626b6437b65efb9b8f465e0ae875a7f367ad134088db289b5295810f6d",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25.md",
     "source": "devlog/projects/qwen3.8-test/notes/json-lens-ornith-code-review-2026-08-25.md",
     "sourceSha256": "9329b0970e387c9ae5fca9bfd21b48ad490c661728ac2f2fd39d6910b317a229",
-    "publishedSha256": "f209ab01714273453ba0c443b03a53c5413dbab8b782ecd84b8d6620a4ca94f2",
+    "publishedSha256": "c305b181bdf3ce2716cc4ce36967feacb2dff6305f6c5ef19603c86c7fc719de",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "f209ab01714273453ba0c443b03a53c5413dbab8b782ecd84b8d6620a4ca94f2",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25_CN.md",
+      "chineseSha256": "8f37da03da677e8a3a3ae4354915ddbc6ce29ed9e1df32268504459135a58f8e",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25.md",
     "source": "devlog/projects/qwen3.8-test/notes/json-lens-qwen-round-1-review-2026-08-25.md",
     "sourceSha256": "79dab6cce1e034293fff433cd41e9de89f8a99d2eb86581526f110835a1a2204",
-    "publishedSha256": "0152530f91169309459cc80236842f71aa1b8658d00203682f34ff95e78a3ac3",
+    "publishedSha256": "625bbe7909fed814888b1dd020733c4dff738eb11032824fdf2ed2bac40d6cd3",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "0152530f91169309459cc80236842f71aa1b8658d00203682f34ff95e78a3ac3",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25_CN.md",
+      "chineseSha256": "bcac6c613ad9bc3fbc38653952c49ecb62740381e98d20fbeaeae44c8b8d4e51",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26.md",
     "source": "devlog/projects/qwen3.8-test/notes/json-lens-round-3-final-comparison-2026-08-26.md",
     "sourceSha256": "672e8e1e92394222b787847c6f7218c1a485f86647ddd6e6f63ab5ad5e3acf36",
-    "publishedSha256": "7c7572bbdc26d5197509bbbf5259c52c7b926d461508107fa1230af035711a84",
+    "publishedSha256": "624bc33bd120216fecab79e5d6c14e061e54d7435fb01e6aa4c43b968a9d1dea",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7c7572bbdc26d5197509bbbf5259c52c7b926d461508107fa1230af035711a84",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26_CN.md",
+      "chineseSha256": "9029277f87eeed0c17d212addc73ce16454a2db60279a33cde4ea88dfb915602",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test.md",
     "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-oq4e-mtp-test.md",
     "sourceSha256": "098ebe86e951e08a30508d0df9556302a4dfb79576f5c800e4e2d847819b8272",
-    "publishedSha256": "6018d0d40f3955d32fa74fb2c422160d3346db50b1fee6bdfb21a20b2093514a",
+    "publishedSha256": "1a0ac1a62ea18ba5ffc9b696a89aa229d4bc06131039f046ae1baf75f05a7aba",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "6018d0d40f3955d32fa74fb2c422160d3346db50b1fee6bdfb21a20b2093514a",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test_CN.md",
+      "chineseSha256": "eda1625465a32cbea0fac23ee582c08103ef6c3938337444c6779218645569b7",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review.md",
     "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-round-1-review.md",
     "sourceSha256": "0482d5d458ab54d0d51ce52be2bf2794ed24f0ae11e9e858e18a9e540d45d064",
-    "publishedSha256": "0482d5d458ab54d0d51ce52be2bf2794ed24f0ae11e9e858e18a9e540d45d064",
+    "publishedSha256": "833f5aafda4a064ad865ac22be21c08f0c55258cfa2a48729543ef074adff886",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "0482d5d458ab54d0d51ce52be2bf2794ed24f0ae11e9e858e18a9e540d45d064",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review_CN.md",
+      "chineseSha256": "d80fcf7bccfcedb8aa95d22575b3461e1e634638a19bb77d654e9ba878915214",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review.md",
     "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-round-2-review.md",
     "sourceSha256": "1180b7ccd170f56d176e3a13c04babf3a6862abd95aef4a4e42be778db7623d2",
-    "publishedSha256": "1180b7ccd170f56d176e3a13c04babf3a6862abd95aef4a4e42be778db7623d2",
+    "publishedSha256": "e527531fdd46a0f4daf56545020d4bab024896894821d09162d1e2697c810686",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "1180b7ccd170f56d176e3a13c04babf3a6862abd95aef4a4e42be778db7623d2",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review_CN.md",
+      "chineseSha256": "4aa15f4ea484d1aa72c30b15d44f5b209e2f3c49b93907c8f14547c0cbd76c8c",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review.md",
     "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-round-3-review.md",
     "sourceSha256": "145410b310a788fbb7cec67b2939426c8c5f237e85070df8e1f441a22e987960",
-    "publishedSha256": "145410b310a788fbb7cec67b2939426c8c5f237e85070df8e1f441a22e987960",
+    "publishedSha256": "472219888515ad579ff01b4da07588d26db7b194392e8fe2e1d2dec220614f31",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "145410b310a788fbb7cec67b2939426c8c5f237e85070df8e1f441a22e987960",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review_CN.md",
+      "chineseSha256": "f312d5ab1bcf2c53ea24e40fc403e828e2709500c7ed3e24f6cbf52403244dfc",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
     "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
     "sourceSha256": "3b32833882643b29e346621831f32fe2be9e785d24d4aba01500791a7d019bfb",
-    "publishedSha256": "0b7a68b851b5efc63ebfa74a2bacce72f597d931fcef139f4b83542b5a0c8571",
+    "publishedSha256": "de5d343d3e565c906ba6f16d71ed2ac51eb8b7d33d0e58cddcd3f2133fd3aae6",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "0b7a68b851b5efc63ebfa74a2bacce72f597d931fcef139f4b83542b5a0c8571",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31_CN.md",
+      "chineseSha256": "f16190b0eeb1b5af9244bdc36a7f51091facda909cf0b04883cafc93d81127ba",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20.md",
     "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
     "sourceSha256": "f2061a92c59e3bf6170baa190130c3667d7997b6d52d397c25a94d6b8935c08d",
-    "publishedSha256": "7df83d648fae4e927c112fcda6f7ae841e9cfd3ba95a8501904d417ae6a9a54e",
+    "publishedSha256": "74a072ffd44b99751804dbc43d6693289c7f3f30b9f71db9980a4886322f0b96",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7df83d648fae4e927c112fcda6f7ae841e9cfd3ba95a8501904d417ae6a9a54e",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20_CN.md",
+      "chineseSha256": "0142bf1bb2f5e0b1adb91b4c3bb27df59a890d41edf886ecff6474d3b3b3db89",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md",
     "source": "devlog/projects/qwen3.8-test/notes/mlx-dspark-vision-unavailable-2026-09-03.md",
     "sourceSha256": "fe3fa31fe0ad7e8b0b17d4291cd6dd43bb97d58a9e624431d7cfe0f43ff895c4",
-    "publishedSha256": "87b6d7e2b10e59d2c149e184da1252bc80a85adfaa178287fcd4c4898d403636",
+    "publishedSha256": "6783230d02728fbd48c27f7712fea3ead81a0b26bf2d716a2caadb744eec55f7",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "87b6d7e2b10e59d2c149e184da1252bc80a85adfaa178287fcd4c4898d403636",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03_CN.md",
+      "chineseSha256": "d9cb0430b65f5e2f050f1cfb7ef45b9d840eb8044a42eb011c8d2a5c17a395d7",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
     "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
     "sourceSha256": "079a1d5a6b4a7287a0c6b04b70611ea4f4ee98f086c0e99b924dc5dbccf71167",
-    "publishedSha256": "c9f4bd9cbe07a498d52cf2f58bb5889940072e31ebb5d20aa9dc0665e3ec103c",
+    "publishedSha256": "ff449a689e8e2fdb7ccf5cc4a6e2abe71b92f58f301bd8284d278150752cfa55",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "c9f4bd9cbe07a498d52cf2f58bb5889940072e31ebb5d20aa9dc0665e3ec103c",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19_CN.md",
+      "chineseSha256": "81a74a1d50d2d4fcde1dfa41e4f1ee5ce43a84f5739053c57a596b4ec5f6d9ff",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
     "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
     "sourceSha256": "e0bf117732620325362b8aa1828cf388985562489ecbeb8d7fce18a78fed4ed9",
-    "publishedSha256": "abf15a96691b2709b5b1470d571b411dd93704f84e054ec1f79d3f2406fc7bd2",
+    "publishedSha256": "c5984f23e9775bc8a057dd39a52433870a61466440c666997fb55d8dd963effb",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "abf15a96691b2709b5b1470d571b411dd93704f84e054ec1f79d3f2406fc7bd2",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20_CN.md",
+      "chineseSha256": "b04603032c4c0697faae1a23e2dd825fafbcce55367b2a0817f71fdddfafc16b",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20.md",
     "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
     "sourceSha256": "ad28fe087b6cb13f8754315f4fb4f06c2bda6dd5c9101974f99d329e31f7a7f9",
-    "publishedSha256": "f322a9586c127a2730dac78d7668f50791d5d9415b483d41019532c191c6ce1d",
+    "publishedSha256": "69ff54d3e128b0ea0c7b5170b6b33a4d0ea0d4f36b00d72d18734ef30bc5e250",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "f322a9586c127a2730dac78d7668f50791d5d9415b483d41019532c191c6ce1d",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20_CN.md",
+      "chineseSha256": "fc7683ee33ceb77f8e976f6e5ebc8912b57b434ddf64c65fcfa057834c2898bf",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test.md",
     "source": "devlog/projects/qwen3.8-test/notes/mtplx-pi-frog-choir-test.md",
     "sourceSha256": "039bd81a273a40f0d4611bccfb3f1eb2223b2228ba2e71b16ab96b5dc9a23399",
-    "publishedSha256": "147f4ceb120d8e861467e1bb2fed8e46781733249741a43f5e541fec217c90dd",
+    "publishedSha256": "901ff25d54c993bb4eece0fbac77f07fcb3d101bd277a0cf6090a17846c5aa5c",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "147f4ceb120d8e861467e1bb2fed8e46781733249741a43f5e541fec217c90dd",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test_CN.md",
+      "chineseSha256": "2988de2c9349c56d5432d36783a4149702f09b0b8ae9f8b03109207e27cb0fb8",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
     "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
     "sourceSha256": "110dd135bc42c138c04350a6183e435251c472fa17e0cd8f7bfe68d34792fe8f",
-    "publishedSha256": "d9a669af8b83d21180930af5e22912a10fe41959c693e6b2504c790c472ff16c",
+    "publishedSha256": "1414197911340665dc9a18b66fd0b44277c80944544e390c214f917c489f6e70",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "d9a669af8b83d21180930af5e22912a10fe41959c693e6b2504c790c472ff16c",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20_CN.md",
+      "chineseSha256": "986ef9bc78a1db99b6aa9d29a6f8b369697385b2034a1ef5dc50e37ce8309221",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
     "sourceSha256": "fad1e3dbfb99ac69ed9d8b8fc1d24ae7c2d236835a844ffba47013a5b9971b7c",
-    "publishedSha256": "84047221d94752d6afc0b6af755af626286b31a1bcbdabb9c683ace45544f9ec",
+    "publishedSha256": "e0594fa6411072bf0b81d60fb2ffef840d7977b282b04bb70ab2674bef5aa97c",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "84047221d94752d6afc0b6af755af626286b31a1bcbdabb9c683ace45544f9ec",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07_CN.md",
+      "chineseSha256": "3f06a10afdfb8b6fc6319fbdf2cb922a3445e344296f337286ec90087bfab400",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-ds-v4-flash-vision-run-2026-09-08.md",
     "sourceSha256": "294197a96e47bf1264bf6e69abdc02372aa1abb49a69e08861ef14a478b4c530",
-    "publishedSha256": "294197a96e47bf1264bf6e69abdc02372aa1abb49a69e08861ef14a478b4c530",
+    "publishedSha256": "a5f881b95e65b3fb75911625d9ae8f9b7c93cc52162611ca6632d49428a6d890",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "294197a96e47bf1264bf6e69abdc02372aa1abb49a69e08861ef14a478b4c530",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08_CN.md",
+      "chineseSha256": "f8f4697640e3d6f9e6db0e7e76abb4d82608948df246f9aa25b763cdc732abfd",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-final-summary-2026-09-04.md",
     "sourceSha256": "2545642e27b26fe6e10bce9297ef886f32c0e55fda8d7728eb1f17520c5182fc",
-    "publishedSha256": "e39505475bb38d18333d55922605c4fca9d942fae664af905e7d4db2b28e1aa5",
+    "publishedSha256": "f4e6c0d05647eca186c160dcf4e1d03260309088e95b9dfd70cfc75094164909",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "e39505475bb38d18333d55922605c4fca9d942fae664af905e7d4db2b28e1aa5",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04_CN.md",
+      "chineseSha256": "2cfddc7ffec3f2e4de772fdd0957002f7040b0ce58a1e2bf6e163a5bb66b94bf",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-mlx-dspark-pi-review-2026-09-01.md",
     "sourceSha256": "dcb806c4b183d5aa0cfdbeca23e9118256144fcf79c69ea730a2cfb806596334",
-    "publishedSha256": "f950e3b0c026246898535ce83f65ceee13ecf12261241f1f3594a1f730f8a5bb",
+    "publishedSha256": "94de3027b1613a2711821522246da1644bd86bb6052a5b9b15e3eb6bce441720",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "f950e3b0c026246898535ce83f65ceee13ecf12261241f1f3594a1f730f8a5bb",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01_CN.md",
+      "chineseSha256": "122032592d568807624dfc0ddab70b02e1f4d691a2a1bc794b4fca722b6a1639",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-1-review-2026-09-01.md",
     "sourceSha256": "aec4a04f2d1d5f0c160ca54c0aa5d38dbb7040535f9eeb869f3f080d4cbfd318",
-    "publishedSha256": "b3ef2f9e4fc0075c58ba6625766246a754f5fe0fdd96d42454c6ee0012eb9bba",
+    "publishedSha256": "236bca33a08ed9e64e867c48d17c3850417f8354ad1a7549f5d9524e517acb5b",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "b3ef2f9e4fc0075c58ba6625766246a754f5fe0fdd96d42454c6ee0012eb9bba",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01_CN.md",
+      "chineseSha256": "80487b71ab3e22d46e7e0e0209082069537d90099ccf68456ec2c1f8acd533b6",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-2-review-2026-09-02.md",
     "sourceSha256": "d2caf6406b4dc78c57dad263655ed3b10b2b8f1d3818772feb8a9edbe980e76e",
-    "publishedSha256": "24dbc6c28cd288250ee7e456497acf3b28edefe3cec3bdfc453fe84ce6e3bfc9",
+    "publishedSha256": "ff82b7c383a53b5772ff1bc739bdf64657aa188abf41480d327437099a83ea0e",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "24dbc6c28cd288250ee7e456497acf3b28edefe3cec3bdfc453fe84ce6e3bfc9",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02_CN.md",
+      "chineseSha256": "9bb6b7caa9b26b14a11a682185da32daf9ae797a128cc1db9d55dfc60f4eaa8e",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-3-review-2026-09-02.md",
     "sourceSha256": "8cae6b9e8fbd9767a6b248de7d5583f2f03478f1bd8ca381ae92ef7c9e0b8702",
-    "publishedSha256": "39cb5845d8b32c750ad24bf8238ba1f9953fab5c0bdf21f101dbd11da735251c",
+    "publishedSha256": "26b5df8a0378cb360b6fe78dc04ed72638a4f94dbf870b78aa5d94a6411a5cc4",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "39cb5845d8b32c750ad24bf8238ba1f9953fab5c0bdf21f101dbd11da735251c",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02_CN.md",
+      "chineseSha256": "2c888d8227bc5fb6ef5688483faab63afb09676103619406dcddc37cbf2b79ea",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-4-review-2026-09-02.md",
     "sourceSha256": "d916faaac7312f32052d3a37c542d63bd68181ee60881e93adb96ef9a95c935b",
-    "publishedSha256": "d916faaac7312f32052d3a37c542d63bd68181ee60881e93adb96ef9a95c935b",
+    "publishedSha256": "ad900723a4cec2442b3bdc0fc2b538985698beea0d607c62b27059997df30825",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "d916faaac7312f32052d3a37c542d63bd68181ee60881e93adb96ef9a95c935b",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02_CN.md",
+      "chineseSha256": "73797057fab17fbcbf670cd57c72d2fd473319090b08049bef55f224970dc294",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-5-review-2026-09-03.md",
     "sourceSha256": "5db0361d4f812a75b48ddb30db90fbc291010e5ce43569892406ca2050cd82b1",
-    "publishedSha256": "5db0361d4f812a75b48ddb30db90fbc291010e5ce43569892406ca2050cd82b1",
+    "publishedSha256": "bb395b1c9e7c77746e571ffc2e60b50e3a125ad2698cb13943bde117099a56e5",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "5db0361d4f812a75b48ddb30db90fbc291010e5ce43569892406ca2050cd82b1",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03_CN.md",
+      "chineseSha256": "2e6d6cc3c2d33778827360784a6e675938ac854e0e31f6bf6333a80bf75a3dd7",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-6-review-2026-09-03.md",
     "sourceSha256": "84f1fb1e7dff8e912b380edabed0a7ef99f80d929049bfea471c7ed091f47b7a",
-    "publishedSha256": "84f1fb1e7dff8e912b380edabed0a7ef99f80d929049bfea471c7ed091f47b7a",
+    "publishedSha256": "471fe0899731e95ef0dfbb5f58580e2599b196b193abb6596b418cdb1733a8df",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "84f1fb1e7dff8e912b380edabed0a7ef99f80d929049bfea471c7ed091f47b7a",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03_CN.md",
+      "chineseSha256": "9dc63e04a34b8bb74e30caca32ca421478535be5998086d8814822db5412333d",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-7-review-2026-09-04.md",
     "sourceSha256": "a34f3c3a34b03dbcdda1b682d6e2d938f1d5b8e5354f419621f51f44e7005fc4",
-    "publishedSha256": "a34f3c3a34b03dbcdda1b682d6e2d938f1d5b8e5354f419621f51f44e7005fc4",
+    "publishedSha256": "e516627ba8c2a72aa5e8d84c984f21b8ae1bb1de23c9971806103356b27521bb",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "a34f3c3a34b03dbcdda1b682d6e2d938f1d5b8e5354f419621f51f44e7005fc4",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04_CN.md",
+      "chineseSha256": "6057cec846e7a9ffe9295bdaeda07adc01003258c8f504ec97fd692a32f39446",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16.md",
     "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
     "sourceSha256": "f40fba4d20fa515d3f34bd1d37c9bdc5fe9c84ad4e2417a6578c6f6792dd0bb2",
-    "publishedSha256": "6f70bc5e78939b1952f69fb3abfa95b270cb1daaf0f473725d8cf08b1ba68855",
+    "publishedSha256": "e9a73de1945200a425e19db8261cefd839218590e73b42ddc206e23d31a00cad",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "6f70bc5e78939b1952f69fb3abfa95b270cb1daaf0f473725d8cf08b1ba68855",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16_CN.md",
+      "chineseSha256": "af1e414570c290f549776b81b38c4b9f6f465a43a0ee037ce0f0791eb49787a9",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test.md",
     "source": "devlog/projects/qwen3.8-test/notes/omlx-rc-oq4e-mtp-performance-test.md",
     "sourceSha256": "db9a3b24aa0ab4c65805d9168278e5fafe2ba616c48d583ab0ce80fae36f001d",
-    "publishedSha256": "8250ada1e51d4efa2a2c9c357ee982fe725d363d2ef117f752f86c8cf1aa06e1",
+    "publishedSha256": "a470d2d48eb4c4c375832799dcd8158229547fce6d37c255ad88b7158797884b",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "8250ada1e51d4efa2a2c9c357ee982fe725d363d2ef117f752f86c8cf1aa06e1",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test_CN.md",
+      "chineseSha256": "5aaa93856281f65ae21de4ce5a280fed755b81c65246439dc50949258792344e",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
     "source": "devlog/projects/qwen3.8-test/notes/orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
     "sourceSha256": "073d85a836869febeb3ee9884bbe51513dd913e127cb86263e0076b3701d98be",
-    "publishedSha256": "32d2ddb65a2da40be51f900bbdcb1702d0ea53e07703f0d469562df3cd38aa27",
+    "publishedSha256": "d9263322faf6c3396f435226b327ccd7930261a93fc8a1f7dcc0bc259ca4f296",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "32d2ddb65a2da40be51f900bbdcb1702d0ea53e07703f0d469562df3cd38aa27",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31_CN.md",
+      "chineseSha256": "f934f8b4d61b9df218d4a5f68ec40450f17096299493ca678f8c32efd32fc10a",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test.md",
     "source": "devlog/projects/qwen3.8-test/notes/paris-3d-qwen3.8-27b-test.md",
     "sourceSha256": "d9614c497cbb98c8915123e576578429520513c37d32d7cdf5717a76214721e1",
-    "publishedSha256": "7d58499b5da3d586e5d635771dbe9cea8628e9b2431df33a0434aa829cdfa2fc",
+    "publishedSha256": "d131a3df820e132ff5657012b2e5cb12ae6384e6c49c8da0bde27290ff48af0a",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7d58499b5da3d586e5d635771dbe9cea8628e9b2431df33a0434aa829cdfa2fc",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test_CN.md",
+      "chineseSha256": "8f21b820e89124f12e762a598ba67054577a5b4a268f6f44bb8ad71de20d1f08",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-qwen3-8-27b-local-coding-test-summary.md",
     "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
     "sourceSha256": "26bce507b2831aef8ef048481e53c062e15b9436353f526b8344a67adf5fa55d",
-    "publishedSha256": "31a86bb047ee4fa95d00fbb7feda4362fd2943b5b113dec10a179528850db82e",
+    "publishedSha256": "b0a24f1d872f0da9770369a0f7ba8c2041bced1c45c44b663dc31575c2c0dd94",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "31a86bb047ee4fa95d00fbb7feda4362fd2943b5b113dec10a179528850db82e",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-qwen3-8-27b-local-coding-test-summary.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-qwen3-8-27b-local-coding-test-summary.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-qwen3-8-27b-local-coding-test-summary_CN.md",
+      "chineseSha256": "838d1075f14b9dcf3c2b51cb82053ba465554066a5b9644ce32aaaad9b81876e",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05.md",
     "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
     "sourceSha256": "28dc8d411df381f62f14aea8d8f703f2d1518c8a98e2fbcf7feee5aed187ee99",
-    "publishedSha256": "7dae1c39af1abff944eedcce630f289a404e8eb9857e7cc2e483f46c329bb401",
+    "publishedSha256": "73dbccb8c8c22c8a3c613e1f16d6c46225b38f4da86468dcb40fdf35ec583a9f",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7dae1c39af1abff944eedcce630f289a404e8eb9857e7cc2e483f46c329bb401",
+    "initialPublishedPath": "reports/originals/devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "chinese": "reports/originals/devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05_CN.md",
+      "chineseSha256": "8688afd5babb78544e607f8747e15a91803811b4a863fba73ef04262c3e6600d",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
-    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1-zh-cn.md",
+    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1.md",
     "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
     "sourceSha256": "f619e62f753c8c3b3cfb2ab5ea3743042559ec711192fdd3554b5e28b3349565",
-    "publishedSha256": "f75a5f00db25841e3876fb4adcf6eed6bd3186c2ce1772d7e92caeaa1f73a7fb",
+    "publishedSha256": "964e449f8c4c00da638e829076c3316b10a0ed110b908a47febaae19e39e87ee",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "f75a5f00db25841e3876fb4adcf6eed6bd3186c2ce1772d7e92caeaa1f73a7fb",
+    "initialPublishedPath": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1-zh-cn.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1.md",
+      "chinese": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1_CN.md",
+      "chineseSha256": "75af0807715165aad5ab60f3173014ffa0a52c56ec77f8f8029ce950e6791e53",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
-    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2-zh-cn.md",
+    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2.md",
     "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
     "sourceSha256": "256c76230647ae0aa2ad71c1f2ec8dafe8c2df2ea5405e3f085036c60b063357",
-    "publishedSha256": "1a8282048f79cf32793586ce82f6517f7fc552f60cbedef9eee4e7c677a1621e",
+    "publishedSha256": "7d9934ae4ba704fcabec3e4c214063b8865614a5a19016c30e661b37c95e8fc8",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "1a8282048f79cf32793586ce82f6517f7fc552f60cbedef9eee4e7c677a1621e",
+    "initialPublishedPath": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2-zh-cn.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2.md",
+      "chinese": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2_CN.md",
+      "chineseSha256": "28551927d9ecdaa8b6575e49f227238577fc9ba6b322e73325b8d01bca03dd04",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
-    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3-zh-cn.md",
+    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3.md",
     "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
     "sourceSha256": "daf353fb2be17dcb655cb58a8f5bb120f14d1eac271af53bf085407f3aff5e85",
-    "publishedSha256": "e0c10bb1dcba50197c65bb8485e4bc6fc9034db15a0c0bad866c4414adf623d3",
+    "publishedSha256": "b31b64ac62fd59d89bc9969d22c5a546624b0dd70897b257bfb37446e2c0b435",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "e0c10bb1dcba50197c65bb8485e4bc6fc9034db15a0c0bad866c4414adf623d3",
+    "initialPublishedPath": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3-zh-cn.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3.md",
+      "chinese": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3_CN.md",
+      "chineseSha256": "29fcdf7a839b4704adfe1d9c86099a422785c26b0b1aff3bb3c5a5e7f4a19310",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
-    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4-zh-cn.md",
+    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4.md",
     "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
     "sourceSha256": "4a495f61fb31d287d3cabc8106a2817ffe03225ff9050df1052f133ccbba37a9",
-    "publishedSha256": "50a927128af53d694d25b153a0b83b35aad92ab599c276d5c61be79bc8288868",
+    "publishedSha256": "87840f22edfd967832593e71cb202bb23b03b8ce6799c8c2bd83b6db0b65c3f2",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "50a927128af53d694d25b153a0b83b35aad92ab599c276d5c61be79bc8288868",
+    "initialPublishedPath": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4-zh-cn.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4.md",
+      "chinese": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4_CN.md",
+      "chineseSha256": "976b37d1b0c3e519ddb58866d7f34a542a7ba2f5f4b2967462bf49f0f7b0ce8e",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
-    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-zh-cn.md",
+    "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report.md",
     "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
     "sourceSha256": "10248ac08c371bc9cc882128feeb4b9a37b700b6a71a7a547f5292d07cfa05a1",
-    "publishedSha256": "01652b84363df7f2c715a8c0d633d22e2e66fa388b5fec1f00ad39dbd311cbbb",
+    "publishedSha256": "df4577c8bf10c0f2e93f9aa486e0513ae2e3890afa051cdcc864fcd42a958a6a",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "01652b84363df7f2c715a8c0d633d22e2e66fa388b5fec1f00ad39dbd311cbbb",
+    "initialPublishedPath": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-zh-cn.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report.md",
+      "chinese": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report_CN.md",
+      "chineseSha256": "de20708336a33b1050aca024dc9beea42bfca6f40588c2f9caf68600267d3bab",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme.md",
     "source": "qwen-tests/mtplx-flash-with-pi-3d-team-arena/README.md",
     "sourceSha256": "7cb9995fe239760a2047eaab54eed2907dcf0384681c73da47e6a52cc5055c11",
-    "publishedSha256": "7cb9995fe239760a2047eaab54eed2907dcf0384681c73da47e6a52cc5055c11",
+    "publishedSha256": "4246b2ff954ccd7658a2f6d356d70dcab914119506666db64d452a5c10981eeb",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "7cb9995fe239760a2047eaab54eed2907dcf0384681c73da47e6a52cc5055c11",
+    "initialPublishedPath": "reports/originals/qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme.md",
+      "chinese": "reports/originals/qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme_CN.md",
+      "chineseSha256": "bc8cefdef73d4e2fd090d2f08f4d0a1997568636eb7f036147252157ec0b2dcd",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20.md",
     "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
     "sourceSha256": "0660bd8d91367c202f1cc03b62293797fb9a12678a44243ffc274eb10883ca39",
-    "publishedSha256": "412146ffad29993a49ffdd9a7d04f6af600ed8d49f479d938dca7b64e212a8ff",
+    "publishedSha256": "4ae4c56c0b795dc65c72ca03668381443b3107e4e9b003fbb952353d6d160041",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "412146ffad29993a49ffdd9a7d04f6af600ed8d49f479d938dca7b64e212a8ff",
+    "initialPublishedPath": "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20.md",
+      "chinese": "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20_CN.md",
+      "chineseSha256": "a47485fbd4c5ee503d78939c59a1e5f04fd394469517f9f80cdcb2c8377d3ad2",
+      "translationModel": "local/Qwen3.8-27B-MLTF-q8c",
+      "translationRuntime": "MLTF 0.1.2",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/lan-pc-outputs-ai.md",
     "source": "lan-pc/outputs/AI服务实测报告.html",
     "sourceSha256": "d6e566ac5e86de521b4d7c12430f290e6bc0a2f97012200f97296caf12c8cc71",
-    "publishedSha256": "c1749ba1d82220380f033c0b1812493e3fe55643a3816b98abce0a8ef67a6d04",
+    "publishedSha256": "8b9ee9857374125955b78a6b430eb2b8a7357659deda2a405b0470c81885b41b",
     "changes": [
       "local-links-relocated",
       "account-and-LAN-paths-generalized",
-      "html-to-markdown"
-    ]
+      "html-to-markdown",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "c1749ba1d82220380f033c0b1812493e3fe55643a3816b98abce0a8ef67a6d04",
+    "initialPublishedPath": "reports/originals/lan-pc-outputs-ai.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/lan-pc-outputs-ai.md",
+      "chinese": "reports/originals/lan-pc-outputs-ai_CN.md",
+      "chineseSha256": "11b4ac0a5ad030a299d79b5687e53bfc732a6e8614fd41de61c5d43f31e016e8",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/lan-pc-outputs-repair-cafe-soak-report.md",
     "source": "lan-pc/outputs/repair-cafe-soak-report.html",
     "sourceSha256": "ed719f9c33c22415d5c3b3ce430481d192496ef3b11092be49a95581ac629c1b",
-    "publishedSha256": "27e348f0dbb463e0884c907716c11e8958aa147878d1727df0f6c9c4a9d19fdf",
+    "publishedSha256": "ef0b31c5e36f598142eeb3f8b44152058ae99e8e6b66723e32645c94dc6a9093",
     "changes": [
       "local-links-relocated",
       "account-and-LAN-paths-generalized",
-      "html-to-markdown"
-    ]
+      "html-to-markdown",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "27e348f0dbb463e0884c907716c11e8958aa147878d1727df0f6c9c4a9d19fdf",
+    "initialPublishedPath": "reports/originals/lan-pc-outputs-repair-cafe-soak-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/lan-pc-outputs-repair-cafe-soak-report.md",
+      "chinese": "reports/originals/lan-pc-outputs-repair-cafe-soak-report_CN.md",
+      "chineseSha256": "1e16d1e7f04372bddd2fb91f2ae70b9aaa8e43cf94c8f206bde3e90b51d75d6d",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/engine-tests-2026-10-19-long-context-report.md",
     "source": "engine-tests/2026-10-19-long-context/report.md",
     "sourceSha256": "31a2baca12a3d6c109dbf223bb4da56d734da34eccdf690e1e1409f3c881bc89",
-    "publishedSha256": "9d8d7098101422fc6ff7ed35ac646ef60f141a6342080c976e08dc5802f4e11f",
+    "publishedSha256": "b5b059fba3496b5a0ac3949395d04eddfae6ef082271b588e3c5ac3199ac8d9b",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "9d8d7098101422fc6ff7ed35ac646ef60f141a6342080c976e08dc5802f4e11f",
+    "initialPublishedPath": "reports/originals/engine-tests-2026-10-19-long-context-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/engine-tests-2026-10-19-long-context-report.md",
+      "chinese": "reports/originals/engine-tests-2026-10-19-long-context-report_CN.md",
+      "chineseSha256": "3f52fba19b4274c78edf13881c128b8a81b463ebf33b69a9902538af492e9bc3",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/engine-tests-2026-10-19-mltf-clients-report.md",
     "source": "engine-tests/2026-10-19-mltf-clients/report.md",
     "sourceSha256": "f2562ffe5d3ceeb41978041019aa220a949c864faa2e8b3654a2abcfb32a765a",
-    "publishedSha256": "bbe37a71d8232369cda4d9d854eb1e8f3481ff445d593d61f4904274ee6269e4",
+    "publishedSha256": "d8a1fdb149eb479964c07cb6cd3a8d4a58c10b45da0a7cbc6e9ee6b86ef84c46",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "bbe37a71d8232369cda4d9d854eb1e8f3481ff445d593d61f4904274ee6269e4",
+    "initialPublishedPath": "reports/originals/engine-tests-2026-10-19-mltf-clients-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/engine-tests-2026-10-19-mltf-clients-report.md",
+      "chinese": "reports/originals/engine-tests-2026-10-19-mltf-clients-report_CN.md",
+      "chineseSha256": "2691e0de5572fa958a949066cd56133c9572e798c3b3fee7b79902b8432562fb",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/engine-tests-2026-10-19-mltf-comparison-report.md",
     "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
     "sourceSha256": "0709e56e99a61c96a282e103fc59646302d971bc44f439be14d91932b9533477",
-    "publishedSha256": "fd9d3d3ccb7a7d4caf02306cf1c3b1cca5a3a83bc7ae5b966e92e8d8ca1bbdf2",
+    "publishedSha256": "4b240564af6c4a079e466161798d117dce4afc7d4a123c2c08e87a1d159f0be9",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "fd9d3d3ccb7a7d4caf02306cf1c3b1cca5a3a83bc7ae5b966e92e8d8ca1bbdf2",
+    "initialPublishedPath": "reports/originals/engine-tests-2026-10-19-mltf-comparison-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/engine-tests-2026-10-19-mltf-comparison-report.md",
+      "chinese": "reports/originals/engine-tests-2026-10-19-mltf-comparison-report_CN.md",
+      "chineseSha256": "78505807503775c314b436e0e0fe5e74fae568fe1289a1aa9f2c83dae7f6e323",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/engine-tests-2026-10-19-quality-comparison-report.md",
     "source": "engine-tests/2026-10-19-quality-comparison/report.md",
     "sourceSha256": "f25efc7ecad0c2f251513eb7bd595b8ae66ce8ff3e0d7e0b3700da8ff5964cae",
-    "publishedSha256": "a619b71468b025894f30de289fe7ae56be6c11d3ffa95e770707e98424daad01",
+    "publishedSha256": "3ed9050e8b90a65d5213c5f1dd81d7461f817fc3b2238f54d2a748a299a76f7e",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "a619b71468b025894f30de289fe7ae56be6c11d3ffa95e770707e98424daad01",
+    "initialPublishedPath": "reports/originals/engine-tests-2026-10-19-quality-comparison-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/engine-tests-2026-10-19-quality-comparison-report.md",
+      "chinese": "reports/originals/engine-tests-2026-10-19-quality-comparison-report_CN.md",
+      "chineseSha256": "04ab9079342a52fea1b2d714726b96737cc076b7da7541fd8c600afd9a7115c5",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   },
   {
     "path": "reports/originals/engine-tests-2026-10-19-vision-stability-report.md",
     "source": "engine-tests/2026-10-19-vision-stability/report.md",
     "sourceSha256": "4046a03032204b703947cbb0a3b16ac477cc94f314976fc4c29e9de74fa43f46",
-    "publishedSha256": "769004df17f4167e0c4bfdd2ec25efe4bc39b66c660aea8a1a503accb71f1fec",
+    "publishedSha256": "f22bd96904875471510fcad85acc8635755c22c6246d6851e820fb4e6a520856",
     "changes": [
       "local-links-relocated",
-      "account-and-LAN-paths-generalized"
-    ]
+      "account-and-LAN-paths-generalized",
+      "full-bilingual-prose",
+      "dated-environment-context",
+      "language-paired-relative-links"
+    ],
+    "initialPublishedSha256": "769004df17f4167e0c4bfdd2ec25efe4bc39b66c660aea8a1a503accb71f1fec",
+    "initialPublishedPath": "reports/originals/engine-tests-2026-10-19-vision-stability-report.md",
+    "initialPublishedCommit": "0f3397627fd3fc0e8e763c4766ef9f91596a7268",
+    "localization": {
+      "date": "2026-10-20",
+      "english": "reports/originals/engine-tests-2026-10-19-vision-stability-report.md",
+      "chinese": "reports/originals/engine-tests-2026-10-19-vision-stability-report_CN.md",
+      "chineseSha256": "a8ae2e5d8f955f3e8003c17194a915788738b651cd1b323cb7d36d33db8a31d6",
+      "translationModel": "Codex editorial translation",
+      "translationRuntime": "Direct editorial localization with preserved source evidence",
+      "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
+      "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
+    }
   }
 ]

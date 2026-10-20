@@ -1,31 +1,50 @@
-# DeepSeek V4.1 Flash 测试总结（前 10 局）
+# DeepSeek V4.1 Flash Test Summary (First 10 Games)
 
-测试页面为 [ai-werewolf GitHub Pages](https://leoli-dev.github.io/ai-werewolf/)。所有已完成对局均使用 deepseek-flash（DeepSeek-V4.1-Flash）、12 人随机标准玩法、狼队沟通 3 轮、AI 代打和上帝视角。原计划覆盖 16 组推理配置、每组 3 局；用户要求第 10 局后暂停，因此本报告只汇总前 10 局，剩余 38 局未跑。
+[English](source-report.md) | [简体中文](source-report_CN.md)
 
-## 结果
+<!-- environment-context:start -->
 
-| 发言推理 | 决策推理 | 完成局数 | 好人胜 | 狼人胜 | 事件 | 决策 | LLM 调用 | 失败 | 代打 | 显示用时合计 |
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+The test page is [ai-werewolf GitHub Pages](https://leoli-dev.github.io/ai-werewolf/). All completed games used deepseek-flash (DeepSeek-V4.1-Flash), 12 random standard gameplay, 3 rounds of wolf team communication, AI auto-play, and god's-eye view. The original plan was to cover 16 sets of reasoning configurations, with 3 games per set; the user requested a pause after game 10, so this report only summarizes the first 10 games, with the remaining 38 games not run.
+
+## Results
+
+| Speech Reasoning | Decision Reasoning | Completed Games | Good Guy Wins | Werewolf Wins | Events | Decisions | LLM Calls | Failures | Auto-play | Total Displayed Time |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| none | none | 3 | 1 | 2 | 512 | 454 | 455 | 未记录 | 未记录 | 23:01 |
-| none | low | 3 | 1 | 2 | 543 | 477 | 618 | 未记录 | 48 | 1:40:49 |
-| none | high | 3 | 0 | 3 | 530 | 461 | 530 | 未记录 | 17 | >2:27:20 |
+| none | none | 3 | 1 | 2 | 512 | 454 | 455 | Not recorded | Not recorded | 23:01 |
+| none | low | 3 | 1 | 2 | 543 | 477 | 618 | Not recorded | 48 | 1:40:49 |
+| none | high | 3 | 0 | 3 | 530 | 461 | 530 | Not recorded | 17 | >2:27:20 |
 | none | max | 1 | 0 | 1 | 181 | 166 | 132 | 53 | 56 | 2:41:37 |
-| **合计** |  | **10** | **2** | **8** | **1,766** | **1,558** | **1,735** | **至少 53** | **至少 121** | **>7:12:47** |
+| **Total** |  | **10** | **2** | **8** | **1,766** | **1,558** | **1,735** | **At least 53** | **At least 121** | **>7:12:47** |
 
-用时是每局结果页展示的计时相加；high 组第 1 局显示超过 60 分钟，因此总时长只能给出下界。none/none 组没有保存失败/代打计数，故汇总为“未记录”。面板的失败和代打是分开计数的，数值不一定相等。
+The time is the sum of the timers displayed on each game's result page; game 1 in the high group displayed a time exceeding 60 minutes, so only a lower bound can be given for the total duration. The none/none group did not save failure/auto-play counts, so they are summarized as "Not recorded". The panel counts failures and auto-play separately, so the values are not necessarily equal.
 
-胜负样本很少，结果不构成模型强弱结论。已跑配置里狼人 8 胜、好人 2 胜；随机身份、局势与高延迟导致的代打都会影响结果。
+The sample size for wins and losses is small, and the results do not constitute a conclusion on model strength. In the configurations run, werewolves won 8 times and good guys won 2 times; random identities, game situations, and auto-play caused by high latency all affect the results.
 
-## 测试中发现的问题
+## Issues Found During Testing
 
-1. **高推理响应时间很长，且经常回退。** none/max 第 1 局用时 2:41:37，记录到 53 次失败和 56 次代打；多次响应接近 170–179 秒。none/high 三局至少总计超过 2:27:20。局面仍可自动推进，但等待显著影响体验和测试吞吐。
-2. **投票阶段会被最慢的请求拖住。** 多次观察到投票持续数分钟；源代码的 `voteRound()` 等 `askAll()` 完成后才汇总，而 `askAll()` 用 `Promise.all` 等待该组所有决策（game.ts:444（历史本机文件，未随本报告发布）、game.ts:1062（历史本机文件，未随本报告发布））。因此一个慢响应会推迟整轮结果，页面没有显示剩余请求数。
-3. **狼队沟通也使用决策推理强度。** 每晚的多轮狼聊受到决策档位影响；在 max 组中，狼队沟通阶段反复出现长等待和代打。
-4. **导出成功提示与文件可见性不一致。** 10 局结束后都点了“导出记录”，toast 确认事件/决策数量；用户与本地工作区都没有找到 JSON。当前归档只有逐局统计，缺少用户要求的完整逐事件 JSON，需修复或核实下载交付路径后重测。
-5. **代打比例会改变测试结果。** none/low 记录 48 次代打，none/high 记录 17 次，none/max 记录 56 次；胜负统计混合了模型输出和规则 AI 回退，后续比较应分别统计纯模型决策与回退局数。
+1. **High reasoning response times are very long and often fall back.** Game 1 in none/max took 2:41:37, with 53 failures and 56 auto-play instances recorded; multiple responses were close to 170–179 seconds. The three games in none/high totaled at least >2:27:20. The game state could still progress automatically, but the waiting significantly impacted experience and test throughput.
+2. **The voting phase is held up by the slowest request.** It was observed multiple times that voting lasted for several minutes; the source code's `voteRound()` waits for `askAll()` to complete before aggregating, while `askAll()` uses `Promise.all` to wait for all decisions in that group (game.ts:444 (historical local file, not published with this report), game.ts:1062 (historical local file, not published with this report)). Therefore, a slow response delays the results of the entire round, and the page does not display the number of remaining requests.
+3. **Wolf team communication also uses decision reasoning intensity.** The multi-round wolf chat each night is affected by the decision level; in the max group, long waits and auto-play repeatedly occurred during the wolf team communication phase.
+4. **Export success prompts are inconsistent with file visibility.** After each of the 10 games ended, "Export Record" was clicked, and the toast confirmed the number of events/decisions; neither the user nor the local workspace found the JSON. The current archive only contains per-game statistics, lacking the complete per-event JSON requested by the user; the download delivery path needs to be fixed or verified before retesting.
+5. **The auto-play ratio changes test results.** none/low recorded 48 auto-play instances, none/high recorded 17, and none/max recorded 56; win/loss statistics mixed model outputs and rule-based AI fallbacks, so future comparisons should separately count pure model decisions and fallback games.
 
-## 导出校验与归档限制
+## Export Verification and Archiving Limitations
 
-每个结果 toast 确认的事件/决策数依次为：178/164、145/130、189/160、177/153、163/144、203/180、216/190、168/151、146/120、181/166。页面 toast 说明触发了 JSON 导出，但并未提供文件路径；用户确认也看不到下载。故本目录未伪造或改写原始 JSON，`progress.csv`、各配置摘要和本报告只保存可核实的统计数据。
+The number of events/decisions confirmed by each result toast was, in order: 178/164, 145/130, 189/160, 177/153, 163/144, 203/180, 216/190, 168/151, 146/120, 181/166. The page toast indicated that JSON export was triggered, but did not provide a file path; the user confirmed that the download was also not visible. Therefore, this directory did not fabricate or rewrite the original JSON; `progress.csv`, the configuration summaries, and this report only save verifiable statistical data.
 
-API key 保持在浏览器的加密密钥库中，未复制到报告或本地归档。
+The API key remains in the browser's encrypted keychain and was not copied to the report or local archive.

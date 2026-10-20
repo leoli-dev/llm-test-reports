@@ -1,20 +1,39 @@
-# Cafe POS from-zero / Config D
+# Cafe POS from zero / Config D
 
-| 项目 | 记录 |
+[English](hermes-05.md) | [简体中文](hermes-05_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | HERMES-05 |
-| 日期 | 2026-05-27 |
-| 模型与运行方式 | Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit |
-| 推理位置 | 本机 |
+| ID | HERMES-05 |
+| Date | 2026-05-27 |
+| Model and runtime | Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-历史评分 7.4/10。24/24 测试与 build 通过；折扣闭环改善，但写了 11KB App.css 未 import。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Historical result
+
+Historical score: 7.4/10. All 24/24 tests and the build passed. Discount integration improved, but an 11KB App.css was never imported.
+
+## Full reports
 
 - [Hermes Cafe POS / Config D](../originals/session-cafe-pos-config-d.md)
 
-## 证据边界
+## Evidence limits
 
-会话保存原评审和 eval-log 提交号 0ae4c25；旧源码与报告仓库当前不存在，提交号只作线索，未找到可读取的 Git 对象。各配置使用同一产品目录重建，不把最后一版当作全部五版。
+The conversation preserves the original review and eval-log commit 0ae4c25. Product/report repositories are absent; the commit is a clue, not a verified readable Git object. The same product directory was rebuilt across configurations.

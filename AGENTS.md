@@ -1,12 +1,16 @@
 # LLM test report archive
 
-This is a report archive, not a model runtime or a monorepo of generated products.
+[English](AGENTS.md) | [简体中文](AGENTS_CN.md)
 
-- Canonical report content lives in `reports/originals/*.md`. Keep historical failures, measurements, human intervention and limits explicit. Do not silently rewrite a past conclusion using later results; add a dated update instead.
-- `reports/experiments/*.md` groups report documents by test. `data/catalog.json` powers the static reader and experiment index. Use CONTRIBUTING.md and scripts/add-report.mjs when adding a new report.
-- Separate local inference, LAN PC inference and cloud comparisons. A local source-code folder does not establish where inference ran.
-- Product repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test start. Link a pinned commit when available. Do not move product source into this repository.
-- Never publish client auth, private API endpoints, credentials, full personal sessions, model weights or runtime caches. Preserve experimental facts when generalizing private paths; document publication transformations.
-- Keep `site/` plain HTML, CSS and JavaScript. Build output in `dist/` must work under a GitHub Pages repository subpath, with no backend or external font requirement.
-- Run `npm run build` and `npm run check` after content or site changes. For UI changes, test search, combined filters, report switching, image links and mobile overflow in Chromium. Do not use Google Chrome or Playwright channel chrome.
-- The original local import inventory is external. Running scripts/import_archive.py again can replace the initial archive; prefer adding reports rather than reimporting over later edits.
+This repository stores reports, rather than a model runtime or generated-product monorepo.
+
+- Full report editions live in `reports/originals/*.md`. English is the unsuffixed default; every report and reader-facing document has a full Chinese `_CN.md` counterpart. Preserve historical failures, measurements, human intervention and limits. Add dated updates instead of silently replacing past conclusions.
+- `reports/experiments/*.md` groups documents by test. `data/catalog.json` and `data/catalog_CN.json` power the English and Chinese readers. Keep document IDs stable across languages. Follow CONTRIBUTING.md and use scripts/add-report.mjs with a report pair.
+- Record actual inference-host hardware and test-time OS/version/build, with evidence. `environment.md` is a dated current workstation reference; do not substitute its current OS for undocumented historical conditions. Mark unknowns explicitly.
+- Distinguish local, LAN PC and cloud inference, and label client versus inference host. A local source-code folder does not establish where inference ran.
+- Product repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test start. Link a pinned commit when possible. Keep product source in its own repository.
+- Never publish client auth, private endpoints, credentials, full personal sessions, model weights or runtime caches. Preserve facts when generalizing private paths and document publication transformations.
+- Keep `site/` plain HTML, CSS and JavaScript. The English entry is `index.html`; Chinese is `index_CN.html`. Preserve report selection when switching language. `dist/` must work under a GitHub Pages repository subpath without a backend or external fonts.
+- Run `npm run build` and `npm run check` after changes. For UI changes, verify both languages, search, combined filters, report switching, images, downloads and mobile overflow in Chromium. Do not use Google Chrome or Playwright channel chrome.
+- Original code, commands, figures and literal evidence retain their source language. Translate surrounding explanations; do not redraw screenshots or alter numbers to suggest a different outcome. Preserve provenance and the source-code translation audit.
+- The original local import inventory is external. The initial importer must not overwrite the maintained bilingual archive; add paired reports instead.

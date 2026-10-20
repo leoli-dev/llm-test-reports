@@ -1,55 +1,74 @@
 ---
 type: Note
-title: DeepSeek V4.1 Flash 十局推理配置测试
+title: "DeepSeek V4.1 Flash Ten-Game Reasoning Configuration Test"
 status: current
-description: 真实 API 对局前十局的结果、延迟与导出问题；按用户要求在第十局后暂停
+description: "Results, latency, and export issues for the first ten games of real API matches; paused after the tenth game as requested by the user"
 tags: [llm, benchmark, deepseek, game-test, latency]
 timestamp: 2026-10-11T21:44:16Z
 ---
 
-# DeepSeek V4.1 Flash 十局推理配置测试
+# DeepSeek V4.1 Flash Ten-Game Reasoning Configuration Test
 
-## 测试范围
+[English](devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark.md) | [简体中文](devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark_CN.md)
 
-2026-10-11 在 GitHub Pages 运行 DeepSeek V4.1 Flash（deepseek-flash）。每局为 12 人随机标准玩法、狼人沟通 3 轮、AI 代打和上帝视角开启。原计划是发言推理 none/low/high/max × 决策推理 none/low/high/max，每组 3 局，共 48 局。用户后来要求完成第十局后暂停；因此只跑了发言 none 下的决策 none（3 局）、low（3 局）、high（3 局）和 max（1 局），其余 38 局未执行。
+<!-- environment-context:start -->
 
-逐局数据保存在 ai-werewolf 仓库的 artifacts/deepseek-v41-flash-benchmark-2026-10-11/progress.csv，测试报告位于同目录的 report.md。API key 留在浏览器密钥库，没有写入项目日志。
+## Workstation and system (context added 2026-10-20)
 
-## 汇总
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-| 发言推理 | 决策推理 | 局数 | 好人胜 | 狼人胜 | 事件 | 决策 | LLM 调用 | 失败 | 代打 | 显示用时 |
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Test Scope
+
+2026-10-11 Running DeepSeek V4.1 Flash (deepseek-flash) on GitHub Pages. Each game is a 12-player random standard game, with werewolf communication for 3 rounds, AI proxy play enabled, and god's view enabled. The original plan was speech reasoning none/low/high/max × decision reasoning none/low/high/max, with 3 games per group, totaling 48 games. The user later requested to pause after completing the tenth game; therefore, only decision none (3 games), low (3 games), high (3 games), and max (1 games) under speech none were run, and the remaining 38 games were not executed.
+
+Per-game data is saved in artifacts/deepseek-v41-flash-benchmark-2026-10-11/progress.csv in the ai-werewolf repository, and the test report is located in report.md in the same directory. The API key remains in the browser keychain and was not written to project logs.
+
+## Summary
+
+| Speech Reasoning | Decision Reasoning | Games | Good Wins | Werewolf Wins | Events | Decisions | LLM Calls | Failures | Proxy Plays | Displayed Time |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| none | none | 3 | 1 | 2 | 512 | 454 | 455 | 未记录 | 未记录 | 23:01 |
-| none | low | 3 | 1 | 2 | 543 | 477 | 618 | 未记录 | 48 | 1:40:49 |
-| none | high | 3 | 0 | 3 | 530 | 461 | 530 | 未记录 | 17 | >2:27:20 |
+| none | none | 3 | 1 | 2 | 512 | 454 | 455 | Not recorded | Not recorded | 23:01 |
+| none | low | 3 | 1 | 2 | 543 | 477 | 618 | Not recorded | 48 | 1:40:49 |
+| none | high | 3 | 0 | 3 | 530 | 461 | 530 | Not recorded | 17 | >2:27:20 |
 | none | max | 1 | 0 | 1 | 181 | 166 | 132 | 53 | 56 | 2:41:37 |
-| 合计 |  | 10 | 2 | 8 | 1,766 | 1,558 | 1,735 | 至少 53 | 至少 121 | >7:12:47 |
+| Total |  | 10 | 2 | 8 | 1,766 | 1,558 | 1,735 | At least 53 | At least 121 | >7:12:47 |
 
-游戏结果页展示的时间相加；high 组第一局超过 60 分钟，所以总数是下界。none/none 没记录失败和代打数量。失败与代打是两个不同的面板计数，数值可以不同。样本规模小，且大量回退会混合模型与规则 AI 的结果，不能据此判断模型的整体胜率。
+Times displayed on the game results page are summed; the first game in the high group exceeded 60 minutes, so the total is a lower bound. Failures and proxy play counts were not recorded for none/none. Failures and proxy plays are two different panel counts, and the values can differ. The sample size is small, and a large number of fallbacks mix model and rule-based AI results, so the overall win rate of the model cannot be determined based on this.
 
-## 逐局结果
+## Per-Game Results
 
-| 序号 | 配置（发言/决策） | 胜方 | 天数 | 事件 | 决策 | LLM 调用 | 失败 | 代打 | 用时 |
+| No. | Configuration (Speech/Decision) | Winner | Days | Events | Decisions | LLM Calls | Failures | Proxy Plays | Time |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|
-| 1 | none/none | 好人 | 4 | 178 | 164 | 165 | 未记录 | 未记录 | 07:52 |
-| 2 | none/none | 狼人 | 3 | 145 | 130 | 130 | 未记录 | 未记录 | 06:22 |
-| 3 | none/none | 狼人 | 5 | 189 | 160 | 160 | 未记录 | 未记录 | 08:47 |
-| 4 | none/low | 狼人 | 4 | 177 | 153 | 199 | 未记录 | 14 | 30:51 |
-| 5 | none/low | 好人 | 4 | 163 | 144 | 194 | 未记录 | 17 | 31:06 |
-| 6 | none/low | 狼人 | 5 | 203 | 180 | 225 | 未记录 | 17 | 38:52 |
-| 7 | none/high | 狼人 | 6 | 216 | 190 | 234 | 未记录 | 9 | >60 分钟 |
-| 8 | none/high | 狼人 | 4 | 168 | 151 | 159 | 未记录 | 3 | 39:51 |
-| 9 | none/high | 狼人 | 4 | 146 | 120 | 137 | 未记录 | 5 | 47:29 |
-| 10 | none/max | 狼人 | 5 | 181 | 166 | 132 | 53 | 56 | 2:41:37 |
+| 1 | none/none | Good | 4 | 178 | 164 | 165 | Not recorded | Not recorded | 07:52 |
+| 2 | none/none | Werewolf | 3 | 145 | 130 | 130 | Not recorded | Not recorded | 06:22 |
+| 3 | none/none | Werewolf | 5 | 189 | 160 | 160 | Not recorded | Not recorded | 08:47 |
+| 4 | none/low | Werewolf | 4 | 177 | 153 | 199 | Not recorded | 14 | 30:51 |
+| 5 | none/low | Good | 4 | 163 | 144 | 194 | Not recorded | 17 | 31:06 |
+| 6 | none/low | Werewolf | 5 | 203 | 180 | 225 | Not recorded | 17 | 38:52 |
+| 7 | none/high | Werewolf | 6 | 216 | 190 | 234 | Not recorded | 9 | >60 minutes |
+| 8 | none/high | Werewolf | 4 | 168 | 151 | 159 | Not recorded | 3 | 39:51 |
+| 9 | none/high | Werewolf | 4 | 146 | 120 | 137 | Not recorded | 5 | 47:29 |
+| 10 | none/max | Werewolf | 5 | 181 | 166 | 132 | 53 | 56 | 2:41:37 |
 
-## 观察到的问题
+## Observed Issues
 
-1. 高推理请求出现长尾延迟。none/max 第十局耗时 2:41:37，LLM 面板记录 53 次失败和 56 次代打；多条请求耗时约 170–179 秒。none/high 三局总显示时长超过 2:27:20。
-2. 投票有明显“等待后才结算”的停顿。源码 voteRound 先等待 askAll，askAll 对同一轮决策使用 Promise.all；所有请求完成前不会发布票数结果，最慢的请求会拖住整轮。参见 ai-werewolf/src/game/game.ts 第 444 行和第 1062 行。页面没有展示还剩多少请求。
-3. 狼队沟通使用决策推理强度，所以高/最高决策推理会放慢每晚多轮狼队讨论，不只影响投票、技能等动作。
-4. 页面导出行为与文件可见性不一致。十局都点击“导出记录”，页面 toast 分别确认 178/164、145/130、189/160、177/153、163/144、203/180、216/190、168/151、146/120、181/166。toast 说已导出，但用户和本地工作区均找不到 JSON 下载。当前保存的是汇总统计，没有完整逐事件 JSON。
-5. 代打占比会污染纯模型评测。none/low 记录 48 次代打，none/high 记录 17 次，none/max 记录 56 次。后续报告应把纯模型回答和回退动作分开看。
+1. High reasoning requests exhibit long-tail latency. The tenth game of none/max took 2:41:37, with the LLM panel recording 53 failures and 56 proxy plays; multiple requests took approximately 170–179 seconds. The total displayed duration for the three games in none/high exceeded 2:27:20.
+2. Voting has noticeable "wait then settle" pauses. The source code voteRound first waits for askAll, and askAll uses Promise.all for decisions in the same round; vote results are not published until all requests are complete, so the slowest request holds up the entire round. See ai-werewolf/src/game/game.ts line 444 and line 1062. The page does not display how many requests are remaining.
+3. Werewolf communication uses decision reasoning intensity, so high/max decision reasoning slows down multi-round werewolf discussions every night, not just actions like voting and skills.
+4. Page export behavior is inconsistent with file visibility. "Export Record" was clicked for all ten games, and page toasts confirmed 178/164, 145/130, 189/160, 177/153, 163/144, 203/180, 216/190, 168/151, 146/120, and 181/166 respectively. The toasts stated that export was complete, but neither the user nor the local workspace could find the JSON download. Currently saved are summary statistics, not complete per-event JSON.
+5. The proportion of proxy plays contaminates pure model evaluation. none/low recorded 48 proxy plays, none/high recorded 17, and none/max recorded 56. Subsequent reports should separate pure model responses from fallback actions.
 
-## 导出限制
+## Export Limitations
 
-浏览器称 JSON 已导出，然而既没有文件路径，也未发现下载文件；用户确认自己也看不到。不能把统计摘要伪装成完整对局 JSON，因此原始 JSON 没有粘贴进这条日志。BUG-04 跟踪导出文件不可见问题。修复或确认下载交付后，应重新导出并补录原始文件。
+The browser claimed the JSON was exported, but there was no file path, and no downloaded file was found; the user confirmed they could not see it either. Statistical summaries cannot be disguised as complete game JSON, so the raw JSON was not pasted into this log. BUG-04 tracks the issue of invisible export files. After fixing or confirming download delivery, the export should be redone and the raw files supplemented.

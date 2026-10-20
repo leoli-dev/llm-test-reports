@@ -1,32 +1,51 @@
 ---
 type: Note
-title: MTPLX Qwen3.8 27B Optimized Quality 压测执行记录
+title: "MTPLX Qwen3.8 27B Optimized Quality Stress Test Execution Record"
 status: current
-description: 按 Flash-Next 128K 方法记录 Qwen3.8 27B Optimized Quality 冷 prefill 与后续近 128K natural soak；soak 完成 3 个任务、持续 30.6 分钟，系统采样完整而 CPU/GPU/热压力遥测只覆盖末段。
+description: "Recorded Qwen3.8 27B Optimized Quality cold prefill and subsequent near-128K natural soak using the Flash-Next 128K method; the soak completed 3 tasks, lasting 30.6 minutes, with complete system sampling but CPU/GPU/thermal pressure telemetry covering only the final segment."
 tags: [qwen3.8, optimized-quality, mtplx, benchmark, performance, prefill, decode, memory]
 timestamp: 2026-09-20T08:42:42Z
 ---
 
-# MTPLX Qwen3.8 27B Optimized Quality 压测
+# MTPLX Qwen3.8 27B Optimized Quality Stress Test
 
-## 结论
+[English](devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md) | [简体中文](devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20_CN.md)
 
-2026-09-20 按 Flash-Next 128K 压测方法对 MTPLX 上的 `Qwen 3.8 27B Optimized Quality`（8-bit dynamic quant）执行第二个模型批次。完成两轮 warm-up 和 8K–120K 冷 prefill（每档 3 次），共 18 个请求；15 个冷 prefill 样本均通过 marker 校验且 `cached_tokens=0`。
+<!-- environment-context:start -->
 
-实际 prompt 中位数由 8,406 增至 120,408 tokens 时，冷 prefill median 从 465.9 降至 305.9 tok/s（端点下降 34.3%）；TTFT 从 18.19s 增至 395.88s（约 21.8 倍）。这是上下文长度对冷 prefill 的曲线，不是持续 decode 衰减曲线。
+## Workstation and system (context added 2026-10-20)
 
-短 marker 回复的 decode median 在 8K–120K 端点为 39.79→36.48 tok/s（端点变化 -8.3%），但每次仅 470–904 个 completion tokens，且各档不是单调变化；只作浅层上下文观测，不能代替约 4K structured/natural 长 decode 或 soak 时间序列。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-首个结构化 decode 探针在 prefill 前被 MTPLX HTTP 507 拒绝：8,405 prompt tokens（全部未缓存），引擎估算 96.6 GiB，超过 96.0 GiB 内存预算 0.6 GiB，completion 为 0。按计划停止条件没有重试，因此 64K/112K 长 decode、natural 对照、缓存 A/B 与 45–60 分钟 soak 均未执行。本批结论为**部分完成**，不可宣称完整 decode 衰减曲线或稳定 soak 结果。
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 配置与方法
+<!-- environment-context:end -->
 
-- MTPLX Desktop OpenAI-compatible endpoint：`http://127.0.0.1:8001/v1`；运行时 model id：`mtplx-qwen38-27b-optimized-quality`。
-- 模型 UI 显示 8-bit dynamic quant；服务广告 context 为 262,144。为保持与原计划相同的测试合同，Pi 独立注册使用 131,072 context、8,192 max output。
-- `reasoning_effort=medium`、MTP generation/head enabled、profile Auto、KV quantization off、`allow_swap=false`、MTP cohorts off；关闭 Pi tools/skills/extensions/context files 并用 `--no-session`。配置前后快照匹配。
-- 使用隔离 Pi agent 目录；没有修改全局 Pi 模型/设置。正式冷组每档三个唯一语料，短 marker 响应用于测 prefill 并顺带取得短 decode 样本；执行前完成 2 次 warm-up。
+## Conclusions
 
-| 名义输入 | 实际 prompt 中位数 | Prefill median (tok/s) | TTFT median (s) | 短答 decode median (tok/s) | Marker |
+On 2026-09-20, the second model batch was executed on MTPLX for `Qwen 3.8 27B Optimized Quality` (8-bit dynamic quant) using the Flash-Next 128K stress test method. Two rounds of warm-up and 8K–120K cold prefill (3 runs per tier) were completed, totaling 18 requests; all 15 cold prefill samples passed marker validation and had `cached_tokens=0`.
+
+As the actual prompt median increased from 8,406 to 120,408 tokens, the cold prefill median decreased from 465.9 to 305.9 tok/s (endpoint drop of 34.3%); TTFT increased from 18.19s to 395.88s (approximately 21.8 times). This is the curve of context length on cold prefill, not a sustained decode decay curve.
+
+The decode median for short marker responses was 39.79→36.48 tok/s at the 8K–120K endpoints (endpoint change -8.3%), but each run had only 470–904 completion tokens, and the values were not monotonic across tiers; this serves only as a shallow context observation and cannot replace approximately 4K structured/natural long decode or soak time series.
+
+The first structured decode probe was rejected by MTPLX HTTP 507 before prefill: 8,405 prompt tokens (all uncached), engine estimated 96.6 GiB, exceeding the 96.0 GiB memory budget by 0.6 GiB, with completion of 0. No retry was performed per the planned stop condition, so the 64K/112K long decode, natural control, cache A/B, and 45–60 minute soak were not executed. The conclusion for this batch is **partially completed**, and a complete decode decay curve or stable soak results cannot be claimed.
+
+## Configuration and Method
+
+- MTPLX Desktop OpenAI-compatible endpoint: `http://127.0.0.1:8001/v1`; runtime model id: `mtplx-qwen38-27b-optimized-quality`.
+- The model UI displays 8-bit dynamic quant; the service advertises a context of 262,144. To maintain the same test contract as the original plan, Pi independently registered using 131,072 context and 8,192 max output.
+- `reasoning_effort=medium`, MTP generation/head enabled, profile Auto, KV quantization off, `allow_swap=false`, MTP cohorts off; Pi tools/skills/extensions/context files were disabled and `--no-session` was used. Pre- and post-configuration snapshots matched.
+- An isolated Pi agent directory was used; no global Pi model/settings were modified. The formal cold group used three unique corpora per tier, with short marker responses used to measure prefill and incidentally obtain short decode samples; 2 warm-up runs were completed before execution.
+
+| Nominal Input | Actual Prompt Median | Prefill Median (tok/s) | TTFT Median (s) | Short Answer Decode Median (tok/s) | Marker |
 |---:|---:|---:|---:|---:|---:|
 | 8K | 8,406 | 465.9 | 18.19 | 39.79 | 3/3 |
 | 32K | 32,407 | 422.2 | 76.98 | 43.81 | 3/3 |
@@ -34,36 +53,36 @@ timestamp: 2026-09-20T08:42:42Z
 | 96K | 96,407 | 326.1 | 295.94 | 31.73 | 3/3 |
 | 120K | 120,408 | 305.9 | 395.88 | 36.48 | 3/3 |
 
-两次 64 行 warm-up 分别生成 1,314–1,694 completion tokens；据此校准到 160 行、约 3.8K token 的结构化输出探针。该探针输入为 8,405 tokens，未开始 prefill 就被拒绝；这不是输出截断、marker 错误或 Pi 适配问题。MTPLX 服务保持运行，触发停止条件后无后续请求。
+Two 64-line warm-up runs generated 1,314–1,694 completion tokens respectively; based on this, calibration was performed to a structured output probe of 160 lines, approximately 3.8K tokens. This probe's input was 8,405 tokens and was rejected before prefill started; this was not due to output truncation, marker error, or Pi adaptation issues. The MTPLX service remained running, and no subsequent requests were made after the stop condition was triggered.
 
-## 资源观测与边界
+## Resource Observations and Boundaries
 
-设备物理内存 128 GB；采样期间 MTPLX PID 未变化，RSS 约 30.7 GB；Swap 约 3.67–4.27 GiB，未见持续上升的明确趋势。关键限制是 MTPLX 引擎对该请求的 96 GiB 投影预算，而非 Mac 物理内存已经耗尽。测试没有清 cache、重启服务或更改 KV/Swap 配置。
+Device physical memory 128 GB; during sampling, the MTPLX PID did not change, with RSS approximately 30.7 GB; Swap was approximately 3.67–4.27 GiB, with no clear trend of sustained increase. The key limitation was the MTPLX engine's 96 GiB projected budget for this request, rather than Mac physical memory being exhausted. The test did not clear cache, restart the service, or change KV/Swap configuration.
 
-若继续长 decode，应作为后续独立批次处理：先由用户决定是否释放更多引擎余量或使用 q8 KV 配置。更改 KV 会改变配置合同，不与当前无 KV 量化批次混并。
+If long decode is to be continued, it should be handled as a subsequent independent batch: first, the user decides whether to release more engine headroom or use the q8 KV configuration. Changing KV would alter the configuration contract and should not be mixed with the current no-KV-quantization batch.
 
-## 产物
+## Artifacts
 
-- 运行报告（历史本机文件，未随本报告发布）
-- 逐请求曲线 CSV（历史本机文件，未随本报告发布）
-- 短答 decode CSV（历史本机文件，未随本报告发布）
-- [冷 prefill 曲线 SVG](../../assets/figures/9d2839259a0e-cold-prefill-throughput.svg)
-- 原始 MTPLX metrics（历史本机文件，未随本报告发布）
-- 请求记录与响应快照（历史本机文件，未随本报告发布）
-- 机器状态采样（历史本机文件，未随本报告发布）
+- Run report (historical local file, not published with this report)
+- Per-request curve CSV (historical local file, not published with this report)
+- Short answer decode CSV (historical local file, not published with this report)
+- [Cold prefill curve SVG](../../assets/figures/9d2839259a0e-cold-prefill-throughput.svg)
+- Raw MTPLX metrics (historical local file, not published with this report)
+- Request records and response snapshots (historical local file, not published with this report)
+- Machine state sampling (historical local file, not published with this report)
 
-## 后续补测：近 128K 多任务 natural soak（2026-09-20）
+## Follow-up Supplementary Test: Near-128K Multi-task Natural Soak (2026-09-20)
 
-按用户要求另起 soak run `20260920T071156Z-216b61`。context window 131,072；3 个不同任务各使用 120,410 prompt tokens，最多请求 8,192 输出 tokens。连续运行 **30 分 38 秒**，配置前后匹配。
+Per user request, a separate soak run `20260920T071156Z-216b61` was initiated. Context window 131,072; 3 different tasks each used 120,410 prompt tokens, with a maximum requested output of 8,192 tokens. Continuous run for **30 min 38 sec**, with pre- and post-configuration matching.
 
-| # | 任务 | Completion tokens | Prefill tok/s | Decode tok/s | TTFT (s) | marker/header |
+| # | Task | Completion tokens | Prefill tok/s | Decode tok/s | TTFT (s) | marker/header |
 |---:|---|---:|---:|---:|---:|:---:|
-| 1 | 数据完整性与异常审计 | 8,192 | 404.182 | 28.638 | 298.404 | 通过 |
-| 2 | 延迟分布与缓存/分片归因 | 6,428 | 348.884 | 26.208 | 345.878 | 通过 |
-| 3 | 可靠性改进与验证方案 | 8,192 | 332.588 | 27.860 | 362.575 | 未通过 |
+| 1 | Data integrity and anomaly audit | 8,192 | 404.182 | 28.638 | 298.404 | Passed |
+| 2 | Latency distribution and cache/sharding attribution | 6,428 | 348.884 | 26.208 | 345.878 | Passed |
+| 3 | Reliability improvements and validation plan | 8,192 | 332.588 | 27.860 | 362.575 | Failed |
 
-3 次请求的 prefill median 为 **348.884 tok/s**，decode median 为 **27.860 tok/s**。第 1→3 个任务 prefill 下降 **17.7%**；decode 有先降后升，端点变化 **−2.7%**。第 3 项 marker/header 校验失败，但请求完成且速率指标有效；因此正确/完整计数为 2/3。
+The prefill median for the 3 requests was **348.884 tok/s**, and the decode median was **27.860 tok/s**. Prefill decreased by **17.7%** from task 1→3; decode decreased then increased, with an endpoint change of **−2.7%**. The marker/header validation for item 3 failed, but the request completed and rate metrics were valid; therefore, the correct/complete count was 2/3.
 
-全程 system-state 119 个样本：可用 RAM 最低/平均 **27.0% / 44.6%**；整机 RAM 已用估算峰值 **93.44 GiB**；MTPLX RSS 峰值 **35.99 GiB**；进程 CPU 中位/采样峰值 **11.7% / 95.9%**；Swap **3,638.25→3,614.25 MiB**，未增长。CPU/GPU/热压力 powermetrics 仅覆盖压测末段 **8 分 02 秒、33 个样本**：CPU/GPU 功耗估算均值 **5.69 W / 19.64 W**，GPU HW active residency 均值 **98.2%**，热压力 **Heavy 33/33**。没有采到绝对摄氏温度；独立 GPU 显存不可见（Apple Silicon 统一内存）。
+System-state sampling for the entire duration yielded 119 samples: available RAM minimum/average **27.0% / 44.6%**; estimated peak whole-machine RAM usage **93.44 GiB**; MTPLX RSS peak **35.99 GiB**; process CPU median/sampling peak **11.7% / 95.9%**; Swap **3,638.25→3,614.25 MiB**, no increase. CPU/GPU/thermal pressure powermetrics covered only the final segment of the stress test for **8 min 02 sec, 33 samples**: CPU/GPU power consumption estimated average **5.69 W / 19.64 W**, GPU HW active residency average **98.2%**, thermal pressure **Heavy 33/33**. Absolute Celsius temperature was not sampled; independent GPU VRAM was not visible (Apple Silicon unified memory).
 
-补测证据：运行报告（历史本机文件，未随本报告发布） · 逐请求记录（历史本机文件，未随本报告发布） · 全程系统采样（历史本机文件，未随本报告发布） · powermetrics 原始遥测（历史本机文件，未随本报告发布） · [两模型对比报告](devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20.md)。
+Supplementary test evidence: Run report (historical local file, not published with this report) · Per-request records (historical local file, not published with this report) · Full-duration system sampling (historical local file, not published with this report) · powermetrics raw telemetry (historical local file, not published with this report) · [Two-model comparison report](devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20.md).

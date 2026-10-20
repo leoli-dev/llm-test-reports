@@ -1,212 +1,231 @@
 ---
 type: Note
-title: Neon Bastion — Round 3 verification (score withheld pending playtest)
+title: "Neon Bastion — Round 3 verification (score withheld pending playtest)"
 status: current
-description: Third-pass verification of Neon Bastion — every Round 2 fix independently confirmed, but a human playthrough then exposed that AI fire bypasses the event bus entirely (no tracer, flash, spark or sound for 7 of 8 units) and that the player gets no damage-taken feedback at all.
+description: "Third-pass verification of Neon Bastion — every Round 2 fix independently confirmed, but a human playthrough then exposed that AI fire bypasses the event bus entirely (no tracer, flash, spark or sound for 7 of 8 units) and that the player gets no damage-taken feedback at all."
 tags: [qwen3.8, mlx-dspark, dflash2, pi, threejs, code-review, fps, benchmark, playtest, methodology]
 timestamp: 2026-09-02T10:45:00Z
 ---
 
-> **本页为第三轮。** 前两轮见 [Round 1](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md) 与 [Round 2](devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md)。
+> **This page is Round 3.** See [Round 1](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md) and [Round 2](devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md) for the previous two rounds.
 
-# Neon Bastion — Round 3 验证（评分暂缓至人工游玩）
+# Neon Bastion — Round 3 Verification (Scoring Deferred to Manual Play)
 
-被评审提交：`ad6545d "Fix round-2 review findings (4 P1, 2 P2) + sprint feedback"`，基线 `1badf4c`。13 files changed, +402/−76，工作树干净。
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02_CN.md)
 
-## 本轮不给分数——这是刻意的
+<!-- environment-context:start -->
 
-Round 2 的方法论结论是：**静态代码审查 + headless 测试复跑 + 截图检视，三者叠加仍然无法验证「可玩性」**。A/D 反向、曳光不可见、操作说明造假三项，曾在 33 单测 + 6 E2E 全绿、5 张截图俱全的情况下通过了两轮评审。
+## Workstation and system (context added 2026-10-20)
 
-若本轮再以同一套证据给出一个分数，等于立刻违背刚记录的结论。因此本页只回答「Round 2 的每条发现是否已修复」这个可证实的问题，**最终评分留待用户人工游玩后给出**，试玩清单见文末。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-## 独立验证
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-| 检查 | 结果 | 证据 |
+<!-- environment-context:end -->
+
+Reviewed commit: `ad6545d "Fix round-2 review findings (4 P1, 2 P2) + sprint feedback"`, baseline `1badf4c`. 13 files changed, +402/−76, working tree clean.
+
+## No Score Given This Round — This Is Deliberate
+
+The methodological conclusion from Round 2 was: **static code review + headless test reruns + screenshot inspection, even combined, still cannot verify "playability"**. The three issues of inverted A/D controls, invisible tracers, and fabricated control instructions had passed two rounds of review despite 33 unit tests + 6 E2E tests all passing and 5 screenshots being present.
+
+If this round were to assign a score based on the same set of evidence, it would immediately contradict the conclusion just recorded. Therefore, this page only answers the verifiable question of "whether each finding from Round 2 has been fixed," and **the final score is reserved for after the user manually plays the game**. See the end of the document for the playtest checklist.
+
+## Independent Verification
+
+| Check | Result | Evidence |
 |---|---|---|
-| `tsc --noEmit` | Pass | exit 0。 |
-| `npm run build` | Pass with warning | 仍有 >500 kB chunk 警告，README 已记录为已知取舍。 |
-| 单元测试 | Pass | **38/38（5 文件）**，较 R2 增加 5 条 movement 测试。 |
-| Playwright E2E | Pass | 6/6，**连续 3 轮**均 7.4 s 全绿。 |
-| 计算样式探针 | Pass | 评审方独立复跑（非 agent 自带断言），见下。 |
+| `tsc --noEmit` | Pass | exit 0. |
+| `npm run build` | Pass with warning | Still has >500 kB chunk warning, documented in README as a known trade-off. |
+| Unit Tests | Pass | **38/38 (5 files)**, an increase of 5 movement tests compared to R2. |
+| Playwright E2E | Pass | 6/6, **3 consecutive rounds** all green at 7.4 s. |
+| Computed Style Probe | Pass | Independently rerun by the reviewer (not the agent's built-in assertions), see below. |
 
-## Round 2 遗留项的处置
+## Disposition of Round 2 Carry-over Items
 
-| ID | 状态 | 独立复核证据 |
+| ID | Status | Independent Re-verification Evidence |
 |---|---|---|
-| **UI-02**（P1 覆盖层黑字） | **已修复** | `hud.ts:255` 改为 `this.root.appendChild(this.screenEl)`。评审方探针实测：`.nb-screen` 的 parent 为 `nb-root nb-results`、`--cyan` 解析为 `#18e0ff`；`.nb-res-title` color `rgb(24,224,255)`（原 `rgb(0,0,0)`）、`.nb-sub` `rgb(230,238,251)`、`.nb-row .sc` 字体 `ui-monospace`。**Times 已完全消失。** |
-| **CTRL-01**（P1 A/D 反向） | **已修复** | `match.ts:152-155` 改为 `rx = -Math.cos(p.yaw); rz = Math.sin(p.yaw);`，并附推导注释。新增 `tests/unit/movement.test.ts` 5 条：4 个朝向下的 D 向右、A 为 D 的镜像、D/A 无前后漂移。 |
-| **FX-01**（P1 战斗反馈不可见） | **已修复** | 曳光起点移至枪口（`app.ts:249-253`，前 0.55 m / 眼下 0.12 m）；`spawnMuzzleFlash` 已实现（`renderer.ts:315`，池化）；`res.kind === 'wall'` 现在也触发火花（冷色，与命中单位的暖色区分）；`tracerLife` 0.09→0.18 s 并接入 CONFIG（原为死常量）；`maxParticles`/`hitKick`/`shotKick` 三个死常量已删除。`02-combat-hit.png` 可见曳光线、金色 hitmarker、火花，调试面板 `FX 5`。 |
-| **DOC-02**（P1 README 虚构操作） | **已修复** | Controls 表与 `applyKey()` 逐条一致（Space=Jump、Q/E=观战、左键射击），并新增一行 **"Not yet implemented (honest list): crouch, melee, weapon switching, Tab leaderboard hold, `P` pause, `M` mute"**——把未实现项显式列出，正是题面要求的诚实度。 |
-| **QA-10**（P2 渲染断言是弱代理） | **已修复** | 字节数代理已替换为**读取 WebGL canvas 实际像素**（`brightFrac` / `std` / `maxLuma`，采样 6 帧取最优），机位固定为面向中央高台。全黑画面现在会使测试失败。 |
-| **ART-03**（P2 实机过暗） | **已修复但过头** | exposure 1.15→1.5、wall `#1A1D22`→`#23272E`、新增 `AmbientLight(0x3a4a6a, 0.25)`、钠灯 4 盏 @150→6 盏 @220。画面确实亮了，但见下方 ART-04。 |
-| **FEEL-01**（P2 Sprint 无反馈） | 已实现 | FOV 78°→85° 平滑推移 + 头部晃动，reduced-motion 下禁用，并写入 Controls 表。可感知性待人工确认。 |
+| **UI-02** (P1 Overlay Black Text) | **Fixed** | `hud.ts:255` changed to `this.root.appendChild(this.screenEl)`. Reviewer probe measurement: parent of `.nb-screen` is `nb-root nb-results`, `--cyan` resolves to `#18e0ff`; `.nb-res-title` color `rgb(24,224,255)` (originally `rgb(0,0,0)`), `.nb-sub` `rgb(230,238,251)`, `.nb-row .sc` font `ui-monospace`. **Times has completely disappeared.** |
+| **CTRL-01** (P1 Inverted A/D) | **Fixed** | `match.ts:152-155` changed to `rx = -Math.cos(p.yaw); rz = Math.sin(p.yaw);`, with derivation comments added. Added 5 new tests in `tests/unit/movement.test.ts`: D moves right in 4 orientations, A is the mirror of D, no forward/backward drift for D/A. |
+| **FX-01** (P1 Combat Feedback Invisible) | **Fixed** | Tracer start point moved to muzzle (`app.ts:249-253`, 0.55 m forward / 0.12 m below eye); `spawnMuzzleFlash` implemented (`renderer.ts:315`, pooled); `res.kind === 'wall'` now also triggers sparks (cool color, distinguished from warm color of hit units); `tracerLife` 0.09→0.18 s and connected to CONFIG (originally a dead constant); three dead constants `maxParticles`/`hitKick`/`shotKick` removed. `02-combat-hit.png` shows visible tracer line, gold hitmarker, sparks, debug panel `FX 5`. |
+| **DOC-02** (P1 README Fabricated Controls) | **Fixed** | Controls table matches `applyKey()` item by item (Space=Jump, Q/E=Spectate, Left Click=Shoot), and added a line **"Not yet implemented (honest list): crouch, melee, weapon switching, Tab leaderboard hold, `P` pause, `M` mute"** — explicitly listing unimplemented items, which is exactly the honesty required by the prompt. |
+| **QA-10** (P2 Rendering Assertion is Weak Proxy) | **Fixed** | Byte count proxy replaced by **reading actual pixels from WebGL canvas** (`brightFrac` / `std` / `maxLuma`, sampling 6 frames to take the best), camera fixed facing the central platform. A completely black screen will now cause the test to fail. |
+| **ART-03** (P2 Actual Game Too Dark) | **Fixed but Overdone** | exposure 1.15→1.5, wall `#1A1D22`→`#23272E`, added `AmbientLight(0x3a4a6a, 0.25)`, sodium lights 4 @150→6 @220. The screen is indeed brighter, but see ART-04 below. |
+| **FEEL-01** (P2 Sprint No Feedback) | Implemented | FOV 78°→85° smooth transition + head bob, disabled under reduced-motion, and written into the Controls table. Perceptibility pending manual confirmation. |
 
-## 值得记录的一点：agent 把评审意见内化成了回归测试
+## A Point Worth Noting: The Agent Internalized Review Comments into Regression Tests
 
-新增的两条断言直接针对上一轮的失效机制，注释写着 *"toHaveText/toBeVisible pass for black-on-black, so assert computed style"*：
+The two newly added assertions directly target the failure mechanisms from the previous round, with comments stating *"toHaveText/toBeVisible pass for black-on-black, so assert computed style"*:
 
-- 开始屏与结算屏均断言 **computed color 与 font-family**（`rgb(232,244,255)` / `rgb(24,224,255)` + `system-ui`）
-- 场景渲染断言改为**画布像素统计**而非 PNG 字节数
+- Both start screen and results screen assert **computed color and font-family** (`rgb(232,244,255)` / `rgb(24,224,255)` + `system-ui`)
+- Scene rendering assertion changed to **canvas pixel statistics** instead of PNG byte count
 
-这是本轮质量最高的部分：它没有只修 bug，而是补上了"能发现这类 bug"的测试。
+This is the highest quality part of this round: it did not just fix the bug, but added tests that "can detect this type of bug."
 
-## 新发现
+## New Findings
 
-### P2 · ART-04 — 暖色照明过量，违背题面的「深灰混凝土」方向
+### P2 · ART-04 — Excessive Warm Lighting, Contradicting the Prompt's "Dark Gray Concrete" Direction
 
-`01-arena.png` 与 `02-combat-hit.png` 显示地面呈明显橙棕色，暖色光主导整个画面；而墙体 `#23272E` 仍偏暗，形成"亮橙地面 + 近黑墙面"的割裂对比。题面第「视觉、声音与性能」节要求的是「深灰混凝土、蓝/红队伍灯带、**少量**暖色工业照明」——当前的暖色不是少量。
+`01-arena.png` and `02-combat-hit.png` show the ground as distinctly orange-brown, with warm light dominating the entire screen; while the wall `#23272E` remains dark, creating a fragmented contrast of "bright orange ground + near-black walls." The "Visual, Sound, and Performance" section of the prompt requires "dark gray concrete, blue/red team light strips, **small amount** of warm industrial lighting" — the current warm light is not a small amount.
 
-根因是四项提亮改动被同时叠加：exposure ×1.30、wall 明度 ×1.4、新增环境光、钠灯总功率 ×2.2（4×150 → 6×220）。**这份建议由本评审方给出且未说明应逐项验证**，责任在评审方。
+The root cause is that four brightening changes were stacked simultaneously: exposure ×1.30, wall brightness ×1.4, added ambient light, total sodium light power ×2.2 (4×150 → 6×220). **This suggestion was given by the reviewer and did not specify that each item should be verified individually**, so the responsibility lies with the reviewer.
 
-建议回退方向（一次只调一项并看图）：钠灯先回到 4 盏 @180、exposure 降到 1.3，保留 AmbientLight 与 wall 提亮；若仍暗，优先提 wall 而非加暖光。
+Suggested rollback direction (adjust one item at a time and check the image): first return sodium lights to 4 @180, lower exposure to 1.3, keep AmbientLight and wall brightening; if still dark, prioritize brightening the wall rather than adding warm light.
 
-## 人工游玩清单（评分前置条件）
+## Manual Play Checklist (Prerequisite for Scoring)
 
-请按下列七项实玩确认，任一不通过都应记为新发现：
+Please manually play and confirm the following seven items; any failure should be recorded as a new finding:
 
-1. **A/D 方向** — 按 D 是否向右平移（这是 CTRL-01 的直接验收）。
-2. **弹道可见性** — 开火时能否看到枪口火焰、曳光线；打在墙上是否有火花。
-3. **音效** — 开火、命中、击杀、换弹是否有声。*Round 2 报告的静音在静态审查中无法复现，本轮未作改动，需实机确认。*
-4. **结算画面** — 标题是否为青色可读、排行榜文字是否清晰（UI-02 验收）。
-5. **画面亮度** — 是否仍偏暗，或已过度偏橙（ART-04 验收）。
-6. **Sprint** — 按住 Shift 是否能感到 FOV 推移与镜头晃动。
-7. **射击手感** — 全自动是否仍觉得不对。*注：题面写的是「自动步枪」，改半自动属需求变更，需用户拍板。*
+1. **A/D Direction** — Does pressing D move right (this is the direct acceptance of CTRL-01).
+2. **Ballistic Visibility** — Can you see muzzle flash and tracer line when firing; are there sparks when hitting walls.
+3. **Sound Effects** — Are there sounds for firing, hitting, killing, and reloading. *The silence reported in Round 2 could not be reproduced in static review, no changes were made this round, manual confirmation is needed.*
+4. **Results Screen** — Is the title readable in cyan, is the leaderboard text clear (UI-02 acceptance).
+5. **Screen Brightness** — Is it still too dark, or has it become excessively orange (ART-04 acceptance).
+6. **Sprint** — Can you feel the FOV transition and camera shake when holding Shift.
+7. **Shooting Feel** — Does full-auto still feel wrong. *Note: The prompt says "assault rifle", changing to semi-auto is a requirement change, user decision is needed.*
 
 ---
 
-## 人工游玩结果（2026-09-02，用户实测）
+## Manual Playtest Results (2026-09-02, User Actual Test)
 
-用户按上方清单实玩，报告：**只有玩家自己的弹道有打击效果与音效；所有 AI 角色的射击没有任何反馈；玩家死了不知道是怎么死的；扣血也没有任何提示，被打到了不知道发生了什么。**
+The user played through the checklist above and reported: **Only the player's own projectiles have hit effects and sound; all AI character shots have no feedback whatsoever; when the player dies, they do not know how they died; there is no indication when taking damage, and when hit, they do not know what happened.**
 
-经复核，**全部属实**，且根因是一处架构性缺陷加一处功能空白。
+Upon review, **all points are factual**, and the root cause is one architectural defect plus one functional gap.
 
-### P1 · FX-02 — AI 射击完全绕过事件总线，因而无任何表现
+### P1 · FX-02 — AI shooting completely bypasses the event bus, resulting in no presentation
 
-`src/game/ai/aiController.ts:213` 直接调用 `fireWeapon(...)`：
+`src/game/ai/aiController.ts:213` directly calls `fireWeapon(...)`:
 
 ```ts
 fireWeapon({ units: ctx.units, solids: ctx.solids, shooter: unit, aim, now, seed: ctx.seed });
 ```
 
-而所有表现层事件由 `Match.emitShot()`（`src/game/match.ts:228-249`）发出——玩家的开火路径经过它，**AI 的不经过**。后果逐条对应用户的观察：
+While all presentation-layer events are emitted by `Match.emitShot()` (`src/game/match.ts:228-249`)—the player's firing path goes through it, **the AI's does not**. The consequences correspond item-by-item to the user's observations:
 
-| 表现 | 玩家开火 | AI 开火 |
+| Presentation | Player Firing | AI Firing |
 |---|---|---|
-| `{type:'shot'}` 事件 | ✅ | ❌ 从不发出 |
-| 曳光线 / 枪口火焰 | ✅ | ❌ |
-| 命中火花（单位与墙面） | ✅ | ❌ |
-| 枪声（含距离衰减） | ✅ | ❌ |
-| `{type:'hit'}` 事件 | ✅ | ❌ |
-| kill feed | ✅ 完整（含爆头标记） | ⚠️ 仅靠 reaper 兜底 |
+| `{type:'shot'}` event | ✅ | ❌ Never emitted |
+| Tracer line / Muzzle flash | ✅ | ❌ |
+| Hit sparks (units and walls) | ✅ | ❌ |
+| Gunshot sound (with distance attenuation) | ✅ | ❌ |
+| `{type:'hit'}` event | ✅ | ❌ |
+| Kill feed | ✅ Complete (including headshot marker) | ⚠️ Relies only on reaper fallback |
 
-伤害本身是生效的——`fireWeapon` 内部直接改 `target.hp`，所以玩家会掉血、会死，但整个过程在视觉与听觉上完全静默。这正是「不知道怎么死的」。
+The damage itself is effective—`fireWeapon` directly modifies `target.hp` internally, so the player loses health and dies, but the entire process is completely silent visually and audibly. This is exactly "not knowing how they died."
 
-kill feed 之所以仍有内容，是因为 `match.ts:204-223` 有一条 reaper 兜底：扫描 `hp<=0` 的单位并用 `causeId` 补一条记录。但该路径信息降级——`headshot` 恒为 `false`，killer 取不到时写 `'???'`。
+The reason the kill feed still has content is that `match.ts:204-223` has a reaper fallback: it scans for units with `hp<=0` and adds a record using `causeId`. However, this path degrades information—`headshot` is always `false`, and if the killer cannot be retrieved, it writes `'???'`.
 
-修复方向：让 AI 的开火也走 `Match` 的统一路径（把 `fireWeapon` 的调用移入 `Match` 并在其后调用 `emitShot`，或让 `aiController` 通过回调把 `FireResult` 交回 `Match`）。修完后 AI 的曳光、枪口火焰、火花与枪声会自动全部生效，因为 `app.ts` 的 `onEvent` 本就不区分射手身份——它只在 hitmarker/伤害数字处判断 `e.shooterId === 0`。
+Fix direction: Make AI firing also go through the unified path of `Match` (move the call to `fireWeapon` into `Match` and call `emitShot` afterwards, or have `aiController` return the `FireResult` to `Match` via a callback). After the fix, AI tracers, muzzle flashes, sparks, and gunshots will automatically all work, because the `onEvent` in `app.ts` does not distinguish shooter identity—it only checks `e.shooterId === 0` at the hitmarker/damage number location.
 
-**为何三轮评审与全部测试都没发现**：单元测试直接调用 `fireWeapon` 验证伤害与计分，本就绕过事件层；E2E 通过 `__teamArenaTest.shoot()` 驱动玩家射击，走的是玩家路径；6 个 E2E 场景中没有任何一条断言「AI 开火时应产生表现事件」。**测试覆盖了"AI 会造成伤害"，从未覆盖"AI 开火看得见"。**
+**Why three rounds of review and all tests failed to detect this**: Unit tests directly call `fireWeapon` to verify damage and scoring, inherently bypassing the event layer; E2E drives player shooting via `__teamArenaTest.shoot()`, which follows the player path; none of the 6 E2E scenarios assert that "presentation events should be generated when AI fires." **Tests covered "AI deals damage," but never covered "AI firing is visible."**
 
-### P1 · FX-03 — 玩家受击方没有任何反馈，且相关规格常量在 Round 3 被删除
+### P1 · FX-03 — No feedback for the player when hit, and related specification constants were deleted in Round 3
 
-两层问题：
+Two layers of issues:
 
-1. **`app.ts` 从不处理 `'hit'` 事件。** 其 `onEvent` 只分支 `'shot'`/`'kill'`/`'reload'`/`'end'`（`src/app.ts:243,270,278,280`）。即便 AI 走通了事件总线，玩家被击中时仍不会有屏幕红闪、伤害方向指示、痛觉音效或镜头冲击——这些**一项都未实现**。
+1. **`app.ts` never handles `'hit'` events.** Its `onEvent` only branches on `'shot'`/`'kill'`/`'reload'`/`'end'` (`src/app.ts:243,270,278,280`). Even if the AI went through the event bus, when the player is hit, there would still be no screen red flash, damage direction indicator, pain sound effect, or camera impact—**none of these are implemented**.
 
-2. **Round 3 把两个规格常量当作死常量删除了**（`git show ad6545d -- src/game/constants.ts`）：
+2. **Round 3 deleted two specification constants as dead constants** (`git show ad6545d -- src/game/constants.ts`):
 
    ```
    -  hitKick: 0.06,  // camera kick on being hit
    -  shotKick: 0.02, // camera kick per shot (recoil pitch)
    ```
 
-   它们「死」是因为**功能从未实现**，而非冗余。题面第「竞技场与镜头」节明确要求：「第一人称镜头应有轻微移动起伏、**受击镜头冲击**与**枪口后坐**」。复核确认代码中确无任何后坐力实现（`applyLook` 只处理鼠标输入）。删除常量等于抹去了这两项未实现规格的最后线索。
+   They were "dead" because **the functionality was never implemented**, not because they were redundant. The "Arena and Camera" section of the problem statement explicitly requires: "First-person camera should have slight movement bobbing, **hit camera impact**, and **muzzle recoil**." Review confirmed that there is indeed no recoil implementation in the code (`applyLook` only handles mouse input). Deleting the constants erased the last clues to these two unimplemented specifications.
 
-   > ⚠️ 责任说明：Round 1 由评审方指出 `fovDeg` 为死常量（该项确为已实现值的冗余别名），Round 3 中 agent 将此推广到 `hitKick`/`shotKick`。评审方当时未区分「冗余别名」与「未实现功能的占位常量」，此处有诱导责任；但删除规格追踪线索而非实现功能，判断责任在 agent。
+   > ⚠️ Responsibility Note: In Round 1, the reviewer pointed out that `fovDeg` was a dead constant (this item was indeed a redundant alias for an implemented value). In Round 3, the agent generalized this to `hitKick`/`shotKick`. The reviewer at the time did not distinguish between "redundant alias" and "placeholder constant for unimplemented functionality," so there is inducing responsibility here; however, the judgment responsibility for deleting specification tracking clues instead of implementing the functionality lies with the agent.
 
-修复方向：实现受击反馈（方向指示器 + 短促红色暗角 + `hitKick` 镜头冲击 + 痛觉音效）与开火后坐（`shotKick` 累积 pitch 抬升并平滑回落），并恢复这两个常量。
+Fix direction: Implement hit feedback (direction indicator + short red vignette + `hitKick` camera impact + pain sound effect) and firing recoil (`shotKick` accumulates pitch lift and smoothly falls back), and restore these two constants.
 
-### 对前三轮结论的影响
+### Impact on the Conclusions of the First Three Rounds
 
-FX-02 是本项目迄今**最严重的单一缺陷**——它使 4v4 中 7/8 的角色在战斗中完全无声无影，直接摧毁题面「命中反馈」「可读性」两节的核心要求，也解释了用户从第一次试玩起就反复表达的「没有打击感」。
+FX-02 is the **most severe single defect** in this project to date—it renders 7/8 of the characters in 4v4 completely silent and invisible in combat, directly destroying the core requirements of the "Hit Feedback" and "Readability" sections of the problem statement, and also explains the "lack of hit feel" that the user repeatedly expressed from the first playtest.
 
-它同时第三次印证了同一条方法论：Round 1「对照自己写的测试验收」→ Round 2「只验证可断言的东西」→ Round 3「测试覆盖了因果，从未覆盖表现」。三轮的决定性缺陷全部由**人工游玩**发现，无一由自动化证据发现。
+It also confirms the same methodology for the third time: Round 1 "Acceptance against self-written tests" → Round 2 "Only verifying what is assertable" → Round 3 "Tests covered causality, never covered presentation." The decisive defects in all three rounds were discovered by **manual playtesting**, none by automated evidence.
 
-PLAY-01 清单的其余各项（A/D 方向、结算可读性、亮度、Sprint 手感、音效有无）在本次反馈中未被单独否定，但因 FX-02 使 AI 相关表现全部缺失，第 3 项「音效」的原始结论需在 FX-02 修复后重测。
+The other items in the PLAY-01 checklist (A/D direction, settlement readability, brightness, Sprint feel, presence of sound effects) were not individually negated in this feedback, but because FX-02 causes all AI-related presentation to be missing, the original conclusion for item 3 "Sound Effects" needs to be retested after FX-02 is fixed.
 
 ---
 
-## 玩法重设计规格（2026-09-02 用户裁定 · 优先于原始题面）
+## Gameplay Redesign Specification (2026-09-02 User Ruling · Takes Precedence Over Original Prompt)
 
-> **执行版拆分**：本节与 FX-02 / FX-03 已按依赖顺序切成 5 个自足任务，存于
-> `~/Code/qwen3.8-tests/neon-bastion-followup-tasks.md`，供逐个投喂给 Pi。
-> 顺序为 FX-02 → FX-03 → 射速+半自动 → 移除换弹 → 弹丸系统，每个任务 16–28 行。
-> 拆分原因：一次性投喂本页全文（178 行）曾导致模型生成 32,768 token 思考、零正文，撞 `max_tokens` 上限被截断
-> （pi session usage：`stop=length`、`output=32768`、thinking 118,179 字符、text 0 字符）。
-> 该文件是本节的派生执行件，**规格以本节为准**；若两者冲突，改本节并重新生成拆分。
+> **Execution Split**: This section and FX-02 / FX-03 have been split into 5 self-contained tasks in dependency order, stored in
+> `~/Code/qwen3.8-tests/neon-bastion-followup-tasks.md`, for feeding to Pi one by one.
+> The order is FX-02 → FX-03 → Fire Rate + Semi-Auto → Remove Reload → Projectile System, with each task being 16–28 lines.
+> Reason for splitting: Feeding the full text of this page (178 lines) at once previously caused the model to generate 32,768 tokens of thinking with zero body text, hitting the `max_tokens` limit and being truncated
+> (pi session usage: `stop=length`, `output=32768`, thinking 118,179 characters, text 0 characters).
+> This file is a derived execution artifact of this section; **this section is the authoritative specification**; if there is a conflict, modify this section and regenerate the split.
 
-> **裁定：本节优先于 `test-prompts/3d-team-arena.md`。** 用户在实玩后决定以游戏体验为准，凡与题面冲突处一律以本节为准，实施方无需再回溯题面。原题面中「自动步枪 + 弹匣 + R 换弹」与「射击采用 hitscan」两处**作废**。
+> **Ruling: This section takes precedence over `test-prompts/3d-team-arena.md`.** After actual playtesting, the user decided to prioritize gameplay experience; wherever there is a conflict with the original prompt, this section shall prevail, and the implementer does not need to refer back to the original prompt. The "Automatic Rifle + Magazine + R to Reload" and "Shooting uses hitscan" parts of the original prompt are **void**.
 >
-> 本节是给实施方（Pi）的规格，不是评审意见。
+> This section is a specification for the implementer (Pi), not a review opinion.
 
-### 目标
+### Goal
 
-把交火从「瞬时判定的扫射」改成「有节奏、可读、可闪避的对射」。核心是三件事：**降低射速**、**取消弹药管理**、**让子弹有飞行时间**。
+Change firefights from "instantly resolved sprays" to "rhythmic, readable, and dodgeable exchanges." The core consists of three things: **reduce fire rate**, **remove ammo management**, and **give bullets a flight time**.
 
-### R1 · 射速统一为每秒 1 发
+### R1 · Unify Fire Rate to 1 Round Per Second
 
-| 项 | 现值 | 目标 |
+| Item | Current Value | Target |
 |---|---|---|
-| `CONFIG.fireInterval`（玩家） | `0.085`（11.7 发/秒） | **`1.0`** |
-| `CONFIG.ai.fireInterval` | `0.2`（5 发/秒） | **`1.0`** |
+| `CONFIG.fireInterval` (Player) | `0.085` (11.7 rounds/sec) | **`1.0`** |
+| `CONFIG.ai.fireInterval` | `0.2` (5 rounds/sec) | **`1.0`** |
 
-玩家与 AI 使用同一射速，不再有任何一方在射速上占优。
+Player and AI use the same fire rate; neither side has a fire rate advantage anymore.
 
-**连带必须处理**：`CONFIG.ai.burstMin: 3` / `burstMax: 6` 的连发概念在 1 发/秒下失效——一次 burst 会拖 3–6 秒。`aiController` 的连发状态机需简化为「到点开一枪」，并保留原有的反应延迟与命中率抖动。
+**Required Consequential Handling**: The burst concept of `CONFIG.ai.burstMin: 3` / `burstMax: 6` becomes invalid at 1 round/sec—a single burst would last 3–6 seconds. The burst state machine in `aiController` needs to be simplified to "fire one shot when the timer expires," while retaining the original reaction delay and hit accuracy jitter.
 
-### R2 · 完全移除换弹与弹药
+### R2 · Completely Remove Reload and Ammo
 
-删除 `magSize` / `reserveMax` / `reloadTime`、`R` 键绑定、空弹匣锁定、换弹音效与 HUD 的弹药与 `nb-reload` 显示。射速节流是唯一的开火限制，任何角色都不会「打空」。
+Delete `magSize` / `reserveMax` / `reloadTime`, the `R` key binding, empty magazine lock, reload sound effects, and the HUD's ammo and `nb-reload` display. Fire rate throttling is the only firing restriction; no character will ever "run out of ammo."
 
-HUD 右下角的弹药区可直接移除，或改为显示「下一发就绪」的冷却指示（后者更有助于 1 发/秒的节奏读取，建议采用）。
+The ammo area in the bottom-right of the HUD can be removed directly, or changed to display a "next shot ready" cooldown indicator (the latter is more helpful for reading the 1 round/sec rhythm and is recommended).
 
-### R3 · 玩家改为半自动：一次点击一发
+### R3 · Change Player to Semi-Auto: One Click, One Shot
 
-当前 `mousedown` 置 `fire = true`、`mouseup` 才清除，因此按住即连发。改为**边沿触发**：一次 `mousedown` 只产生一次开火意图，按住不重复；再次开火必须松开后重新按下，且仍受 R1 的 1 发/秒节流约束。
+Currently, `mousedown` sets `fire = true`, and it is only cleared on `mouseup`, so holding down results in continuous fire. Change to **edge-triggered**: a single `mousedown` produces only one firing intent; holding down does not repeat; to fire again, the button must be released and pressed again, and it is still subject to the 1 round/sec throttling constraint of R1.
 
-AI 侧不需要「点击」概念，按 R1 的节流开火即可。
+The AI side does not need a "click" concept; it can simply fire according to the R1 throttling.
 
-### R4 · 子弹改为可闪避的飞行弹丸
+### R4 · Change Bullets to Dodgeable Flying Projectiles
 
-**这一项确定走真弹丸系统。** 用户要求「看到子弹射过来还能躲开」，而 hitscan 在开火瞬间即完成判定，不存在可闪避的飞行时间——仅让曳光「看起来在飞」无法满足该目标。
+**This item is confirmed to use a true projectile system.** The user requires "being able to see bullets coming and dodge them," whereas hitscan completes the hit determination at the instant of firing, meaning there is no dodgeable flight time—merely making tracers "look like they are flying" cannot meet this goal.
 
-代码中原本不存在弹丸速度概念（全仓无 `bulletSpeed`/`projectile`，`tracerLife` 只是曳光显示时长），故「现在的 50%」无对应现值。**建议起始值 `bulletSpeed: 60`（单位/秒），调参区间 45–80。** 推导：竞技场约 64 单位宽，典型交火距离 10–30 单位；60 单位/秒下飞行时间为 0.17 s（10 单位）至 0.5 s（30 单位）——中远距离可反应闪避，近距离仍难躲，符合「有威胁但可读」的手感。README 已将武器称作 pulse rifle，慢速能量弹与该命名自洽。
+The code originally did not have a concept of projectile speed (no `bulletSpeed`/`projectile` in the entire repo, and `tracerLife` is just the tracer display duration), so "current 50%" has no corresponding current value. **Recommended starting value `bulletSpeed: 60` (units/sec), tuning range 45–80.** Derivation: The arena is approximately 64 units wide, with typical engagement distances of 10–30 units; at 60 units/sec, the flight time is 0.17 s (10 units) to 0.5 s (30 units)—mid-to-long range allows for reactive dodging, while close range remains difficult to dodge, fitting the "threatening but readable" feel. The README already refers to the weapon as a pulse rifle, and slow energy projectiles are consistent with this naming.
 
-**实施要点（关系到现有验证能否保住）**：
+**Implementation Key Points (affecting whether existing validations can be preserved)**:
 
-1. **逐帧推进 + 连续碰撞**，不要用「点是否在墙内」的离散检测。每个逻辑 tick 对弹丸走过的线段调用一次现有的 `resolveShot` 式射线检测，**命中判定逻辑完全复用**——这样「墙体优先」「头/身命中体」「友军免伤」「单发只计分一次」四条不变量与其对应的单元测试可以原样保留，只是判定时机从「开火瞬间」变为「弹丸抵达时」。
-2. **弹丸对象池**，寿命上限与最大存活数设上限，避免累积（现有 `sparks`/`tracers` 已有池化范式可直接沿用）。
-3. **命中在弹丸抵达时才结算**：伤害、计分、`kill` 事件、hitmarker 全部延后到那一刻，射手可能在弹丸飞行途中已阵亡——需决定此时是否仍计分（建议**仍计分**，实现更简单且符合直觉）。
-4. **AI 需要预瞄**：`aiController` 当前朝目标当前位置开火，在有飞行时间后将几乎打不中移动目标。需按 `目标位置 + 目标速度 × 预估飞行时间` 做一阶提前量，并保留现有的命中率抖动作为难度调节。
-5. **曳光改为跟随弹丸**：曳光线段应画在弹丸的当前位置上（短拖尾），而不是开火瞬间画出完整弹道。这同时让 FX-02 修复后的 AI 弹道具备真正的可读性——玩家能看到子弹从哪个方向飞来。
+1. **Per-frame advancement + continuous collision**, do not use discrete detection of "whether a point is inside a wall." For each logical tick, call the existing `resolveShot`-style ray detection once for the line segment traversed by the projectile, **fully reusing the hit determination logic**—this way, the four invariants of "wall priority," "head/body hitboxes," "friendly fire immunity," and "single shot scores only once" and their corresponding unit tests can be preserved as-is, with only the timing of determination changing from "instant of firing" to "when the projectile arrives."
+2. **Projectile object pool**, set limits on lifetime and maximum survival count to avoid accumulation (existing `sparks`/`tracers` already have a pooling paradigm that can be directly reused).
+3. **Hits are settled only when the projectile arrives**: damage, scoring, `kill` events, and hitmarkers are all delayed until that moment; the shooter may have died during the projectile's flight—need to decide whether to still score in this case (recommend **still scoring**, as the implementation is simpler and more intuitive).
+4. **AI needs lead aiming**: `aiController` currently fires at the target's current position, which will almost never hit moving targets once flight time is introduced. Need to perform first-order lead calculation based on `目标位置 + 目标速度 × 预估飞行时间`, and retain the existing hit accuracy jitter as a difficulty adjustment.
+5. **Tracers follow the projectile**: The tracer line segment should be drawn at the projectile's current position (short trail), rather than drawing the complete trajectory at the instant of firing. This also gives the AI trajectory after the FX-02 fix true readability—players can see from which direction the bullet is coming.
 
-### 与 FX-02 / FX-03 的关系
+### Relationship with FX-02 / FX-03
 
-本次改动**必须在 FX-02 修复之后或与其同时进行**。FX-02（AI 开火绕过事件总线）未修时，AI 的弹丸同样不会产生任何表现，「看到子弹射过来」这一目标无从谈起——7/8 的角色仍将无声无影。FX-03（受击零反馈）同理：1 发/秒的节奏下每一次中弹都很关键，缺少受击提示会让新的战斗节奏更难读。
+This change **must be made after or simultaneously with the FX-02 fix**. If FX-02 (AI firing bypassing the event bus) is not fixed, AI projectiles will also not produce any visual effects, making the goal of "seeing bullets coming" impossible—7/8 of the characters will still be silent and invisible. Similarly for FX-03 (zero feedback on being hit): at a rhythm of 1 round/sec, every hit is critical, and the lack of hit feedback will make the new combat rhythm harder to read.
 
-**建议实施顺序**：FX-02 → FX-03 → R1/R2/R3 → R4。
+**Recommended Implementation Order**: FX-02 → FX-03 → R1/R2/R3 → R4.
 
-### 实施影响面
+### Implementation Impact Scope
 
-移除换弹牵动 **13 个文件**（全仓 `mag|reload` 命中）：
+Removing reload affects **13 files** (repo-wide `mag|reload` hits):
 
-- 逻辑：`combat/weapon.ts`（`registerShot` 的弹匣与换弹锁定）、`combat/hitscan.ts`、`units/units.ts`、`match.ts`、`ai/aiController.ts`、`types.ts`
-- 表现：`render/hud.ts`（弹药与 `nb-reload`）、`render/renderer.ts`、`game/audio.ts`（`reload()`）、`app.ts`（`R` 键、`audio.empty()`）
-- 测试：`tests/unit/hitscan.test.ts` 的 `'empty magazine cannot fire; reload blocks firing then refills'` 需删除；E2E 场景 2 的弹匣递减断言需改写；`testHooks.ts` 的状态字段
-- 文档：README 的 Controls 表移除 `R`，「What's implemented」同步更新，并说明新的射击模型
+- Logic: `combat/weapon.ts` (magazine and reload lock in `registerShot`), `combat/hitscan.ts`, `units/units.ts`, `match.ts`, `ai/aiController.ts`, `types.ts`
+- Presentation: `render/hud.ts` (ammo and `nb-reload`), `render/renderer.ts`, `game/audio.ts` (`reload()`), `app.ts` (`R` key, `audio.empty()`)
+- Tests: The `'empty magazine cannot fire; reload blocks firing then refills'` in `tests/unit/hitscan.test.ts` needs to be deleted; the magazine decrement assertion in E2E scenario 2 needs to be rewritten; state fields in `testHooks.ts`
+- Documentation: Remove `R` from the Controls table in the README, update "What's implemented" accordingly, and explain the new shooting model
 
-### 平衡性与验收
+### Balance and Acceptance
 
-`ai.accuracy: 0.62` 与 `reactTime: 0.26` 是在 5 发/秒下调出的；射速降至 1/5 后单位时间伤害同步降至约 1/5，对局会显著拉长，并可能出现双方长时间打不死的僵持（Round 2 修 `alert` 状态时曾遇到同类问题）。改完**必须**用 `tests/unit/ai.test.ts` 现有的「3 seed 全场终止性回归」验证比赛仍能在有限逻辑时间内结束；若不能，优先上调 `ai.accuracy` 而非回调射速。
+`ai.accuracy: 0.62` and `reactTime: 0.26` were tuned at 5 rounds/sec; after reducing the fire rate to 1/5, damage per unit time also drops to approximately 1/5, matches will be significantly longer, and stalemates where neither side can kill the other for a long time may occur (a similar issue was encountered when fixing the `alert` state in Round 2). After the changes, it is **mandatory** to use the existing "3 seed full-match termination regression" in `tests/unit/ai.test.ts` to verify that the match can still end within a finite logical time; if not, prioritize increasing `ai.accuracy` rather than reverting the fire rate.
 
-新增建议测试：弹丸飞行时间与距离成正比、弹丸不穿墙（连续碰撞）、飞行途中射手死亡仍正常结算、玩家按住鼠标只产生一发。
+New recommended tests: Projectile flight time is proportional to distance, projectiles do not pass through walls (continuous collision), shooter death during flight still settles normally, player holding the mouse produces only one shot.

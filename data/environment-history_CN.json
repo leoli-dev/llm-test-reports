@@ -1,0 +1,62 @@
+[
+  {
+    "test": "2026-10-19-long-context",
+    "source": "engine-tests/2026-10-19-long-context/hardware.json",
+    "sourceSha256": "5558f01367f9c65615f88f131a64cb44b0b5840157a64bf0b9d032c0dd7e7955",
+    "chip": "Apple M5 Max",
+    "logicalCpuCores": 18,
+    "memoryBytes": 137438953472,
+    "gpuCores": 40,
+    "osVersion": "27.0.1",
+    "osBuild": "26A434",
+    "note": "仅列出该历史快照采集的字段；null 表示未提取或未记录。"
+  },
+  {
+    "test": "2026-10-19-vision-stability",
+    "source": "engine-tests/2026-10-19-vision-stability/hardware.json",
+    "sourceSha256": "25dbd9f6cba4a08d5ab9f2a6039afb6df51d40687916413afacaa58b95650021",
+    "chip": "Apple M5 Max",
+    "logicalCpuCores": 18,
+    "memoryBytes": 137438953472,
+    "gpuCores": null,
+    "osVersion": "27.0.1",
+    "osBuild": "26A434",
+    "note": "仅列出该历史快照采集的字段；null 表示未提取或未记录。"
+  },
+  {
+    "test": "2026-10-19-mltf-comparison",
+    "source": "engine-tests/2026-10-19-mltf-comparison/hardware.json",
+    "sourceSha256": "bfe1cc9ed02d130b3707e8cbcda43157721d56e9b155a30c440ca4a0a2d3f368",
+    "chip": "Apple M5 Max",
+    "logicalCpuCores": 18,
+    "memoryBytes": 137438953472,
+    "gpuCores": null,
+    "osVersion": "27.0.1",
+    "osBuild": "26A434",
+    "note": "仅列出该历史快照采集的字段；null 表示未提取或未记录。"
+  },
+  {
+    "test": "2026-10-19-mltf-clients",
+    "source": "engine-tests/2026-10-19-mltf-clients/hardware.json",
+    "sourceSha256": "8c0aa54a4948e756cde206a7958ee775e106c502a1dbc9bdc29ccf992df14cc3",
+    "chip": "Apple M5 Max",
+    "logicalCpuCores": 18,
+    "memoryBytes": 137438953472,
+    "gpuCores": null,
+    "osVersion": "27.0.1",
+    "osBuild": "26A434",
+    "note": "仅列出该历史快照采集的字段；null 表示未提取或未记录。"
+  },
+  {
+    "test": "2026-10-19-quality-comparison",
+    "source": "engine-tests/2026-10-19-quality-comparison/hardware.json",
+    "sourceSha256": "a254ecfc4dc245e2a1280a06b3ce60f691c805aa2ea912435553e4a76841accf",
+    "chip": "Apple M5 Max",
+    "logicalCpuCores": 18,
+    "memoryBytes": 137438953472,
+    "gpuCores": 40,
+    "osVersion": "27.0.1",
+    "osBuild": null,
+    "note": "仅列出该历史快照采集的字段；null 表示未提取或未记录。"
+  }
+]

@@ -1,20 +1,39 @@
-# MLTF / Qwen、Pi、Hermes 三种真实 CLI
+# MLTF / real Qwen, Pi and Hermes CLI checks
 
-| 项目 | 记录 |
+[English](perf-07.md) | [简体中文](perf-07_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | PERF-07 |
-| 日期 | 2026-10-19 |
-| 模型与运行方式 | Qwen3.8-27B 8bit；MLTF  |
-| 推理位置 | 本机 |
+| ID | PERF-07 |
+| Date | 2026-10-19 |
+| Model and runtime | Qwen3.8-27B 8bit; MLTF  |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-Qwen/Pi 主轮通过；Hermes 4096 cap 主轮失败，独立 16K 跟进最终通过。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | macOS 27.0.1 (26A434) |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-- [MLTF：qwen / pi / hermes 真实 CLI 图文长任务验收](../originals/engine-tests-2026-10-19-mltf-clients-report.md)
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 证据边界
+<!-- environment-context:end -->
 
-原失败保留；128K 窗口内长任务，非满 128K 输入；客户端系统提示与 thinking 不同。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。
+## Historical result
+
+Qwen and Pi passed the main round. Hermes failed the 4096-token main round; a separate 16K follow-up ultimately passed.
+
+## Full reports
+
+- [MLTF: real qwen / pi / hermes CLI acceptance on long multimodal tasks](../originals/engine-tests-2026-10-19-mltf-clients-report.md)
+
+## Evidence limits
+
+Original failures remain. This was a long task within a 128K window, not a full 128K input. Client system prompts and thinking settings differed. Historical files were migrated from the former mlx-dspark directory.

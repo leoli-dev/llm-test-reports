@@ -1,0 +1,2700 @@
+{
+  "title": "LLM Test Reports",
+  "updated": "2026-10-20",
+  "author": "leoli-dev",
+  "experiments": [
+    {
+      "id": "SOL-01",
+      "title": "3D 太阳系 / Qwen3.6-35B-A3B-MLX-8bit",
+      "date": "2026-05-26",
+      "sortDate": "2026-05-26",
+      "model": "Hermes + oMLX；Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "历史报告 82/100；该组最高，漏冥王星等要求。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/sol-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SOL-02",
+      "title": "3D 太阳系 / gemma-4-26b-a4b-it-bf16",
+      "date": "2026-05-26",
+      "sortDate": "2026-05-26",
+      "model": "Hermes + oMLX；gemma-4-26b-a4b-it-bf16",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "历史报告 68/100；能运行，内容简化。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/sol-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SOL-03",
+      "title": "3D 太阳系 / Qwen3.6-27B-MTPLX-Optimized-Speed",
+      "date": "2026-05-26",
+      "sortDate": "2026-05-26",
+      "model": "Hermes + oMLX；Qwen3.6-27B-MTPLX-Optimized-Speed",
+      "engines": [
+        "MTPLX",
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "历史报告 60–65/100；有渲染与布局问题。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/sol-03_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SOL-04",
+      "title": "3D 太阳系 / Qwen3-Coder-Next-8bit",
+      "date": "2026-05-26",
+      "sortDate": "2026-05-26",
+      "model": "Hermes + oMLX；Qwen3-Coder-Next-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "历史报告 55/100；代码完成快，真实画面差。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/sol-04_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SOL-05",
+      "title": "3D 太阳系 / gemma-4-31b-it-8bit",
+      "date": "2026-05-26",
+      "sortDate": "2026-05-26",
+      "model": "Hermes + oMLX；gemma-4-31b-it-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "历史报告 25/100；JS 语法污染，无法交付。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/sol-05_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SOL-06",
+      "title": "3D 太阳系 / 40B 中止轮",
+      "date": "2026-05-26",
+      "sortDate": "2026-05-26",
+      "model": "Qwen3.6-40B-Claude-4.6-Opus-Deckard-Heretic-Uncensored-Thinking-8bit",
+      "engines": [
+        "其他"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "约 9.5 tok/s，运行约 27 分钟后中止。",
+      "caveat": "报告明确记载没有归档该轮 repo；会话记载移入 Trash，当前无权限枚举 Trash。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/sol-06_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "TET-01",
+      "title": "俄罗斯方块 / gemma-4-31b-it-8bit",
+      "date": "2026-06-02—06-04",
+      "sortDate": "2026-06-02",
+      "model": "Claude Code + oMLX；gemma-4-31b-it-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "32/100；5 轮后未验收。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-tetris-code-test-readme_CN.md",
+        "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review_CN.md"
+      ],
+      "markdown": "reports/experiments/tet-01_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-tetris-code-test",
+        "name": "Tetris 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "TET-02",
+      "title": "俄罗斯方块 / Qwen3.6-27B-UD-MLX-4bit",
+      "date": "2026-06-02—06-04",
+      "sortDate": "2026-06-02",
+      "model": "Claude Code + oMLX；Qwen3.6-27B-UD-MLX-4bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "80/100；3 轮后通过。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-tetris-code-test-readme_CN.md",
+        "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review_CN.md"
+      ],
+      "markdown": "reports/experiments/tet-02_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-tetris-code-test",
+        "name": "Tetris 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "TET-03",
+      "title": "俄罗斯方块 / Qwen3.6-35B-A3B-MLX-8bit",
+      "date": "2026-06-02—06-04",
+      "sortDate": "2026-06-02",
+      "model": "Claude Code + oMLX；Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "60/100；8 轮后通过，修废弃文件与谎报记录保留。",
+      "caveat": "35B 的实际入口是 index.html 内联实现；js/、css/ 为历史版本，不应当作当前运行入口。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-tetris-code-test-readme_CN.md",
+        "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review_CN.md"
+      ],
+      "markdown": "reports/experiments/tet-03_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-tetris-code-test",
+        "name": "Tetris 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "TET-04",
+      "title": "俄罗斯方块 / Qwen3.5-122B-A10B-4bit",
+      "date": "2026-06-02—06-04",
+      "sortDate": "2026-06-02",
+      "model": "Claude Code + oMLX；Qwen3.5-122B-A10B-4bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "96/100；1 轮后通过。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-tetris-code-test-readme_CN.md",
+        "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review_CN.md"
+      ],
+      "markdown": "reports/experiments/tet-04_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-tetris-code-test",
+        "name": "Tetris 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SHOP-01",
+      "title": "购物商城 MVP / Qwen3.5-122B-A10B-4bit",
+      "date": "2026-06（原报告）",
+      "sortDate": "2026-06-01",
+      "model": "Claude Code + oMLX；Qwen3.5-122B-A10B-4bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "94/100；2 轮 review 后通过。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-shoping-mvp-test-readme_CN.md",
+        "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review_CN.md"
+      ],
+      "markdown": "reports/experiments/shop-01_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-shoping-mvp-test",
+        "name": "Shopping MVP 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SHOP-02",
+      "title": "购物商城 MVP / Qwen3.6-35B-A3B-MLX-8bit",
+      "date": "2026-06（原报告）",
+      "sortDate": "2026-06-01",
+      "model": "Claude Code + oMLX；Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "98/100；1 轮 review 后通过。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-shoping-mvp-test-readme_CN.md",
+        "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review_CN.md"
+      ],
+      "markdown": "reports/experiments/shop-02_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-shoping-mvp-test",
+        "name": "Shopping MVP 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SHOP-03",
+      "title": "购物商城 MVP / Qwen3.6-27B-UD-MLX-4bit",
+      "date": "2026-06（原报告）",
+      "sortDate": "2026-06-01",
+      "model": "Claude Code + oMLX；Qwen3.6-27B-UD-MLX-4bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "超过 5 小时后中止；DNF，源码仍在。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-shoping-mvp-test-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/shop-03_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-shoping-mvp-test",
+        "name": "Shopping MVP 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "SHOP-04",
+      "title": "购物商城 MVP / gemma-4-31b-it-8bit",
+      "date": "2026-06（原报告）",
+      "sortDate": "2026-06-01",
+      "model": "Claude Code + oMLX；gemma-4-31b-it-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "早期本机同题测试",
+      "summary": "82/100；3 轮 review 后通过。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/early-tests-local-llm-shoping-mvp-test-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/shop-04_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/local-llm-shoping-mvp-test",
+        "name": "Shopping MVP 同题作品"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "EARLY-01",
+      "title": "Boston 行程地图 / Pi",
+      "date": "2026-08-21 前后（会话）",
+      "sortDate": "2026-08-21",
+      "model": "Pi + oMLX Qwen3.8-27B AWQ 5bpw",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 早期工作流",
+      "summary": "会话保存了地图、筛选和标记验收，以及图像前缀缓存错误。",
+      "caveat": "最后曾直接复制参考 pi-boston-map-first 到 pi-boston-guide；不能作为独立生成成绩。现未定位到这两个目录。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-boston-map_CN.md"
+      ],
+      "markdown": "reports/experiments/early-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "EARLY-02",
+      "title": "Arcology 控制室 / Pi 尝试与 Qwen Code 交付",
+      "date": "2026-08-21",
+      "sortDate": "2026-08-21",
+      "model": "oMLX True2456/Qwen3.8-27B-AWQ-5.0bpw；Pi / Qwen Code coding-reason",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 早期工作流",
+      "summary": "Qwen Code 交付并修复多项问题；最后仍有窄屏溢出及 QA 循环。Pi/MTPLX 前期另有 shape error 和重复 token 失败。",
+      "caveat": "报告与会话在；原始产品源码目录未找到，不能将其当作已恢复源码。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review_CN.md"
+      ],
+      "markdown": "reports/experiments/early-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "EARLY-03",
+      "title": "Paris 3D",
+      "date": "2026-08-22",
+      "sortDate": "2026-08-22",
+      "model": "oMLX Qwen3.8-27B + Qwen Code",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 早期工作流",
+      "summary": "后期 46/46 单测与构建通过，坐标数据修好；最终视觉和三种游览模式仍不通过。",
+      "caveat": "原报告部分路径仍写 prompts/；题目现位于 test-prompts/。产品源码 paris3d/ 未找到。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test_CN.md"
+      ],
+      "markdown": "reports/experiments/early-03_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "EARLY-04",
+      "title": "LLM 内存带宽教学页 / 三轮 review",
+      "date": "2026-08-22—08-23",
+      "sortDate": "2026-08-22",
+      "model": "oMLX RC Qwen3.8-27B-oQ4e-mtp + Qwen Code",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 早期工作流",
+      "summary": "经历 Canvas、公式、控件、数据与 autoplay 修复；会话最终结案只剩 1 个 P1：M5 Max 失效来源 URL 被标 confirmed。",
+      "caveat": "四篇报告在，产品源码目录未找到。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review_CN.md"
+      ],
+      "markdown": "reports/experiments/early-04_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "JSON-01",
+      "title": "JSON Lens / Ornith",
+      "date": "2026-08-25—08-26",
+      "sortDate": "2026-08-25",
+      "model": "Ornith 1.5 35B-A3B",
+      "engines": [
+        "其他"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 早期工作流",
+      "summary": "同题多轮比较；声明的自动化门槛通过，但最终均未满足完整验收。",
+      "caveat": "报告与题目在，产品源码目录未找到。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26_CN.md"
+      ],
+      "markdown": "reports/experiments/json-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "JSON-02",
+      "title": "JSON Lens / Qwen",
+      "date": "2026-08-25—08-26",
+      "sortDate": "2026-08-25",
+      "model": "Qwen3.8-27B",
+      "engines": [
+        "其他"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 早期工作流",
+      "summary": "同题多轮比较；声明的自动化门槛通过，但最终均未满足完整验收。",
+      "caveat": "报告与题目在，产品源码目录未找到。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26_CN.md"
+      ],
+      "markdown": "reports/experiments/json-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "FROG-01",
+      "title": "Frog Choir / 首轮与修复轮",
+      "date": "2026-08-23—08-24",
+      "sortDate": "2026-08-23",
+      "model": "MTPLX Optimized Quality + Pi / Qwen Code",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "首轮核心功能不合格；第二轮恢复相机、音频与校准，仍有真实左右手映射问题。",
+      "caveat": "旧报告用 frog-choir_mtplx-quality-pi；现目录由项目名和文件结构对应，未证明它与历史评审的逐字节版本一致。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review_CN.md"
+      ],
+      "markdown": "reports/experiments/frog-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "FLASH-01",
+      "title": "Orbital Garden",
+      "date": "2026-08-31—09-01",
+      "sortDate": "2026-08-31",
+      "model": "MTPLX qwen3.8-flash-next-optimized-speed + Pi",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "核心场景通过；窄屏无 WebGL fallback 被裁切。",
+      "caveat": "旧报告目录名已失效；现目录由项目名与实现结构对应，不视为历史快照哈希验证。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31_CN.md"
+      ],
+      "markdown": "reports/experiments/flash-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "FLASH-02",
+      "title": "Marble Workshop",
+      "date": "2026-08-31—09-01",
+      "sortDate": "2026-08-31",
+      "model": "MTPLX qwen3.8-flash-next-optimized-speed + Pi",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "10 项检查通过；替代托盘计分不满足真实物理结果要求。",
+      "caveat": "旧报告目录名已失效；现目录由项目名与实现结构对应，不视为历史快照哈希验证。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31_CN.md"
+      ],
+      "markdown": "reports/experiments/flash-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "FLASH-03",
+      "title": "Gare Saint-Lazare",
+      "date": "2026-08-31—09-01",
+      "sortDate": "2026-08-31",
+      "model": "MTPLX qwen3.8-flash-next-optimized-speed + Pi",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "模拟和自动测试较强；蒸汽离场消散 P1 不满足。",
+      "caveat": "旧报告目录名已失效；现目录由项目名与实现结构对应，不视为历史快照哈希验证。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01_CN.md"
+      ],
+      "markdown": "reports/experiments/flash-03_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "FLASH-04",
+      "title": "Neon Bastion / Flash-Next 版本",
+      "date": "2026-08-31—09-01（目录/会话）",
+      "sortDate": "2026-08-31",
+      "model": "目录标注 MTPLX Flash + Pi",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "源码、单测与 E2E 脚本在；未找到专属于该目录的完整独立总结。",
+      "caveat": "不能套用另一个 mlx-dspark/8bit 版本的七轮成绩。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme_CN.md"
+      ],
+      "markdown": "reports/experiments/flash-04_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "NEON-01",
+      "title": "Neon Bastion / 8bit 七轮",
+      "date": "2026-09-01—09-04",
+      "sortDate": "2026-09-01",
+      "model": "mlx-dspark + Qwen3.8-27B-8bit + DFlash2 + Pi",
+      "engines": [
+        "mlx-dspark"
+      ],
+      "scope": "local",
+      "category": "Neon Bastion 多模型比较",
+      "summary": "七轮总结截稿 31 提交；09-16 横向总结记仓库终态 34 提交。约 30 小时；149 单测、26 E2E。部署当时丢弃图像，不能据此评价模型视觉能力。",
+      "caveat": "",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04_CN.md"
+      ],
+      "markdown": "reports/experiments/neon-01_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/llm-test-2026-09-01-game-neon-bastion",
+        "play": "https://leoli-dev.github.io/llm-test-2026-09-01-game-neon-bastion/",
+        "name": "Neon Bastion"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "NEON-02",
+      "title": "Neon Bastion / MTPLX 55-task 重跑",
+      "date": "2026-09-07—09-16",
+      "sortDate": "2026-09-07",
+      "model": "MTPLX Qwen3.8-27B Optimized Speed + Pi",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Neon Bastion 多模型比较",
+      "summary": "最终 55/55 全完成，55 提交；793 单测、202 E2E、9 负对照，约 70 小时。逐任务数据与 09-16 横向总结均保留。",
+      "caveat": "55task-run 是编排与指标目录；游戏源码在 mtplx-27B-optimized-speed-with-pi-neon-bastion。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16_CN.md"
+      ],
+      "markdown": "reports/experiments/neon-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "NEON-03",
+      "title": "Neon Bastion / ds-v4-flash-vision 55-task",
+      "date": "2026-09-08—09-16",
+      "sortDate": "2026-09-08",
+      "model": "ds-v4-flash-vision + DeepSeek Harness；云端对照",
+      "engines": [
+        "其他"
+      ],
+      "scope": "cloud",
+      "category": "云端比较项",
+      "summary": "55/55 任务完成；历史最终记录 550 单测、122 E2E；人工验收仍发现测试遗漏。",
+      "caveat": "代码在本机，推理为云端；不能计作本机模型跑分。单轮 note 的旧标题与正文最终状态不一致，最终状态看三轮总结及验收文档。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16_CN.md"
+      ],
+      "markdown": "reports/experiments/neon-03_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "TIDE-01",
+      "title": "Tide Isle / R1、R2 与 PLAY 副本",
+      "date": "2026-09-05—09-06",
+      "sortDate": "2026-09-05",
+      "model": "MTPLX Qwen3.8-27B Optimized Speed + Pi",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "R1 与 R2 A/B 修复批均有记录；人工发现 7 个问题，已修 5，C 批未投。",
+      "caveat": "PLAY 是可玩副本，不另算一次模型测试。R2 详情也在 devlog index/log/backlog 中。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05_CN.md"
+      ],
+      "markdown": "reports/experiments/tide-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "PERF-01",
+      "title": "MTPLX Flash-Next 冷 prefill 与近 128K soak",
+      "date": "2026-09-19—09-20",
+      "sortDate": "2026-09-19",
+      "model": "MTPLX；Flash-Next Optimized Speed",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "各模型完成 3 个 near-128K natural soak 任务；Flash 13.5 分钟，Quality 30.6 分钟。冷 prefill 有五档输入。",
+      "caveat": "Quality 目录主要是运行结果；两轮共用 Flash 目录的 pressure_test.py。初轮 507 与未完成矩阵均保留。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20_CN.md",
+        "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "PERF-02",
+      "title": "MTPLX 27B Quality 冷 prefill 与近 128K soak",
+      "date": "2026-09-19—09-20",
+      "sortDate": "2026-09-19",
+      "model": "MTPLX；Qwen3.8-27B Optimized Quality",
+      "engines": [
+        "MTPLX"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "各模型完成 3 个 near-128K natural soak 任务；Flash 13.5 分钟，Quality 30.6 分钟。冷 prefill 有五档输入。",
+      "caveat": "Quality 目录主要是运行结果；两轮共用 Flash 目录的 pressure_test.py。初轮 507 与未完成矩阵均保留。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20_CN.md",
+        "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "PERF-03",
+      "title": "oMLX RC / oQ4e-mtp Dashboard 观察",
+      "date": "2026-08-22",
+      "sortDate": "2026-08-22",
+      "model": "oMLX 0.6.3rc2 + Qwen3.8-27B-oQ4e-mtp",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "有 Dashboard 快照与对比计划。",
+      "caveat": "不是已完成的严格同题跑分；不能把 session 平均 42.4 tok/s 与单请求 18.6 tok/s 混为一谈。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-03_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "PERF-04",
+      "title": "mlx-dspark 128K / 256K 长上下文",
+      "date": "2026-10-19",
+      "sortDate": "2026-10-19",
+      "model": "Qwen3.8-27B 8bit；mlx-dspark 128K ",
+      "engines": [
+        "mlx-dspark"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "128K 完成；256K 也返回但出现内存压力与约 12.31 GiB swap 增量。",
+      "caveat": "每长度一个性能样本；512-token 输出，不是完整代码质量测试。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/engine-tests-2026-10-19-long-context-report_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-04_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "PERF-05",
+      "title": "mlx-vlm 视觉 + DFlash2 阶梯稳定性",
+      "date": "2026-10-19",
+      "sortDate": "2026-10-19",
+      "model": "Qwen3.8-27B 8bit；mlx-vlm 视觉 + DFlash2 阶梯稳定性",
+      "engines": [
+        "mlx-vlm"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "32K、64K、96K、128K、128K-repeat 五个阶段及恢复探针通过，另保留两个 greedy 失败样本。",
+      "caveat": "主表跨进程与不同采样，不能解读为同进程连续单因素对比。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/engine-tests-2026-10-19-vision-stability-report_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-05_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "PERF-06",
+      "title": "MLTF vs mlx-vlm / 128K 图文性能",
+      "date": "2026-10-19",
+      "sortDate": "2026-10-19",
+      "model": "Qwen3.8-27B 8bit；MLTF vs mlx-vlm ",
+      "engines": [
+        "MLTF",
+        "mlx-vlm"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "各后端两轮；decode 约 3.53×，整请求时间减少约 34.5%。",
+      "caveat": "8bit 权重源相同，KV 与数值路径不同；并非等精度实验，也不是长期稳定性证明。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/engine-tests-2026-10-19-mltf-comparison-report_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-06_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "PERF-07",
+      "title": "MLTF / Qwen、Pi、Hermes 三种真实 CLI",
+      "date": "2026-10-19",
+      "sortDate": "2026-10-19",
+      "model": "Qwen3.8-27B 8bit；MLTF ",
+      "engines": [
+        "MLTF"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "Qwen/Pi 主轮通过；Hermes 4096 cap 主轮失败，独立 16K 跟进最终通过。",
+      "caveat": "原失败保留；128K 窗口内长任务，非满 128K 输入；客户端系统提示与 thinking 不同。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/engine-tests-2026-10-19-mltf-clients-report_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-07_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "PERF-08",
+      "title": "MLTF vs mlx-vlm / 128 请求质量对照",
+      "date": "2026-10-19",
+      "sortDate": "2026-10-19",
+      "model": "Qwen3.8-27B 8bit；MLTF vs mlx-vlm ",
+      "engines": [
+        "MLTF",
+        "mlx-vlm"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "后验实际代码执行 11/12 vs 10/12；medium 数学 18/20 vs 17/20；32K/128K 检索两端均 2/6。",
+      "caveat": "代码冻结严格分均 10/12，与后验放宽沙箱分开。小样本不能证明无损；OFF 数学均 0/20 有地板效应。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/engine-tests-2026-10-19-quality-comparison-report_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-08_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "TANK-01",
+      "title": "MLTF × Pi / 3D 坦克大战四轮",
+      "date": "2026-10-20",
+      "sortDate": "2026-10-20",
+      "model": "MLTF 0.1.2 + Qwen3.8-27B 8bit q8c + Pi",
+      "engines": [
+        "MLTF"
+      ],
+      "scope": "local",
+      "category": "Qwen3.8 应用生成",
+      "summary": "四轮 430 请求、461,939 输出 tokens、约 5.44 小时；29 次文字监督提示。",
+      "caveat": "game/ 是产品；supervision/ 是监督、性能与验收脚本；github-share 是分享快照，不另算一轮。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report_CN.md",
+        "reports/originals/devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20_CN.md",
+        "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1_CN.md",
+        "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2_CN.md",
+        "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3_CN.md",
+        "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4_CN.md"
+      ],
+      "markdown": "reports/experiments/tank-01_CN.md",
+      "artifact": {
+        "url": "https://github.com/leoli-dev/llm-test-2026-10-20-game-tank-battle",
+        "play": "https://leoli-dev.github.io/llm-test-2026-10-20-game-tank-battle/",
+        "name": "Tank Battle"
+      },
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "SELF-01",
+      "title": "四份模型自我介绍 HTML",
+      "date": "日期未核实",
+      "sortDate": "0000-00-00",
+      "model": "文件名 4bit / 8bit / fp16 / flash；完整配置未核实",
+      "engines": [
+        "其他"
+      ],
+      "scope": "local",
+      "category": "身份未完全核实的样本",
+      "summary": "4 份独立 HTML 现存。",
+      "caveat": "未找到对应完整 testing report，不把文件名当作精确权重、引擎或量化证据。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/self-01-record_CN.md"
+      ],
+      "markdown": "reports/experiments/self-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": true,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "LAYA-01",
+      "title": "Laya 本地服务 / 72 题与并发边界",
+      "date": "2026-09-21",
+      "sortDate": "2026-09-21",
+      "model": "aac6fef/laya-multilingual-mlx；GPU FP16；1024 tokens",
+      "engines": [
+        "其他"
+      ],
+      "scope": "local",
+      "category": "相邻本地判别模型测试",
+      "summary": "72 题 37/72，51.4%；单题很快，但并发 7 有 reset 断崖。",
+      "caveat": "Laya 是判别模型，与生成式 LLM 分列；报告中的临时 /tmp JSON 要单独核对是否仍在。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21_CN.md",
+        "reports/originals/source-benchmarks_CN.md"
+      ],
+      "markdown": "reports/experiments/laya-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "Darwin 27.0.0；未记录 macOS 产品版本",
+        "testOSSource": "原报告的机器环境说明",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": "Apple M5 Max / 128 GB / Python 3.12.13",
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "JEV-01",
+      "title": "Jev vs 本地 Laya / 同一 72 题",
+      "date": "2026-09-21",
+      "sortDate": "2026-09-21",
+      "model": "Jev 云端 proxy 对照本地 Laya",
+      "engines": [
+        "其他"
+      ],
+      "scope": "cloud",
+      "category": "云端比较项",
+      "summary": "Jev 66/72（91.7%），Laya 37/72（51.4%）；云端延迟和限流单列。",
+      "caveat": "Jev 服务不在本机推理；jev-tests/investment 的投资测试属于另一组用例，不能与 72 题混为一份。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21_CN.md"
+      ],
+      "markdown": "reports/experiments/jev-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "PC-01",
+      "title": "Qwen3.8 Flash-Next / API 21 请求初测",
+      "date": "2026-10-06",
+      "sortDate": "2026-10-06",
+      "model": "内网 PC Qwen3.8 Flash-Next 服务；Mac 为客户端",
+      "engines": [
+        "其他"
+      ],
+      "scope": "lan",
+      "category": "内网 PC 推理服务测试",
+      "summary": "21 请求成功；短生成中位数 65.1 tok/s；代码 8/8；三档简单检索通过。",
+      "caveat": "不是这台 Mac 的推理性能；不含 PC GPU/RAM 遥测。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/lan-pc-outputs-ai_CN.md"
+      ],
+      "markdown": "reports/experiments/pc-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "lan",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "PC-02",
+      "title": "Repair Café / Pi 编程与约 151 分钟 soak",
+      "date": "2026-10-06",
+      "sortDate": "2026-10-06",
+      "model": "Pi → 内网 PC Qwen3.8 Flash-Next；Mac 保存代码",
+      "engines": [
+        "其他"
+      ],
+      "scope": "lan",
+      "category": "内网 PC 推理服务测试",
+      "summary": "124 个合法压力请求、健康检查 302/302；最终 66 自写测试、56 独立领域检查、26 Chromium 操作检查通过。",
+      "caveat": "有超时、人工反馈、恢复会话与一次合法预算越界 400；不能称一次自主成功。源码包、报告包与证据包也都在 outputs/。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/lan-pc-outputs-repair-cafe-soak-report_CN.md"
+      ],
+      "markdown": "reports/experiments/pc-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "lan",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "CLOUD-01",
+      "title": "AI Werewolf / DeepSeek V4.1 Flash 十局",
+      "date": "2026-10-11",
+      "sortDate": "2026-10-11",
+      "model": "DeepSeek V4.1 Flash API；云端",
+      "engines": [
+        "其他"
+      ],
+      "scope": "cloud",
+      "category": "云端比较项",
+      "summary": "前 10 局后按要求暂停；48 局矩阵其余 38 局未执行。",
+      "caveat": "作为邻近 testing report 索引保留，明确排除本机推理成绩。",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark_CN.md",
+        "reports/originals/source-report_CN.md"
+      ],
+      "markdown": "reports/experiments/cloud-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "HERMES-01",
+      "title": "Hermes POS gauntlet / Cart & Pricing",
+      "date": "2026-05-27",
+      "sortDate": "2026-05-27",
+      "model": "Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit；Config A",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "仅会话找回的早期参数测试",
+      "summary": "01_CART_AND_PRICING：9/9 单测、build 通过；整体 7/10，越界改 UI 与后续 checkout。另有 02 任务评审路径记录。",
+      "caveat": "仅找回会话评审；hermes-pos-gauntlet、hermes-agent-eval-log 与 spec 仓库均未定位。第二任务不能仅凭历史文件名认定验收通过。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-pos-gauntlet_CN.md"
+      ],
+      "markdown": "reports/experiments/hermes-01_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "HERMES-02",
+      "title": "Cafe POS from-zero / Config A",
+      "date": "2026-05-27",
+      "sortDate": "2026-05-27",
+      "model": "Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "仅会话找回的早期参数测试",
+      "summary": "历史评分 6.5/10。24/24 测试通过但 checkout 传零金额；模板 README、构建 warnings。",
+      "caveat": "会话保存原评审和 eval-log 提交号 275aa59；旧源码与报告仓库当前不存在，提交号只作线索，未找到可读取的 Git 对象。各配置使用同一产品目录重建，不把最后一版当作全部五版。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-cafe-pos-config-a_CN.md"
+      ],
+      "markdown": "reports/experiments/hermes-02_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "HERMES-03",
+      "title": "Cafe POS from-zero / Config B",
+      "date": "2026-05-27",
+      "sortDate": "2026-05-27",
+      "model": "Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "仅会话找回的早期参数测试",
+      "summary": "历史评分 7.3/10。23/23 测试与干净 build 通过；折扣只影响 cart，不进入 checkout。",
+      "caveat": "会话保存原评审和 eval-log 提交号 6e9893c；旧源码与报告仓库当前不存在，提交号只作线索，未找到可读取的 Git 对象。各配置使用同一产品目录重建，不把最后一版当作全部五版。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-cafe-pos-config-b_CN.md"
+      ],
+      "markdown": "reports/experiments/hermes-03_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "HERMES-04",
+      "title": "Cafe POS from-zero / Config C",
+      "date": "2026-05-27",
+      "sortDate": "2026-05-27",
+      "model": "Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "仅会话找回的早期参数测试",
+      "summary": "历史评分 6.2/10。22/22 测试与 build 通过；折扣丢失、库存状态与 CustomEvent 同步问题。",
+      "caveat": "会话保存原评审和 eval-log 提交号 330271f；旧源码与报告仓库当前不存在，提交号只作线索，未找到可读取的 Git 对象。各配置使用同一产品目录重建，不把最后一版当作全部五版。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-cafe-pos-config-c_CN.md"
+      ],
+      "markdown": "reports/experiments/hermes-04_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "HERMES-05",
+      "title": "Cafe POS from-zero / Config D",
+      "date": "2026-05-27",
+      "sortDate": "2026-05-27",
+      "model": "Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "仅会话找回的早期参数测试",
+      "summary": "历史评分 7.4/10。24/24 测试与 build 通过；折扣闭环改善，但写了 11KB App.css 未 import。",
+      "caveat": "会话保存原评审和 eval-log 提交号 0ae4c25；旧源码与报告仓库当前不存在，提交号只作线索，未找到可读取的 Git 对象。各配置使用同一产品目录重建，不把最后一版当作全部五版。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-cafe-pos-config-d_CN.md"
+      ],
+      "markdown": "reports/experiments/hermes-05_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "HERMES-06",
+      "title": "Cafe POS from-zero / Config E",
+      "date": "2026-05-27",
+      "sortDate": "2026-05-27",
+      "model": "Hermes + oMLX Qwen3.6-35B-A3B-MLX-8bit",
+      "engines": [
+        "oMLX"
+      ],
+      "scope": "local",
+      "category": "仅会话找回的早期参数测试",
+      "summary": "历史评分 7.5/10。22/22 测试与 build 通过；折扣集成较好，Sales Summary 重复扣折扣并混入税。",
+      "caveat": "会话保存原评审和 eval-log 提交号 d008ce6；旧源码与报告仓库当前不存在，提交号只作线索，未找到可读取的 Git 对象。各配置使用同一产品目录重建，不把最后一版当作全部五版。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/session-cafe-pos-config-e_CN.md"
+      ],
+      "markdown": "reports/experiments/hermes-06_CN.md",
+      "artifact": null,
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "source-report",
+      "title": "DeepSeek V4.1 Flash 测试总结（前 10 局）",
+      "path": "reports/originals/source-report_CN.md",
+      "format": "markdown",
+      "source": "source/report.md",
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "source-benchmarks",
+      "title": "本地基准测试",
+      "path": "reports/originals/source-benchmarks_CN.md",
+      "format": "markdown",
+      "source": "source/BENCHMARKS.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.2 / arm64（原报告记载）",
+        "testOSSource": "source/BENCHMARKS.md：原始环境说明",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": "Apple M3 Max / 40 核 GPU / 128 GiB（原报告记载）",
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "early-tests-20260526-omlx-model-test-solar-system-readme",
+      "title": "oMLX 本地 LLM 模型测试：太阳系演示",
+      "path": "reports/originals/early-tests-20260526-omlx-model-test-solar-system-readme_CN.md",
+      "format": "markdown",
+      "source": "early-tests/20260526_omlx-model-test_solar-system/README.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review",
+      "title": "代码审查 — 第 2 轮",
+      "path": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-5-122b-a10b-4bit-code-review_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-shoping-mvp-test/Qwen3.5-122B-A10B-4bit/CODE_REVIEW.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review",
+      "title": "代码审查 — 第 1 轮",
+      "path": "reports/originals/early-tests-local-llm-shoping-mvp-test-qwen3-6-35b-a3b-mlx-8bit-code-review_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-shoping-mvp-test/Qwen3.6-35B-A3B-MLX-8bit/CODE_REVIEW.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-shoping-mvp-test-readme",
+      "title": "本地 LLM 编程能力测评 — 全栈电商 MVP",
+      "path": "reports/originals/early-tests-local-llm-shoping-mvp-test-readme_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-shoping-mvp-test/README.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-tetris-code-test-readme",
+      "title": "本地 LLM 编程能力测评 — 俄罗斯方块",
+      "path": "reports/originals/early-tests-local-llm-tetris-code-test-readme_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-tetris-code-test/README.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review",
+      "title": "代码审查 — 第 1 轮",
+      "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-tetris-code-test/tetris-test-Qwen3.5-122B/CODE_REVIEW.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review",
+      "title": "代码审查 — 第 2 轮",
+      "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-27b-code-review_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-tetris-code-test/tetris-test-Qwen3.6-27B/CODE_REVIEW.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review",
+      "title": "代码审查 — 第 8 轮",
+      "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-qwen3-6-35b-code-review_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-tetris-code-test/tetris-test-Qwen3.6-35B/CODE_REVIEW.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review",
+      "title": "代码审查 — 第 5 轮（最终）",
+      "path": "reports/originals/early-tests-local-llm-tetris-code-test-tetris-test-gemma-4-31b-code-review_CN.md",
+      "format": "markdown",
+      "source": "early-tests/local-llm-tetris-code-test/tetris-test-gemma-4-31b/CODE_REVIEW.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark",
+      "title": "DeepSeek V4.1 Flash 十局推理配置测试",
+      "path": "reports/originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/ai-werewolf/notes/deepseek-v4.1-flash-10-game-benchmark.md",
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21",
+      "title": "云端 Jev 与本地 Laya 对比评测",
+      "path": "reports/originals/devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/jev-tests/notes/jev-vs-local-laya-comparison-2026-09-21.md",
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21",
+      "title": "Laya 本地服务深度测评",
+      "path": "reports/originals/devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/laya-mlx/notes/local-service-deep-evaluation-2026-09-21.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "Darwin 27.0.0；未记录 macOS 产品版本",
+        "testOSSource": "原报告的机器环境说明",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": "Apple M5 Max / 128 GB / Python 3.12.13",
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review",
+      "title": "Arcology 控制室 — 第 1 轮审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-arcology-control-room-round-1-review_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/arcology-control-room-round-1-review.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test",
+      "title": "首次成功运行 Qwen Code 测试",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-first-successful-qwen-code-test_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/first-successful-qwen-code-test.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review",
+      "title": "Frog Choir — 第 1 轮独立审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-1-review_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/frog-choir-round-1-review.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review",
+      "title": "Frog Choir — 第 2 轮独立评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-frog-choir-round-2-review_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/frog-choir-round-2-review.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01",
+      "title": "Gare Saint-Lazare — MTPLX/Pi Flash Next 独立验收与代码审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/gare-saint-lazare-mtplx-pi-flash-next-review-2026-09-01.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25",
+      "title": "JSON Lens — Ornith 1.5 35B-A3B 代码审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-ornith-code-review-2026-08-25_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/json-lens-ornith-code-review-2026-08-25.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25",
+      "title": "JSON Lens Qwen 3.8 第 1 轮代码审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-qwen-round-1-review-2026-08-25_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/json-lens-qwen-round-1-review-2026-08-25.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26",
+      "title": "JSON Lens — 第 3 轮最终审查及模型对比",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-json-lens-round-3-final-comparison-2026-08-26_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/json-lens-round-3-final-comparison-2026-08-26.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test",
+      "title": "LLM 带宽展示 — oQ4e-mtp 交付测试",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-oq4e-mtp-test.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review",
+      "title": "LLM 带宽展示 — 第 1 轮评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-round-1-review.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review",
+      "title": "LLM 带宽展示 — 第 2 轮评审与范围扩展",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-2-review_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-round-2-review.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review",
+      "title": "LLM 带宽展示 — 第 3 轮评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-3-review_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/llm-bandwidth-showcase-round-3-review.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31",
+      "title": "弹珠工坊 — MTPLX/Pi Flash Next 独立验收与代码审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20",
+      "title": "在 M5 Max 上用 MLTF 驱动 8-bit Qwen3.8-27B：pi 制作 3D 坦克大战的四轮监督实测",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mltf-pi-tank-battle-four-round-report-2026-10-20_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mltf-pi-tank-battle-four-round-report-2026-10-20.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03",
+      "title": "mlx-dspark 无法为 Qwen3.8-27B 提供视觉输入",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mlx-dspark-vision-unavailable-2026-09-03.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19",
+      "title": "MTPLX Flash-Next 128K 持续高上下文压力测试计划",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20",
+      "title": "MTPLX Flash-Next 128K 压测执行记录",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-flash-next-128k-pressure-test-run-2026-09-20.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20",
+      "title": "MTPLX 本机模型性能对比",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-model-comparison-report-2026-09-20_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-model-comparison-report-2026-09-20.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test",
+      "title": "MTPLX + Pi `frog-choir` 测试",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-pi-frog-choir-test_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-pi-frog-choir-test.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20",
+      "title": "MTPLX Qwen3.8 27B Optimized Quality 压测",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/mtplx-qwen38-27b-quality-pressure-test-run-2026-09-20.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07",
+      "title": "霓虹堡垒 55 项任务重跑 — A01–D05",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-55task-rerun-2026-09-07_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-55task-rerun-2026-09-07.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08",
+      "title": "Neon Bastion ds-v4-flash-vision 运行 — A01–A03",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-ds-v4-flash-vision-run-2026-09-08.md",
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04",
+      "title": "Neon Bastion 七轮总结",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-final-summary-2026-09-04.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01",
+      "title": "Neon Bastion — mlx-dspark/Qwen3.8-27B-8bit + Pi 独立验收与代码审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-mlx-dspark-pi-review-2026-09-01_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-mlx-dspark-pi-review-2026-09-01.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01",
+      "title": "Neon Bastion — mlx-dspark/Qwen3.8-27B-8bit + Pi 独立验收与代码审查",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-1-review-2026-09-01.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02",
+      "title": "Round 2 — 独立复核（2026-09-02）",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-2-review-2026-09-02.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02",
+      "title": "Neon Bastion — Round 3 验证（评分暂缓至人工游玩）",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-3-review-2026-09-02.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02",
+      "title": "Neon Bastion — Round 4 评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-4-review-2026-09-02.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03",
+      "title": "Neon Bastion — Round 5 评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-5-review-2026-09-03.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03",
+      "title": "Neon Bastion — Round 6 评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-6-review-2026-09-03.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04",
+      "title": "第七轮评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-round-7-review-2026-09-04.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16",
+      "title": "Neon Bastion 三轮测试横向总结",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-neon-bastion-three-rounds-summary-2026-09-16_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/neon-bastion-three-rounds-summary-2026-09-16.md",
+      "environment": {
+        "scope": "cloud",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test",
+      "title": "oMLX RC + Qwen3.8-27B-oQ4e-mtp 性能测试",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-omlx-rc-oq4e-mtp-performance-test_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/omlx-rc-oq4e-mtp-performance-test.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31",
+      "title": "Orbital Garden — MTPLX/Pi Flash Next 独立验收与代码评审",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test",
+      "title": "Paris 3D — Qwen3.8-27B 测试",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-paris-3d-qwen3-8-27b-test_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/paris-3d-qwen3.8-27b-test.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-qwen3-8-27b-local-coding-test-summary",
+      "title": "Qwen3.8-27B 本机 coding-agent 测试总结（全量）",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-qwen3-8-27b-local-coding-test-summary_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/qwen3.8-27b-local-coding-test-summary.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05",
+      "title": "Tide Isle R1 — mtplx optimized-speed 四任务总结",
+      "path": "reports/originals/devlog-projects-qwen3-8-test-notes-tide-isle-mtplx-optspeed-r1-2026-09-05_CN.md",
+      "format": "markdown",
+      "source": "devlog/projects/qwen3.8-test/notes/tide-isle-mtplx-optspeed-r1-2026-09-05.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1-zh-cn",
+      "title": "本地 Qwen3.8-27B-MLTF-q8c × pi：3D 坦克大战监督实验报告",
+      "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-1_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-1.zh-CN.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2-zh-cn",
+      "title": "本地 Qwen3.8-27B-MLTF-q8c × pi：坦克大战第二轮监督报告",
+      "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-2_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-2.zh-CN.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3-zh-cn",
+      "title": "Qwen3.8-27B-MLTF-q8c × pi：第三轮游戏重构与本机性能报告",
+      "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-3_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-3.zh-CN.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4-zh-cn",
+      "title": "MLTF / Qwen3.8-27B 本机监督实验：R4 UI 遮挡修复",
+      "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-round-4_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.round-4.zh-CN.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report-zh-cn",
+      "title": "在 M5 Max 上用 MLTF 驱动 8-bit Qwen3.8-27B：pi 制作 3D 坦克大战的四轮监督实测",
+      "path": "reports/originals/qwen-tests-mltf-27b-pi-tank-battle-2026-10-20-report_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mltf-27b-pi-tank-battle-2026-10-20/REPORT.zh-CN.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "坦克大战链报告：引擎 /status 快照",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme",
+      "title": "NEON BASTION — 4v4 区域突击",
+      "path": "reports/originals/qwen-tests-mtplx-flash-with-pi-3d-team-arena-readme_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mtplx-flash-with-pi-3d-team-arena/README.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "qwen-tests-mtplx-model-comparison-report-2026-09-20",
+      "title": "MTPLX 本机模型性能对比",
+      "path": "reports/originals/qwen-tests-mtplx-model-comparison-report-2026-09-20_CN.md",
+      "format": "markdown",
+      "source": "qwen-tests/mtplx-model-comparison-report-2026-09-20.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "lan-pc-outputs-ai",
+      "title": "内网 AI 服务实测",
+      "path": "reports/originals/lan-pc-outputs-ai_CN.md",
+      "format": "html-converted",
+      "source": "lan-pc/outputs/AI服务实测报告.html",
+      "environment": {
+        "scope": "lan",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "lan-pc-outputs-repair-cafe-soak-report",
+      "title": "Pi × 内网 Qwen 连续开发与长上下文压力实测",
+      "path": "reports/originals/lan-pc-outputs-repair-cafe-soak-report_CN.md",
+      "format": "html-converted",
+      "source": "lan-pc/outputs/repair-cafe-soak-report.html",
+      "environment": {
+        "scope": "lan",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "engine-tests-2026-10-19-long-context-report",
+      "title": "Qwen3.8-27B 128K / 256K 长上下文实测",
+      "path": "reports/originals/engine-tests-2026-10-19-long-context-report_CN.md",
+      "format": "markdown",
+      "source": "engine-tests/2026-10-19-long-context/report.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "engine-tests-2026-10-19-mltf-clients-report",
+      "title": "MLTF：qwen / pi / hermes 真实 CLI 图文长任务验收",
+      "path": "reports/originals/engine-tests-2026-10-19-mltf-clients-report_CN.md",
+      "format": "markdown",
+      "source": "engine-tests/2026-10-19-mltf-clients/report.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "engine-tests-2026-10-19-mltf-comparison-report",
+      "title": "MLTF 与 MLX-VLM：128K 图文长任务对照",
+      "path": "reports/originals/engine-tests-2026-10-19-mltf-comparison-report_CN.md",
+      "format": "markdown",
+      "source": "engine-tests/2026-10-19-mltf-comparison/report.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "engine-tests-2026-10-19-quality-comparison-report",
+      "title": "MLTF / mlx-vlm 配对质量、速度与内存对照",
+      "path": "reports/originals/engine-tests-2026-10-19-quality-comparison-report_CN.md",
+      "format": "markdown",
+      "source": "engine-tests/2026-10-19-quality-comparison/report.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "engine-tests-2026-10-19-vision-stability-report",
+      "title": "Qwen3.8-27B 视觉 + DFlash2 阶梯稳定性实测",
+      "path": "reports/originals/engine-tests-2026-10-19-vision-stability-report_CN.md",
+      "format": "markdown",
+      "source": "engine-tests/2026-10-19-vision-stability/report.md",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": "macOS 27.0.1 (26A434)",
+        "testOSSource": "历史 hardware.json；公开安全字段见 data/environment-history_CN.json",
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "test-snapshot-and-current-reference"
+      }
+    },
+    {
+      "id": "session-cafe-pos-config-a",
+      "title": "Hermes Cafe POS / Config A",
+      "path": "reports/originals/session-cafe-pos-config-a_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/cafe-pos-config-a",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "session-cafe-pos-config-b",
+      "title": "Hermes Cafe POS / Config B",
+      "path": "reports/originals/session-cafe-pos-config-b_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/cafe-pos-config-b",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "session-cafe-pos-config-c",
+      "title": "Hermes Cafe POS / Config C",
+      "path": "reports/originals/session-cafe-pos-config-c_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/cafe-pos-config-c",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "session-cafe-pos-config-d",
+      "title": "Hermes Cafe POS / Config D",
+      "path": "reports/originals/session-cafe-pos-config-d_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/cafe-pos-config-d",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "session-cafe-pos-config-e",
+      "title": "Hermes Cafe POS / Config E",
+      "path": "reports/originals/session-cafe-pos-config-e_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/cafe-pos-config-e",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "session-pos-gauntlet",
+      "title": "Hermes POS / Cart & Pricing",
+      "path": "reports/originals/session-pos-gauntlet_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/pos-gauntlet",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "session-boston-map",
+      "title": "Boston 地图：测试结果与复制参考的纠正",
+      "path": "reports/originals/session-boston-map_CN.md",
+      "format": "session-recovered",
+      "source": "session-recovered/boston-map",
+      "environment": {
+        "scope": "local",
+        "originUnverified": false,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "self-01-record",
+      "title": "四份模型自我介绍 HTML",
+      "path": "reports/originals/self-01-record_CN.md",
+      "format": "record-only",
+      "source": "inventory-record/SELF-01",
+      "environment": {
+        "scope": "local",
+        "originUnverified": true,
+        "testOS": null,
+        "testOSSource": null,
+        "workstationSnapshot": "2026-10-20T22:03:27Z",
+        "testHardware": null,
+        "hardwareStatus": "current-reference-only"
+      }
+    }
+  ],
+  "locale": "cn",
+  "localizationComplete": true,
+  "environment": "data/environment_CN.json"
+}

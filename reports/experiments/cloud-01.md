@@ -1,21 +1,40 @@
-# AI Werewolf / DeepSeek V4.1 Flash 十局
+# AI Werewolf / ten DeepSeek V4.1 Flash games
 
-| 项目 | 记录 |
+[English](cloud-01.md) | [简体中文](cloud-01_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | CLOUD-01 |
-| 日期 | 2026-10-11 |
-| 模型与运行方式 | DeepSeek V4.1 Flash API；云端 |
-| 推理位置 | 云端对照 |
+| ID | CLOUD-01 |
+| Date | 2026-10-11 |
+| Model and runtime | DeepSeek V4.1 Flash API; cloud |
+| Inference location | cloud |
 
-## 历史结果
+<!-- environment-context:start -->
 
-前 10 局后按要求暂停；48 局矩阵其余 38 局未执行。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-- [DeepSeek V4.1 Flash 十局推理配置测试](../originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark.md)
-- [DeepSeek V4.1 Flash 测试总结（前 10 局）](../originals/source-report.md)
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 证据边界
+<!-- environment-context:end -->
 
-作为邻近 testing report 索引保留，明确排除本机推理成绩。
+## Historical result
+
+Paused after the first ten games at the user's request. The other 38 games in the 48-game matrix were not run.
+
+## Full reports
+
+- [DeepSeek V4.1 Flash Ten-Game Reasoning Configuration Test](../originals/devlog-projects-ai-werewolf-notes-deepseek-v4-1-flash-10-game-benchmark.md)
+- [DeepSeek V4.1 Flash Test Summary (First 10 Games)](../originals/source-report.md)
+
+## Evidence limits
+
+Retained as a related testing report, explicitly excluded from local-inference results.

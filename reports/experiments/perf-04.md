@@ -1,20 +1,39 @@
-# mlx-dspark 128K / 256K 长上下文
+# mlx-dspark / 128K and 256K long context
 
-| 项目 | 记录 |
+[English](perf-04.md) | [简体中文](perf-04_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | PERF-04 |
-| 日期 | 2026-10-19 |
-| 模型与运行方式 | Qwen3.8-27B 8bit；mlx-dspark 128K  |
-| 推理位置 | 本机 |
+| ID | PERF-04 |
+| Date | 2026-10-19 |
+| Model and runtime | Qwen3.8-27B 8bit; mlx-dspark 128K  |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-128K 完成；256K 也返回但出现内存压力与约 12.31 GiB swap 增量。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | macOS 27.0.1 (26A434) |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-- [Qwen3.8-27B 128K / 256K 长上下文实测](../originals/engine-tests-2026-10-19-long-context-report.md)
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 证据边界
+<!-- environment-context:end -->
 
-每长度一个性能样本；512-token 输出，不是完整代码质量测试。 原报告内可能残留 mlx-dspark 旧绝对链接；现文件已迁移到本条位置。
+## Historical result
+
+128K completed. 256K also returned output, but memory pressure occurred and swap increased by approximately 12.31 GiB.
+
+## Full reports
+
+- [Qwen3.8-27B 128K / 256K long-context measurements](../originals/engine-tests-2026-10-19-long-context-report.md)
+
+## Evidence limits
+
+One performance sample per length, with 512-token output; not a complete code-quality test. Old absolute report links may still describe the former mlx-dspark directory; the files were migrated into the MLTF historical records.

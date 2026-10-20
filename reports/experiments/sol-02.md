@@ -1,20 +1,35 @@
-# 3D 太阳系 / gemma-4-26b-a4b-it-bf16
+# 3D Solar System / gemma-4-26b-a4b-it-bf16
 
-| 项目 | 记录 |
+[English](sol-02.md) | [简体中文](sol-02_CN.md)
+
+| Item | Record |
 |---|---|
-| 编号 | SOL-02 |
-| 日期 | 2026-05-26 |
-| 模型与运行方式 | Hermes + oMLX；gemma-4-26b-a4b-it-bf16 |
-| 推理位置 | 本机 |
+| ID | SOL-02 |
+| Date | 2026-05-26 |
+| Model and runtime | Hermes + oMLX; gemma-4-26b-a4b-it-bf16 |
+| Inference location | local |
 
-## 历史结果
+<!-- environment-context:start -->
 
-历史报告 68/100；能运行，内容简化。
+## Workstation and system (context added 2026-10-20)
 
-## 原始报告
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Historical result
+
+Historical score: 68/100. The demo ran, but the implementation was simplified.
+
+## Full reports
 
 - [oMLX Local LLM Model Test: Solar System Demo](../originals/early-tests-20260526-omlx-model-test-solar-system-readme.md)
-
-## 证据边界
-
-历史成绩由原报告保存，本次发布没有重新测评模型。

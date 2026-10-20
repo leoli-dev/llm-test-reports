@@ -1,30 +1,49 @@
-# MLTF：qwen / pi / hermes 真实 CLI 图文长任务验收
+# MLTF: real qwen / pi / hermes CLI acceptance on long multimodal tasks
 
-生成于 2026-10-19T18:45:33.884644-04:00。三客户端4096输出主轮完整通过：**否；见失败项**。
+[English](engine-tests-2026-10-19-mltf-clients-report.md) | [简体中文](engine-tests-2026-10-19-mltf-clients-report_CN.md)
 
-最终端到端验收（Hermes独立16K跟进单列）：**通过**。原主轮失败和无效适配尝试完整保留。
+<!-- environment-context:start -->
 
-设备：Apple M5 Max，40 GPU cores，物理统一内存128 GiB，macOS 27.0.1。
+## Workstation and system (context added 2026-10-20)
 
-每个客户端使用新启动的同配置 MLTF 服务，实际安装的 CLI 负责图像附件、模型请求、读取本地独立 nonce 文件及工具结果回传。代理逐字节转发到 MLTF；测试钩子只观察 native GenerationRequest，不替换请求或采样。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | macOS 27.0.1 (26A434) |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-模型 `mlx-community/Qwen3.8-27B-8bit`，窗口 131,072 tokens，vision 开启，目标权重来自原 8bit 模型的 packed q8c，KV 为 INT8。共同正文 88,064 tokens；实际输入含各 CLI 的系统提示、工具、图像和结果，以逐请求 usage 为准。**本轮是 128K 窗口内的长任务，不是 128K 满载输入。**
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-推荐采样 `temperature=1 / top_p=0.95 / top_k=20` 同时核对客户端真实 HTTP body 和原生引擎请求。启动时保留客户端原设置：qwen low，pi / hermes medium thinking；Hermes原生恢复期间的effort变化逐请求记录。输出每请求上限 4096，最多三次生成；冷启动与工具后续请求的缓存分别记录。
+<!-- environment-context:end -->
 
-## 功能与整体耗时
+Generated 2026-10-19T18:45:33.884644-04:00. Did all three clients fully pass the main 4096-output round? **No; see failures.**
 
-| 客户端 | 验收 | HTTP / native 次数 | CLI wall 秒 | 工具成功闭环 | 图片颜色/形状/顺序 | 最终回答字符 |
+Final end-to-end acceptance, with the independent Hermes 16K follow-up reported separately: **Pass**. Original main-round failures and invalid adapter attempts are retained in full.
+
+Device: Apple M5 Max, 40 GPU cores, 128 GiB physical unified memory, macOS 27.0.1.
+
+Each client uses a freshly started MLTF service with the same configuration. Actual installed CLIs attach images, request the model, read an independent local nonce file and return tool results. The proxy forwards bytes unchanged to MLTF; test hooks observe native GenerationRequest without replacing requests or sampling.
+
+Model: `mlx-community/Qwen3.8-27B-8bit`, 131,072-token window, vision enabled, packed-q8c target weights from the original 8bit model and INT8 KV. Shared body: 88,064 tokens. Actual input includes each CLI's system prompt, tools, images and results; per-request usage is authoritative. **These are long tasks within a 128K window, not full-128K inputs.**
+
+Recommended sampling `temperature=1 / top_p=0.95 / top_k=20` is checked against both actual client HTTP bodies and native engine requests. Initial client settings remain: qwen low and pi/hermes medium thinking. Hermes effort changes during native recovery are recorded per request. Output is capped at 4096 per request, with at most three generations. Cold-start and post-tool cache states are recorded separately.
+
+## Functionality and overall duration
+
+| Client | Acceptance | HTTP / native count | CLI wall seconds | Successful tool round trip | Image color/shape/order | Final-answer characters |
 |---|---|---:|---:|---:|---|---:|
-| qwen | 通过 | 2 / 2 | 263.13 | 1 / 1 | 通过 | 11,692 |
-| pi | 通过 | 2 / 2 | 257.74 | 1 / 1 | 通过 | 16,542 |
-| hermes | 失败/待查 | 4 / 3 | 401.63 | 1 / 1 | 失败 | 170 |
+| qwen | Pass | 2 / 2 | 263.13 | 1 / 1 | Pass | 11,692 |
+| pi | Pass | 2 / 2 | 257.74 | 1 / 1 | Pass | 16,542 |
+| hermes | Fail/pending | 4 / 3 | 401.63 | 1 / 1 | Fail | 170 |
 
-CLI wall 包含启动、客户端预处理、工具执行和所有请求。客户端的系统提示与 thinking effort 不同，数字用于实际链路验收，不能当作同提示、同推理预算的客户端性能排名。
+CLI wall time includes startup, client preprocessing, tools and all requests. System prompts and thinking efforts differ, so these numbers validate actual integration paths rather than ranking clients with identical prompts/reasoning budgets.
 
-## 全部请求：缓存、prefill 和 decode
+## All requests: cache, prefill and decode
 
-| 客户端 / 请求 | 输入 / 输出 / reasoning tokens | effort / native thinking | 正文字符 | 缓存 tokens | 冷/暖 | TTFT¹ 秒 | lifecycle prefill² tok/s | lifecycle decode³ tok/s | 请求 wall 秒 | finish |
+| Client / request | Input / output / reasoning tokens | effort / native thinking | Final-content characters | Cached tokens | Cold/warm | TTFT¹ seconds | lifecycle prefill² tok/s | lifecycle decode³ tok/s | Request wall seconds | finish |
 |---|---:|---|---:|---:|---|---:|---:|---:|---:|---|
 | qwen / 0001 | 95824 / 130 / 71 | low / True | 0 | 0 | cold | 183.82 | 521.70 | 62.33 | 185.88 | tool_calls |
 | qwen / 0002 | 96004 / 4096 / 1341 | low / True | 11,692 | 95808 | warm | 0.94 | 230.40 | 54.81 | 75.63 | length |
@@ -35,118 +54,118 @@ CLI wall 包含启动、客户端预处理、工具执行和所有请求。客�
 | hermes / 0003 | 92419 / 4096 / 0 | none / False | 17,119 | 92352 | warm | 0.58 | 140.61 | 40.64 | 101.34 | length |
 | hermes / 0004 | — / — / — | medium / None | 0 | None | unknown | — | — | — | — | None |
 
-¹ TTFT 到首个生成增量，包含 thinking、正文或工具参数；首个可见正文时间另存 clients-summary.json / requests.csv。
-² MLTF 口径为未缓存 prefill tokens ÷ start-to-first-emission elapsed；包含请求生命周期开销和首批生成，不是纯 GPU kernel 计时。暖缓存不会把复用 tokens 算成重新 prefill。
-³ MLTF 口径为扣除首个完整 speculative emission 后的 tokens ÷ first-emission-to-done elapsed。包含 reasoning、正文和工具输出 tokens。它与 /status 的 native command throughput 口径不同；两者原值均保留。速度与token总量以全部HTTP/native逐请求证据为准，CLI终态摘要可能漏计截断中间轮。
+¹ TTFT ends at the first generated increment, including reasoning, final content or tool arguments. First visible final-content time is stored separately in clients-summary.json / requests.csv.
+² MLTF lifecycle prefill is uncached prefill tokens / start-to-first-emission elapsed. It includes request-lifecycle overhead and first-batch generation, rather than pure GPU-kernel timing. Reused tokens are not counted as new prefill on warm requests.
+³ MLTF lifecycle decode is tokens after subtracting the first complete speculative emission / first-emission-to-done elapsed. It includes reasoning, final content and tool-output tokens. This differs from /status native command throughput; both raw definitions remain. All HTTP/native per-request evidence determines speed and token totals, since terminal CLI summaries may omit truncated intermediate rounds.
 
-完整的首正文时刻、生成交付间隔、prompt/decode 分母与 tokens 见 requests.csv（历史本机文件，未随本报告发布） 和 clients-summary.json（历史本机文件，未随本报告发布）。所有 HTTP 尝试均列出；失败请求保留，不以重跑结果替换。
+Complete first-final-content times, generation-delivery intervals, prompt/decode denominators and token counts are in requests.csv (historical local file; not published with this report) and clients-summary.json (historical local file; not published with this report). Every HTTP attempt is listed; failed requests are not replaced by rerun results.
 
-## CPU、GPU 与统一内存
+## CPU, GPU and unified memory
 
-| 客户端 | Native / 前端 / CLI CPU 均值 % | 全局 GPU busy 均值 % | Native RSS / footprint 峰值 GiB | 前端 RSS / footprint 峰值 GiB | CLI tree RSS / footprint 峰值 GiB | MLTF allocator 峰值 GiB | 全局 GPU in-use 峰值 GiB |
+| Client | Native / frontend / CLI mean CPU % | Mean global GPU busy % | Native RSS / footprint peak GiB | Frontend RSS / footprint peak GiB | CLI tree RSS / footprint peak GiB | MLTF allocator peak GiB | Global GPU in-use peak GiB |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | qwen | 0.72 / 0.68 / 0.27 | 98.97 | 1.50 / 5.82 | 0.82 / 0.59 | 0.42 / 0.32 | 34.34 | 33.18 |
 | pi | 0.78 / 0.82 / 0.32 | 99.15 | 1.50 / 5.57 | 0.80 / 0.57 | 0.14 / 0.09 | 34.08 | 32.63 |
 | hermes | 0.91 / 0.93 / 0.64 | 96.75 | 1.68 / 6.01 | 0.80 / 0.57 | 0.81 / 0.57 | 34.52 | 32.32 |
 
-CPU 100% 表示一个逻辑 CPU 核。Native 是实际 `splash` 子进程；前端是 Python HTTP 服务；CLI tree 包含启动适配器和其实际 agent 子进程。GPU busy / GPU driver memory 为全局计数，可能包括其他应用。
-**RSS、physical footprint、MLTF allocator 和 GPU driver memory 口径重叠，不能相加。** Native OS footprint 不能代表全部 Metal 分配；进程树内存和可能重复计算共享页。本报告不据此计算 RAM 节省百分比。
+CPU 100% represents one logical CPU core. Native is the actual `splash` subprocess; frontend is the Python HTTP service; CLI tree includes the launch adapter and actual agent subprocesses. GPU busy/driver memory are global and may include other apps.
+**RSS, physical footprint, MLTF allocator and GPU-driver memory overlap and must not be added.** Native OS footprint does not represent all Metal allocation; summing process trees can count shared pages repeatedly. No percentage RAM-saving claim is derived here.
 
-| 客户端 | 1Hz 样本 | 压力计数 | swap 起→止 GiB（增量） | 状态 stale 样本 | telemetry 错误 |
+| Client | 1Hz samples | Pressure counts | Swap start → end GiB (change) | Stale status samples | Telemetry errors |
 |---|---:|---|---:|---:|---|
 | qwen | 262 | {"normal": 262} | 4.70 → 4.70 (0.00) | 0 | {"process.process": 1} |
 | pi | 257 | {"normal": 257} | 4.75 → 4.72 (-0.02) | 0 | {} |
 | hermes | 401 | {"normal": 401} | 4.72 → 4.70 (-0.02) | 0 | {"process.process": 3} |
 
-表中process.process采集错误来自已退出的短命CLI子进程（Qwen caffeinate；Hermes启动期间python/git）的进程枚举与查询竞争，原始错误和缺样计数保留。Native/HTTP前端是否完整采集另见每项valid_count/missing_count及server_roster_error_count；不会把缺样填成0。
+process.process collection errors come from races enumerating/querying short-lived CLI subprocesses that have already exited: Qwen caffeinate, and python/git during Hermes startup. Original errors and missing-sample counts remain. Native/HTTP frontend coverage is separately reported through valid_count/missing_count and server_roster_error_count; missing samples are not filled with 0.
 
-![CPU、GPU 与内存逐秒曲线](../../assets/figures/ec9367fbf12d-resources.png)
+![Per-second CPU, GPU and memory curves](../../assets/figures/ec9367fbf12d-resources.png)
 
-## 验证边界和证据
+## Validation boundaries and evidence
 
-图像识别和 nonce 证明真实图文与工具闭环。主轮长代码在4096 cap截断；独立16K跟进按其实际finish reason记录。本轮未执行生成代码、未验证 25 个 unittest，也未证明不同精度路径或不同客户端的回答质量等价。采样为随机，单轮成绩不提供统计置信度。
+Image recognition and nonce results establish real multimodal input and tool round trips. Long code in the main round is truncated at the 4096 cap; the independent 16K follow-up retains its actual finish reason. Generated code and the 25 unittests are not executed, nor is answer-quality equivalence across precision paths/clients established. Sampling is stochastic and a single round provides no statistical confidence.
 
-Pi 的 JSON 模式可能在模型 error/length 时仍退出 0，因此同时检查 finalized assistant 事件、agent settled、工具执行结果与 nonce；Qwen / Hermes 同时检查终态 envelope 和原始代理 / native 请求。
+Pi JSON mode can exit 0 after model error/length, so finalized assistant events, settled agent state, tool results and nonce are checked together. Qwen/Hermes additionally check terminal envelopes and raw proxy/native requests.
 
-图像源为同一840×280 PNG。Pi/Hermes实际嵌入字节与源文件SHA256核对；Qwen真实CLI会转成同尺寸JPEG，明确记录真实编码和MIME、SHA256差异、RGB平均绝对误差及差异像素比例，并只对此已核实转换允许像素近似通过。识图答案和native image_spans仍须单独通过。不能声称三个客户端上传的图像字节相同。
+The image source is the same 840×280 PNG. Pi/Hermes embedded bytes are checked against source SHA256. Actual Qwen CLI converts it to same-size JPEG; actual encoding/MIME, SHA256 differences, RGB mean absolute error and differing-pixel ratio are recorded explicitly. Approximate pixel acceptance is allowed only for this verified conversion. Recognition answers and native image_spans must still pass separately. The three clients cannot be said to upload identical image bytes.
 
-临时 profile 隔离测试、输出 cap、工具范围和无关辅助请求；未替换 SDK 传输。Pi/Hermes 本轮关闭自动压缩以保留长正文，Qwen 保留其正常压缩机制；实际每次请求都核对共享长正文仍在。各客户端初始effort保留，自动恢复中的变化逐请求记录。
+Temporary profiles isolate testing, output caps, tool scope and unrelated helper requests; SDK transport is not replaced. Pi/Hermes disable automatic compaction to preserve the long body, while Qwen retains normal compaction. Each actual request is checked to retain the shared long body. Initial efforts remain; changes during automatic recovery are recorded per request.
 
-- 每请求速度与参数 CSV（历史本机文件，未随本报告发布）
-- 每客户端 CPU/GPU/内存汇总 CSV（历史本机文件，未随本报告发布）
-- 逐秒资源 CSV（历史本机文件，未随本报告发布）
-- 完整机器可读审计（历史本机文件，未随本报告发布）
-- 测试计划（历史本机文件，未随本报告发布）
-- 持久客户端配置最终审计（历史本机文件，未随本报告发布）
-- 服务恢复与进程清理审计（历史本机文件，未随本报告发布）
-- 恢复后的实际服务状态（历史本机文件，未随本报告发布）
-- 真实 CLI 离线解析器（历史本机文件，未随本报告发布）
+- Per-request speed/parameter CSV (historical local file; not published with this report)
+- Per-client CPU/GPU/memory summary CSV (historical local file; not published with this report)
+- Per-second resource CSV (historical local file; not published with this report)
+- Complete machine-readable audit (historical local file; not published with this report)
+- Test plan (historical local file; not published with this report)
+- Final persistent-client-configuration audit (historical local file; not published with this report)
+- Service-restoration/process-cleanup audit (historical local file; not published with this report)
+- Actual restored-service status (historical local file; not published with this report)
+- Real-CLI offline parser (historical local file; not published with this report)
 
-真实CLI暴露了两项视觉能力声明缺口：Qwen补充`generationConfig.modalities.image=true`，Hermes补充本机模型的`supports_vision=true`；只修改对应canonical模型能力字段，采样和其他全局选择保留。Qwen修复证据（历史本机文件，未随本报告发布）、Hermes修复证据（历史本机文件，未随本报告发布）。随后原生图像请求由本报告实际HTTP和native job证据验证。
+Actual CLIs reveal two missing vision-capability declarations: Qwen adds `generationConfig.modalities.image=true`, and Hermes adds `supports_vision=true` for the local model. Only the corresponding canonical model-capability fields change; sampling and other global selections remain. Qwen repair evidence (historical local file; not published with this report), Hermes repair evidence (historical local file; not published with this report). Actual HTTP/native-job evidence in this report then verifies native image requests.
 
-## Hermes独立16K输出跟进（不池入4096主轮）
+## Independent Hermes 16K-output follow-up (not pooled with the 4096 main round)
 
-预先记录的跟进计划（历史本机文件，未随本报告发布）只提高测试输出/步数预算，保持同一图像源、88,064正文tokens、vision、128K、medium初始thinking和推荐三项采样。输出cap=16,384，agent iterations=4，代理最多6次生成。原4096轮和全部失败证据保留；本节速度、时间、内存不合入主轮CSV或曲线。
+The pre-recorded follow-up plan (historical local file; not published with this report) raises only test output/step budgets, retaining the image source, 88,064 body tokens, vision, 128K, initial medium thinking and recommended three sampling settings. Output cap=16,384, agent iterations=4 and proxy limit=6 generations. Original 4096-round failures remain; this section's speed/time/memory are not merged into main-round CSV/curves.
 
-- 真实CLI结果：通过；exit `0`，wall **1,052.92秒**，HTTP/native `4/4`。
-- 终态视觉：`True`；nonce工具结果/最终回答：`True/True`；最终回答`94,183`字符。
-- Native / 前端 / CLI CPU均值 `1.22 / 0.99 / 0.72%`；全局GPU busy均值`97.97%`。
-- allocator峰值`36.34 GiB`，全局GPU in-use峰值`32.63 GiB`；内存口径重叠，不能相加。压力`{"normal": 1048}`，swap增量`-0.02 GiB`。
-- 必需检查失败/待查：`[]`。
+- Real CLI result: pass; exit `0`, wall **1,052.92 seconds**, HTTP/native `4/4`.
+- Terminal vision: `True`; nonce tool result / final answer: `True/True`; final answer `94,183` characters.
+- Native / frontend / CLI mean CPU: `1.22 / 0.99 / 0.72%`; mean global GPU busy: `97.97%`.
+- Allocator peak: `36.34 GiB`, global GPU in-use peak: `32.63 GiB`; overlapping definitions must not be added. Pressure `{"normal": 1048}`, swap change `-0.02 GiB`.
+- Required failed/unresolved checks: `[]`.
 
-| 请求 | HTTP/forwarded | 输入 / 输出 / reasoning | effort | cache tokens | TTFT秒 | prefill tok/s | decode tok/s | wall秒 | finish |
+| Request | HTTP/forwarded | Input / output / reasoning | effort | cache tokens | TTFT seconds | prefill tok/s | decode tok/s | wall seconds | finish |
 |---|---|---:|---|---:|---:|---:|---:|---:|---|
 | 0001 | 200 / True | 92219 / 131 / 73 | medium | 0 | 163.67 | 563.91 | 55.48 | 165.98 | tool_calls |
 | 0002 | 200 / True | 92450 / 16384 / 16384 | medium | 92192 | 1.12 | 250.91 | 37.33 | 439.96 | length |
 | 0003 | 200 / True | 92490 / 16384 / 0 | none | 92320 | 0.70 | 278.36 | 58.73 | 279.63 | length |
 | 0004 | 200 / True | 108919 / 6042 / 54 | medium | 92480 | 40.34 | 408.59 | 52.28 | 155.83 | stop |
 
-本轮请求2的16,384输出tokens全部用于思考，正文为空；Hermes自动将请求3设为none恢复，请求3输出16,384正文tokens后触发续写，请求4恢复medium并自然stop。**扩大输出cap没有消除思考耗尽现象**；最终成功包含客户端原生恢复和续写的全部时间。
+All 16,384 output tokens in follow-up request 2 are reasoning, with no final content. Hermes automatically changes request 3 to none for recovery; after request 3 produces 16,384 final-content tokens, continuation triggers request 4, which restores medium and naturally stops. **Increasing the cap does not eliminate reasoning-budget exhaustion**; final success includes all time spent on native client recovery and continuation.
 
-Hermes终态CLI摘要只报告`6173` completion tokens；逐HTTP/native证据记录实际生成`38,941` tokens（reasoning `16,511`）。CLI摘要未包含截断中间轮，速度与总量必须以全部HTTP/native逐请求证据为准。
+Hermes's terminal CLI summary reports only `6173` completion tokens; HTTP/native evidence records actual generation of `38,941` tokens (`16,511` reasoning). The summary omits truncated intermediate rounds, so all HTTP/native per-request evidence must determine speed and totals.
 
-Native RSS / footprint峰值`2.23 / 7.82 GiB`；前端`0.82 / 0.58 GiB`；CLI tree `0.25 / 0.21 GiB`。资源采样`1048`个；native/前端进程采集错误`0`，短命CLI子进程查询竞争`2`次，原始缺样保留。
+Native RSS/footprint peaks: `2.23 / 7.82 GiB`; frontend: `0.82 / 0.58 GiB`; CLI tree: `0.25 / 0.21 GiB`. Resource samples: `1048`; native/frontend process-collection errors: `0`; short-lived CLI query races: `2`. Original missing samples remain.
 
-原始证据：hermes/followup16k（历史本机文件，未随本报告发布）。独立跟进请求CSV（历史本机文件，未随本报告发布）、资源汇总CSV（历史本机文件，未随本报告发布）、逐秒CSV（历史本机文件，未随本报告发布）、完整跟进审计（历史本机文件，未随本报告发布）、独立33项审计（历史本机文件，未随本报告发布）。
+Raw evidence: hermes/followup16k (historical local file; not published with this report). Independent follow-up request CSV (historical local file; not published with this report), resource-summary CSV (historical local file; not published with this report), per-second CSV (historical local file; not published with this report), full follow-up audit (historical local file; not published with this report), independent 33-check audit (historical local file; not published with this report).
 
 
-![Hermes独立16K跟进资源曲线](../../assets/figures/102d3c9aadad-followup-resources.png)
+![Independent Hermes 16K follow-up resource curves](../../assets/figures/102d3c9aadad-followup-resources.png)
 
-## 保留的失败尝试与测试收尾异常
+## Retained failed attempts and cleanup anomalies
 
-- qwen / invalid-adapter（历史本机文件，未随本报告发布）：首次真实CLI没有发送图像、声明36个工具，协调器在prefill阶段中止；CLI exit -15。证据完整保留，未计入成功主轮速度/内存结论。
-- runner-pi-hermes.log（历史本机文件，未随本报告发布）：pi 收尾时 PermissionError: [Errno 1] Operation not permitted。这是协调器清理已停止/僵尸进程组的异常，按原始HTTP/native终态单独判断应用请求；Pi已完成的成功数据保留。协调器随后修复并恢复普通服务。
-- runner.log（历史本机文件，未随本报告发布）：qwen 收尾时 PermissionError: [Errno 1] Operation not permitted。这是协调器清理已停止/僵尸进程组的异常，按原始HTTP/native终态单独判断应用请求；Pi已完成的成功数据保留。协调器随后修复并恢复普通服务。
+- qwen / invalid-adapter (historical local file; not published with this report): the first real CLI sends no image and declares 36 tools; the coordinator stops during prefill, with CLI exit -15. Complete evidence remains and is excluded from successful main-round speed/memory conclusions.
+- runner-pi-hermes.log (historical local file; not published with this report): Pi cleanup raises PermissionError: [Errno 1] Operation not permitted while the coordinator cleans stopped/zombie process groups. Application requests are judged separately through raw HTTP/native terminal evidence; completed successful Pi data remain. The coordinator is subsequently repaired and routine service restored.
+- runner.log (historical local file; not published with this report): qwen cleanup raises PermissionError: [Errno 1] Operation not permitted while the coordinator cleans stopped/zombie process groups. Application requests are judged separately through raw HTTP/native terminal evidence; completed successful Pi data remain. The coordinator is subsequently repaired and routine service restored.
 
-普通MLTF服务恢复记录：service-restored.json（历史本机文件，未随本报告发布），PID `59376`，ready `True`。
+Routine MLTF restoration record: service-restored.json (historical local file; not published with this report), PID `59376`, ready `True`.
 
 ### qwen
 
-原始证据：qwen/live（历史本机文件，未随本报告发布），前端 PID `51935`，native PIDs `[51948]`。
-检查失败/待查：`[]`。
-CLI 终态错误：`[]`。
-文件读取/解析错误：`[]`。
+Raw evidence：qwen/live (historical local file; not published with this report)，Frontend PID `51935`，native PIDs `[51948]`。
+Failed/unresolved checks：`[]`。
+Terminal CLI errors：`[]`。
+File-read/parse errors：`[]`。
 
-- 请求 0001：HTTP 200、forwarded=True，可见正文识图=None、nonce=False；必需检查失败/待查 `[]`；观测偏离 `[]`；错误 `[]`。
-- 请求 0002：HTTP 200、forwarded=True，可见正文识图=True、nonce=True；必需检查失败/待查 `[]`；观测偏离 `[]`；错误 `[]`。
+- Request 0001：HTTP 200、forwarded=True，Vision in visible final content=None、nonce=False；Required failed/unresolved checks `[]`；Observed deviations `[]`；Errors `[]`。
+- Request 0002：HTTP 200、forwarded=True，Vision in visible final content=True、nonce=True；Required failed/unresolved checks `[]`；Observed deviations `[]`；Errors `[]`。
 ### pi
 
-原始证据：pi/live（历史本机文件，未随本报告发布），前端 PID `47427`，native PIDs `[47434]`。
-检查失败/待查：`[]`。
-CLI 终态错误：`[]`。
-文件读取/解析错误：`[]`。
+Raw evidence：pi/live (historical local file; not published with this report)，Frontend PID `47427`，native PIDs `[47434]`。
+Failed/unresolved checks：`[]`。
+Terminal CLI errors：`[]`。
+File-read/parse errors：`[]`。
 
-- 请求 0001：HTTP 200、forwarded=True，可见正文识图=False、nonce=False；必需检查失败/待查 `[]`；观测偏离 `[]`；错误 `[]`。
-- 请求 0002：HTTP 200、forwarded=True，可见正文识图=True、nonce=True；必需检查失败/待查 `[]`；观测偏离 `[]`；错误 `[]`。
+- Request 0001：HTTP 200、forwarded=True，Vision in visible final content=False、nonce=False；Required failed/unresolved checks `[]`；Observed deviations `[]`；Errors `[]`。
+- Request 0002：HTTP 200、forwarded=True，Vision in visible final content=True、nonce=True；Required failed/unresolved checks `[]`；Observed deviations `[]`；Errors `[]`。
 ### hermes
 
-原始证据：hermes/live（历史本机文件，未随本报告发布），前端 PID `49522`，native PIDs `[49539]`。
-检查失败/待查：`["cli_exit_zero", "cli_tool_answer_evidence", "vision_colors_shapes_order", "no_blocked_http_attempts"]`。
-CLI 终态错误：`[{"exit_code": 1, "error": null}]`。
-文件读取/解析错误：`[]`。
+Raw evidence：hermes/live (historical local file; not published with this report)，Frontend PID `49522`，native PIDs `[49539]`。
+Failed/unresolved checks：`["cli_exit_zero", "cli_tool_answer_evidence", "vision_colors_shapes_order", "no_blocked_http_attempts"]`。
+Terminal CLI errors：`[{"exit_code": 1, "error": null}]`。
+File-read/parse errors：`[]`。
 
-- 请求 0001：HTTP 200、forwarded=True，可见正文识图=None、nonce=False；必需检查失败/待查 `[]`；观测偏离 `[]`；错误 `[]`。
-- 请求 0002：HTTP 200、forwarded=True，可见正文识图=None、nonce=False；必需检查失败/待查 `[]`；观测偏离 `[]`；错误 `[]`。
-- Hermes自动恢复：前一请求0002的4096输出全部为reasoning且正文为空，CLI原生length continuation将请求0003的reasoning_effort改为none，native thinking=false。原medium设置仍是启动配置；temperature/top_p/top_k继续为1/.95/20。恢复请求及耗时完整计入。
-- 请求 0003：HTTP 200、forwarded=True，可见正文识图=True、nonce=True；必需检查失败/待查 `[]`；观测偏离 `["http_original_effort_preserved", "native_thinking_enabled"]`；错误 `[]`。
-- 请求 0004：HTTP 429、forwarded=False，可见正文识图=None、nonce=False；必需检查失败/待查 `["native_job_matched_by_exact_public_id", "native_sampling_recommended", "native_float32_sampling_matches_http", "native_sampling_matches_http", "native_frontend_pid_matches_status", "native_output_cap_matches_plan", "native_prompt_matches_usage", "native_vision_input_present", "native_thinking_matches_http_effort", "usage_inside_128k", "usage_total_consistent", "cache_counts_consistent", "prefill_rate_arithmetic_consistent", "decode_rate_arithmetic_consistent", "http_success", "stream_finished"]`；观测偏离 `["native_thinking_enabled"]`；错误 `[{"proxy_errors": "per-case generation request limit 3 exceeded"}]`。
+- Request 0001：HTTP 200、forwarded=True，Vision in visible final content=None、nonce=False；Required failed/unresolved checks `[]`；Observed deviations `[]`；Errors `[]`。
+- Request 0002：HTTP 200、forwarded=True，Vision in visible final content=None、nonce=False；Required failed/unresolved checks `[]`；Observed deviations `[]`；Errors `[]`。
+- Hermes automatic recovery: all 4096 output tokens from request0002 are reasoning, with no final content. Native CLI length continuation changes request0003 reasoning_effort to none, native thinking=false. Original medium remains the startup setting; temperature/top_p/top_k remain 1/.95/20. Recovery requests and duration are fully included.
+- Request 0003：HTTP 200、forwarded=True，Vision in visible final content=True、nonce=True；Required failed/unresolved checks `[]`；Observed deviations `["http_original_effort_preserved", "native_thinking_enabled"]`；Errors `[]`。
+- Request 0004：HTTP 429、forwarded=False，Vision in visible final content=None、nonce=False；Required failed/unresolved checks `["native_job_matched_by_exact_public_id", "native_sampling_recommended", "native_float32_sampling_matches_http", "native_sampling_matches_http", "native_frontend_pid_matches_status", "native_output_cap_matches_plan", "native_prompt_matches_usage", "native_vision_input_present", "native_thinking_matches_http_effort", "usage_inside_128k", "usage_total_consistent", "cache_counts_consistent", "prefill_rate_arithmetic_consistent", "decode_rate_arithmetic_consistent", "http_success", "stream_finished"]`；Observed deviations `["native_thinking_enabled"]`；Errors `[{"proxy_errors": "per-case generation request limit 3 exceeded"}]`。

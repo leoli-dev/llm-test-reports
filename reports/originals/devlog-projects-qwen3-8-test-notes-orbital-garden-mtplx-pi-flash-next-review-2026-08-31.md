@@ -1,13 +1,32 @@
 ---
 type: Note
-title: Orbital Garden — MTPLX/Pi Flash Next independent acceptance and code review
+title: "Orbital Garden — MTPLX/Pi Flash Next independent acceptance and code review"
 status: current
-description: Independent review of the Orbital Garden React/R3F delivery attributed to the MTPLX + Pi qwen3.8-flash-next-optimized-speed test; core scene passes, but a narrow no-WebGL fallback is clipped.
+description: "Independent review of the Orbital Garden React/R3F delivery attributed to the MTPLX + Pi qwen3.8-flash-next-optimized-speed test; core scene passes, but a narrow no-WebGL fallback is clipped."
 tags: [qwen3.8, flash-next, mtplx, pi, react, threejs, r3f, code-review, frontend]
 timestamp: 2026-08-31T15:41:42Z
 ---
 
 # Orbital Garden — MTPLX/Pi Flash Next independent acceptance and code review
+
+[English](devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31.md) | [简体中文](devlog-projects-qwen3-8-test-notes-orbital-garden-mtplx-pi-flash-next-review-2026-08-31_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
 
 ## Scope and evidence handling
 
@@ -89,11 +108,11 @@ The original requirement to avoid a generic dashboard or a decorative page gradi
 
 `html, body` globally set `overflow: hidden` (`src/styles.css:16-23`). The fallback is also permanently fixed to the viewport (`src/styles.css:423-433`) and its 2-column seed list has no compact/mobile composition (`src/styles.css:469-490`). At a verified 320×568 viewport with `?nowebgl=1`, the list box was `{ y: 500.9, height: 180 }`; it extends below the 568px viewport to y≈681 while the document reports `scrollHeight=clientHeight=568`. The lower part of the seed list is clipped and cannot be scrolled into view.
 
-Fix by allowing `overflow-y: auto` for `.fallback` (and using a normal/min-height layout), or providing a short-viewport fallback layout that scales/reflows the SVG and list. Add a 320×568 no-WebGL browser assertion that every list item is within the scrollable document or reachable through scrolling. Tracked as FE-17（历史本机文件，未随本报告发布）.
+Fix by allowing `overflow-y: auto` for `.fallback` (and using a normal/min-height layout), or providing a short-viewport fallback layout that scales/reflows the SVG and list. Add a 320×568 no-WebGL browser assertion that every list item is within the scrollable document or reachable through scrolling. Tracked as FE-17 (historical local file; not published with this report).
 
 ### P2 — mobile instruction footer is horizontally clipped
 
-The footer combines `white-space: nowrap`, letter spacing, and absolute centering (`src/styles.css:336-346`). Even after its mobile font reduction, the actual 390×844 box measured x=-16, width=423 (`src/styles.css:519-523`); both ends are hidden by the app's overflow. Shorten/wrap the hint on small widths or hide nonessential clauses. Tracked as UX-08（历史本机文件，未随本报告发布）.
+The footer combines `white-space: nowrap`, letter spacing, and absolute centering (`src/styles.css:336-346`). Even after its mobile font reduction, the actual 390×844 box measured x=-16, width=423 (`src/styles.css:519-523`); both ends are hidden by the app's overflow. Shorten/wrap the hint on small widths or hide nonessential clauses. Tracked as UX-08 (historical local file; not published with this report).
 
 ### P2 — automatic quality tier is immutable after initial mount
 
@@ -152,5 +171,5 @@ One numeric correction matters for future comparisons: the self-report says high
 
 1. Fix FE-17 and UX-08, then rerun the no-WebGL case at 320×568 and a normal mobile scene at 390×844.
 2. Add the existing CDP/Playwright scenarios to a reproducible project command so build/lint/visual interaction evidence does not rely on an agent prose claim.
-3. After other tests, repeat this exact task through Qwen CLI with the prompt, thinking level, context capacity, cold/warm cache condition, token counts, TTFT, stable decode, elapsed time, tool rounds, build/lint and the same viewport matrix recorded side-by-side. This is tracked as BENCH-04（历史本机文件，未随本报告发布）.
+3. After other tests, repeat this exact task through Qwen CLI with the prompt, thinking level, context capacity, cold/warm cache condition, token counts, TTFT, stable decode, elapsed time, tool rounds, build/lint and the same viewport matrix recorded side-by-side. This is tracked as BENCH-04 (historical local file; not published with this report).
 4. After the targeted UI fixes and comparable replay, this can be marked accepted; no architectural rewrite is indicated.

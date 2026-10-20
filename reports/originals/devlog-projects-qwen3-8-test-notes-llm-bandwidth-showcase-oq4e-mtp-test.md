@@ -1,39 +1,58 @@
 ---
 type: Note
-title: LLM bandwidth showcase — oQ4e-mtp delivery test
+title: "LLM bandwidth showcase — oQ4e-mtp delivery test"
 status: current
-description: Completed coding-agent delivery of a zero-dependency interactive teaching page about memory-bandwidth-limited LLM decode speed.
+description: "Completed coding-agent delivery of a zero-dependency interactive teaching page about memory-bandwidth-limited LLM decode speed."
 tags: [qwen3.8, oq4e, mtp, omlx-rc, frontend, benchmark, education]
 timestamp: 2026-08-23T01:04:17Z
 ---
 
 # LLM bandwidth showcase — oQ4e-mtp delivery test
 
+[English](devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test.md) | [简体中文](devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-oq4e-mtp-test_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
 ## Result
 
-`Qwen3.8-27B-oQ4e-mtp` 完成了一个本地、单页、纯前端且零运行时依赖的教学站点：`$HOME/Code/qwen3.8-tests/llm-bandwidth-showcase`。页面以「模型权重读取受内存带宽限制」解释 decode 阶段 token 生成上限，并明确把计算称为教学理论估算，不当作实测跑分。
+`Qwen3.8-27B-oQ4e-mtp` completed a local, single-page, pure front-end educational site with zero runtime dependencies: `$HOME/Code/qwen3.8-tests/llm-bandwidth-showcase`. The page explains the upper limit of token generation during the decode phase by stating that “model weight loading is constrained by memory bandwidth,” and explicitly labels the calculations as theoretical educational estimates, not measured benchmarks.
 
 ## Delivered
 
-- `index.html`、`style.css`：中文科学博物馆式深色界面、7 个内容区、reduced-motion 支持。
-- `data.js`：5 个设备、6 个模型、4 个精度/量化项；每条硬件与模型数据带来源 URL、标题、检索日期与备注。
-- `calc.js`：权重大小、容量判断、理论带宽上限和带效率系数的教学估算，以及逐步推导。
-- `animation.js`：Canvas 内存 → GPU → token 的数据流动画；容量不足时改为 offload 窄通道说明。
-- `app.js` 与 `README.md`：选择/重算/比较/方法与维护说明。
+- `index.html`, `style.css`: Chinese science-museum-style dark interface, 7 content areas, reduced-motion support.
+- `data.js`: 5 devices, 6 models, 4 precision/quantization items; each hardware and model data entry includes source URL, title, retrieval date, and notes.
+- `calc.js`: Weight size, capacity assessment, theoretical bandwidth upper limit, and educational estimation with efficiency coefficients, along with step-by-step derivation.
+- `animation.js`: Data flow animation from Canvas memory → GPU → token; when capacity is insufficient, it switches to an explanation of offload narrow channels.
+- `app.js` and `README.md`: Selection/recalculation/comparison/methods and maintenance instructions.
 
 ## Independent verification
 
-- `node --check` 已通过 `data.js`、`calc.js`、`animation.js` 与 `app.js`。
-- 使用本地 `python3 -m http.server` 与 Playwright Chromium 成功加载并截图；请求仅包括页面自身的 HTML/CSS/JS，未见运行时 `fetch` / XHR 或第三方资源加载。
-- 截图人工检查显示首屏布局、设备卡、模型选择与精度选择正确渲染，视觉风格与 README 描述一致。
+- `node --check` has passed `data.js`, `calc.js`, `animation.js`, and `app.js`.
+- Successfully loaded and captured screenshots using local `python3 -m http.server` and Playwright Chromium; requests included only the page's own HTML/CSS/JS, with no runtime `fetch` / XHR or third-party resource loading observed.
+- Manual inspection of the screenshots confirmed that the above-the-fold layout, device cards, model selection, and precision selection rendered correctly, with a visual style consistent with the README description.
 
-生成 agent 另报告 DOM 计数、交互重算和零 console error 均通过；这些是生成端自测声明，尚未由本次独立检查逐一复跑。
+The generating agent also reported that DOM counts, interaction recalculations, and zero console errors all passed; these are self-test claims from the generation side and have not yet been individually re-run by this independent check.
 
 ## Data caution
 
-页面内来源链接与检索日期齐全，但本次任务没有联网逐条核对数据。尤其 Apple 各代芯片的最大统一内存和标称带宽，正式对外使用前需按页面链接重新核实。页面和 README 已明确该限制，未将理论数值表述为真实性能。
+The in-page source links and retrieval dates are complete, but this task did not involve online verification of the data item by item. In particular, the maximum unified memory and nominal bandwidth of Apple's successive chip generations must be re-verified against the page links before formal external use. The page and README explicitly state this limitation, and theoretical values are not presented as actual performance.
 
 ## Reuse
 
-本地运行：`cd $HOME/Code/qwen3.8-tests/llm-bandwidth-showcase && python3 -m http.server 8000`。
+Local run: `cd $HOME/Code/qwen3.8-tests/llm-bandwidth-showcase && python3 -m http.server 8000`.
 

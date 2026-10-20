@@ -1,81 +1,100 @@
 ---
 type: Note
-title: 云端 Jev 与本地 Laya 对比评测
+title: "Comparative Evaluation of Cloud Jev and Local Laya"
 status: current
-description: 基于同一72题与同类压力测试，对云端 Jev 和本地 laya-mlx 的质量、延时、context、并发、可靠性与部署边界进行比较。
+description: "Based on the same 72 questions and similar stress tests, this report compares the quality, latency, context, concurrency, reliability, and deployment boundaries of Cloud Jev and local laya-mlx."
 tags: [Jev, laya, comparison, benchmark, local-model, cloud-model]
 timestamp: 2026-09-21T05:42:26Z
 ---
 
-# 云端 Jev 与本地 Laya 对比评测
+# Comparative Evaluation of Cloud Jev and Local Laya
 
-**对比对象：**
+[English](devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21.md) | [简体中文](devlog-projects-jev-tests-notes-jev-vs-local-laya-comparison-2026-09-21_CN.md)
 
-- 云端 Jev：`127.0.0.1:4001` proxy → Vercel → `typesafe-ai/jev`
-- 本地 Laya：`127.0.0.1:4002` → `aac6fef/laya-multilingual-mlx`，Apple M5 Max GPU FP16
+<!-- environment-context:start -->
 
-**核心公平性：** 两个模型使用完全相同的 72 个 state、问题、criteria 和人工标签。延时、context 与并发测试使用相同或对应的 payload 形状；由于 Jev 存在云端限流，负载样本数和退避策略会单独标注，不能把所有数字当作同环境 microbenchmark。
+## Workstation and system (context added 2026-10-20)
 
-## 一句话结论
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-**质量优先选 Jev，速度、隐私、离线和成本可控优先选本地 Laya；但以当前实现直接上线，高并发场景两者都不合格。** Jev 在同一 72 题上领先 40.3 个百分点，语义鲁棒性也全面胜出；Laya 则快约两个数量级以上、完全本地、同输入逐位确定。
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-## 1. 总览
+<!-- environment-context:end -->
 
-| 维度 | 云端 Jev | 本地 Laya | 胜出 |
+**Comparison Targets:**
+
+- Cloud Jev: `127.0.0.1:4001` proxy → Vercel → `typesafe-ai/jev`
+- Local Laya: `127.0.0.1:4002` → `aac6fef/laya-multilingual-mlx`, Apple M5 Max GPU FP16
+
+**Core Fairness:** Both models use exactly the same 72 states, questions, criteria, and human labels. Latency, context, and concurrency tests use identical or corresponding payload shapes; due to cloud rate limiting for Jev, load sample counts and backoff strategies are annotated separately, and not all numbers should be treated as microbenchmarks in the same environment.
+
+## One-Sentence Conclusion
+
+**Choose Jev for quality priority; choose local Laya for speed, privacy, offline capability, and cost control priority; however, with the current implementation, neither is qualified for high-concurrency scenarios if deployed directly.** Jev leads by 40.3 percentage points on the same 72 questions and comprehensively wins in semantic robustness; Laya is more than two orders of magnitude faster, fully local, and bit-for-bit deterministic for the same input.
+
+## 1. Overview
+
+| Dimension | Cloud Jev | Local Laya | Winner |
 |---|---|---|---|
-| 72题总体准确率 | **91.7%** | 51.4% | Jev |
-| 高难度准确率 | **75.0%** | 41.7% | Jev |
+| Overall Accuracy on 72 Questions | **91.7%** | 51.4% | Jev |
+| High-Difficulty Accuracy | **75.0%** | 41.7% | Jev |
 | noul / choice / score | **100 / 91.7 / 83.3%** | 58.3 / 58.3 / 37.5% | Jev |
-| 等价改写 | **5/5；p 0.95–0.97** | 4/5；p 0.378–0.951 | Jev |
-| choice 顺序全排列 | **24/24** | 15/24 | Jev |
-| 约1K state、1题 P50 | 1,403 ms | **13.22 ms** | Laya，约106×快 |
-| 约1K state、32题 P50 | 1,591 ms | **250.05 ms** | Laya，约6.4×快 |
-| 最大已观察成功输入 | **25,272 tokens**，但长输入 503 较多 | 1024 tokens，边界严格可靠 | Jev 容量；Laya 可预测性 |
-| 重复完整 JSON | 30 次 21 种 | **60 次 1 种** | Laya |
-| 突发并发 | C4 后受 429/reset 影响 | C6 后 reset 断崖 | 都需修复 |
-| 数据边界 | state 发往云端 | **完全本机** | Laya |
-| 离线能力 | 无 | **有** | Laya |
+| Equivalent Rewriting | **5/5; p 0.95–0.97** | 4/5; p 0.378–0.951 | Jev |
+| Full Permutation of Choice Order | **24/24** | 15/24 | Jev |
+| ~1K state, 1 questions P50 | 1,403 ms | **13.22 ms** | Laya, ~106× faster |
+| ~1K state, 32 questions P50 | 1,591 ms | **250.05 ms** | Laya, ~6.4× faster |
+| Max Observed Successful Input | **25,272 tokens**, but more 503 for long inputs | 1024 tokens, strictly reliable boundary | Jev capacity; Laya predictability |
+| Repeated Complete JSON | 30 times 21 types | **60 times 1 types** | Laya |
+| Burst Concurrency | Affected by 429/reset after C4 | Reset cliff after C6 | Both need fixing |
+| Data Boundary | State sent to cloud | **Fully local** | Laya |
+| Offline Capability | None | **Yes** | Laya |
 
-## 2. 同一 72 题准确性
+## 2. Accuracy on Same 72 Questions
 
-### 2.1 按难度
+### 2.1 By Difficulty
 
-| 难度 | 云端 Jev | 本地 Laya | 差值 |
+| Difficulty | Cloud Jev | Local Laya | Difference |
 |---|---:|---:|---:|
-| 低 | **24/24（100%）** | 14/24（58.3%） | +41.7 pp |
-| 中 | **24/24（100%）** | 13/24（54.2%） | +45.8 pp |
-| 高 | **18/24（75.0%）** | 10/24（41.7%） | +33.3 pp |
-| **总体** | **66/72（91.7%）** | **37/72（51.4%）** | **+40.3 pp** |
+| Low | **24/24 (100%)** | 14/24 (58.3%) | +41.7 pp |
+| Medium | **24/24 (100%)** | 13/24 (54.2%) | +45.8 pp |
+| High | **18/24 (75.0%)** | 10/24 (41.7%) | +33.3 pp |
+| **Overall** | **66/72 (91.7%)** | **37/72 (51.4%)** | **+40.3 pp** |
 
-Jev 的错误集中在两类高难题：机械“第一匹配”规则和对历史短时全员中断的严重度评分。Laya 的错误范围更广，包含基础否定、当前状态、例外量词、选项位置偏置和 score 中档坍缩。
+Jev's errors are concentrated in two types of high-difficulty questions: mechanical "first match" rules and severity scoring for short-term all-user interruptions in history. Laya's error scope is broader, including basic negation, current state, exception quantifiers, option position bias, and mid-range collapse in score.
 
-### 2.2 按题型
+### 2.2 By Question Type
 
-| 题型 | 云端 Jev | 本地 Laya | 差值 |
+| Question Type | Cloud Jev | Local Laya | Difference |
 |---|---:|---:|---:|
-| noul | **24/24（100%）** | 14/24（58.3%） | +41.7 pp |
-| choice | **22/24（91.7%）** | 14/24（58.3%） | +33.4 pp |
-| score | **20/24（83.3%）** | 9/24（37.5%） | +45.8 pp |
+| noul | **24/24 (100%)** | 14/24 (58.3%) | +41.7 pp |
+| choice | **22/24 (91.7%)** | 14/24 (58.3%) | +33.4 pp |
+| score | **20/24 (83.3%)** | 9/24 (37.5%) | +45.8 pp |
 
-Jev 已经能可靠处理本轮的否定、时序和中等复杂路由；Laya 尚不能作为一般语义判断器。尤其 score 相差 45.8 个百分点，说明不能用 Laya 的低延时掩盖任务不匹配。
+Jev can already reliably handle negation, temporal logic, and medium-complexity routing in this round; Laya cannot yet serve as a general semantic judge. In particular, the score difference is 45.8 percentage points, indicating that Laya's low latency cannot mask task mismatch.
 
-### 2.3 语言与置信度
+### 2.3 Language and Confidence
 
-| 指标 | 云端 Jev | 本地 Laya |
+| Metric | Cloud Jev | Local Laya |
 |---|---:|---:|
-| 英文准确率 | **93.5%** | 52.2% |
-| 中文准确率 | **88.5%** | 50.0% |
-| 置信度 ≥0.9 覆盖率 | **93.1%** | 43.1% |
-| 置信度 ≥0.9 的准确率 | **94.0%** | 58.1% |
+| English Accuracy | **93.5%** | 52.2% |
+| Chinese Accuracy | **88.5%** | 50.0% |
+| Confidence ≥0.9 Coverage | **93.1%** | 43.1% |
+| Accuracy with Confidence ≥0.9 | **94.0%** | 58.1% |
 
-Jev 的概率在这组样本上更有区分力；Laya 的高置信错误太多，现阶段不能用 confidence threshold 构造可靠拒答。即便如此，Jev 也有高置信错例，涉及高风险业务时仍需领域校准。
+Jev's probabilities are more discriminative on this set of samples; Laya has too many high-confidence errors, so reliable refusal cannot be constructed using confidence thresholds at this stage. Even so, Jev also has high-confidence error cases, and domain calibration is still required when involving high-risk business.
 
-## 3. 延时与批处理
+## 3. Latency and Batching
 
-### 3.1 相同短到近1K state
+### 3.1 Same Short to Near-1K State
 
-| `alpha` units | Jev P50 | Laya P50 | Laya 约快 |
+| `alpha` units | Jev P50 | Laya P50 | Laya ~Faster |
 |---:|---:|---:|---:|
 | 50 | 2,466 ms | 4.13 ms | 597× |
 | 250 | 1,742 ms | 5.72 ms | 305× |
@@ -84,106 +103,106 @@ Jev 的概率在这组样本上更有区分力；Laya 的高置信错误太多�
 | 950 | 1,970 ms | 11.50 ms | 171× |
 | 990 | 1,656 ms | 11.59 ms | 143× |
 
-Jev 的 provider attempt P50 约 121–157 ms，但端到端 P50 为 1.6–2.5 秒，主要时间在网络、gateway 与调度。Laya 直接在本机执行，context 增长曲线清晰且没有云端长尾。
+Jev's provider attempt P50 is approximately 121–157 ms, but end-to-end P50 is 1.6–2.5 seconds, with most time spent on network, gateway, and scheduling. Laya executes directly on the local machine, with a clear context growth curve and no cloud long tail.
 
-### 3.2 同一约900-unit state，增加问题数
+### 3.2 Same ~900-unit State, Increasing Question Count
 
-| 问题数 | Jev P50 | Laya P50 | Laya 约快 |
+| Question Count | Jev P50 | Laya P50 | Laya ~Faster |
 |---:|---:|---:|---:|
 | 1 | 1,403 ms | 13.22 ms | 106× |
 | 8 | 1,499 ms | 60.31 ms | 24.9× |
 | 32 | 1,591 ms | 250.05 ms | 6.4× |
 
-Laya 的问题执行近线性增长；Jev 的网络固定成本占主导，1→32 题只增加约 188 ms。**若选择 Jev，batch 是决定性优化；若需要每个事件即时逐题判断，Laya 的延时优势巨大。**
+Laya's question execution grows nearly linearly; Jev's network fixed cost dominates, with only about 188 ms increase from 1 to 32 questions. **If choosing Jev, batching is the decisive optimization; if immediate per-question judgment for each event is required, Laya's latency advantage is huge.**
 
 ## 4. Context
 
-### 本地 Laya
+### Local Laya
 
-- 健康接口明确报告 1024 tokens。
-- noul、choice、score 都验证可正好用到 1024；再增加一个测试单位即 HTTP 422。
-- 不静默截断，错误明确；容量小但行为可预测。
+- The health endpoint explicitly reports 1024 tokens.
+- noul, choice, and score are all verified to be usable up to exactly 1024; adding one more test unit results in HTTP 422.
+- No silent truncation; errors are explicit; capacity is small but behavior is predictable.
 
-### 云端 Jev
+### Cloud Jev
 
-- 最大成功样本为 25,272 input tokens，容量至少比 Laya 大约 24.7×。
-- 但 8K 以上出现大量非单调 503；三次全成功的最高测试档只有 4,272 tokens。
-- 26K–32K units 本轮均为 0/3；没有明确 token-limit 错误，无法断言官方硬上限。
+- The largest successful sample was 25,272 input tokens, with capacity at least approximately 24.7× larger than Laya.
+- However, above 8K, a large number of non-monotonic 503 occurred; the highest test tier with three consecutive full successes was only 4,272 tokens.
+- 26K–32K units were all 0/3 in this round; there were no explicit token-limit errors, so the official hard limit cannot be asserted.
 
-如果任务必须携带长证据，Jev 更有潜力；如果任务要求严格、可预先计算的 token 边界，Laya 当前契约更清楚。Jev 的“最大成功”不能当作生产 SLA。
+If a task must carry long evidence, Jev has more potential; if a task requires strict, pre-computable token boundaries, Laya's current contract is clearer. Jev's "maximum success" should not be treated as a production SLA.
 
-## 5. 并发与服务可靠性
+## 5. Concurrency and Service Reliability
 
 ### 5.1 Laya
 
-- 并发 1/2/4：160/160 成功，吞吐最高约 269 req/s。
-- 并发 5/6：连续三轮均 64/64。
-- 并发 7：连续三轮仅 7/64；根因是单线程 `HTTPServer` 与小 listen backlog。
+- Concurrency 1/2/4: 160/160 succeeded, with peak throughput of approximately 269 req/s.
+- Concurrency 5/6: 64/64 in all three consecutive rounds.
+- Concurrency 7: only 7/64 in all three consecutive rounds; the root cause is single-threaded `HTTPServer` and a small listen backlog.
 
 ### 5.2 Jev
 
-- 单问题同步 burst：C1 3/3、C2 6/6、C4 12/12。
-- C8 6/24，主要是 429；C16 4/48、C32 6/96，并叠加 connection reset。
-- 受控完整准确性批次可通过退避取得 72/72 答案，但一次持续首轮曾只有 49/72，其余 23 次为 429。
+- Single-question synchronous bursts: C1 3/3, C2 6/6, C4 12/12.
+- C8 6/24, primarily 429; C16 4/48, C32 6/96, with superimposed connection resets.
+- Controlled full-accuracy batches can obtain 72/72 answers via backoff, but one sustained first round yielded only 49/72, with the remaining 23 instances being 429.
 
-两者的失败层不同：Laya 是本机接入架构，修复队列后可利用其稳定的串行推理吞吐；Jev 同时受本地 proxy backlog、网络、gateway 排队和上游限额约束。Jev 的调用端必须把 429 视为正常控制信号，而非异常边角情况。
+The failure layers differ for the two: Laya is a local access architecture, and after fixing the queue, its stable serial inference throughput can be utilized; Jev is simultaneously constrained by local proxy backlog, network, gateway queuing, and upstream rate limits. Jev's client must treat 429 as a normal control signal, rather than an exceptional edge case.
 
-## 6. 确定性与语义鲁棒性
+## 6. Determinism and Semantic Robustness
 
-| 测试 | 云端 Jev | 本地 Laya |
+| Test | Cloud Jev | Local Laya |
 |---|---|---|
-| 相同 payload 重放 | 30次有21种完整 JSON | 60次只有1种 |
-| 标签稳定性 | 20次复测 argmax 标签完全相同；risk score 0.27–0.34 | 标签与数值逐位相同 |
-| Batch vs 单题 | paid/stage 完全相同；risk 数值不同 | 三题完全相同 |
-| 5个等价问法 | 5/5 同标签，p 0.95–0.97 | 4/5，p 0.378–0.951 |
-| choice 24种顺序 | 24/24 正确，p=1 | 15/24 正确，p 0.268–0.667 |
+| Identical payload replay | 30 runs yielded 21 distinct complete JSONs | 60 runs yielded only 1 distinct JSON |
+| Label stability | 20 retests showed identical argmax labels; risk score 0.27–0.34 | Labels and values are bit-for-bit identical |
+| Batch vs. single question | paid/stage identical; risk values differ | All three questions identical |
+| 5 equivalent phrasings | 5/5 same label, p 0.95–0.97 | 4/5, p 0.378–0.951 |
+| Choice 24 orderings | 24/24 correct, p=1 | 15/24 correct, p 0.268–0.667 |
 
-Jev 的数值有轻微随机性，但语义稳定；Laya 的数值完全确定，但语义对措辞与位置敏感。对于决策系统，后者通常比小幅概率抖动更危险。
+Jev's values exhibit slight randomness, but semantics are stable; Laya's values are fully deterministic, but semantics are sensitive to phrasing and position. For decision systems, the latter is typically more dangerous than minor probability fluctuations.
 
-## 7. 隐私、依赖和成本边界
+## 7. Privacy, Dependencies, and Cost Boundaries
 
-| 问题 | 云端 Jev | 本地 Laya |
+| Question | Cloud Jev | Local Laya |
 |---|---|---|
-| 数据是否离机 | 是，state/questions 发往 Vercel/TypeSafe | 否 |
-| 是否依赖网络/API key | 是 | 否 |
-| 离线运行 | 不可 | 可 |
-| 边际调用成本 | 有云端计费/额度语义；本轮响应 cost 为0、另有 marketCost telemetry | 无按请求云账单；消耗本机算力/电力 |
-| 服务版本控制 | `typesafe-ai/jev` 云端解析，不能固定官方版本 | 本地模型与代码可固定 |
+| Does data leave the machine? | Yes, state/questions sent to Vercel/TypeSafe | No |
+| Depends on network/API key? | Yes | No |
+| Offline operation | Not possible | Possible |
+| Marginal call cost | Cloud billing/quota semantics apply; response cost in this round was 0, with separate marketCost telemetry | No per-request cloud billing; consumes local compute/power |
+| Service version control | `typesafe-ai/jev` resolved in cloud, official version cannot be pinned | Local model and code can be pinned |
 
-本轮 Jev 正式质量和性能结果中，成功响应的 `marketCost` telemetry 合计约 $0.0129；这不含探索调用，也不是实际账单承诺。Laya 的成本主要是常驻约 614 MiB FP16 权重及本机统一内存/能耗。
+In this round's formal quality and performance results for Jev, the total `marketCost` telemetry for successful responses was approximately $0.0129; this excludes exploratory calls and is not an actual billing commitment. Laya's cost is primarily the resident ~614 MiB FP16 weights and local unified memory/energy consumption.
 
-## 8. 选择建议
+## 8. Selection Recommendations
 
-### 现在就要较高判断质量
+### High judgment quality required immediately
 
-选 **Jev**，但必须：
+Choose **Jev**, but must:
 
-- 合并同一 state 的问题；
-- 建有界队列，限制并发不超过已验证容量；
-- 对 429/502/503/504 做有上限退避；
-- 给超时、限流和敏感数据配置明确降级；
-- 对 score 和业务高风险错例再做领域校准。
+- Merge questions for the same state;
+- Establish a bounded queue, limiting concurrency to verified capacity;
+- Apply capped backoff for 429/502/503/504;
+- Configure explicit degradation for timeouts, rate limiting, and sensitive data;
+- Perform domain calibration for scores and high-risk business error cases.
 
-### 必须本地、离线、极低延时或原文不能出机
+### Must be local, offline, extremely low latency, or raw text cannot leave the machine
 
-可以继续投资 **Laya**，但当前只适合经过真实保留集验证的窄域分类。不能因为 4–12 ms 很快，就让它直接处理开放式否定、例外、多步规则或高风险判断。
+Can continue investing in **Laya**, but currently only suitable for narrow-domain classification validated on real holdout sets. Do not let it directly handle open-ended negations, exceptions, multi-step rules, or high-risk judgments just because 4–12 ms is fast.
 
-### 高吞吐生产服务
+### High-throughput production service
 
-**当前两个裸服务都不要直接上线。**
+**Do not directly deploy either of the current bare services.**
 
-- Laya：threaded acceptor + 有界队列 + 单 GPU worker + batch 聚合 + 明确 429/503。
-- Jev proxy：增大/管理 listen backlog、全局并发 semaphore、token bucket、Retry-After、jitter backoff、熔断与批处理。
+- Laya: threaded acceptor + bounded queue + single GPU worker + batch aggregation + explicit 429/503.
+- Jev proxy: increase/manage listen backlog, global concurrency semaphore, token bucket, Retry-After, jitter backoff, circuit breaking, and batching.
 
-### 不建议的混合方案
+### Not recommended hybrid approach
 
-暂时不要用当前 Laya 先筛掉“无需调用 Jev”的样本：51.4% 的通用准确率可能在前置阶段静默丢掉关键判断。更安全的混合方式是先用确定性业务规则缩小问题，仅把允许出机且确需语义判断的 batch 交给 Jev；Laya 只有在目标领域独立评测达标后才加入旁路或 shadow。
+Do not currently use Laya to pre-filter samples that "do not require calling Jev": 51.4%'s general accuracy may silently drop critical judgments in the pre-stage. A safer hybrid approach is to first use deterministic business rules to narrow down questions, and only send batches that are allowed to leave the machine and truly require semantic judgment to Jev; Laya should only be added to bypass or shadow after independent evaluation in the target domain meets standards.
 
-## 9. 结论边界
+## 9. Conclusion Boundaries
 
-- 72 题是手工诊断集，不是任何真实业务分布的最终 benchmark。
-- Jev 和 Laya 的模型规模、训练集、服务位置不同；本报告比较的是用户实际能调用的两个端到端服务，不是纯模型架构。
-- Jev 的并发批次发生在 context 压测之后，429 会受到流量窗口影响；这正是端到端容量事实，但不等同于模型最大算力。
-- Laya 的 AG News 94.53% 来自训练混合相关样本，不能覆盖本轮分布外推理；这里统一采用同一 72 题作主要质量对照。
+- 72 questions are a manual diagnostic set, not a final benchmark for any real business distribution.
+- Jev and Laya have different model scales, training sets, and service locations; this report compares two end-to-end services that users can actually call, not pure model architectures.
+- Jev's concurrent batches occurred after context stress testing, so 429 is affected by traffic windows; this is an end-to-end capacity fact, but not equivalent to maximum model compute.
+- Laya's AG News 94.53% comes from training on related samples and cannot cover out-of-distribution inference in this round; the same 72 questions are uniformly used here as the primary quality comparison.
 
-单项证据见云端 Jev 深度测评（历史本机文件，未随本报告发布）与[本地 Laya 深度测评](devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21.md)。
+See the Cloud Jev Deep Evaluation (historical local file, not published with this report) and [Local Laya Deep Evaluation](devlog-projects-laya-mlx-notes-local-service-deep-evaluation-2026-09-21.md) for individual evidence.

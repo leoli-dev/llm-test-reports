@@ -1,12 +1,31 @@
 # Hermes Cafe POS / Config B
 
-来源：原会话中保存的独立评审。原报告／源码目录本次未定位；以下是原报告消息摘录，不是重新测评。
+[English](session-cafe-pos-config-b.md) | [简体中文](session-cafe-pos-config-b_CN.md)
 
-## 原评审记录 973
+<!-- environment-context:start -->
 
-Config B review 完，已保存记录。
+## Workstation and system (context added 2026-10-20)
 
-验证结果：
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+Source: an independent review preserved in the original conversation. The original report/source directory was not located during this retrieval. The text below is an excerpt of the historical report message, not a new evaluation.
+
+## Original review record 973
+
+Config B review is complete and saved.
+
+Verification results:
 
 ```text
 project: $HOME/Code/hermes-eval-local-cafe-pos
@@ -15,33 +34,33 @@ npm run build: pass, no warnings
 git repo: not initialized
 ```
 
-比 Config A 明显好：
+Clear improvements over Config A:
 
-- build 干净，没有 Config A 那堆 type-only import warnings
-- 非折扣 checkout 路径是正常的：订单金额、库存、订单列表基本能跑通
-- 项目结构更直接，JS + React + Vite，少了 TypeScript 配置噪音
-- UI/功能覆盖更接近真实可用 app
+- The build is clean, without Config A's type-only import warnings.
+- The checkout path without a discount works: order amounts, stock and the order list basically function end to end.
+- The project structure is more direct: JS + React + Vite, with less TypeScript configuration noise.
+- UI/function coverage is closer to an actually usable app.
 
-但仍有一个关键 bug：
+One critical bug remains:
 
-折扣码只影响 cart 显示，不进入 checkout。
+Discount codes affect the cart display but do not reach checkout.
 
-在 Cart.jsx（历史本机文件，未随本报告发布），`appliedCode` 是 Cart 组件内部 state。  
-但 App.jsx（历史本机文件，未随本报告发布） checkout 时只调用：
+In Cart.jsx (historical local file; not published with this report), `appliedCode` is internal Cart component state.  
+However, App.jsx (historical local file; not published with this report) calls only this at checkout:
 
 ```text
 checkout(cart, productMap, stock, orders)
 ```
 
-然后 cart.js（历史本机文件，未随本报告发布） 用：
+Then cart.js (historical local file; not published with this report) uses:
 
 ```text
 calculatePricing(cart, productMap, null)
 ```
 
-所以结果是：cashier 在 cart 里看到 `SAVE10` 折扣，但 checkout 后 receipt/order/sales summary 记录的是**未打折金额**。
+The cashier sees the `SAVE10` discount in the cart, but the receipt/order/sales summary after checkout records the **undiscounted amount**.
 
-评分：
+Scores:
 
 ```text
 requirement_coverage: 8
@@ -54,24 +73,24 @@ autonomy_recovery: 7
 overall: 7.3
 ```
 
-记录已保存：
+Record saved:
 
-config-b-fromzero-01-local-cafe-pos.md（历史本机文件，未随本报告发布）
+config-b-fromzero-01-local-cafe-pos.md (historical local file; not published with this report)
 
-并提交：
+Committed as:
 
 ```text
 6e9893c Record Config B from-zero POS evaluation
 ```
 
-当前小结：**Config B > Config A**。  
-A 做出大而像样的东西，但 checkout 金额核心断了；B 更干净，主流程更接近可用，只是 discount integration 漏了。
+Current assessment: **Config B > Config A**.  
+A builds something large and substantial, but its core checkout amounts are broken. B is cleaner and closer to a usable main flow, with discount integration still missing.
 
-## 原评审记录 1405
+## Original review record 1405
 
-如果按而家呢个 **from-zero POS 单任务** 来讲，可以先算一轮测试完。
+For this single **from-zero POS task**, this round of testing can be considered complete for now.
 
-目前结论几清楚：
+The current findings are clear:
 
 ```text
 E 7.5  temp 0.3, ctx 200k, max_tokens 32768, rep_penalty 1.05
@@ -81,7 +100,7 @@ A 6.5  temp 0.1, ctx 131k, max_tokens 8192
 C 6.2  temp 0.6, top_p 0.95
 ```
 
-暂定 sweet spot：
+Provisional sweet spot:
 
 ```text
 ctx_window: 200000
@@ -96,15 +115,14 @@ TurboQuant KV Cache: false
 DFlash: false
 ```
 
-我会点理解：
-- `temp 0.1` 太保守，反而容易机械但漏 integration。
-- `top_p 0.95` 呢轮明显差，容易散。
-- `rep_penalty 1.05 + 大 max_tokens + 200k ctx` 方向系啱。
-- `temp 0.3` 比 `0.6` 稳少少，但优势唔大，E 赢 D 只系 0.1 分。
+My interpretation:
+- `temp 0.1` is too conservative: it can be mechanical while missing integration.
+- `top_p 0.95` was clearly worse in this round, with more scattered behavior.
+- `rep_penalty 1.05 + 大 max_tokens + 200k ctx` points in the right direction.
+- `temp 0.3` is slightly steadier than `0.6`, but the margin is small: E beats D by only 0.1 points.
 
-未测试嘅只剩两类：
-- performance/稳定性开关：TurboQuant KV Cache / DFlash
-- 换任务类型复验：例如“扩展既有复杂代码库”而唔系 from-zero
+Only two types of follow-up remain untested:
+- Performance/stability switches: TurboQuant KV Cache / DFlash.
+- Replication with another task type, such as extending an existing complex codebase rather than starting from zero.
 
-如果你今日想收工，结论可以用 E 做默认。
-
+If stopping for the day, E can serve as the default based on these findings.

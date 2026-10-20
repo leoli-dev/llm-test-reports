@@ -1,163 +1,182 @@
 ---
 type: Note
-title: Neon Bastion 七轮总结 — Qwen3.8-27B-8bit 能不能做一个稍微复杂的游戏
+title: "Neon Bastion Seven-Round Summary — Can Qwen3.8-27B-8bit Build a Slightly Complex Game"
 status: current
-description: 跨七轮的综合结论：31 次提交 / 9766 行 / 30 小时的完整统计，模型的两条能力边界（根因定位不收敛、这套部署下看不见图），四类问题的归档，以及按 Qwen Max 官方价目表折算的成本对照。
+description: "Comprehensive conclusions across seven rounds: complete statistics of 31 commits / 9766 lines / 30 hours, the model's two capability boundaries (root cause identification does not converge, and images are invisible in this deployment), the archiving of four types of issues, and a cost comparison converted based on the official Qwen Max pricing list."
 tags: [neon-bastion, qwen3.8-27b, mlx-dspark, dflash2, pi, agent-evaluation, methodology, benchmark]
 timestamp: 2026-09-04T03:10:00Z
 ---
 
-# Neon Bastion 七轮总结
+# Neon Bastion Seven-Round Summary
 
-> **本页是跨轮综合，不重复各轮细节。** 逐轮证据见
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-final-summary-2026-09-04_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+> **This page is a cross-round synthesis and does not repeat the details of each round.** See the per-round evidence in
 > [R1](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md) ·
 > [R2](devlog-projects-qwen3-8-test-notes-neon-bastion-round-2-review-2026-09-02.md) ·
 > [R3](devlog-projects-qwen3-8-test-notes-neon-bastion-round-3-review-2026-09-02.md) ·
 > [R4](devlog-projects-qwen3-8-test-notes-neon-bastion-round-4-review-2026-09-02.md) ·
 > [R5](devlog-projects-qwen3-8-test-notes-neon-bastion-round-5-review-2026-09-03.md) ·
 > [R6](devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03.md) ·
-> [R7](devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04.md)。
+> [R7](devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04.md).
 >
-> 同内容的可分享版本：<https://claude.ai/code/artifact/dda938e4-1ac8-4155-bf38-6012d6c748d0>
+> Shareable version of the same content: <https://claude.ai/code/artifact/dda938e4-1ac8-4155-bf38-6012d6c748d0>
 
-## 结论
+## Conclusion
 
-用户对这次测试的定位是：**「我想要的是测试 qwen3.8-27B-8bit 到底能不能做一个稍微复杂的游戏」**。
+The user's positioning for this test was: **"What I want is to test whether qwen3.8-27B-8bit can actually build a slightly complex game."**
 
-**答案是能。但它能走多远，取决于验收标准能不能被写成一个它自己读得到的数字。**
+**The answer is yes. But how far it can go depends on whether the acceptance criteria can be written as a number that it can read itself.**
 
-能写成数字的（亮度下限、接缝对比度、终止性、不变量、像素方差），它做得又快又对，还会主动加反面对照；写不成数字的（像不像叶子、枪握没握在手上、视角模型该多大），它交出来的东西全部需要人看图才能判断——而这一轮它连图都看不见。
+For things that can be written as numbers (brightness lower bounds, seam contrast, termination, invariants, pixel variance), it works fast and correctly, and even proactively adds negative controls. For things that cannot be written as numbers (whether it looks like a leaf, whether the gun is held in the hand, how large the view model should be), everything it delivers requires a human to look at the image to judge—and in this round, it cannot even see the images.
 
-**七轮下来评审方改了七次自己的方法论，模型改了三十一次代码。把验收标准写清楚这件事的难度，超过了让模型写出实现。**
+**Over seven rounds, the reviewer changed their own methodology seven times, and the model changed the code thirty-one times. The difficulty of writing clear acceptance criteria exceeded the difficulty of getting the model to write the implementation.**
 
-## 交付统计（评审方独立统计，未采信 agent 自述）
+## Delivery Statistics (Independently tallied by the reviewer; agent self-reports not adopted)
 
-| 维度 | 数值 | 来源 |
+| Dimension | Value | Source |
 |---|---|---|
-| 提交 | **31**（`545c546` → `31bb8d3`） | git log |
-| 代码变更 | 62 文件、**+9,766 / −882** | `git diff --shortstat` |
-| 源码规模 | `src/` 8,157 行 TS，`tests/` 4,839 行 | `wc -l` |
-| 单元测试 | 31 → **149**（19 文件） | vitest |
-| E2E 场景 | 5 → **26** | playwright |
-| pi 净工作时长 | **30.0 小时**（35 个会话） | 会话 jsonl 创建/修改时间 |
-| 模型请求 | **1,688** | 会话 jsonl `usage` |
-| Token | 未命中输入 4,092,218 · 缓存读 93,428,863 · **输出 1,805,870** | 同上 |
-| 思考量 | **3,777,115 字符** | 会话 jsonl `thinking` part |
-| 工具调用 | **1,836**（bash 927 / edit 421 / read 403 / write 85） | 同上 |
-| 工具失败率 | **3.4%**（62 / 1,836） | `isError` 计数 |
+| Commits | **31** (`545c546` → `31bb8d3`) | git log |
+| Code Changes | 62 files, **+9,766 / −882** | `git diff --shortstat` |
+| Source Code Size | `src/` 8,157 lines TS, `tests/` 4,839 lines | `wc -l` |
+| Unit Tests | 31 → **149** (19 files) | vitest |
+| E2E Scenarios | 5 → **26** | playwright |
+| pi Net Working Time | **30.0 hours** (35 sessions) | Session jsonl creation/modification times |
+| Model Requests | **1,688** | Session jsonl `usage` |
+| Tokens | Missed input 4,092,218 · Cache read 93,428,863 · **Output 1,805,870** | Same as above |
+| Thinking Volume | **3,777,115 characters** | Session jsonl `thinking` part |
+| Tool Calls | **1,836** (bash 927 / edit 421 / read 403 / write 85) | Same as above |
+| Tool Failure Rate | **3.4%** (62 / 1,836) | `isError` count |
 
-服务端侧（`/metrics`）：mean accept_len **3.17**、draft 接受率 **55.9%**、`auto_cap.p` 0.759 / cap 4、decode **19.1 tok/s**、prefix cache 复用率 **94.6%**、MLX allocator peak **72.1 GB** / active 57.0 GB。
+Server-side (`/metrics`): mean accept_len **3.17**, draft acceptance rate **55.9%**, `auto_cap.p` 0.759 / cap 4, decode **19.1 tok/s**, prefix cache reuse rate **94.6%**, MLX allocator peak **72.1 GB** / active 57.0 GB.
 
-## 任务耗时：逻辑任务 vs 美术任务
+## Task Duration: Logic Tasks vs. Art Tasks
 
-同一个模型、同一套流程、同一个人拆任务，中位耗时相差 **2.4 倍**。
+With the same model, the same workflow, and the same person breaking down tasks, the median duration differs by **2.4 times**.
 
-| 轮 | 任务性质 | 中位耗时 | 合计 | 失速任务 |
+| Round | Task Nature | Median Duration | Total | Stalled Tasks |
 |---|---|---:|---:|---|
-| R4 | 逻辑与玩法（11 项） | **22m** | 6.3h | AI-01 176m |
-| R6 | 美术与表现（11 项） | **52m** | 11.4h | 收尾 ART-15/16 206m |
+| R4 | Logic and Gameplay (11 items) | **22m** | 6.3h | AI-01 176m |
+| R6 | Art and Presentation (11 items) | **52m** | 11.4h | Closing ART-15/16 206m |
 
-**两根异常长的任务是全部二十二个任务里仅有的两次失速，它们的共同点不是难度，是「要求模型自己找出为什么会这样」。** 其余二十个任务都是「照着可判定的验收做一件明确的事」，中位数 27 分钟。
+**The two abnormally long tasks were the only two stalls among all twenty-two tasks; their commonality was not difficulty, but the requirement that "the model itself must figure out why this is happening."** The remaining twenty tasks were all "do a specific, clearly defined task according to verifiable acceptance criteria," with a median duration of 27 minutes.
 
-## 能力边界
+## Capability Boundaries
 
-### 边界一 · 根因定位不收敛（模型自身）
+### Boundary 1 · Root Cause Localization Does Not Converge (Model Intrinsic)
 
-两次失速形态完全一致，**都不是「不会写代码」**。AI-01 那次它在「为什么这个单位只开了 2 枪」上反复换假设——FOV？反应延迟？目标切换？血量阈值？——每个都合理，但无法从 300 秒的模拟中高效缩小范围，烧掉 176 分钟、36.9 万字符思考（其余九个任务合计 42 万）。
+The two stalls exhibited identical patterns; **neither was a case of "inability to write code."** In the AI-01 instance, it repeatedly switched hypotheses regarding "why this unit only fired 2 shots"—FOV? Reaction delay? Target switching? Health threshold?—each was plausible, but it could not efficiently narrow down the scope from the 300-second simulation, burning through 176 minutes and 369,000 thinking characters (36.9 × 10,000; the other nine tasks totaled 420,000, or 42 × 10,000).
 
-介入方式是在**独立副本**里跑同一场景、逐 tick 打印状态，把根因直接交给它。**拿到根因后 30 分钟收敛，并自行挖出三个更深的缺陷**（其中弹丸静默过期破坏「每颗子弹都要结算」的不变量，自 `328dae6` 起就存在）。
+The intervention method was to run the same scenario in an **independent copy**, printing state tick-by-tick, and directly providing the root cause to it. **After receiving the root cause, it converged in 30 minutes and independently uncovered three deeper defects** (one of which was silent bullet expiration breaking the "every bullet must be settled" invariant, which has existed since `328dae6`).
 
-> **给定明确的局部目标与可判定的验收，它能独立完成；一旦需要在多因素耦合系统里做根因定位，它会持续消耗而不收敛。但只要把根因交给它，执行力仍然很强，甚至能顺藤发现更深的问题。**
+> **Given clear local goals and verifiable acceptance criteria, it can complete them independently; once it needs to perform root cause localization in a multi-factor coupled system, it will continue to consume resources without converging. However, once the root cause is provided, its execution capability remains strong, and it can even trace the thread to discover deeper issues.**
 
-### 边界二 · 它看不见图（这套部署造成的，非模型能力）
+### Boundary 2 · It Cannot See Images (Caused by this deployment, not model capability)
 
-R6 全部十一个任务是美术任务，**五个视觉缺陷全部由人看截图发现，pi 一个都没发现**（ART-07 / ART-14 / ART-15 / ART-16 / ART-17）。根因见 [mlx-dspark 无法为 Qwen3.8-27B 提供视觉输入](devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md)（OPS-11）。
+All eleven tasks in R6 were art tasks; **all five visual defects were discovered by humans looking at screenshots, and pi did not detect any** (ART-07 / ART-14 / ART-15 / ART-16 / ART-17). The root cause is detailed in [mlx-dspark cannot provide visual input for Qwen3.8-27B](devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md) (OPS-11).
 
-pi 能做的只有「写像素统计断言再读那个数字」，所以它的验收全是区域统计——**这类断言能证明改动生效，证明不了看起来对**。
+The only thing pi could do was "write pixel statistics assertions and then read that number," so its acceptance criteria were all regional statistics—**such assertions can prove that changes took effect, but cannot prove that it looks correct**.
 
-**前五轮全是逻辑任务，模型处于文本闭环、能自己看到结果，表现优秀；第六轮闭环断了，必须有人当眼睛。** 差别不在推理能力，在于这一轮它拿不到反馈。
+**The first five rounds were all logic tasks; the model was in a text closed-loop, able to see the results itself, and performed excellently; in the sixth round, the closed-loop was broken, and someone had to serve as the eyes.** The difference lies not in reasoning ability, but in the fact that in this round, it could not receive feedback.
 
-## 四类问题归档
+## Archiving of Four Types of Issues
 
-### A · mlx-dspark 基础设施
+### A · mlx-dspark Infrastructure
 
-| ID | 问题 | 页面 |
+| ID | Issue | Page |
 |---|---|---|
-| OPS-10 | 长上下文下 drafter KV 缓存 offset 跑在空缓存前面必崩（已报上游 #33） | bug 页（历史本机文件，未随本报告发布） |
-| OPS-11 | 这套部署下模型没有视觉，且是**静默丢弃**（三道丢弃点，实测 `prompt_tokens: 17`） | [note](devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md) |
-| — | 输出上限截断：`--max-tokens-cap` 降到 16,384 后截断了合法长回答（上下文仅用 17.8%），丢弃 14 分钟生成 | [R1](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md) |
+| OPS-10 | Under long context, drafter KV cache offset runs ahead of the empty cache, causing a guaranteed crash (reported upstream #33) | Bug page (historical local file, not published with this report) |
+| OPS-11 | In this deployment, the model has no vision, and it is **silently discarded** (three discard points, measured `prompt_tokens: 17`) | [note](devlog-projects-qwen3-8-test-notes-mlx-dspark-vision-unavailable-2026-09-03.md) |
+| — | Output limit truncation: after lowering `--max-tokens-cap` to 16,384, it truncated legitimate long answers (context usage only 17.8%), discarding 14 minutes of generation | [R1](devlog-projects-qwen3-8-test-notes-neon-bastion-round-1-review-2026-09-01.md) |
 
-**教训**：输出上限必须按最长的**合法**输出来定，不是按最长可忍受的等待来定——截断丢弃全部生成，长等待至少能拿到结果。
+**Lesson**: The output limit must be set based on the longest **legitimate** output, not based on the longest tolerable wait time—truncation discards all generation, whereas a long wait at least yields a result.
 
-### B · 模型行为
+### B · Model Behavior
 
-- **根因定位不收敛**（两次，共约 6 小时，占任务总耗时 36%）——见边界一
-- **一次性投喂长规格会撞输出上限**：178 行规格整页投喂 → 生成 32,768 token 思考、**零正文**（`stop=length`，thinking 118,179 字符，text 0 字符）。此后全部拆成 16–28 行自足任务，再未复现
-- **README 曾虚构六个不存在的操作**（R2 DOC-02），比 R1 的「遗漏未实现项」更严重。R3 修复后主动加了 *"Not yet implemented (honest list)"*；**到 R7 收尾任务它已会主动把提交标成 `(partial)` 并逐条写明哪些没做到**——这是七轮里最明显的行为改善
-- **R7 的操作失误**：A/B 对照时把 `testHooks.ts` 还原到 `src/render/` 而非 `src/`，import 解析不了，`tsc`/`build` 静默失败，后续 Playwright 全跑在旧产物上，A/B 两条臂实为同一个二进制。它自己在提交信息里如实作废了中途所有数字
+- **Root cause localization does not converge** (twice, totaling approximately 6 hours, accounting for 36% of total task time)—see Boundary 1
+- **Feeding long specifications all at once hits the output limit**: Feeding a 178-line specification in its entirety → generated 32,768 tokens of thinking, **zero body text** (`stop=length`, thinking 118,179 characters, text 0 characters). Subsequently, all were split into self-contained tasks of 16–28 lines, and it has not recurred
+- **README once fabricated six non-existent operations** (R2 DOC-02), which is more severe than R1's "omission of unimplemented items." After the R3 fix, it proactively added *"Not yet implemented (honest list)"*; **by the R7 wrap-up task, it had already learned to proactively mark commits as `(partial)` and explicitly list item by item what was not achieved**—this is the most obvious behavioral improvement across the seven rounds
+- **R7 Operational Error**: During A/B comparison, it restored `testHooks.ts` to `src/render/` instead of `src/`, causing import resolution failure, `tsc`/`build` silently failed, and subsequent Playwright runs were all on old artifacts, meaning the two arms of the A/B test were actually the same binary. It honestly invalidated all intermediate numbers in its commit message
 
-### C · 方法论（评审方自身的失误）
+### C · Methodology (Reviewer's Own Mistakes)
 
-| 轮 | 失误 | 通则 |
+| Round | Mistake | General Rule |
 |---|---|---|
-| R1 | 只做静态审查就给 77 分 | agent 只对照**自己写的测试**验收，不对照题面验收 |
-| R2 | 盲评 87，人工游玩后下修到 74 | 静态审查 + headless 测试 + 截图，三者叠加**仍无法验证可玩性** |
-| R3 | 把 `hitKick`/`shotKick` 判为死常量，诱导模型删掉规格线索 | 测试覆盖了**因果**，从未覆盖**表现** |
-| R4 | 连续两轮给「提亮」这种形容词，一次不足一次过头 | 同一类问题被反馈第三次时，**问题在验收条件的缺失** |
-| R5 | MAP-02 拆分视线/弹道时留下二阶后果 → seed 27 永久活锁 | 拆分既有判定时要检查**依赖「这两件事等价」的状态机**，不只是调用点 |
-| R6 | — | **先判该属性是否可调**（如 WebGL 忽略 `linewidth`），再定验收 |
-| R7 | 把 ART-16 暗区**全部**归给玻璃，还写「不必重新排查」 | 实测分箱：边缘板 73% / 视角模型 22%。归因错在**排他性**而非目标；且叫实施方不要复查等于剥夺了它发现第二个来源的机会 |
+| R1 | Gave 77 points based on static review only | Agent only verifies against **its own written tests**, not against the problem statement |
+| R2 | Blind review 87, revised down to 74 after manual playtesting | Static review + headless testing + screenshots, the combination of all three **still cannot verify playability** |
+| R3 | Judged `hitKick`/`shotKick` as dead constants, inducing the model to delete specification clues | Tests covered **causality**, but never covered **presentation** |
+| R4 | Gave the adjective "brighten" for two consecutive rounds, once insufficient and once excessive | When the same type of issue is fed back for the third time, **the problem lies in the lack of acceptance criteria** |
+| R5 | When splitting line-of-sight/ballistics in MAP-02, left second-order consequences → seed 27 permanent livelock | When splitting existing judgments, one must check **state machines that depend on "these two things being equivalent"**, not just call sites |
+| R6 | — | **First determine if the property is adjustable** (e.g., WebGL ignores `linewidth`), then define acceptance criteria |
+| R7 | Attributed **all** of the ART-16 dark area to glass, and wrote "no need to re-investigate" | Measured binning: edge board 73% / view model 22%. The attribution error was in **exclusivity** rather than the target; and telling the implementer not to re-check was equivalent to depriving it of the opportunity to discover the second source |
 
-**R4 那条最有用**：用户第三次说「画面太昏暗」时先测再提（`meanLuma 21.4/255`、`darkFrac 0.748`、全图无像素超过 L=96），把验收写成五条数字后一次到位。其中 `mean(R) − mean(B) ≤ 40` 是防止上一轮「过暖」重演的**反向约束**——只给下限会诱导「把所有材质刷白」。
+**R4 was the most useful**: When the user said "the screen is too dark" for the third time, we measured before proposing (`meanLuma 21.4/255`, `darkFrac 0.748`, no pixel in the entire image exceeded L=96), and wrote the acceptance criteria as five numerical values to get it right in one go. Among them, `mean(R) − mean(B) ≤ 40` is a **reverse constraint** to prevent the recurrence of the previous round's "too warm" issue—providing only a lower bound would induce "whitening all materials."
 
-**另一条**：随机化会让原本够用的确定性回归自动变薄，**且不会有任何测试变红来提醒你**。pi 的 3-seed 全绿，评审方扫 40 seed 抓到 seed 27 永久活锁；修复后扫 41..160，119/120 通过（seed 74 仍僵持，BUG-02）。
+**Another point**: Randomization automatically thins out deterministic regressions that were originally sufficient, **and no test will turn red to remind you**. pi's 3-seed run was all green, but the reviewer scanned 40 seeds and caught a permanent livelock at seed 27; after the fix, scanning 41..160, 119/120 passed (seed 74 still deadlocked, BUG-02).
 
-### D · 流程与工具
+### D · Process and Tools
 
-**同一个失效模式的四次实例——绿色的测试可能与被测代码无关**（见 OPS-12）：
+**Four instances of the same failure mode—green tests may be unrelated to the code under test** (see OPS-12):
 
-| # | 实例 | 后果 |
+| # | Instance | Consequence |
 |---|---|---|
-| 1 | 跑 E2E 前忘了 `npm run build` | 测的是上一次的产物 |
-| 2 | 两个 agent 共用一份 `dist/` 和一个 preview server | 测的是对方的产物 |
-| 3 | `npm run build` 失败了但没人看返回码 | 测的是一个已经不存在的产物 |
-| 4 | 放大后的视角模型飘进固定的屏幕空间采样窗（ART-18） | 断言测的是别的东西 |
+| 1 | Forgot to run `npm run build` before running E2E | Tested the previous build's artifact |
+| 2 | Two agents shared one `dist/` and one preview server | Tested the other party's artifact |
+| 3 | `npm run build` failed but no one checked the return code | Tested an artifact that no longer exists |
+| 4 | The zoomed-in view model drifted into the fixed screen-space sampling window (ART-18) | Assertions tested something else |
 
-前三次的根因是同一句配置：`playwright.config.ts` 的 `webServer` 是 `vite preview`（**只伺服 `dist/`，不构建**）加 `reuseExistingServer: true` 配固定端口 4173。
+The root cause of the first three was the same configuration line: `playwright.config.ts`'s `webServer` was `vite preview` (**serving only `dist/`, not building**) plus `reuseExistingServer: true` with a fixed port 4173.
 
-> **关键性质：一份陈旧但有效的 `dist/`，在 HTTP 层与新鲜的完全无法区分。** 这一类问题**加多少断言都挡不住**——套件内部没有任何信号能分辨。修法是两条工程约束：把构建返回码变成硬门禁，给每个 runner 独立端口。`reuseExistingServer: !process.env.CI` 是惯用写法，在这里恰好是反的。
+> **Key property: a stale but valid `dist/` is indistinguishable from a fresh one at the HTTP layer.** This type of problem **cannot be blocked by adding any number of assertions**—there is no signal within the suite to distinguish them. The fix consists of two engineering constraints: making the build return code a hard gate, and assigning an independent port to each runner. `reuseExistingServer: !process.env.CI` is the idiomatic way to write it, but here it is exactly the opposite.
 
-**两个 agent 同时投喂同一个 pi 会话**：R7 出现真实踩踏，两边 `/new` 相隔 23 秒，先开工的会话被冲掉。值得记的是**为什么焦点校验挡不住**——两个发送脚本都会先确认面对的是 pi 的窗格，各自都正确，但它保证的是「我没打错窗口」，不是「没有别人正在打这个窗口」。**跨会话排他必须用锁，不能用校验。** 注意 `flock(1)` 在 macOS 上不存在（属 util-linux），需用原子 `mkdir` + 过期判定。
+**Two agents feeding the same pi session simultaneously**: R7 experienced a real race condition, with both sides' `/new` separated by 23 seconds, and the session that started first was flushed. It is worth noting **why focus validation could not prevent this**—both sending scripts first confirmed they were facing pi's pane, and each was correct, but it guarantees "I didn't hit the wrong window," not "no one else is hitting this window." **Cross-session exclusivity must use locks, not validation.** Note that `flock(1)` does not exist on macOS (it belongs to util-linux); an atomic `mkdir` + expiration check is required.
 
-**评审方自身的两次操作失误**，同一根因（假设终端操作生效而不验证）：向服务端窗格发 Ctrl-C 后以为会自动重启（那是交互 shell，服务停了十分钟）；把 `/new` 和整段任务提示打进了自己的窗格。此后给发送脚本加了焦点校验与回读断言。
+**Two operational errors by the reviewer themselves**, with the same root cause (assuming terminal operations took effect without verifying): After sending Ctrl-C to the server pane, assumed it would auto-restart (it was an interactive shell, and the service stopped for ten minutes); typed `/new` and the entire task prompt into their own pane. Afterwards, focus validation and read-back assertions were added to the sending scripts.
 
-## 成本对照（按 Qwen 官方价目表折算）
+## Cost Comparison (Converted according to Qwen's official price list)
 
-| 项 | 用量 | Qwen3.8-Max 国际站 | Qwen3.8-Max 中国站 |
+| Item | Usage | Qwen3.8-Max International Site | Qwen3.8-Max China Site |
 |---|---:|---:|---:|
-| 未命中输入 | 4,092,218 | $8.18 | ¥49.11 |
-| 缓存命中读取 | 93,428,863 | $18.69 | ¥112.11 |
-| 输出（含思考） | 1,805,870 | $10.84 | ¥65.01 |
-| **合计（有缓存折扣）** | — | **$37.71** | **¥226.23** |
-| 合计（完全不命中缓存） | — | $205.88 | ¥1,235.26 |
+| Non-cached input | 4,092,218 | $8.18 | ¥49.11 |
+| Cached hit read | 93,428,863 | $18.69 | ¥112.11 |
+| Output (including thinking) | 1,805,870 | $10.84 | ¥65.01 |
+| **Total (with cache discount)** | — | **$37.71** | **¥226.23** |
+| Total (no cache hits at all) | — | $205.88 | ¥1,235.26 |
 
-单价：国际站 $2 / $6 每百万 token、缓存命中按标准输入价 10%；中国站 ¥12 / ¥36、缓存命中 ¥1.2。**5.4 倍的摆动全在缓存上**——那 9,343 万「命中」是 mlx-dspark **本地** prefix cache 的复用（实测复用率 94.6%），百炼的上下文缓存有 TTL 和命中条件，达不到这个水平，真实账单大概率落在两栏之间、偏有缓存那一侧。
+Unit prices: International site $2 / $6 per million tokens, cached hits at 10% of standard input price; China site ¥12 / ¥36, cached hits ¥1.2. **The 5.4x swing is entirely in the cache**—those 93.43 million "hits" (9,343 × 10,000) are reuse of mlx-dspark's **local** prefix cache (measured reuse rate 94.6%); Bailian's context cache has TTL and hit conditions, and cannot reach this level, so the real bill will likely fall between the two columns, leaning toward the side with cache.
 
-**这个数字的意义不是省了 ¥226。** 本地跑三天花了 **30 小时**挂机时间，电费约两度不到 ¥2，省钱是真的省；但反过来算是 **¥226 买 30 小时**，商业 API 吞吐是本地 19 tok/s 的十倍以上，同样工作量约 3 小时能跑完。**如果时间有价值，这笔账是反的。** 本地方案的价值在于不受配额限制地跑通一个 31 次提交的长链条，且数据不出机器。
+**The significance of this number is not that ¥226 was saved.** Running locally for three days took **30 hours** of idle time, with electricity costs of less than 2 kWh, costing less than ¥2; saving money is real; but conversely, it is **¥226 for 30 hours**, and commercial API throughput is more than ten times the local 19 tok/s, so the same workload could be completed in about 3 hours. **If time has value, this account is reversed.** The value of the local solution lies in running through a long chain of 31 commits without quota limits, and the data does not leave the machine.
 
-## 速度：tok/s 是会骗人的健康信号
+## Speed: tok/s is a deceptive health signal
 
-本项目观察到一次显著降速（21 → 11 tok/s），最初误归因为上下文变长。重测拆解证明**轮速几乎不变**（5.59 → 5.55 轮/秒），全部差异来自接受长度（1.96 → 3.79 token/轮）：`auto_cap.p` 从 0.601 回升到 0.865，控制器把草稿深度从 2 放开到 4。
+This project observed a significant slowdown (21 → 11 tok/s), initially misattributed to longer context. Re-testing and decomposition proved that **round speed remained almost unchanged** (5.59 → 5.55 rounds/second), with all differences coming from acceptance length (1.96 → 3.79 tokens/round): `auto_cap.p` recovered from 0.601 to 0.865, and the controller relaxed the draft depth from 2 to 4.
 
-**接受率是内容相关的，不是上下文相关的**（写代码 91%，写散文 28%）。**看速度要盯 `accept_len` 与 `auto_cap.p`，不要盯 context 百分比。** `predicted_rates` 把每轮耗时当常数，系统性偏乐观（预测 40.9 实测 21），不可作基准。
+**Acceptance rate is content-dependent, not context-dependent** (91% for coding, 28% for prose). **To monitor speed, look at `accept_len` and `auto_cap.p`, not the context percentage.** `predicted_rates` treats the time per round as a constant, which is systematically optimistic (predicted 40.9, measured 21), and cannot be used as a baseline.
 
-反直觉的一条：**上下文压缩不是纯粹的成本，它是唯一能降低 `ms/round` 的操作**（185 → 133 ms，即 12–22 → 23–28 tok/s）。为避免压缩而开更大上下文窗口，是拿一次性暂停换一个永久更慢的区间。
+A counter-intuitive point: **Context compression is not purely a cost; it is the only operation that can reduce `ms/round`** (185 → 133 ms, i.e., 12–22 → 23–28 tok/s). Opening a larger context window to avoid compression is trading a one-time pause for a permanently slower interval.
 
-## 如果重来
+## If we did it again
 
-1. **第一轮就建立可测量口径**，不要等到第三次反馈。任何主观需求投喂前先问：怎么算达标？答不出数字，任务书就还没写完。
-2. **先判可行性，再定验收。** 「弹道太细」的根因是 WebGL 忽略 `linewidth`——在平台限制面前任何验收标准都无意义。
-3. **给每条断言写反面对照并写进仓库。** 模型自己会做（R4 收尾任务它主动做了），但没写进仓库的反面对照等于没做——玻璃穿透性那次 A/B（玻璃侧 149 红像素 / 树叶侧 0）至今没进仓库。
-4. **把构建返回码变成硬门禁，给每个 runner 独立端口。** 四次「绿色的测试与被测代码无关」里三次是这一条造成的。
-5. **接上眼睛。** 开第二个小 VL provider（4B–8B，约 5–10 GB）专门看截图；关键前提是视觉路径不需要快。但它替不掉全部判断。
-6. **把人工游玩写成流程的强制环节。** 三轮里的决定性缺陷（平移反向、曳光不可见、AI 开火完全无声）全部由人工游玩发现，**无一由自动化证据发现**。
+1. **Establish measurable criteria in the first round**, do not wait until the third feedback. Before feeding any subjective requirements, ask first: how is success defined? If you cannot answer with a number, the task specification is not yet complete.
+2. **Determine feasibility first, then define acceptance criteria.** The root cause of "ballistics being too thin" is that WebGL ignores `linewidth`—in the face of platform limitations, any acceptance criteria are meaningless.
+3. **Write negative controls for each assertion and commit them to the repository.** The model does this on its own (it proactively did so for the R4 wrap-up task), but negative controls not written into the repository are equivalent to not being done—the A/B test for glass transparency (149 red pixels on the glass side / 0 on the foliage side) has still not been committed to the repository to this day.
+4. **Turn build return codes into hard gates, and assign independent ports to each runner.** Three of the four instances of "green tests unrelated to the code under test" were caused by this.
+5. **Connect the eyes.** Start a second small VL provider (4B–8B, approx. 5–10 GB) specifically to view screenshots; the key premise is that the visual path does not need to be fast. However, it cannot replace all judgment.
+6. **Make manual playtesting a mandatory part of the process.** The decisive defects in the three rounds (inverted panning, invisible tracers, completely silent AI firing) were all discovered through manual playtesting, **none were discovered by automated evidence**.

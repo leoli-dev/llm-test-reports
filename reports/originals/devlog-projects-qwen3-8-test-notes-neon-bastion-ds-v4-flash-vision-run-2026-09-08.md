@@ -1,65 +1,84 @@
 ---
 type: Note
-title: Neon Bastion ds-v4-flash-vision run — A–G progress (35/55)
+title: "Neon Bastion ds-v4-flash-vision run — A–G progress (35/55)"
 status: current
-description: 用同一份 55 任务书在 ds-v4-flash-vision-with-dsh 部署下重跑 Neon Bastion；A01–G08（35/55）完成，游戏已达「能跑能打能死能重开能观战 + 完整 HUD/小地图/结算」的可玩闭环。
+description: "Re-ran Neon Bastion using the same 55-task specification under the ds-v4-flash-vision-with-dsh deployment; A01–G08 (35/55) completed, and the game has reached a playable closed loop of \"runnable, playable, killable, restartable, spectatable + complete HUD/minimap/settlement\"."
 tags: [neon-bastion, ds-v4, deepseek, benchmark, task-decomposition]
 timestamp: 2026-09-08T09:40:00Z
 ---
 
 # Neon Bastion ds-v4-flash-vision run — A01–A03
 
-在**同一套 55 份任务书**（`~/Code/qwen3.8-tests/test-prompts/neon-bastion/` + `INDEX.md`）下，
-换 `ds-v4-flash-vision` 部署从零重跑 Neon Bastion，验证任务书与方法论对另一模型是否同样成立。
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-ds-v4-flash-vision-run-2026-09-08_CN.md)
 
-- 部署：DeepSeek `ds-v4-flash-vision`（本 session 直接作为 agent 执行，无需外部投喂脚本）
-- 工作目录：`~/Code/qwen3.8-tests/ds-v4-flash-vision-with-dsh-neon-bastion`
-- **本轮进度：3/55（A01–A03），用户按计划在 A03 完成后暂停、准备断网**
+<!-- environment-context:start -->
 
-## 交付事实
+## Workstation and system (context added 2026-10-20)
 
-**2026-09-08 续：A–D 段（16/55）全部完成。** 16 次提交（`880ae2a` A01 → `4f831ca` D05）。末态 `npm run build` 退出码 0、
-**单测 265（15 文件）**、E2E 3（占位页）。`npm test` 与 `npm run test:e2e` 均绿。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Mac client / local comparison; cloud hardware was not recorded |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-已交付模块（全部纯逻辑层，无 three.js / DOM / AudioContext）：
-- A：util / types / CONFIG / rng（可注入 seed 的 xorshift32+fmix32，`hashSeed` salt 隔离，禁 Math.random）
-- B：mapData（地图唯一真源）→ geometry（AABB/地面高度/slab 射线，玻璃双模式 `ignoreGlass`）→ navmesh（距离+LOS 建边 + 确定性 Dijkstra）→ generateMap（四套布局 + seed 纯函数，连通性换图）
-- C：movement（轴分离碰撞/重力/跳跃/maxStep 踏步）→ playerInput（四向自洽输入，`r=f×up`）→ render/camera（FOV/起伏/后坐/受击冲击/reduced-motion，纯数学，只读 Unit）
-- D：weapon（冷却/半自动/散布纯函数）→ bullet（对象池 + 扫掠线段 CCD 防隧穿）→ hitscan（墙优先/头身命中体/玻璃看得到打不中/友军免伤/HP≥0）→ fire（唯一开火入口 + 计分不变量 + 事件总线 killfeed≤5）→ match（8 单位编排，fixed tick，冻结，纯数据 snapshot）
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-依赖版本：three ^0.185.1、vite ^8.2.2、vitest ^5.0.0、@playwright/test ^1.63.0、typescript ^7.0.2。
+<!-- environment-context:end -->
 
-首环境问题：npm 全局缓存含 root-owned 临时文件（`~/.npm/_cacache/tmp`），`npm install` 报 EPERM；
-已改用项目内 `--cache .npm-cache` 规避（工具链环境问题不应污染交付）。
+Under the **same set of 55 task specifications** (`~/Code/qwen3.8-tests/test-prompts/neon-bastion/` + `INDEX.md`),
+redeploy `ds-v4-flash-vision` from scratch to rerun Neon Bastion, verifying whether the task specifications and methodology hold equally for another model.
 
-负对照（A01 规则 #6）逐任务执行：A02 类型错误→build 非0；A03 改 hpMax→CONFIG 断言红；A04 去 salt/注入 Math.random→红；
-B01 移中央立柱/改 id25 材质→红；B02 删 glass 分支→双模式断言红；B03 改 tie-break→确定性红；B04 绕过连通性换图→SEVERED 红；
-C01 关轴回退+径向校正→"不在墙内"红；C02 把 r 取反→四向自洽红；C03 深度冻结证明不污染 Unit；D01 去 shotIndex→每发不同红；
-D02 扫掠段坍缩成端点→薄墙隧穿红；D03 忽略墙优先→墙后/玻璃红；D04 让 AI 跳过 shot 事件→核心断言红；D05 删冻结守卫→冻结测试红。
+- Deployment: DeepSeek `ds-v4-flash-vision` (executed directly as an agent in this session, no external feeding script required)
+- Working directory: `~/Code/qwen3.8-tests/ds-v4-flash-vision-with-dsh-neon-bastion`
+- **Current progress: 3/55 (A01–A03), user paused as planned after A03 completion, preparing to disconnect**
 
-**2026-09-08 续：E–G 段（35/55）完成。** 累计 34 次提交（`880ae2a` A01 → `6ddbe42` G08）。末态 `npm run build` 退出码 0、
-**单测 407（28 文件）**、**E2E 52（13 spec）**，`npm run test:all` 全绿。
+## Delivery Facts
 
-- **E（AI，E01–E07）**：感知（视锥/视距/遮挡，玻璃不挡视线；听觉不给身份）→ 状态机骨架 + 导航寻路跟随（确定性 brain，与玩家共用 `stepUnit`）→ doctrine 人格（seed 纯函数、每队恰 2 flanker + 2 rusher）→ 开火决策（反应延迟、瞄准偏移命中率、`minFireDist`、**拒绝隔玻璃开火**，经 D04 唯一 `fireFrom`）→ 防僵持（四道递进闸门 + `retreatDwell` 第三出口 + 每单位无接触计时器 + Match 硬时间上限 `warTime+150`）→ 防卡死（`handleStall` 检测 + 墙角切向滑出 + 交战不被打断）→ 终止性全量扫描（seed 1..40、300 逻辑秒、逐 tick 三不变量、失败打印可复现 seed）。**所有 40 seed 都能结束**。
-- **F（应用外壳，F01–F03）**：`src/app.ts` 的 `App`（纯逻辑：屏幕状态机、固定 1/60 累加器 `acc += min(realDt, maxFrameDt 0.25)`、`fastForward`/`teleport`/`setSeed`/`playAgain`、输入单一入口）+ `mountApp`（DOM/rAF/Pointer Lock）+ `src/testHooks.ts`（`window.__nb`，与真实输入同一条 `applyKey`/`applyLook` 路径）→ `src/render/scene.ts` 从 `mapData.solids` 生成几何（按尺寸缓存复用；8 单位共享胶囊几何 + 每队一份材质；`map/sceneGeometrySignature` 证明场景来自当前地图）→ 死亡观战（`resolveSpectator` 纯函数、Q/E 环形切换、`spectateCamera` 第三人称平滑跟随 / 蓝队全灭回落自由俯视 26m）。**C03 的相机 E2E 按备注在 F01 补上**。
-- **G（比赛 UI，G01–G08）**：HUD（DOM 覆盖层 `.nb-root`、准星/分段血条/**冷却不是弹药**/比分/killfeed）→ 实时排行榜（复用组件、玩家高亮、同分按 id 稳定不抖、DOM 读回 `totalScore === hitScore + 3×kills`）→ 小地图（**共享视野不透视**：`sharedViewCanSee` 本队任一存活单位看见才显示，最后已知位置淡出 0.7s，玻璃不挡视线；`ai.*` 与 `minimap.*` 两组视野参数独立性有测试锁）→ 受击/命中反馈（暗角 + 来向弧 `damageBearing` + 爆头/身体 hitmarker + 浮动 20/50，**只订阅 D04 事件总线**）→ 结算层与 restart（复用排行榜、隐藏全部局内 chrome、restart 无残留）→ 导演模式 F2 + 调试面板 F3/`` ` `` → reduced-motion 与 no-WebGL fallback（`?nogl=1` 永不白屏、比赛照常；云在 reduced-motion 下"停运动不删元素"）→ favicon/theme-color/apple-touch-icon（内联 SVG data-URI，`#`→`%23`）。
+**2026-09-08 Continuation: Sections A–D (16/55) all completed.** 16 commits (`880ae2a` A01 → `4f831ca` D05). Final state `npm run build` exit code 0,
+**Unit tests 265 (15 files)**, E2E 3 (placeholder page). Both `npm test` and `npm run test:e2e` are green.
 
-**G 段新增的工程习惯（可复用）**：
-- **负对照必须先确认 build 成功再跑 E2E**——本轮两次"控制组全绿"的假象都源于 `tsc --noEmit` 因 unused local 失败、`dist/` 仍是旧构建；`npm run build` 的退出码是硬闸门（与 OPS-12 同源）。
-- **断言要读"看得见的东西"**：调试面板的 state 断言最初读 `data-state` 属性，把显示文字写死也照过；改成读可见 `<span>` 的 textContent 并加"5 号是 dead 且非全同行相同"的非均匀断言后才真正承重。同理 G02 的不变量断言在"全 0 分数"时恒真，先用 `addScore` 造非零再断言。
-- **复用组件会牵连既有断言**：结算层复用 `Scoreboard` 后，G02 的"`.nb-scoreboard` 恰好 1 个"改为"`.nb-root > .nb-scoreboard`（局内）恰好 1 个"。
+Delivered modules (all pure logic layer, no three.js / DOM / AudioContext):
+- A: util / types / CONFIG / rng (xorshift32+fmix32 with injectable seed, `hashSeed` salt isolation, Math.random forbidden)
+- B: mapData (single source of truth for map) → geometry (AABB/ground height/slab ray, glass dual-mode `ignoreGlass`) → navmesh (distance+LOS edge construction + deterministic Dijkstra) → generateMap (four layouts + seed pure function, connectivity-based map swap)
+- C: movement (axis-separated collision/gravity/jump/maxStep stepping) → playerInput (four-directional self-consistent input, `r=f×up`) → render/camera (FOV/bob/recoil/hit impact/reduced-motion, pure math, read-only Unit)
+- D: weapon (cooldown/semi-auto/spread pure function) → bullet (object pool + swept line segment CCD to prevent tunneling) → hitscan (wall priority/head-body hitboxes/glass visible but unhit/ally damage immunity/HP≥0) → fire (single firing entry point + scoring invariant + event bus killfeed≤5) → match (8-unit orchestration, fixed tick, freeze, pure data snapshot)
 
-## 当前状态
+Dependency versions: three ^0.185.1, vite ^8.2.2, vitest ^5.0.0, @playwright/test ^1.63.0, typescript ^7.0.2.
 
-**A–G 全段完成（35/55）。** 关键路径 A→B→C→D→E→F 早已打通：逻辑层能跑完整 AI-vs-AI 对局且**每局必结束**；应用外壳把 Match 接到浏览器（固定 tick / 屏幕状态 / 输入 / 测试钩子）；渲染器从 mapData 画出竞技场；死亡观战、HUD、实时排行榜、小地图（共享视野）、受击/命中反馈、结算与 restart、导演模式与调试面板、reduced-motion 与 no-WebGL fallback、favicon 全部就位。**此刻游戏已是"能玩的最小闭环 + 完整 UI"**，只差美术（H）、人形与持枪（I）、特效（J）、音频（K），以及证据与交付（L–M）。
+Initial environment issue: npm global cache contained root-owned temporary files (`~/.npm/_cacache/tmp`), `npm install` reported EPERM;
+switched to project-local `--cache .npm-cache` to avoid it (toolchain environment issues should not pollute the delivery).
 
-## 与前一轮（qwen 55-task）的不同点
+Negative controls (A01 Rule #6) executed per task: A02 type error → build non-0; A03 changed hpMax → CONFIG assertion red; A04 removed salt/injected Math.random → red;
+B01 removed central pillar/changed id25 material → red; B02 deleted glass branch → dual-mode assertion red; B03 changed tie-break → determinism red; B04 bypassed connectivity map swap → SEVERED red;
+C01 disabled axis fallback + radial correction → "not inside wall" red; C02 inverted r → four-directional self-consistency red; C03 depth freeze proved no Unit pollution; D01 removed shotIndex → each shot different red;
+D02 swept segment collapsed to endpoint → thin wall tunneling red; D03 ignored wall priority → behind wall/glass red; D04 let AI skip shot event → core assertion red; D05 deleted freeze guard → freeze test red.
 
-- 部署/模型不同（本轮回 `ds-v4-flash-vision`），无外部编排脚本；执行器即本 agent。
-- 恢复时经 devlog Recall 即可重建上下文，无需依赖上次的 `notes/neon-bastion-55task-rerun-2026-09-07.md`。
+**2026-09-08 Continuation: Sections E–G (35/55) completed.** Cumulative 34 commits (`880ae2a` A01 → `6ddbe42` G08). Final state `npm run build` exit code 0,
+**Unit tests 407 (28 files)**, **E2E 52 (13 specs)**, `npm run test:all` all green.
 
-## 恢复点
+- **E (AI, E01–E07)**: Perception (frustum/visibility range/occlusion, glass does not block line of sight; audio does not provide identity) → state machine skeleton + navigation pathfinding follow (deterministic brain, shares `stepUnit` with player) → doctrine personality (seed pure function, exactly 2 flankers + 2 rushers per team) → firing decision (reaction delay, aim offset hit rate, `minFireDist`, **refuses to fire through glass**, via D04 single `fireFrom`) → anti-stall (four progressive gates + `retreatDwell` third exit + per-unit no-contact timer + Match hard time limit `warTime+150`) → anti-stuck (`handleStall` detection + corner tangential slide-out + engagement not interrupted) → termination full scan (seed 1..40, 300 logical seconds, per-tick three invariants, failure prints reproducible seed). **All 40 seeds terminate**.
+- **F (Application Shell, F01–F03)**: `src/app.ts`'s `App` (pure logic: screen state machine, fixed 1/60 accumulator `acc += min(realDt, maxFrameDt 0.25)`, `fastForward`/`teleport`/`setSeed`/`playAgain`, single input entry point) + `mountApp` (DOM/rAF/Pointer Lock) + `src/testHooks.ts` (`window.__nb`, same `applyKey`/`applyLook` path as real input) → `src/render/scene.ts` generates geometry from `mapData.solids` (cached reuse by size; 8 units share capsule geometry + one material per team; `map/sceneGeometrySignature` proves scene comes from current map) → death spectating (`resolveSpectator` pure function, Q/E circular switching, `spectateCamera` third-person smooth follow / blue team wipeout falls back to free top-down 26m). **C03's camera E2E added in F01 per notes**.
+- **G (Match UI, G01–G08)**: HUD (DOM overlay `.nb-root`, crosshair/segmented health bar/**cooldown is not ammo**/score/killfeed) → real-time leaderboard (reused component, player highlight, stable non-jittering by id for same score, DOM readback `totalScore === hitScore + 3×kills`) → minimap (**shared view does not see through**: `sharedViewCanSee` shown only if any surviving unit on own team sees it, last known position fades out 0.7s, glass does not block line of sight; independence of two view parameter sets for `ai.*` and `minimap.*` locked by tests) → hit/hit feedback (vignette + direction arc `damageBearing` + headshot/body hitmarker + floating 20/50, **subscribes only to D04 event bus**) → settlement layer and restart (reused leaderboard, hides all in-match chrome, restart leaves no residue) → director mode F2 + debug panel F3/`` ` `` → reduced-motion 与 no-WebGL fallback（`?nogl=1` 永不白屏、比赛照常；云在 reduced-motion 下"停运动不删元素"）→ favicon/theme-color/apple-touch-icon（内联 SVG data-URI，`#`→`%23`).
 
-从 **H01** 起投。任务书位于 `test-prompts/neon-bastion/`，按 `INDEX.md` 字母序。
-每任务完成定义：`npm run build` 退出码 0 + 新增测试全绿 + 既有测试不回归 + 单独 commit + 每条新断言做一次负对照。
-**负对照流程提醒**：先改代码 → 跑 `npm run build` 并确认 `built in`（否则 E2E 测的是旧 `dist/`）→ 跑目标测试确认变红 → 还原 → 重新 build。
+**New engineering habits added in Section G (reusable)**:
+- **Negative controls must confirm build success before running E2E** — both instances of "control group all green" illusion in this round stemmed from `tsc --noEmit` failing due to unused local, leaving `dist/` as old build; `npm run build`'s exit code is a hard gate (same source as OPS-12).
+- **Assertions should read "visible things"**: debug panel state assertions initially read `data-state` attributes, passing even with hardcoded display text; changed to read visible `<span>`'s textContent and added non-uniform assertion "5 is dead and not all rows identical" before truly bearing weight. Similarly, G02's invariant assertion was always true when "all scores are 0", so used `addScore` to create non-zero values before asserting.
+- **Reusing components affects existing assertions**: after settlement layer reused `Scoreboard`, G02's "exactly 1 `.nb-scoreboard`" changed to "exactly 1 `.nb-root > .nb-scoreboard` (in-match)".
+
+## Current Status
+
+**Sections A–G all completed (35/55).** Critical path A→B→C→D→E→F long since established: logic layer can run full AI-vs-AI matches and **every match terminates**; application shell connects Match to browser (fixed tick / screen state / input / test hooks); renderer draws arena from mapData; death spectating, HUD, real-time leaderboard, minimap (shared view), hit/hit feedback, settlement and restart, director mode and debug panel, reduced-motion and no-WebGL fallback, favicon all in place. **The game is now a "playable minimal loop + complete UI"**, only missing art (H), humanoid and weapon holding (I), effects (J), audio (K), and evidence and delivery (L–M).
+
+## Differences from Previous Round (qwen 55-task)
+
+- Different deployment/model (this round uses `ds-v4-flash-vision`), no external orchestration script; executor is this agent.
+- Upon resumption, context can be reconstructed via devlog Recall, no need to rely on previous `notes/neon-bastion-55task-rerun-2026-09-07.md`.
+
+## Resumption Point
+
+Start from **H01**. Task specifications located in `test-prompts/neon-bastion/`, in alphabetical order per `INDEX.md`.
+Definition of done per task: `npm run build` exit code 0 + all new tests green + no regression in existing tests + separate commit + one negative control for each new assertion.
+**Negative control process reminder**: first modify code → run `npm run build` and confirm `built in` (otherwise E2E tests old `dist/`) → run target test to confirm it turns red → revert → rebuild.

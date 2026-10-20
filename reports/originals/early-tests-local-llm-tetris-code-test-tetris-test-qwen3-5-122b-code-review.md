@@ -1,14 +1,33 @@
 # Code Review — Round 1
 
-**总体评价：** 选型出色（Vue 3 + TypeScript + Composition API），架构清晰，加分项覆盖最全。能运行，但有一个导致旋转失效的关键 bug。
+[English](early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review.md) | [简体中文](early-tests-local-llm-tetris-code-test-tetris-test-qwen3-5-122b-code-review_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+**Overall Evaluation:** Excellent selection (Vue 3 + TypeScript + Composition API), clear architecture, and the most comprehensive coverage of bonus items. It runs, but contains one critical bug that causes the rotation to fail.
 
 ---
 
-## 🚨 Bug 1：旋转失效——引用相等判断永远找不到当前状态
+## 🚨 Bug 1: Rotation Failure — Reference Equality Check Never Finds Current State
 
-**问题描述：**
+**Problem Description:**
 
-`src/types/pieces.ts` 第 152 行：
+`src/types/pieces.ts` Line 152:
 
 ```ts
 const currentShapeIndex = shapes.findIndex(
@@ -16,11 +35,11 @@ const currentShapeIndex = shapes.findIndex(
 )
 ```
 
-`tetromino.shape` 在经过任何对象扩展（`{ ...tetromino, shape: ... }`）后就是新数组，与 `TETROMINO_SHAPES` 里的原始数组引用不同。`findIndex` 返回 `-1`，导致 `nextShapeIndex = (-1 + 1) % shapes.length = 0`，永远回到状态 0，旋转无法循环。
+`tetromino.shape` is a new array after any object extension (`{ ...tetromino, shape: ... }`), which differs from the original array reference in `TETROMINO_SHAPES`. `findIndex` returns `-1`, causing `nextShapeIndex = (-1 + 1) % shapes.length = 0`, always reverting to state 0, so rotation cannot cycle.
 
-**修复方案：**
+**Fix:**
 
-在 `Tetromino` 类型上增加 `rotationIndex: number` 字段，直接追踪当前旋转状态：
+Add a `rotationIndex: number` field to the `Tetromino` type to directly track the current rotation state:
 
 ```ts
 // src/types/index.ts — 在 Tetromino 接口加一个字段
@@ -41,27 +60,27 @@ export const rotateTetromino = (tetromino: Tetromino): Tetromino => {
 return { type, shape: shapes[0], color, rotationIndex: 0 }
 ```
 
-**修复状态：** ✅ 已修复
+**Fix Status:** ✅ Fixed
 
-修复位置：
-- `src/types/index.ts` — 在 `Tetromino` 接口添加 `rotationIndex: number` 字段
-- `src/types/pieces.ts` — `rotateTetromino` 函数改用 `rotationIndex` 追踪状态
-- `src/types/pieces.ts` — `getRandomTetromino` 初始化 `rotationIndex: 0`
-- `src/utils/gameLogic.ts` — `generatePieceBag` 初始化 `rotationIndex: 0`
-- `src/App.vue` — `hold` 函数中创建 Hold 方块时初始化 `rotationIndex: 0`
+Fix locations:
+- `src/types/index.ts` — Added `rotationIndex: number` field to the `Tetromino` interface
+- `src/types/pieces.ts` — `rotateTetromino` function now uses `rotationIndex` to track state
+- `src/types/pieces.ts` — `getRandomTetromino` initializes `rotationIndex: 0`
+- `src/utils/gameLogic.ts` — `generatePieceBag` initializes `rotationIndex: 0`
+- `src/App.vue` — Initializes `rotationIndex: 0` when creating the Hold piece in the `hold` function
 
 ---
 
-## ✅ 做得好的部分
+## ✅ Well-Executed Parts
 
-- Vue 3 Composition API + TypeScript 全覆盖 ✓
-- 碰撞检测逻辑正确 ✓
-- 消行逻辑正确（含 `row++` 防止跳行）✓
-- Ghost piece / Hard drop 逻辑正确 ✓
-- 7-Bag 随机器（Fisher-Yates）✓
-- Hold 暂存机制 ✓
-- 分数/等级/速度系统 ✓
-- 移动端触控支持 ✓
-- 响应式布局 ✓
-- 本地最高分（localStorage）✓
-- 预定义旋转状态表（非矩阵运算，更精确）✓
+- Vue 3 Composition API + TypeScript full coverage ✓
+- Collision detection logic is correct ✓
+- Line clearing logic is correct (including `row++` to prevent line skipping) ✓
+- Ghost piece / Hard drop logic is correct ✓
+- 7-Bag randomizer (Fisher-Yates) ✓
+- Hold mechanism ✓
+- Score/rank/speed system ✓
+- Mobile touch support ✓
+- Responsive layout ✓
+- Local high score (localStorage) ✓
+- Predefined rotation state table (not matrix operations, more precise) ✓

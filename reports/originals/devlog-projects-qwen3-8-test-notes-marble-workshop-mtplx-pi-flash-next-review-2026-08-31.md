@@ -1,13 +1,32 @@
 ---
 type: Note
-title: Marble Workshop — MTPLX/Pi Flash Next independent acceptance and code review
+title: "Marble Workshop — MTPLX/Pi Flash Next independent acceptance and code review"
 status: current
-description: Independent review of the MTPLX + Pi qwen3.8-flash-next-optimized-speed Marble Workshop delivery; its interaction, presentation, build and 10 checks pass, but surrogate tray scoring means it does not fully satisfy the real-physics result requirement.
+description: "Independent review of the MTPLX + Pi qwen3.8-flash-next-optimized-speed Marble Workshop delivery; its interaction, presentation, build and 10 checks pass, but surrogate tray scoring means it does not fully satisfy the real-physics result requirement."
 tags: [qwen3.8, flash-next, mtplx, pi, threejs, cannon-es, code-review, frontend]
 timestamp: 2026-08-31T20:57:57Z
 ---
 
 # Marble Workshop — MTPLX/Pi Flash Next independent acceptance and code review
+
+[English](devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31.md) | [简体中文](devlog-projects-qwen3-8-test-notes-marble-workshop-mtplx-pi-flash-next-review-2026-08-31_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
 
 ## Scope and evidence handling
 
@@ -65,7 +84,7 @@ This rubric follows the fixed-score, P1-gated approach used for the earlier Orbi
 | Browser suite | Pass | `npm run test:e2e` exited 0: 6 Chromium checks in 47.7 s (boot/HUD, drop/score, pause/resume, reset, obstacle drag, camera/time scale). |
 | Live page / art direction | Pass | User-supplied Chrome tab rendered a glass-contained, lit physical workshop, rails, hoops, collector field, bright bin reactions and restrained control panel--not a video, GIF, or generic dashboard substitute. |
 | Fresh automatic demo | Pass, caveat | Reload showed `AUTO DEMO`, countdown `9.3s`, `DROP #1 x=-1.20`, orbit camera and a live in-play marble. The scheduled 0.2--9.9 s script establishes the intended 10-second tour. |
-| Required controls and HUD | Pass | Live DOM exposed 投放, 暂停, 重置, time/camera controls, obstacle palette, dropped, in-play, total score, FPS, and five per-colour counters. |
+| Required controls and HUD | Pass | Live DOM exposed Drop, Pause, Reset, time/camera controls, obstacle palette, dropped, in-play, total score, FPS, and five per-colour counters. |
 | Console cleanliness | Needs cleanup | No blocking exception; Chrome logged two `UnrealBloomPass` sigma clipping warnings and one deprecated `PCFSoftShadowMap` warning on a fresh load. |
 
 ## Code review
@@ -74,23 +93,23 @@ This rubric follows the fixed-score, P1-gated approach used for the earlier Orbi
 
 Only the initial `binAt(pos)` branch (`src/sim/world.js:239-244`) proves that the marble entered a real bin volume. The later loose-tray branch maps any untracked marble below y=3.4, after it has travelled sufficiently far, to either a synthetic y=1.6 bin test **or the nearest bin** (`src/sim/world.js:263-272`). The final watchdog maps slow, long-travel, or 14-second marbles directly to `nearestBin` (`src/sim/world.js:284-289`). `src/game.js:287-315` deliberately treats both `collect` and `settle` identically for score, HUD, toast, tray light and celebration.
 
-This is observable in the project's own `scripts/trace.mjs`: 3 of 24 lane results are `settle`, yet the suite reports every marble as collected. The physics regression codifies the loophole by accepting `/^(collect|settle)/` in `scripts/physics-drain.test.mjs:131-132`. A stranded or escaped-in-the-tray marble must remain visibly unresolved (or be returned through real physical geometry), not be assigned points based on proximity. Change the automatic recovery to a physical return chute/teleporter visibly marked as such, or report it as a failure with no score; then make the default lane and crowd tests require a sensor `collect` event only. Tracked as MW-01（历史本机文件，未随本报告发布）.
+This is observable in the project's own `scripts/trace.mjs`: 3 of 24 lane results are `settle`, yet the suite reports every marble as collected. The physics regression codifies the loophole by accepting `/^(collect|settle)/` in `scripts/physics-drain.test.mjs:131-132`. A stranded or escaped-in-the-tray marble must remain visibly unresolved (or be returned through real physical geometry), not be assigned points based on proximity. Change the automatic recovery to a physical return chute/teleporter visibly marked as such, or report it as a failure with no score; then make the default lane and crowd tests require a sensor `collect` event only. Tracked as MW-01 (historical local file, not released with this report).
 
 ### P2 — the first-run demo drops outside the manual launcher lane
 
-Manual drops use `course.spawn.xRange`, which is `[-11.3, -9.9]` (`src/game.js:115-126`, `src/sim/course.js:342`). Every scheduled demo drop instead supplies x from -1.5 to 1.4 (`src/demo.js:9-23`). The live fresh-page evidence confirms `DROP #1 x=-1.20`. These balls still begin at the top y coordinate but bypass the actual spout/intake corridor, so the demo does not reliably demonstrate the required slope/hoop/fan/spring sequence. Generate demo x values from the documented spawn range and add a test that each demo drop registers the `run` and `finale` route pieces before it can score. Tracked as MW-02（历史本机文件，未随本报告发布）.
+Manual drops use `course.spawn.xRange`, which is `[-11.3, -9.9]` (`src/game.js:115-126`, `src/sim/course.js:342`). Every scheduled demo drop instead supplies x from -1.5 to 1.4 (`src/demo.js:9-23`). The live fresh-page evidence confirms `DROP #1 x=-1.20`. These balls still begin at the top y coordinate but bypass the actual spout/intake corridor, so the demo does not reliably demonstrate the required slope/hoop/fan/spring sequence. Generate demo x values from the documented spawn range and add a test that each demo drop registers the `run` and `finale` route pieces before it can score. Tracked as MW-02 (historical local file, not released with this report).
 
 ### P2 — advertised Q/E obstacle rotation has no handler
 
-The HUD says `Q/E 旋转` (`src/ui/hud.js`, rendered in the live DOM), but the complete keyboard dispatcher in `src/main.js:219-246` has no `q` or `e` case and `world.js` exposes no obstacle-rotation operation. Either implement safe rotation (including collider and visual quaternion updates) or remove the instruction. Tracked as MW-03（历史本机文件，未随本报告发布）.
+The HUD displays `Q/E 旋转` (`src/ui/hud.js`, rendered in the live DOM), but the complete keyboard dispatcher in `src/main.js:219-246` contains no `q` or `e` case, and `world.js` exposes no obstacle-rotation operation. Either implement safe rotation (including collider and visual quaternion updates) or remove the instruction. Tracked as MW-03 (historical local file, not distributed with this report).
 
 ### P2 — fresh page logs avoidable Three warnings
 
-`PCFSoftShadowMap` at `src/view/scene.js:22-23` is deprecated by the installed Three version. `UnrealBloomPass` at `src/view/scene.js:94-99` emits two sigma-sample clipping warnings with its current parameters. Neither blocks the task, but a clean verification baseline matters for a visual benchmark. Use the non-deprecated shadow-map choice and tune/cap the bloom kernel for the installed Three release. Tracked as MW-04（历史本机文件，未随本报告发布）.
+`PCFSoftShadowMap` at `src/view/scene.js:22-23` is deprecated by the installed Three version. `UnrealBloomPass` at `src/view/scene.js:94-99` emits two sigma-sample clipping warnings with its current parameters. Neither blocks the task, but a clean verification baseline matters for a visual benchmark. Use the non-deprecated shadow-map choice and tune/cap the bloom kernel for the installed Three release. Tracked as MW-04 (historical local file, not released with this report).
 
 ### P2 — no static lint gate
 
-`package.json` has build, physics, browser and combined verify scripts, but no `lint` script or linter dependency. The source is readable and modular, but reproducible review should include at least a configured static lint command. Tracked as MW-05（历史本机文件，未随本报告发布）.
+`package.json` has build, physics, browser and combined verify scripts, but no `lint` script or linter dependency. The source is readable and modular, but reproducible review should include at least a configured static lint command. Tracked as MW-05 (historical local file, not released with this report).
 
 ## Positive findings
 

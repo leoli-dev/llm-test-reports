@@ -1,54 +1,73 @@
 ---
 type: Note
-title: MTPLX Flash-Next 128K 持续高上下文压力测试计划
+title: "MTPLX Flash-Next 128K Sustained High-Context Stress Test Plan"
 status: current
-description: 用 Pi 驱动 MTPLX Desktop 的 Qwen3.8 Flash-Next，在 thinking=medium 下分离测量冷暖缓存 prefill、长上下文 decode、MTP 接受率与持续负载退化。
+description: "Drive MTPLX Desktop's Qwen3.8 Flash-Next with Pi to separately measure cold and warm cache prefill, long-context decode, MTP acceptance rate, and sustained load degradation under thinking=medium."
 tags: [qwen3.8, flash-next, mtplx, pi, benchmark, prefill, decode, mtp, long-context]
 timestamp: 2026-09-19T17:01:06Z
 ---
 
-# MTPLX Flash-Next 128K 持续高上下文压力测试计划
+# MTPLX Flash-Next 128K Sustained High-Context Stress Test Plan
 
-## 目标
+[English](devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19.md) | [简体中文](devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-plan-2026-09-19_CN.md)
 
-在同一模型、同一推理级别、同一 Desktop 服务配置下回答四个问题：
+<!-- environment-context:start -->
 
-1. 从 8K 增长到 120K 时，冷 prefill 的 TTFT 与 tok/s 如何变化？
-2. 8K、64K、112K 上下文下，持续 decode 的 tok/s 如何衰减？
-3. MTPLX 的 RAM/SSD prefix cache 能把相同 112K prompt 的暖 prefill 提升多少？
-4. 连续 45–60 分钟高上下文请求后，是否出现热降频、内存/Swap 增长、MTP 接受率下降、错误或输出截断？
+## Workstation and system (context added 2026-10-20)
 
-本测试测的是运行时吞吐和稳定性，不评价 coding 质量，也不把 Dashboard 主表盘读数当作 decode。后者曾被证实实际对应端到端 `request_tok_s`，见 OPS-20（历史本机文件，未随本报告发布）。
-
-## 固定配置（测试契约）
-
-| 层 | 固定值 |
+| Item | Record and evidence boundary |
 |---|---|
-| 服务方式 | MTPLX Desktop；不使用 MTPLX CLI server |
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+## Objectives
+
+Answer four questions under the same model, same reasoning level, and same Desktop service configuration:
+
+1. How do TTFT and tok/s for cold prefill change as context grows from 8K to 120K?
+2. How does sustained decode tok/s degrade at 8K, 64K, and 112K contexts?
+3. How much can MTPLX's RAM/SSD prefix cache improve warm prefill for the same 112K prompt?
+4. After 45–60 minutes of continuous high-context requests, do thermal throttling, memory/Swap growth, MTP acceptance rate drops, errors, or output truncation occur?
+
+This test measures runtime throughput and stability; it does not evaluate coding quality, nor does it treat Dashboard main gauge readings as decode. The latter has been proven to actually correspond to end-to-end `request_tok_s`, see OPS-20 (historical local file, not published with this report).
+
+## Fixed Configuration (Test Contract)
+
+| Layer | Fixed Value |
+|---|---|
+| Service Mode | MTPLX Desktop; MTPLX CLI server not used |
 | Endpoint | `http://127.0.0.1:8001/v1` |
-| 模型 | `mtplx/mtplx-flash-next-optimized-speed` |
+| Model | `mtplx/mtplx-flash-next-optimized-speed` |
 | Context window | 131,072 tokens |
 | Pi max output | 8,192 tokens |
-| Thinking | **medium**：MTPLX `reasoning_effort=medium`；Pi 全局和该模型覆盖均为 `medium` |
-| Generation | MTP；MTP head on |
-| Profile | Auto（Desktop 对 Flash-Next 选择 Turbo） |
-| KV quantization | Off；Flash-Next 当前没有已验证的量化 KV lane |
+| Thinking | **medium**: MTPLX `reasoning_effort=medium`; Pi global and model-specific overrides are both `medium` |
+| Generation | MTP; MTP head on |
+| Profile | Auto (Desktop selects Turbo for Flash-Next) |
+| KV quantization | Off; Flash-Next currently has no verified quantized KV lane |
 | Swap | MTPLX `allow_swap=false` |
-| MTP cohorts | Off，保持 solo MTP |
-| Pi 工具与会话 | 吞吐测试关闭 tools/skills/extensions/context files，并使用 `--no-session` |
+| MTP cohorts | Off, maintaining solo MTP |
+| Pi tools and sessions | Tools/skills/extensions/context files disabled for throughput tests, and `--no-session` used |
 
-配置证据：`~/Library/Application Support/MTPLX/settings.json`、`~/.pi/agent/settings.json`、`~/.pi/agent/models.json`。执行前和执行后都保存一次只含上述非敏感字段的快照；如果任一项变化，该批结果不得与前一批直接合并。
+Configuration evidence: `~/Library/Application Support/MTPLX/settings.json`, `~/.pi/agent/settings.json`, `~/.pi/agent/models.json`. Save a snapshot containing only the above non-sensitive fields both before and after execution; if any item changes, the results of that batch must not be directly merged with the previous batch.
 
-## 测试语料
+## Test Corpus
 
-生成器按目标 token 数产生确定性但每轮唯一的混合语料：约 45% TypeScript/日志、30% JSON、25% 中英文技术文本。每个 block 有唯一编号和校验值，在约 5%、50%、95% 位置插入 `MARK_A/B/C`。
+The generator produces deterministic but per-round unique mixed corpora based on target token counts: approximately 45% TypeScript/logs, 30% JSON, 25% Chinese and English technical text. Each block has a unique ID and checksum, with `MARK_A/B/C` inserted at approximately 5%, 50%, and 95% positions.
 
-- **冷缓存组**：每轮使用全新 seed，首个 block 起就不同，防止大段 prefix 命中。
-- **暖缓存组**：同一个 prompt 字节级完全相同地重复三次。
-- 名义尺寸只用于生成；统计一律采用 MTPLX `/metrics` 返回的实际 `prompt_tokens`、`cached_tokens`。
-- 三个 marker 必须全部返回，否则该轮标记为 truncation/retrieval failure，速度数据保留但不得记为正确完成。
+- **Cold cache group**: Each round uses a fresh seed, differing from the first block onwards to prevent large prefix hits.
+- **Warm cache group**: The same prompt is repeated three times, byte-for-byte identical.
+- Nominal sizes are used only for generation; statistics always use the actual `prompt_tokens` and `cached_tokens` returned by MTPLX `/metrics`.
+- All three markers must be returned; otherwise, the round is marked as truncation/retrieval failure. Speed data is retained but must not be recorded as a correct completion.
 
-统一头部：
+Unified header:
 
 ```text
 [MTPLX-BENCHMARK-V2]
@@ -65,16 +84,16 @@ BEGIN_CORPUS
 END_CORPUS
 ```
 
-### Prefill 尾部
+### Prefill Tail
 
 ```text
 仅输出一行，不解释：
 PREFILL_OK|{{RUN_ID}}|{{MARK_A}}|{{MARK_B}}|{{MARK_C}}
 ```
 
-输出很短，主要读取服务端 `prefill_tok_s` 与 `ttft_s`。由于固定使用 medium thinking，不能假设模型绝无 reasoning token；必须记录实际 completion tokens。
+Output is short, primarily reading server-side `prefill_tok_s` and `ttft_s`. Since medium thinking is fixed, one cannot assume the model has no reasoning tokens; actual completion tokens must be recorded.
 
-### Decode structured 尾部
+### Decode Structured Tail
 
 ```text
 先输出：
@@ -87,18 +106,18 @@ D0001|alpha beta gamma delta epsilon zeta eta theta
 最后输出 END|{{RUN_ID}}|D0512。
 ```
 
-这是低熵、MTP 容易预测的 decode 上限探针。行数在预热轮按实际 token 数微调，使完整输出接近 4K；极限轮允许命中 8,192 上限，但必须记录 `finish_reason`。
+This is a low-entropy decode upper-bound probe that MTP can easily predict. The line count is fine-tuned in the warm-up round according to the actual token count, so that the complete output approaches 4K; the extreme round allows hitting the 8,192 limit, but `finish_reason` must be recorded.
 
-### Decode natural 尾部
+### Decode natural tail
 
 ```text
 根据语料写一份中文技术审计报告：至少 12 节，每节引用 8 个不同记录编号；
 覆盖正确性、性能、可靠性和异常模式；不得重复段落；目标约 4,000 token。
 ```
 
-这是较高熵的实际写作负载。结构化与自然文本不得混成一个平均值，因为 MTP 接受率会随可预测性显著变化。
+This is a higher-entropy actual writing workload. Structured and natural text must not be mixed into a single average, because the MTP acceptance rate varies significantly with predictability.
 
-## Pi 调用基线
+## Pi invocation baseline
 
 ```bash
 pi \
@@ -114,94 +133,94 @@ pi \
   -p @prompt-file.txt
 ```
 
-命令显式写 `--thinking medium`，即使 Pi 默认配置已经是 medium，也防止未来默认值变化污染复跑。
+The command explicitly writes `--thinking medium`, even if the Pi default configuration is already medium, to prevent future changes to the default value from polluting re-runs.
 
-## 测试矩阵
+## Test matrix
 
-### 0. 连通性与预热（不计入统计）
+### 0. Connectivity and warm-up (not counted in statistics)
 
-- 8K input + 约 512 output，连续 2 次。
-- 验证模型、端口、131K 容量、medium thinking、MTP、marker 和 metrics collector。
-- 只有两轮都成功才进入正式测试。
+- 8K input + approx. 512 output, 2 consecutive runs.
+- Verify model, port, 131K capacity, medium thinking, MTP, marker, and metrics collector.
+- Proceed to formal testing only if both rounds succeed.
 
-### 1. 冷 prefill 曲线
+### 1. Cold prefill curve
 
-| 实际 input 目标 | 输出 | 重复 |
+| Actual input target | Output | Repetitions |
 |---:|---:|---:|
-| 8K | marker 单行 | 3 个全新 seed |
-| 32K | marker 单行 | 3 个全新 seed |
-| 64K | marker 单行 | 3 个全新 seed |
-| 96K | marker 单行 | 3 个全新 seed |
-| 120K | marker 单行 | 3 个全新 seed |
+| 8K | marker single line | 3 fresh seeds |
+| 32K | marker single line | 3 fresh seeds |
+| 64K | marker single line | 3 fresh seeds |
+| 96K | marker single line | 3 fresh seeds |
+| 120K | marker single line | 3 fresh seeds |
 
-报告 `/metrics.prefill_tok_s`、TTFT 与 cached ratio。另拟合 `TTFT = 固定开销 + uncached_tokens / prefill_rate`，避免把 Pi 启动和 HTTP 固定延迟算进 prefill。
+Report `/metrics.prefill_tok_s`, TTFT, and cached ratio. Additionally, fit `TTFT = 固定开销 + uncached_tokens / prefill_rate` to avoid counting Pi startup and HTTP fixed latency into prefill.
 
-### 2. 长上下文 decode 曲线
+### 2. Long-context decode curve
 
-| 模式 | input | 目标 output | 重复 |
+| Mode | Input | Target output | Repetitions |
 |---|---:|---:|---:|
-| structured | 8K / 64K / 112K | 约 4K | 每档 3 |
-| natural | 64K / 112K | 约 4K | 每档 3 |
-| structured extreme | 112K | 接近 8K 上限 | 2 |
+| structured | 8K / 64K / 112K | approx. 4K | 3 per tier |
+| natural | 64K / 112K | approx. 4K | 3 per tier |
+| structured extreme | 112K | close to 8K limit | 2 |
 
-112K + 8K 为 120K，给 Pi system prompt、模板与 token 估算误差留下约 11K 余量。decode 只用首个输出 delta 到最后一个 delta 的时间；TTFT 不计入 decode。
+112K + 8K is 120K, leaving approx. 11K margin for Pi system prompt, template, and token estimation error. Decode uses only the time from the first output delta to the last delta; TTFT is not counted in decode.
 
-### 3. 暖缓存 A/B
+### 3. Warm cache A/B
 
-- 固定一个已通过校验的 `112K + marker 单行` prompt，字节级重复 3 次。
-- 与三个全新 seed 的 112K 冷请求对比。
-- 报告 `cached_tokens / prompt_tokens`、TTFT、prefill tok/s 和 wall time。
-- 不手工清空 RAM/SSD cache；冷组靠唯一语料实现，暖组靠完全相同语料实现。若冷组仍有大比例 cached tokens，按实测值重新分类，不能强称“冷”。
+- Fix a validated `112K + marker 单行` prompt, repeated byte-for-byte 3 times.
+- Compare with 112K cold requests using three fresh seeds.
+- Report `cached_tokens / prompt_tokens`, TTFT, prefill tok/s, and wall time.
+- Do not manually clear RAM/SSD cache; the cold group is achieved via unique corpus, and the warm group via identical corpus. If the cold group still has a large proportion of cached tokens, reclassify based on measured values; do not forcibly label it as "cold".
 
-### 4. 持续高上下文 soak
+### 4. Sustained high-context soak
 
-- 主测试：并发 1，`112K + 约 4K natural`，全新 seed，无间隔连续运行 45–60 分钟。
-- 每第 5 轮插入一次固定 8K structured 基准，用于观察温度/调度导致的短上下文速度漂移。
-- 主测试完成后才做可选排队测试：并发 2，`96K + 约 4K`，15 分钟。当前 MTP cohorts 为 Off，因此并发 2 的结果主要反映排队/调度，不与单请求 decode 基准混合。
+- Main test: concurrency 1, `112K + 约 4K natural`, fresh seeds, continuous run for 45–60 minutes without intervals.
+- Insert a fixed 8K structured benchmark every 5th round to observe short-context speed drift caused by temperature/scheduling.
+- Perform the optional queuing test only after the main test is complete: concurrency 2, `96K + 约 4K`, 15 minutes. Current MTP cohorts are Off, so the results for concurrency 2 mainly reflect queuing/scheduling and are not mixed with single-request decode benchmarks.
 
-## 采集与指标
+## Collection and metrics
 
-正式跑批前先启动 collector。MTPLX `/metrics` 的 `recent` 只有滚动窗口；未持续去重采集会永久丢请求，见 OPS-21（历史本机文件，未随本报告发布）。
+Start the collector before the formal batch run. MTPLX `/metrics`'s `recent` has only a rolling window; without continuous deduplicated collection, requests will be permanently lost, see OPS-21 (historical local file, not published with this report).
 
-每个 `request_id` 至少保存：
+Save at least the following for each `request_id`:
 
-- `prompt_tokens`、`cached_tokens`、`completion_tokens`
-- `prefill_tok_s`、`decode_tok_s`、`request_tok_s`、`ttft_s`
-- MTP 各深度接受率、mean accept length/可用的 speculation 字段
-- `finish_reason`、stop origin、请求 max tokens、错误信息
-- Pi JSON 流的请求开始、首个 reasoning/text delta、最后一个 delta、结束时间
-- marker 校验、structured 行数/END 标志
-- MTPLX 内存、macOS memory pressure、Swap 增量、服务重启/拒绝次数
+- `prompt_tokens`, `cached_tokens`, `completion_tokens`
+- `prefill_tok_s`, `decode_tok_s`, `request_tok_s`, `ttft_s`
+- MTP acceptance rates at each depth, mean accept length / available speculation fields
+- `finish_reason`, stop origin, request max tokens, error messages
+- Pi JSON stream request start, first reasoning/text delta, last delta, end time
+- marker validation, structured line count / END flag
+- MTPLX memory, macOS memory pressure, Swap increment, service restart / rejection count
 
-主口径：
+Primary metrics:
 
-- Prefill：MTPLX `prefill_tok_s`；同时给出冷组 TTFT 斜率拟合。
-- Decode：MTPLX `decode_tok_s`；用 Pi delta 时间交叉计算 `(completion_tokens - 1) / (last_delta - first_delta)`。
-- End-to-end：单列 `request_tok_s`，不得标成 decode。
-- 汇总：median、P10、P90、标准差/变异系数；soak 另比较前 5 轮与末 5 轮。
+- Prefill: MTPLX `prefill_tok_s`; also provide cold group TTFT slope fit.
+- Decode: MTPLX `decode_tok_s`; cross-calculate `(completion_tokens - 1) / (last_delta - first_delta)` using Pi delta times.
+- End-to-end: separate column for `request_tok_s`, must not be labeled as decode.
+- Aggregation: median, P10, P90, standard deviation / coefficient of variation; for soak, additionally compare the first 5 rounds with the last 5 rounds.
 
-## 停止条件
+## Stop Conditions
 
-出现以下任一情况立即停止后续高压轮次并保留现场：
+Immediately stop subsequent high-pressure rounds and preserve the scene if any of the following occurs:
 
-- MTPLX 服务退出、OOM、连续请求拒绝或 Pi 卡在 `already in flight`。
-- macOS memory pressure 持续红色，或 Swap 连续增长且不回落。
-- marker 缺失/错位连续 2 次，说明上下文正确性已失守。
-- TTFT 连续 3 次超过同档前序中位数 3 倍。
-- decode 连续 3 次低于最初 5 个有效样本中位数的 60%。
-- 输出出现持续重复、乱码、非预期提前 EOS，或 112K + 8K 发生 context rejection。
+- MTPLX service exit, OOM, consecutive request rejections, or Pi stuck in `already in flight`.
+- macOS memory pressure remains red, or Swap grows continuously without dropping.
+- Missing/misaligned markers for 2 consecutive times, indicating context correctness has failed.
+- TTFT exceeds the median of the previous same-tier by 3 times for 3 consecutive times.
+- Decode falls below 60% of the median of the first 5 valid samples for 3 consecutive times.
+- Output exhibits persistent repetition, garbled text, unexpected early EOS, or context rejection occurs at 112K + 8K.
 
-## 输出物
+## Deliverables
 
-1. 原始 `metrics.jsonl`、Pi timestamped JSONL、机器状态采样与配置快照。
-2. 冷 prefill 曲线、长上下文 decode 曲线、冷/暖缓存 A/B、soak 时间序列。
-3. structured 与 natural 两套 decode 结果，不合并为一个“总 TPS”。
-4. 一页结论：安全持续负载、112K 下稳定 decode、120K 冷 prefill、缓存收益、60 分钟衰减、失败/截断率。
+1. Raw `metrics.jsonl`, Pi timestamped JSONL, machine state sampling, and configuration snapshot.
+2. Cold prefill curve, long-context decode curve, cold/warm cache A/B, soak time series.
+3. Two sets of decode results for structured and natural, not merged into a single "total TPS".
+4. One-page conclusion: safe sustained load, stable decode at 112K, cold prefill at 120K, cache benefits, 60-minute decay, failure/truncation rate.
 
-## 当前状态
+## Current Status
 
-首轮已于 2026-09-20（Asia/Shanghai）部分执行：完成两轮 warm-up、8K→120K 冷 prefill（每档 3 次），并采集到短 marker 回复的浅层 decode。冷 prefill median 从 8K 的 1,411.4 tok/s 降至 120K 的 704.9 tok/s（约下降 50.1%）；这不是计划要求的持续 decode 衰减曲线。
+The first round was partially executed on 2026-09-20 (Asia/Shanghai): completed two rounds of warm-up, 8K→120K cold prefill (3 times per tier), and collected shallow decode for short marker responses. Cold prefill median decreased from 1,411.4 tok/s at 8K to 704.9 tok/s at 120K (approximately a 50.1% decrease); this is not the sustained decode decay curve required by the plan.
 
-首个结构化长 decode 触及 8,192-token 上限且不完整；随后 MTPLX 连续两次返回 HTTP 507 memory_refusal（预计 96.2 GiB，高于 96.0 GiB 引擎上限），因此按安全条件终止。配置前后未变；64K/112K sustained decode、natural decode、cache A/B 与 45–60 分钟 soak 均未执行。
+The first structured long decode hit the 8,192-token limit and was incomplete; subsequently, MTPLX returned HTTP 507 memory_refusal twice consecutively (estimated 96.2 GiB, exceeding the 96.0 GiB engine limit), so it was terminated according to safety conditions. Configuration remained unchanged before and after; 64K/112K sustained decode, natural decode, cache A/B, and 45–60 minute soak were not executed.
 
-详见[首轮执行记录](devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20.md)与运行报告（历史本机文件，未随本报告发布）。harness 已修正为按 warm-up 校准结构化输出长度，并在首次 507 时立即停止；当前 run 不重试。BENCH-06 仍进行中，待内存余量恢复后再续；若改运行时配置，应另开批次。
+See [First Round Execution Record](devlog-projects-qwen3-8-test-notes-mtplx-flash-next-128k-pressure-test-run-2026-09-20.md) and run report (historical local file, not published with this report) for details. The harness has been corrected to calibrate structured output length based on warm-up and to stop immediately upon the first 507; the current run will not be retried. BENCH-06 is still in progress, to be resumed after memory headroom recovers; if runtime configuration is changed, a separate batch should be opened.

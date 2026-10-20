@@ -1,43 +1,62 @@
 ---
 type: Note
-title: LLM bandwidth showcase — Round 1 review
+title: "LLM bandwidth showcase — Round 1 review"
 status: current
-description: Independent first-round review found three P1 correctness issues in the oQ4e-mtp delivery: a blank Canvas animation, invalid offload speed figures, and a no-op context control.
+description: "Independent first-round review found three P1 correctness issues in the oQ4e-mtp delivery: a blank Canvas animation, invalid offload speed figures, and a no-op context control."
 tags: [qwen3.8, oq4e, mtp, review, frontend, canvas, correctness]
 timestamp: 2026-08-23T01:32:10Z
 ---
 
 # LLM bandwidth showcase — Round 1 review
 
+[English](devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review.md) | [简体中文](devlog-projects-qwen3-8-test-notes-llm-bandwidth-showcase-round-1-review_CN.md)
+
+<!-- environment-context:start -->
+
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
 ## Verdict
 
-**Request Changes.** 页面静态结构、数据与文案的分离良好，JS 语法和本地页面加载均通过；但三项 P1 问题使核心教学结论不可靠或缺少功能。
+**Request Changes.** The separation of the page's static structure, data, and copy is well done, and both the JS syntax and local page loading pass; however, three P1 issues render the core pedagogical conclusions unreliable or lacking in functionality.
 
 ## Findings
 
-### FE-03 — Canvas 动画首次加载为空白（P1）
+### FE-03 — Canvas animation initially loads as blank (P1)
 
-独立浏览器检查 `http://localhost:8000/`：Canvas 具备正确的 CSS/位图尺寸（1066×380 CSS px，2132×760 backing store），但动画区域没有任何已绘制内容。
+Independent browser inspection `http://localhost:8000/`: The Canvas has the correct CSS/bitmap dimensions (1066×380 CSS px, 2132×760 backing store), but the animation area contains no drawn content.
 
-根因是 `animation.js:22` 把 `state.running` 初始设为 `true`，而初始化时 `animation.js:481` 调 `api.start()`；`start()` 在 `animation.js:459-462` 只在 `!state.running` 时创建 `requestAnimationFrame`。因此首次页面加载永远不会启动 `loop()`，也不会调用 `draw()`。
+The root cause is that `animation.js:22` initializes `state.running` to `true`, while during initialization `animation.js:481` calls `api.start()`; `start()` in `animation.js:459-462` only creates `requestAnimationFrame` when `!state.running`. Consequently, the initial page load never starts `loop()`, nor does it call `draw()`.
 
-修复：初始设为 `running: false`，或让 `start()` 在没有已排队 RAF 时启动循环。修复后需在真实浏览器验证：首屏有绘制、暂停/继续正常、`prefers-reduced-motion` 仍只显示静态帧。
+Fix: Initialize to `running: false`, or have `start()` start the loop when no RAF is queued. After the fix, verification in a real browser is required: the first screen must show drawing, pause/resume must work correctly, and `prefers-reduced-motion` must still display only static frames.
 
-### FE-04 — 容量不足仍显示本地带宽 tok/s（P1）
+### FE-04 — Local bandwidth tok/s displayed despite insufficient capacity (P1)
 
-`calc.js:36-41` 无论 `fits` 与否都会计算本地内存带宽的理想/教学 tok/s，`app.js:153-164` 与 `app.js:238-240` 继续把数值展示为 verdict 卡和横向速度柱。以 RTX 4090 + 70B FP16 为例，UI 会同时说“装不下”与给出看似有效的 tok/s。
+`calc.js:36-41` calculates the ideal/educational tok/s for local memory bandwidth regardless of whether `fits` is true or false, and `app.js:153-164` and `app.js:238-240` continue to display the value as a verdict card and horizontal speed bar. For example, with RTX 4090 + 70B FP16, the UI simultaneously states "does not fit" and provides a seemingly valid tok/s.
 
-这与页面和 README 中“offload 不计算精确速度”的约束矛盾。容量不足时应显示“不适用”，并在 chart 最大值与排序中排除该速度；可保留 offload 警示和解释，但不能将本地带宽公式作为其运行速度。
+This contradicts the constraint in the page and README that "offload does not calculate precise speed." When capacity is insufficient, "N/A" should be displayed, and this speed should be excluded from the chart's maximum value and sorting; the offload warning and explanation may be retained, but the local bandwidth formula cannot be used as its operating speed.
 
-### UX-03 — 上下文长度滑杆没有任何模型效应（P1）
+### UX-03 — Context length slider has no effect on any model (P1)
 
-`app.js:123-127` 只更新 `state.ctx` 并触发重绘；`calc.js:101` 仅把 `ctxTokens` 原样返回，未参与容量判断、KV cache 示意、结论或动画。用户改变 256→128k 只会变化控件文本。
+`app.js:123-127` only updates `state.ctx` and triggers a redraw; `calc.js:101` merely returns `ctxTokens` as-is, without participating in capacity determination, KV cache illustration, conclusions, or animation. When a user changes 256→128k, only the control text changes.
 
-修复方向二选一：删除控件并把 KV cache 解释留在“别误解”中；或加入明确标注为教学估计的 KV cache 预算，使它影响可用内存、容量结论和可解释文本。
+Two options for the fix direction: either remove the control and leave the KV cache explanation in "Don't Misunderstand"; or add a KV cache budget explicitly labeled as an educational estimate, so that it affects available memory, capacity conclusions, and explainable text.
 
 ## What passed
 
-- `data.js`、`calc.js`、`animation.js`、`app.js` 均通过 `node --check`。
-- 页面本地加载不依赖外部运行时资源；外部 URL 只作为用户点击的数据来源链接。
-- 数据的 `source` 字段渲染链接使用 `rel="noopener"`。
+- `data.js`, `calc.js`, `animation.js`, and `app.js` all pass `node --check`.
+- Local page loading does not depend on external runtime resources; external URLs serve only as data source links for user clicks.
+- The rendering of links for the `source` field of the data uses `rel="noopener"`.
 

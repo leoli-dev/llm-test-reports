@@ -1,41 +1,60 @@
 ---
 type: Note
-title: Neon Bastion — Round 6 评审：从「可玩」到「像个游戏」的十项任务
+title: "Neon Bastion — Round 6 review: ten tasks from playable to game-like"
 status: current
-description: 人工游玩确认 AI-01 达成设计意图后的新一轮需求：角色人形化与行走动画、第一/第三人称武器、贴图细化、弹道加粗与血液/火花、BGM 强度、favicon；含 THREE.Line 无法加粗的根因判定与命中体一致性约束。
+description: "New requirements after human play confirms AI-01's intent: humanoid characters/walking, first-/third-person weapons, textures, thicker trails, blood/sparks, BGM and favicon; THREE.Line width root cause and hitbox consistency constraints."
 tags: [neon-bastion, qwen3.8-27b, mlx-dspark, pi, code-review, game-art]
 timestamp: 2026-09-03T12:00:00Z
 ---
 
-# Neon Bastion — Round 6 评审
+# Neon Bastion — Round 6 review
 
-## 起点：AI-01 通过了它唯一无法自动验证的验收
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-round-6-review-2026-09-03_CN.md)
 
-Round 5 留下四项「只有事件层/像素层证据、需实机确认」的开口，其中最贵、也最无法用测试证明的是 AI-01：
+<!-- environment-context:start -->
 
-> AI-01 是本轮耗时最多、代码改动最复杂的一项（`aiController.ts` +360 行），但它的价值完全取决于玩家能否感知到「这个 AI 在迂回」。单测只能证明 flanker 选的节点离队友重心更远，证明不了这件事在屏幕上成立。
+## Workstation and system (context added 2026-10-20)
 
-用户人工游玩后的原话：**「AI智能好了很多，虽然偶尔卡墙角，但更想个人了，会躲会偷袭，非常棒！」**
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-「会躲会偷袭」正是 flanker doctrine 的设计意图，「更像个人」正是人格差异化的意图。**该项验收成立**，2h56m 的投入与那次根因介入被证明是值得的。附带一个新缺陷：偶尔卡墙角（记为 BUG-03）——与 AI-01 中修的「停滞处理器越界」同域，但显然未完全消除。
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-本轮需求全部来自这次游玩，性质从「能不能玩」转为「像不像一个游戏」。
+<!-- environment-context:end -->
 
-## 一处根因判定：弹道加粗不是调参数
+## Starting point: AI-01 passes the one acceptance check that cannot be automated
 
-用户反馈「弹道效果还是不够明显，太细太小了」。
+Round 5 leaves four items with only event/pixel evidence requiring real play. AI-01 is the most expensive and least amenable to automated proof:
 
-当前曳光与弹丸拖尾都是 `THREE.Line` + `LineBasicMaterial`（`renderer.ts:573`、`:591`）。**WebGL 在几乎所有平台上忽略 `linewidth`，永远按 1 像素栅格化**——这是 Three.js 文档明确记载的限制，不是本项目的实现问题。
+> AI-01 takes the most time and most complex changes (`aiController.ts` +360 lines), but its value depends entirely on players perceiving flanking. Unit tests establish that flanker nodes are farther from teammate centroid, not that the behavior is evident on screen.
 
-因此：**把 `linewidth` 调大、把 `bulletTrail` 调长、把 opacity 调高，都不会让弹道变粗一个像素。** 必须更换几何类型——朝向弹道方向的圆柱体，或始终面向相机的 billboard 面片（quad strip）。这一点必须写进任务，否则模型极可能先去调参数，验证不出差异后再来回试探（Round 4 的 AI-01 就是这样烧掉近 3 小时）。
+The user's play feedback: **AI is much smarter; it sometimes sticks in corners, but feels more human, takes cover and ambushes—excellent.**
 
-这与 Round 4 的亮度问题同属一类：**用户反复反馈的症状，根因往往不在参数层。** 差别是亮度那次需要先建立可测量口径才能发现，这次是一条已知的平台限制，查文档即可确认。
+Taking cover and ambushing is precisely flanker doctrine's intent; feeling more human is personality differentiation's intent. **Acceptance is established**, supporting the 2h56m investment and root-cause intervention. A new defect remains: occasional corner sticking, BUG-03, in the same area as AI-01's out-of-bounds stagnation handler and evidently not fully eliminated.
 
-## 一条贯穿全轮的约束：视觉不得与命中体脱节
+All requirements this round come from that playthrough, shifting from whether it is playable to whether it feels like a game.
 
-用户要求角色人形化（头、身、手、脚 + 行走迈步）。当前角色是两个盒子：`BoxGeometry(0.8, 1.0, 0.8)` 身体 + `BoxGeometry(0.44, 0.4, 0.44)` 头（`renderer.ts:545-547`）。
+## Root cause: thicker trajectories require more than parameter tuning
 
-而命中判定用的是另一套几何（`units/units.ts`）：
+The user reports trajectories remain too thin, small and hard to see.
+
+Current tracers/projectile trails use `THREE.Line` + `LineBasicMaterial` (`renderer.ts:573`, `:591`). **WebGL ignores `linewidth` on nearly all platforms and rasterizes at 1 pixel**, a documented Three.js platform limitation rather than this project's implementation bug.
+
+**Increasing `linewidth`, extending `bulletTrail` or raising opacity cannot add a pixel of width.** Replace geometry with cylinders aligned to trajectories or camera-facing billboard quad strips. State this explicitly, or the model will likely tune parameters and repeatedly try again when no difference appears, as Round 4 AI-01 consumed nearly 3 hours.
+
+This resembles Round 4 brightness: **repeatedly reported symptoms often originate outside parameter tuning.** Brightness required a measurement definition to uncover the cause; line width is a known platform limitation that documentation can confirm.
+
+## Cross-round constraint: visuals must remain aligned with hitboxes
+
+The user requests humanoids with heads, torsos, arms, legs and walking. Current characters are two boxes: `BoxGeometry(0.8, 1.0, 0.8)` body + `BoxGeometry(0.44, 0.4, 0.44)` head (`renderer.ts:545-547`).
+
+Hit detection uses different geometry (`units/units.ts`):
 
 ```
 body AABB   0.84 × 0.84 × 1.42   (从脚起)
@@ -43,45 +62,45 @@ head sphere 中心 y=1.6，半径 0.27  (即 y 1.33..1.87)
 eyeHeight   1.62
 ```
 
-**当前盒子与命中体本来就不完全重合**（身体盒 1.0 高 vs AABB 1.42 高），只是纯色方块看不出来。一旦改成有轮廓的人形，玩家会本能地瞄准可见的手臂、腿、肩膀——如果这些部位在命中体之外，就会出现「明明打中了却不掉血」，这比方块难看得多。
+**Current boxes already differ from hitboxes**: body height 1.0 versus AABB height 1.42, hidden by flat blocks. With recognizable humanoid outlines, players aim at visible arms, legs and shoulders. If those lie outside hitboxes, apparently successful hits cause no damage, which is worse than crude boxes.
 
-因此本轮所有角色相关任务都带同一条硬约束：**躯干与头部必须充满并贴合命中体；四肢可以存在，但不得明显伸出 AABB 之外**。若确实需要更符合人体比例的造型，正确做法是同步修改 `CONFIG` 的命中体尺寸并更新对应单测，**不允许只改视觉**。
+Every character task therefore requires **torso/head to fill and fit the hitboxes; limbs may exist but must not extend noticeably beyond the AABB**. If human proportions require different geometry, update `CONFIG` hitbox dimensions and corresponding unit tests together. **Visual-only changes are prohibited.**
 
-## 任务拆解
+## Task decomposition
 
-十个任务，`~/Code/qwen3.8-tests/neon-bastion-tasks-r6/task-{1..10}.md`，按依赖顺序逐个交付、逐个提交。
+Ten tasks in `~/Code/qwen3.8-tests/neon-bastion-tasks-r6/task-{1..10}.md`, delivered and committed independently in dependency order.
 
-| # | ID | 任务 | 依赖 |
+| # | ID | Task | Dependencies |
 |---|---|---|---|
-| 1 | FX-04 | 弹道改为可见宽度的几何体（换掉 `THREE.Line`） | — |
-| 2 | FX-05 | 命中角色出血、命中墙地出火花 | — |
-| 3 | ART-08 | 角色人形化：头/躯干/双臂/双腿，贴合命中体 | — |
-| 4 | ART-09 | 行走动画：四肢随移动前后迈步 | 3 |
-| 5 | ART-10 | 第三人称手持武器，开火时举枪 | 3 |
-| 6 | ART-11 | 第一人称视角武器模型（画面右下） | 5 |
-| 7 | ART-12 | 墙体贴图：树叶墙叶簇纹理、玻璃墙反光细节 | — |
-| 8 | ART-13 | 天空与地面贴图细化，云层更明显 | — |
-| 9 | AUD-03 | BGM 改为快节奏、有张力的战斗曲 | — |
+| 1 | FX-04 | Replace `THREE.Line` with visible-width trajectory geometry | — |
+| 2 | FX-05 | Blood on character hits; sparks on wall/ground hits | — |
+| 3 | ART-08 | Humanoid head/torso/arms/legs aligned with hitboxes | — |
+| 4 | ART-09 | Walking: limbs step with movement | 3 |
+| 5 | ART-10 | Third-person held weapon, raised when firing | 3 |
+| 6 | ART-11 | First-person weapon model in lower-right view | 5 |
+| 7 | ART-12 | Wall textures: leafy hedge clusters and reflective glass details | — |
+| 8 | ART-13 | Refine sky/ground textures and more visible clouds | — |
+| 9 | AUD-03 | Fast, tense combat BGM | — |
 | 10 | UI-03 | favicon | — |
 
-**为什么弹道与血液排在最前**：它们是纯增量、零依赖、且用户能立刻看到差别的两项。角色人形化会牵动截图基线与若干像素断言，放在其后可以避免前两项的验证被角色改动干扰。
+**Why trajectories and blood come first:** these are additive, dependency-free changes with immediately visible effects. Humanoids alter screenshot baselines/pixel assertions; putting them later isolates verification of the first two tasks.
 
-**为什么第一人称武器排在第三人称之后**：两者可以共用同一份武器几何的构造函数。先做第三人称能让武器造型在外部视角下被检验（截图可见），再复用到视角模型上。
+**Why first-person weapons follow third-person:** both can reuse the same weapon-geometry constructor. Third-person implementation first exposes the model to external-view screenshot checks before reuse in the view model.
 
-## 验收基线
+## Acceptance baseline
 
-沿用 Round 4：每个任务独立验收，`npx tsc --noEmit`、`npx vitest run`、`npx playwright test` 三项全绿后提交；**跑 E2E 前必须先 `npm run build`**（`playwright.config.ts` 的 `webServer` 是 `vite preview`，只伺服 `dist/` 不构建，否则可能对着旧产物全绿）。
+Continue Round 4's independent per-task acceptance: `npx tsc --noEmit`, `npx vitest run` and `npx playwright test` must all pass before committing. **Run `npm run build` before E2E**: `playwright.config.ts` uses `vite preview` as `webServer`, serving `dist/` without building, otherwise tests can all pass against old output.
 
-跨任务必须保持的不变量：
+Cross-task invariants:
 
-- 命中判定四条：墙体优先、头/身命中体、友军免伤、单发只计一次
-- seed 1..40 全场终止性回归
-- 同 seed → 同地图 → 同对局结果
-- ART-06 的五条亮度指标（`meanLuma ≥ 90`、`darkFrac ≤ 0.15`、直方图 ≥4 桶非空、`mean(R)−mean(B) ≤ 40`、队色可辨）**不得放宽**
-- 零外部素材：所有贴图程序化生成（Canvas / shader），不加载任何图片、模型、音频文件
+- Four hit rules: wall priority, head/body hitboxes, no friendly damage, one score per shot.
+- Full-match termination regression for seed 1..40.
+- Same seed → same map → same match result.
+- ART-06's five brightness criteria—`meanLuma ≥ 90`, `darkFrac ≤ 0.15`, at least 4 nonempty histogram bins, `mean(R)−mean(B) ≤ 40` and distinguishable team colors—**must not be relaxed**.
+- Zero external assets: all textures generated procedurally through Canvas/shaders; no image/model/audio files loaded.
 
-## 方法论续记
+## Methodology continuation
 
-R4 新增的「同一类问题被反馈第三次时，问题在验收条件的缺失」在本轮得到反向印证：**弹道太细只被反馈了一次，但根因同样不在参数层。** 区别在于亮度是连续量（需要建立口径才能判断「够不够」），而线宽是平台的二值限制（要么支持要么不支持）。
+Round 4's missing-acceptance-condition lesson is refined here: **thin trajectories are reported only once, but the cause is again outside parameters.** Brightness is continuous and needs a measurement definition to judge sufficiency; line width is a binary platform capability.
 
-**据此细化为**：收到「效果不明显 / 不够 X」这类反馈时，先判定该属性在当前技术路径上**是否可调**——若根本不可调（如 WebGL 线宽），任何验收标准都无意义，应直接更换实现路径；若可调，再建立可测量口径。**顺序是先判可行性，再定验收。**
+**Refined rule:** when feedback says an effect is insufficiently visible or not X enough, first establish whether the property is **adjustable on the current technical path**. If not, as with WebGL line width, replace the implementation path rather than defining an unusable acceptance test. If adjustable, establish measurable criteria. **Feasibility comes before acceptance criteria.**

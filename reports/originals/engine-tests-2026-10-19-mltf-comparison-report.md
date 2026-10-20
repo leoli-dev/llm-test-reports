@@ -1,134 +1,153 @@
-# MLTF 与 MLX-VLM：128K 图文长任务对照
+# MLTF versus MLX-VLM: 128K long multimodal-task comparison
 
-日期：2026-10-19（America/Toronto）。四个独立新进程按 VLM1 → MLTF1 → MLTF2 → VLM2 顺序运行；每个长请求后做短图片恢复，然后停止该测试服务。任一时刻只加载一个测试后端。
+[English](engine-tests-2026-10-19-mltf-comparison-report.md) | [简体中文](engine-tests-2026-10-19-mltf-comparison-report_CN.md)
 
-同一任务的请求字节复用既有 sampled VLM 请求：126,976 个处理后输入 tokens（含图片）+ 4,096 输出预算 = 131,072；temperature=1、top_p=0.95、top_k=20、thinking 关闭。两份不同图片 / 长任务各测一次每个后端；无 EOS 屏蔽、无重复筛选成功样本。每次启动后的主请求验证 cache matched tokens=0。
+<!-- environment-context:start -->
 
-**数值路径不同：MLTF 0.1.2 的 q8c 权重 / INT8 KV，与 MLX-VLM 0.7.8 的 affine 8bit 权重 / BF16 KV，并非等精度实验。这里比较整套运行路径，不能把差异单独归因于某个 kernel 或 KV 格式。**
+## Workstation and system (context added 2026-10-20)
 
-MLTF 使用独立环境和 8083 端口，128K、96 GiB Metal 预算、单活跃请求，SSD cache 关闭。target 复用当前 8bit 源；draft pinned revision 虽不同，但原始权重 SHA256 一致。视觉资产随官方模板打包，实际 image encode 与图片回答均另行验证。MLTF prefill 使用 W8A8、verify 使用 W8A16 / split2-rounded，不能认定输出质量与 VLM 等同。安装及资产校验见 setup-notes.md（历史本机文件，未随本报告发布）、model-verification.json（历史本机文件，未随本报告发布） 和 draft-source-comparison.json（历史本机文件，未随本报告发布）。生产主启动器和 qwen / pi / hermes 仍保留现有 VLM 配置。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | macOS 27.0.1 (26A434) |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-本次两份任务的共同客户端正文交付率均值：MLTF 58.06 tok/s，VLM 16.47 tok/s，约 3.53 倍。主请求总耗时均值从 554.02 秒变为 362.67 秒，减少 34.5%；首字等待均值分别为 MLTF 292.01 秒、VLM 303.95 秒。均值仅描述本次 n=2，不代表长期稳定性或等精度质量收益。
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-硬件快照（2026-10-19T17:10:02-04:00）：Apple M5 Max，128.00 GiB，18 个逻辑 CPU。操作系统 / 供电 / 热状态原文见 hardware.json（历史本机文件，未随本报告发布）；各运行另存 thermal-before/after。
+<!-- environment-context:end -->
 
-## 完成情况与共同客户端性能
+Date: 2026-10-19 (America/Toronto). Four independent fresh processes run VLM1 → MLTF1 → MLTF2 → VLM2. Each long request is followed by a short-image recovery probe, then its test service stops. Only one test backend is loaded at a time.
 
-“长 decode 通过”仅表示请求完成、输入预算核对、冷 cache 与至少 2,048 输出 tokens 等机械覆盖检查；图片识别、恢复探针单列。未执行生成的 Python 代码，不能据此认定代码功能正确。
+Requests reuse bytes from the existing sampled VLM workload: 126,976 processed input tokens including images + 4,096 output budget = 131,072. Settings: temperature=1, top_p=0.95, top_k=20, thinking off. Two different images/long tasks are each run once per backend, without EOS suppression or selectively retaining successful repetitions. Each fresh-process main request verifies cache matched tokens=0.
 
-| 运行 | 后端 / 任务 | 输入 / 输出 | 长 decode / 满4096 | 图片 / 恢复 | TTFT 秒 | 请求总秒 | 首末正文跨度秒 | 正文交付 tok/s | 输出 / 总秒 tok/s | 终止 |
+**Numerical paths differ: MLTF 0.1.2 q8c weights / INT8 KV versus MLX-VLM 0.7.8 affine 8bit weights / BF16 KV. This is not a same-precision experiment. Complete runtime paths are compared, so differences cannot be attributed solely to a kernel or KV format.**
+
+MLTF uses an isolated environment and port 8083, 128K, a 96 GiB Metal budget, one active request and disabled SSD cache. Target reuses the current 8bit source; draft pinned revisions differ but original-weight SHA256 is identical. Vision assets follow the official packaged template, with actual image encoding and recognition independently checked. MLTF prefill uses W8A8 and verify W8A16 / split2-rounded; answer quality cannot be assumed equal to VLM. Installation/assets: setup-notes.md (historical local file; not published with this report), model-verification.json (historical local file; not published with this report), draft-source-comparison.json (historical local file; not published with this report). The production launcher and qwen/pi/hermes retain existing VLM configurations.
+
+Across the two tasks, common-client mean body delivery is MLTF 58.06 tok/s versus VLM 16.47 tok/s, approximately 3.53 times. Mean main-request duration decreases from 554.02 to 362.67 seconds, a 34.5% reduction. Mean first-output wait is MLTF 292.01 seconds versus VLM 303.95 seconds. These means describe n=2 here, not long-term stability or same-precision quality gains.
+
+Hardware snapshot (2026-10-19T17:10:02-04:00): Apple M5 Max, 128.00 GiB, 18 logical CPUs. Original OS/power/thermal details are in hardware.json (historical local file; not published with this report); each run separately stores thermal-before/after.
+
+## Completion and common-client performance
+
+Long-decode pass means only request completion, input-budget verification, cold cache and at least 2,048 output tokens for mechanical coverage. Image recognition and recovery probes are separate. Generated Python code is not executed, so functional correctness is not established.
+
+| Run | Backend / task | Input / output | Long decode / full 4096 | Image / recovery | TTFT seconds | Total request seconds | First-to-last body span seconds | Body delivery tok/s | Output / total seconds tok/s | Finish |
 | --- | --- | ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| vlm-1 | mlx-vlm / 128k | 126976 / 4096 | 通过 / 通过 | 通过 / 通过 | 274.28 | 542.40 | 268.12 | 15.28 | 7.55 | length |
-| mltf-1 | mltf / 128k | 126976 / 4096 | 通过 / 通过 | 通过 / 通过 | 295.59 | 369.08 | 73.49 | 55.74 | 11.10 | length |
-| mltf-2 | mltf / 128k-repeat | 126976 / 4096 | 通过 / 通过 | 通过 / 通过 | 288.43 | 356.26 | 67.82 | 60.39 | 11.50 | length |
-| vlm-2 | mlx-vlm / 128k-repeat | 126976 / 4096 | 通过 / 通过 | 通过 / 通过 | 333.63 | 565.64 | 232.01 | 17.65 | 7.24 | length |
+| vlm-1 | mlx-vlm / 128k | 126976 / 4096 | Pass / Pass | Pass / Pass | 274.28 | 542.40 | 268.12 | 15.28 | 7.55 | length |
+| mltf-1 | mltf / 128k | 126976 / 4096 | Pass / Pass | Pass / Pass | 295.59 | 369.08 | 73.49 | 55.74 | 11.10 | length |
+| mltf-2 | mltf / 128k-repeat | 126976 / 4096 | Pass / Pass | Pass / Pass | 288.43 | 356.26 | 67.82 | 60.39 | 11.50 | length |
+| vlm-2 | mlx-vlm / 128k-repeat | 126976 / 4096 | Pass / Pass | Pass / Pass | 333.63 | 565.64 | 232.01 | 17.65 | 7.24 | length |
 
-TTFT 从客户端发出 HTTP 请求到收到第一段非空正文；总耗时到 SSE 结束。它们包含前端、模板、图片和首轮推理开销，更适合共同口径比较。正文交付率统一为全部 completion tokens / 首末非空正文跨度，包含已在首块交付的 tokens，略高于严格排除首块的 decode 率。正文 SSE 按推测块成批交付；首末正文跨度并非逐 token 延迟。
+Client TTFT runs from sending HTTP to the first nonempty body content; total duration runs to SSE completion. Both include frontend, template, image and initial-inference overhead, providing common definitions for comparison. Body delivery uniformly divides all completion tokens by first-to-last nonempty-body span, including tokens delivered in the first block; it slightly exceeds a decode rate strictly excluding that block. SSE delivers speculative batches, so that span is not per-token latency.
 
-| 后端 | 样本数 / 长 decode 通过 | TTFT 均值 [范围] 秒 | 总耗时均值 [范围] 秒 | 输出 / 总秒均值 [范围] tok/s |
+| Backend | Samples / long-decode passes | Mean TTFT [range] seconds | Mean total duration [range] seconds | Mean output / total seconds [range] tok/s |
 | --- | ---: | ---: | ---: | ---: |
 | mltf | 2 / 2 | 292.01 [288.43, 295.59] | 362.67 [356.26, 369.08] | 11.30 [11.10, 11.50] |
 | mlx-vlm | 2 / 2 | 303.95 [274.28, 333.63] | 554.02 [542.40, 565.64] | 7.40 [7.24, 7.55] |
 
-每个后端 n=2，仅给样本均值和范围，没有统计置信度。两种任务的请求 SHA256 配对核对如下；即使 API 设置相同，两套随机采样 / 数值路径也不保证输出相同。
+Each backend has n=2, with sample means/ranges only and no statistical confidence. Request SHA256 pairing follows; identical API settings do not guarantee identical outputs across stochastic sampling/numerical paths.
 
-- 128k：请求 SHA256 一致=True；MLTF/VLM 的 TTFT 比=1.078，总耗时比=0.680，输出/总秒比=1.470。
-- 128k-repeat：请求 SHA256 一致=True；MLTF/VLM 的 TTFT 比=0.865，总耗时比=0.630，输出/总秒比=1.588。
+- 128k: identical request SHA256=True; MLTF/VLM TTFT ratio=1.078, total-duration ratio=0.680, output/total-seconds ratio=1.470.
+- 128k-repeat: identical request SHA256=True; MLTF/VLM TTFT ratio=0.865, total-duration ratio=0.630, output/total-seconds ratio=1.588.
 
-## 后端计时（不同口径，分列保留）
+## Backend timing (different definitions retained separately)
 
-| 运行 | prompt 秒 | prompt tok/s | decode 秒 | decode tok/s | cache matched |
+| Run | prompt seconds | prompt tok/s | decode seconds | decode tok/s | cache matched |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | vlm-1 | 273.50 | 464.26 | 268.12 | 15.28 | 0 |
 | mltf-1 | 295.46 | 429.75 | 73.49 | 55.72 | 0 |
 | mltf-2 | 288.30 | 440.43 | 67.82 | 60.31 | 0 |
 | vlm-2 | 332.02 | 382.44 | 232.01 | 17.65 | 0 |
 
-VLM 使用主请求 `/metrics.latest.prompt_eval_time_s`、`prefill_tok_s`、`decode_elapsed_s`、`decode_tok_s`。MLTF terminal `prompt_ms` 是 native 开始至首个推测输出块，包含首轮输出；其 decode 时间为首 native 输出至结束，吞吐分子排除第一个推测块。不能把这两列 prompt 率直接解释为纯 prefill 加速。MLTF `/status.metrics` 是累计统计，没有拿来替代主请求计时。原始 terminal timings / metrics 全保存在 summary.json 和结果 JSON。
+VLM uses main-request `/metrics.latest.prompt_eval_time_s`, `prefill_tok_s`, `decode_elapsed_s` and `decode_tok_s`. MLTF terminal `prompt_ms` spans native start to the first speculative output block, including initial generation. Its decode runs from first native output to completion, excluding the first speculative block from throughput's numerator. These prompt-rate columns do not directly establish pure prefill acceleration. MLTF `/status.metrics` is cumulative and does not replace main-request timing. Original terminal timings/metrics remain in summary.json and result JSON.
 
-MLTF 另有 native batch / command wall 累计计时（`/status.metrics`，与生命周期计时分开）：
+MLTF separately records cumulative native batch/command wall timing (`/status.metrics`, distinct from lifecycle timing):
 
-| 运行 | prefill 输入 / wall 秒 / tok/s | decode 输出 / wall 秒 / tok/s |
+| Run | prefill input / wall seconds / tok/s | decode output / wall seconds / tok/s |
 | --- | ---: | ---: |
 | mltf-1 | 126976 / 294.39 / 431.32 | 4096 / 73.22 / 55.94 |
 | mltf-2 | 126976 / 288.01 / 440.88 | 4096 / 67.58 / 60.61 |
 
-上述 command 指标为进程累计值；快照在主请求完成、恢复探针前取得。主请求前计数保存在 summary.json，须核对为零后才能作为单次请求统计。它不包含相同的 HTTP / 排队开销，也不与 VLM prompt 计时组成“纯 GPU prefill”比例。
+These command metrics are process-cumulative; snapshots are taken after the main request and before recovery probes. Pre-request counts in summary.json must be verified zero before treating them as single-request statistics. They exclude the same HTTP/queue overhead and cannot form a pure-GPU-prefill ratio with VLM prompt timing.
 
-## 内存口径与分阶段资源
+## Memory definitions and resources by phase
 
-**不能用 MLTF 较低的 libproc RSS / footprint 相对 VLM 计算“总 RAM 节省百分比”。本次 native OS 计数与其 Metal allocator / 全局 GPU 驱动计数明显不同；文件映射、模型后备页和 Metal 分配的归属记账不同，OS 进程数值不是完整模型 GPU 驻留量。内存结论应同时查看以下各列，并保留这些口径差异。全局驱动计数还包含桌面和其他进程，不能全部归给本服务。**
+**Lower MLTF libproc RSS/footprint cannot establish a total-RAM-saving percentage versus VLM. Native OS counts differ substantially from Metal allocator/global GPU-driver counts. File mappings, model backing pages and Metal allocations have different attribution; OS process values do not represent full model GPU residency. Memory conclusions must consider all columns and retain their definition differences. Global driver counts also include the desktop/other processes and cannot all be assigned to this service.**
 
-| 运行：主请求期间峰值 GiB | engine RSS / footprint | MLX active / free-cache | MLTF allocation current | 全局 GPU in-use / allocated |
+| Run: main-request peak GiB | engine RSS / footprint | MLX active / free-cache | MLTF allocation current | Global GPU in-use / allocated |
 | --- | ---: | ---: | ---: | ---: |
-| vlm-1 | 32.18 / 71.40 | 50.01 / 24.26 | 未取得 | 73.30 / 82.34 |
-| mltf-1 | 0.99 / 6.35 | 未取得 / 未取得 | 34.86 | 32.75 / 46.29 |
-| mltf-2 | 0.99 / 6.34 | 未取得 / 未取得 | 34.86 | 32.80 / 46.44 |
-| vlm-2 | 24.15 / 72.07 | 50.01 / 24.94 | 未取得 | 73.59 / 82.95 |
+| vlm-1 | 32.18 / 71.40 | 50.01 / 24.26 | Unavailable | 73.30 / 82.34 |
+| mltf-1 | 0.99 / 6.35 | Unavailable / Unavailable | 34.86 | 32.75 / 46.29 |
+| mltf-2 | 0.99 / 6.34 | Unavailable / Unavailable | 34.86 | 32.80 / 46.44 |
+| vlm-2 | 24.15 / 72.07 | 50.01 / 24.94 | Unavailable | 73.59 / 82.95 |
 
-每列取本请求内各自峰值，未必同一时刻；这些统一内存计数互有重叠，不能相加或视为独立显存。MLTF memory_actual current 是分配追踪口径，VLM active/cache 是 MLX allocator 口径，也不能直接互换。
+Each column takes its own peak within the request, not necessarily simultaneous. Unified-memory counters overlap and must not be summed or treated as independent VRAM. MLTF memory_actual current tracks allocation, while VLM active/cache uses MLX allocator definitions; these are not interchangeable.
 
-共同阶段按客户端时钟划分：发请求→首非空正文（含 prefill、图片与首输出）；首正文→请求完成（正文交付）。请求起点优先按“首正文 Unix 时间−客户端单调时钟 TTFT”还原，避免把请求前 health/metrics 快照计入；回退方式保存在 summary.json。这不是 GPU kernel 的严格 phase 边界。每秒采样，峰值可能漏掉短尖峰。CPU 100%=一个逻辑核（本机18核）；system CPU 100%=所有核；GPU busy 是整机全局值。
+Common phases use client clocks: request → first nonempty body includes prefill, images and initial output; first body → completion is body delivery. Request start is preferentially reconstructed as first-body Unix time minus client monotonic TTFT, avoiding pre-request health/metrics snapshots; fallback methods are retained in summary.json. These are not strict GPU-kernel phase boundaries. One-second sampling may miss brief peaks. CPU 100%=one logical core (18 here); system CPU 100%=all cores; GPU busy is global.
 
-| 运行 / 阶段 | 样本 | engine CPU 均 / 峰 % | tree CPU 均 / 峰 % | system CPU 均 / 峰 % | 全局 GPU 均 / 峰 % | engine RSS / footprint 峰 GiB | 全局 GPU alloc / in-use 峰 GiB |
+| Run / phase | Samples | engine CPU mean / peak % | tree CPU mean / peak % | system CPU mean / peak % | Global GPU mean / peak % | engine RSS / footprint peak GiB | Global GPU alloc / in-use peak GiB |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| vlm-1 / 首正文前 | 274 | 5.07 / 115.65 | 5.07 / 115.65 | 7.27 / 36.10 | 99.65 / 100.00 | 32.18 / 58.25 | 68.74 / 59.57 |
-| vlm-1 / 正文交付 | 267 | 22.87 / 47.08 | 22.87 / 47.08 | 16.03 / 70.97 | 97.78 / 99.00 | 31.57 / 71.40 | 82.34 / 73.30 |
-| mltf-1 / 首正文前 | 295 | 0.35 / 21.04 | 0.91 / 50.98 | 3.61 / 10.08 | 99.47 / 100.00 | 0.99 / 6.34 | 46.18 / 32.75 |
-| mltf-1 / 正文交付 | 73 | 0.86 / 0.98 | 1.53 / 1.84 | 4.15 / 13.75 | 98.95 / 99.00 | 0.99 / 6.35 | 46.29 / 31.73 |
-| mltf-2 / 首正文前 | 287 | 0.35 / 26.46 | 0.89 / 29.72 | 3.71 / 20.03 | 99.47 / 100.00 | 0.99 / 6.19 | 46.25 / 32.01 |
-| mltf-2 / 正文交付 | 68 | 0.89 / 2.24 | 1.54 / 2.76 | 4.06 / 11.70 | 98.91 / 99.00 | 0.99 / 6.34 | 46.44 / 32.80 |
-| vlm-2 / 首正文前 | 332 | 4.23 / 99.12 | 4.23 / 99.12 | 4.75 / 66.33 | 99.50 / 100.00 | 24.15 / 57.76 | 68.26 / 58.89 |
-| vlm-2 / 正文交付 | 230 | 20.11 / 44.13 | 20.11 / 44.13 | 5.23 / 13.34 | 98.06 / 99.00 | 23.55 / 72.07 | 82.95 / 73.59 |
+| vlm-1 / Before first body | 274 | 5.07 / 115.65 | 5.07 / 115.65 | 7.27 / 36.10 | 99.65 / 100.00 | 32.18 / 58.25 | 68.74 / 59.57 |
+| vlm-1 / Body delivery | 267 | 22.87 / 47.08 | 22.87 / 47.08 | 16.03 / 70.97 | 97.78 / 99.00 | 31.57 / 71.40 | 82.34 / 73.30 |
+| mltf-1 / Before first body | 295 | 0.35 / 21.04 | 0.91 / 50.98 | 3.61 / 10.08 | 99.47 / 100.00 | 0.99 / 6.34 | 46.18 / 32.75 |
+| mltf-1 / Body delivery | 73 | 0.86 / 0.98 | 1.53 / 1.84 | 4.15 / 13.75 | 98.95 / 99.00 | 0.99 / 6.35 | 46.29 / 31.73 |
+| mltf-2 / Before first body | 287 | 0.35 / 26.46 | 0.89 / 29.72 | 3.71 / 20.03 | 99.47 / 100.00 | 0.99 / 6.19 | 46.25 / 32.01 |
+| mltf-2 / Body delivery | 68 | 0.89 / 2.24 | 1.54 / 2.76 | 4.06 / 11.70 | 98.91 / 99.00 | 0.99 / 6.34 | 46.44 / 32.80 |
+| vlm-2 / Before first body | 332 | 4.23 / 99.12 | 4.23 / 99.12 | 4.75 / 66.33 | 99.50 / 100.00 | 24.15 / 57.76 | 68.26 / 58.89 |
+| vlm-2 / Body delivery | 230 | 20.11 / 44.13 | 20.11 / 44.13 | 5.23 / 13.34 | 98.06 / 99.00 | 23.55 / 72.07 | 82.95 / 73.59 |
 
-MLTF engine 为 native splash 子进程；Python HTTP frontend 另计。VLM 为服务进程本身。RSS、physical footprint、allocator、全局驱动内存是重叠的统一内存观测，**不能相加，也不是独立显存**。进程树 RSS / footprint 求和还可能重复共享页。
+MLTF engine is the native splash subprocess, with Python HTTP frontend separate; VLM uses the service process itself. RSS, physical footprint, allocator and global driver memory overlap within unified memory: **do not sum them or treat them as separate VRAM**. Process-tree RSS/footprint sums can also double-count shared pages.
 
-| 运行 | engine PID / frontend PID | frontend footprint 峰 GiB | tree footprint 求和峰 GiB | MLX active / free-cache / 累计peak 峰 GiB | MLTF allocation current / 累计peak 峰 GiB |
+| Run | engine PID / frontend PID | Frontend footprint peak GiB | Summed tree-footprint peak GiB | MLX active / free-cache / cumulative peak GiB | MLTF allocation current / cumulative peak GiB |
 | --- | --- | ---: | ---: | ---: | ---: |
-| vlm-1 | [30691] / [] | 未取得 | 71.40 | 50.01 / 24.26 / 53.51 | 未取得 / 未取得 |
-| mltf-1 | [33626] / [33618] | 0.64 | 6.75 | 未取得 / 未取得 / 未取得 | 34.86 / 34.86 |
-| mltf-2 | [35543] / [35536] | 0.65 | 6.74 | 未取得 / 未取得 / 未取得 | 34.86 / 34.86 |
-| vlm-2 | [37330] / [] | 未取得 | 72.07 | 50.01 / 24.94 / 53.51 | 未取得 / 未取得 |
+| vlm-1 | [30691] / [] | Unavailable | 71.40 | 50.01 / 24.26 / 53.51 | Unavailable / Unavailable |
+| mltf-1 | [33626] / [33618] | 0.64 | 6.75 | Unavailable / Unavailable / Unavailable | 34.86 / 34.86 |
+| mltf-2 | [35543] / [35536] | 0.65 | 6.74 | Unavailable / Unavailable / Unavailable | 34.86 / 34.86 |
+| vlm-2 | [37330] / [] | Unavailable | 72.07 | 50.01 / 24.94 / 53.51 | Unavailable / Unavailable |
 
-MLX free-cache 是可复用 allocator cache，peak 为进程累计值；没有人为 reset。MLTF memory_actual 是 tracked dense+sparse resident 与缓存的 Metal allocation 取较大值，其 peak 同样累计；它不是 MLX active/cache。两者不同口径，空项表示该后端不提供。VLM allocator 按相同 PID、最近1.5秒内样本连接；MLTF 用 `/status` 1Hz，缓存 / stale 状态单独计数。
+MLX free-cache is reusable allocator cache; peak is process-cumulative without manual reset. MLTF memory_actual takes the greater of tracked dense+sparse resident and cached Metal allocation; its peak is also cumulative and is not MLX active/cache. Empty entries mean the backend does not provide that measurement. VLM allocator samples join by the same PID within the last 1.5 seconds; MLTF polls `/status` at 1Hz, separately counting cached/stale status.
 
-## 交付间隔、压力与结果边界
+## Delivery intervals, pressure and interpretation limits
 
-| 运行 | SSE 最大间隔秒 / >2s / >5s | 请求压力 normal / warn / critical | 请求 swap Δ GiB | 恢复后 swap Δ GiB | 遥测错误计数 | native stale / callback失败 |
+| Run | Maximum SSE interval seconds / >2s / >5s | Request pressure normal / warn / critical | Request swap Δ GiB | Post-recovery swap Δ GiB | Telemetry-error counts | native stale / callback failures |
 | --- | ---: | --- | ---: | ---: | --- | ---: |
 | vlm-1 | 2.70 / 1 / 0 | 541 / 0 / 0 | -0.02 | -0.02 | {} | 0 / 0 |
 | mltf-1 | 0.12 / 0 / 0 | 368 / 0 / 0 | 0.00 | 0.00 | {} | 1 / 0 |
 | mltf-2 | 0.11 / 0 / 0 | 355 / 0 / 0 | 0.00 | 0.00 | {} | 0 / 0 |
 | vlm-2 | 2.05 / 1 / 0 | 562 / 0 / 0 | -0.02 | -0.02 | {} | 0 / 0 |
 
-SSE 间隔衡量正文块交付停顿；DFlash / MLTF 推测块可能包含多个 tokens，不能当成精确逐 token 延迟。swap 是系统级，增量未必全由本服务造成。基线取请求开始前最近样本，结束取请求完成前最近样本，恢复后取该进程最后样本，具体偏移保存在 summary.json。启动期错误和请求期错误分别保留，native status_stale 不自动等于进程崩溃。
+SSE intervals measure pauses between body blocks. DFlash/MLTF speculative blocks can contain multiple tokens and are not exact per-token latency. Swap is system-wide and changes need not be entirely caused by the service. Baseline is the nearest sample before request start; end is the nearest before completion; post-recovery uses that process's last sample. Exact offsets are in summary.json. Startup/request errors remain separate, and native status_stale does not automatically mean a process crash.
 
-- **vlm-1**：正文 SSE 出现 >2s 交付间隔。请求错误：[]。
-- **mltf-1**：请求期间存在 native status 缓存快照。请求错误：[]。
-  MLTF 主请求前后 native 计数增量：image encodes=1，memory denied reservations=0，transport restarts=0，requests failed=0；结束时 ready=True、Metal healthy=True。
-  native 推测 / 图片计数核对：{'drafted_tokens': 5327, 'accepted_draft_tokens': 3335, 'images_encodes': 1, 'transport_restarts': 0}。
-- **mltf-2**：本次采样未触发资源 / 交付告警；仍仅是单次负载证据。请求错误：[]。
-  MLTF 主请求前后 native 计数增量：image encodes=1，memory denied reservations=0，transport restarts=0，requests failed=0；结束时 ready=True、Metal healthy=True。
-  native 推测 / 图片计数核对：{'drafted_tokens': 4977, 'accepted_draft_tokens': 3385, 'images_encodes': 1, 'transport_restarts': 0}。
-- **vlm-2**：正文 SSE 出现 >2s 交付间隔。请求错误：[]。
+- **vlm-1**: body SSE has a >2s delivery interval. Request errors: [].
+- **mltf-1**: native status includes a cached snapshot during the request. Request errors: [].
+  Main-request native counter changes: image encodes=1, memory denied reservations=0, transport restarts=0, requests failed=0; final ready=True, Metal healthy=True.
+  Native speculative/image counter check: {'drafted_tokens': 5327, 'accepted_draft_tokens': 3335, 'images_encodes': 1, 'transport_restarts': 0}.
+- **mltf-2**: this sample triggers no resource/delivery alerts, but remains single-workload evidence. Request errors: [].
+  Main-request native counter changes: image encodes=1, memory denied reservations=0, transport restarts=0, requests failed=0; final ready=True, Metal healthy=True.
+  Native speculative/image counter check: {'drafted_tokens': 4977, 'accepted_draft_tokens': 3385, 'images_encodes': 1, 'transport_restarts': 0}.
+- **vlm-2**: body SSE has a >2s delivery interval. Request errors: [].
 
-只要存在长输出覆盖失败、压力告警、swap 增加或遥测缺口，就应结合原始记录解释；服务存活不能代替输出质量和恢复检查。服务停止时 returncode=-15 通常来自本测试主动 SIGTERM，不能单凭它判为崩溃。
+Long-output coverage failures, pressure warnings, swap increases or telemetry gaps require interpretation against original records. A surviving service does not replace output-quality/recovery checks. Service returncode=-15 commonly comes from deliberate test SIGTERM and alone does not establish a crash.
 
-## 原始证据
+## Raw evidence
 
-测试方案（历史本机文件，未随本报告发布） · 运行清单（历史本机文件，未随本报告发布） · 机器快照（历史本机文件，未随本报告发布） · 汇总 JSON（历史本机文件，未随本报告发布） · 汇总 CSV（历史本机文件，未随本报告发布） · 逐秒 CSV（历史本机文件，未随本报告发布）
+Test plan (historical local file; not published with this report) · Run manifest (historical local file; not published with this report) · Machine snapshot (historical local file; not published with this report) · Summary JSON (historical local file; not published with this report) · Summary CSV (historical local file; not published with this report) · Per-second CSV (historical local file; not published with this report)
 
-- vlm-1：result（历史本机文件，未随本报告发布） · resources（历史本机文件，未随本报告发布） · allocator（历史本机文件，未随本报告发布） · request（历史本机文件，未随本报告发布） · stream（历史本机文件，未随本报告发布） · output（历史本机文件，未随本报告发布） · server_log（历史本机文件，未随本报告发布） · server_exit（历史本机文件，未随本报告发布）
-- mltf-1：result（历史本机文件，未随本报告发布） · resources（历史本机文件，未随本报告发布） · request（历史本机文件，未随本报告发布） · stream（历史本机文件，未随本报告发布） · output（历史本机文件，未随本报告发布） · server_log（历史本机文件，未随本报告发布） · server_exit（历史本机文件，未随本报告发布）
-- mltf-2：result（历史本机文件，未随本报告发布） · resources（历史本机文件，未随本报告发布） · request（历史本机文件，未随本报告发布） · stream（历史本机文件，未随本报告发布） · output（历史本机文件，未随本报告发布） · server_log（历史本机文件，未随本报告发布） · server_exit（历史本机文件，未随本报告发布）
-- vlm-2：result（历史本机文件，未随本报告发布） · resources（历史本机文件，未随本报告发布） · allocator（历史本机文件，未随本报告发布） · request（历史本机文件，未随本报告发布） · stream（历史本机文件，未随本报告发布） · output（历史本机文件，未随本报告发布） · server_log（历史本机文件，未随本报告发布） · server_exit（历史本机文件，未随本报告发布）
+- vlm-1：result (historical local file; not published with this report) · resources (historical local file; not published with this report) · allocator (historical local file; not published with this report) · request (historical local file; not published with this report) · stream (historical local file; not published with this report) · output (historical local file; not published with this report) · server_log (historical local file; not published with this report) · server_exit (historical local file; not published with this report)
+- mltf-1：result (historical local file; not published with this report) · resources (historical local file; not published with this report) · request (historical local file; not published with this report) · stream (historical local file; not published with this report) · output (historical local file; not published with this report) · server_log (historical local file; not published with this report) · server_exit (historical local file; not published with this report)
+- mltf-2：result (historical local file; not published with this report) · resources (historical local file; not published with this report) · request (historical local file; not published with this report) · stream (historical local file; not published with this report) · output (historical local file; not published with this report) · server_log (historical local file; not published with this report) · server_exit (historical local file; not published with this report)
+- vlm-2：result (historical local file; not published with this report) · resources (historical local file; not published with this report) · allocator (historical local file; not published with this report) · request (historical local file; not published with this report) · stream (historical local file; not published with this report) · output (historical local file; not published with this report) · server_log (historical local file; not published with this report) · server_exit (historical local file; not published with this report)
 
-既有 sampled VLM 数据仅为历史辅助：[此前稳定性报告](engine-tests-2026-10-19-vision-stability-report.md)。主表使用本次四个新进程，不把历史成功样本混入均值。
+Existing sampled VLM data is historical support only: [earlier stability report](engine-tests-2026-10-19-vision-stability-report.md). Main tables use this round's four fresh processes, without mixing historical successes into their means.
 
-![共同客户端性能](../../assets/figures/c62883453874-comparison-performance.png)
+![Common-client performance](../../assets/figures/c62883453874-comparison-performance.png)
 
-![逐秒资源曲线](../../assets/figures/10e7105a3dff-comparison-resources.png)
+![Per-second resource curves](../../assets/figures/10e7105a3dff-comparison-resources.png)
 
-![正文交付间隔曲线](../../assets/figures/c4eedf45df1d-comparison-delivery.png)
+![Body-delivery interval curves](../../assets/figures/c4eedf45df1d-comparison-delivery.png)
 
-清理状态见 cleanup-status.json（历史本机文件，未随本报告发布）。
+Cleanup state: cleanup-status.json (historical local file; not published with this report).

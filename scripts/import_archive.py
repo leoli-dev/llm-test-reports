@@ -8,7 +8,10 @@ from markdownify import markdownify
 import argparse, hashlib, json, re, shutil
 
 ap=argparse.ArgumentParser();ap.add_argument('--inventory',type=Path,required=True);args=ap.parse_args()
-ROOT=Path(__file__).resolve().parents[1];inventory=json.loads(args.inventory.read_text())
+ROOT=Path(__file__).resolve().parents[1]
+if (ROOT/'data/catalog_CN.json').exists():
+ raise SystemExit('This archive is bilingual. Reimport would overwrite maintained reports. Use scripts/add-report.mjs with an English/Chinese pair.')
+inventory=json.loads(args.inventory.read_text())
 Q=args.inventory.parent.parent;CODE=Q.parent;HOME=CODE.parent
 DEV=CODE/'project-devlog';OLD=CODE/'local_llm_testing';BENCH=HOME/'local_llms/mltf/records/history/benchmarks'
 PC=HOME/'Documents/Codex/2026-10-06/new-chat'

@@ -1,114 +1,133 @@
-# Qwen3.8-27B 128K / 256K 长上下文实测
+# Qwen3.8-27B 128K / 256K long-context measurements
 
-测试日期：2026-10-19（America/Toronto）。本报告由已完成的两次运行记录生成。
+[English](engine-tests-2026-10-19-long-context-report.md) | [简体中文](engine-tests-2026-10-19-long-context-report_CN.md)
 
-128K 正常完成；256K 也完成了生成，但 decode 阶段出现内存压力和显著换页，不能把完成请求解读为满窗口运行稳定。本次保留默认 KV 精度及原有缓存参数，没有为了跑完测试而切换量化或减少快照。
+<!-- environment-context:start -->
 
-## 配置与测试范围
+## Workstation and system (context added 2026-10-20)
 
-测试时文本服务、qwen CLI 和 pi 的对应 Qwen3.8-27B 条目设为 `262144` tokens（256K，原生总上下文上限）。因本次 256K 表现不佳，用户随后要求把文本服务、视觉服务及相关客户端默认值降回 `131072`（128K）；原始测试配置和结果保留。没有启用 YaRN 或修改 RoPE。日常默认输出上限仍为 `32768`，当前预留满额输出后的输入预算为 `98304` tokens（96K，含系统提示、工具和对话格式开销）。
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | macOS 27.0.1 (26A434) |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
 
-本次每个长度各运行一次：每项启动全新服务进程，模型加载完成后发起首次测量请求，以响应的 `cached_tokens=0` 核查冷前缀缓存。这里的冷缓存指没有复用 prompt / KV prefix；不代表清空 macOS 文件缓存或排除启动时的内核预热。
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
 
-工作负载为唯一的合成结构化记录，末尾是相同的 Python 最短路径代码任务（Dijkstra、路径重建、Bellman-Ford、类型标注和断言）。没有使用用户文档；两个长度不是相同输入字节，但代码任务一致。`temperature=0`、`enable_thinking=false`、输出预算 `512`，另外预留 `8` tokens 的推测解码块余量。
+<!-- environment-context:end -->
 
-控制台日志中的 `578262` sequence-length 警告来自离线构造源语料时的 tokenizer 调用；实际发送的请求已裁剪为精确的 `130552` / `261624` 输入 tokens，并与服务端 usage 核对。保存的测试程序已在源语料 tokenization 时按对应总预算截断，避免以后重复该警告；实际构造请求使用的前缀 token 序列没有改变。
+Test date: 2026-10-19 (America/Toronto). This report is generated from two completed run records.
 
-| 总上下文预算 | 精确输入 tokens | 输出预算 | 推测块余量 | 实际输出 tokens | 缓存命中 tokens | 检查结果 |
+128K completes normally. 256K also completes generation, but decode experiences memory pressure and substantial paging; request completion does not establish stable full-window operation. Default KV precision and existing cache settings are retained, without switching quantization or reducing snapshots to make the test finish.
+
+## Configuration and test scope
+
+During testing, the text service and corresponding Qwen3.8-27B entries in qwen CLI and pi use `262144` tokens (256K, the native total-context cap). Because 256K performs poorly here, the user subsequently requests text/vision services and related client defaults lowered to `131072` (128K). Original test configurations/results remain. YaRN is not enabled and RoPE is unchanged. The routine output cap remains `32768`; after reserving the full output allowance, the current input budget is `98304` tokens (96K, including system prompts, tools and conversation formatting).
+
+Each length is run once. A fresh service process is started for each condition, followed by the first measured request after loading; response `cached_tokens=0` verifies a cold prefix cache. Cold here means no prompt/KV-prefix reuse, not a cleared macOS file cache or absence of startup kernel warmup.
+
+The workload uses unique synthetic structured records, ending with the same Python shortest-path task: Dijkstra, path reconstruction, Bellman-Ford, type annotations and assertions. No user documents are used. Input bytes differ across lengths, but the coding task is the same. Settings are `temperature=0`, `enable_thinking=false`, output budget `512`, and another `8` tokens reserved for speculative-block headroom.
+
+The `578262` sequence-length warning in console logs comes from tokenizer calls during offline source-corpus construction. Actual requests are trimmed to exact input lengths of `130552` / `261624` tokens and checked against server usage. The saved test program now truncates source tokenization to each total budget to prevent repeating that warning; the prefix token sequences used to construct actual requests are unchanged.
+
+| Total context budget | Exact input tokens | Output budget | Speculative headroom | Actual output tokens | Cache-hit tokens | Check result |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| 128K（131,072） | 130,552 | 512 | 8 | 512 | 0 | 通过 |
-| 256K（262,144） | 261,624 | 512 | 8 | 515 | 0 | 完成，有内存压力 |
+| 128K（131,072） | 130,552 | 512 | 8 | 512 | 0 | Pass |
+| 256K（262,144） | 261,624 | 512 | 8 | 515 | 0 | Completed, with memory pressure |
 
-每项只有一个性能样本；这些结果描述这台机器、这次负载和当时的后台活动，不能用来声称稳定提速、统计置信度或真实任务质量。512-token 输出用于形成可测量的 decode 阶段，完整代码很可能触及输出上限。
+Each condition has only one performance sample. Results describe this machine, workload and contemporaneous background activity, rather than a stable speedup, statistical confidence or real-task quality. The 512-token output creates a measurable decode phase; complete code is likely to reach the output cap.
 
-## Prefill 与 decode
+## Prefill and decode
 
-| 预算 | Prefill 秒 | Prefill tok/s | Decode 秒 | Decode tok/s | TTFT 秒 | 每轮平均接受长度 | 草稿接受率 |
+| Budget | Prefill seconds | Prefill tok/s | Decode seconds | Decode tok/s | TTFT seconds | Mean acceptance length per round | Draft acceptance rate |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 128K | 279.40 | 467.30 | 22.13 | 23.10 | 279.40 | 3.63 | 70.61% |
 | 256K | 926.24 | 282.50 | 57.58 | 8.90 | 926.24 | 3.05 | 77.01% |
 
-速度与分段耗时来自 API 的 `x_mlx_dspark`；草稿接受率来自该全新进程的 `/rounds` 统计。TTFT 包含 prefill 及首 token 生成。
+Rates and phase durations come from API `x_mlx_dspark`; draft acceptance comes from `/rounds` statistics in each fresh process. TTFT includes prefill and first-token generation.
 
-## 分阶段 CPU / GPU
+## CPU / GPU by phase
 
-| 预算 | 阶段 | 样本数 | 进程 CPU 均值 / 峰值 % | 全机 CPU 均值 / 峰值 % | GPU busy 均值 / 峰值 % |
+| Budget | Phase | Samples | Process CPU mean / peak % | System CPU mean / peak % | GPU busy mean / peak % |
 | --- | --- | ---: | ---: | ---: | ---: |
 | 128K | prefill | 278 | 18.14 / 34.95 | 5.27 / 17.34 | 99.71 / 100.00 |
 | 128K | decode | 22 | 18.33 / 82.14 | 4.84 / 8.06 | 96.59 / 99.00 |
 | 256K | prefill | 921 | 10.53 / 75.07 | 4.15 / 23.90 | 99.81 / 100.00 |
 | 256K | decode | 56 | 22.76 / 99.03 | 9.49 / 22.92 | 73.73 / 100.00 |
 
-进程 CPU 的 100% 表示占满一个逻辑核；本机为 18 个逻辑核，理论合计约 1800%。全机 CPU 已归一到全部 CPU，100% 表示全机忙碌。GPU busy 为 IOAccelerator 的全局 `Device Utilization %`，包含其他应用和 WindowServer，不是此进程独占利用率；驱动没有说明该百分比的精确平均窗口。
+Process CPU 100% means one fully occupied logical core; this machine has 18 logical cores, for a theoretical approximately 1800% combined. System CPU is normalized across all CPUs, with 100% meaning the entire system is busy. GPU busy is global IOAccelerator `Device Utilization %`, including other apps and WindowServer rather than exclusive process utilization. The driver does not specify its exact averaging window.
 
-## 分阶段内存
+## Memory by phase
 
-以下全部为 GiB（2³⁰ bytes）；均为所列阶段采样峰值。
+All values below are GiB (2³⁰ bytes), using sampled peaks within each listed phase.
 
-| 预算 | 阶段 | 进程 RSS | 进程 physical footprint | MLX active | MLX allocator 累计峰值 | GPU 全局分配 | GPU 全局使用 |
+| Budget | Phase | Process RSS | Process physical footprint | MLX active | MLX allocator cumulative peak | Global GPU allocated | Global GPU used |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | 128K | prefill | 30.60 | 48.18 | 39.12 | 39.64 | 58.14 | 31.89 |
 | 128K | decode | 27.38 | 63.75 | 45.42 | 45.53 | 73.49 | 52.30 |
 | 256K | prefill | 30.67 | 65.58 | 61.33 | 61.42 | 75.20 | 50.77 |
 | 256K | decode | 27.45 | 96.37 | 62.55 | 62.56 | 106.24 | 58.76 |
 
-Apple silicon 使用统一内存。RSS、physical footprint、MLX allocator 和 GPU 驱动统计是存在重叠的不同口径，**不能相加**，也不能把 GPU 数值当作独立显存。RSS / footprint 仅覆盖服务 PID；GPU 分配/使用覆盖全机。MLX allocator 的 `peak_bytes` 是进程自加载以来的高水位，可能包含加载和预热，不能解释为该阶段新增内存。
+Apple silicon uses unified memory. RSS, physical footprint, MLX allocator and GPU-driver statistics overlap and **must not be added**, nor should GPU values be treated as separate VRAM. RSS/footprint cover only the service PID; GPU allocated/used values cover the system. MLX allocator `peak_bytes` is a high-water mark since process loading and may include loading/warmup; it is not additional memory allocated by that phase.
 
-## 内存压力、swap 与采集完整性
+## Memory pressure, swap and collection completeness
 
-| 预算 | Prefill guard 样本 | Decode guard 样本 | Swap 开始 / 结束 GiB | Swap 变化 GiB | Swap 采样峰值 GiB | 遥测错误 / JSON 行错误 |
+| Budget | Prefill guard samples | Decode guard samples | Swap start / end GiB | Swap change GiB | Sampled swap peak GiB | Telemetry errors / JSON-line errors |
 | --- | --- | --- | ---: | ---: | ---: | ---: |
 | 128K | normal × 278 | normal × 22 | 1.09 / 1.09 | 0.00 | 1.09 | 0 / 0 |
-| 256K | normal × 921 | normal × 27、warn × 29 | 1.09 / 13.40 | 12.31 | 13.40 | 0 / 0 |
+| 256K | normal × 921 | normal × 27, warn × 29 | 1.09 / 13.40 | 12.31 | 13.40 | 0 / 0 |
 
-128K：系统内存压力采样为 normal × 302；guard 起止为 `normal` → `normal`，sheds 为 `0` → `0`。采样总数 302；采集耗时均值 / 峰值 0.027 / 0.046 秒。
+128K: system memory-pressure samples are normal × 302; guard start/end is `normal` → `normal`, with sheds `0` → `0`. Total samples: 302. Mean/peak collection duration: 0.027 / 0.046 seconds.
 
-256K：系统内存压力采样为 normal × 947、warn × 31、critical × 1；guard 起止为 `normal` → `warn`，sheds 为 `0` → `0`。采样总数 979；采集耗时均值 / 峰值 0.033 / 1.925 秒。
+256K: system memory-pressure samples are normal × 947, warn × 31 and critical × 1; guard start/end is `normal` → `warn`, with sheds `0` → `0`. Total samples: 979. Mean/peak collection duration: 0.033 / 1.925 seconds.
 
-256K 的服务日志还记录了一次 `13.5s between rounds`；这次长停顿与 decode 阶段的压力和换页同时出现。峰值 GPU 全局分配约 106 GiB，但 MLX active 约 63 GiB；保留的 allocator cache 和系统其他内存也占空间，不能只凭 active 值判断是否会换页。如要常态使用接近满 256K 的输入，可另测 KV 8-bit 或更小的 allocator cache / prefix 快照开销；本次没有实测这些替代配置，也没有改动默认 KV 精度。
+The 256K service log also records `13.5s between rounds`, coinciding with decode pressure and paging. Global GPU allocation peaks near 106 GiB while MLX active is near 63 GiB; retained allocator cache and other system memory also occupy space, so active values alone cannot predict paging. Routine near-full 256K input could separately test KV 8-bit or smaller allocator-cache/prefix-snapshot overhead. Those alternatives are not measured here, and default KV precision is unchanged.
 
-## 采集方法与运行设置
+## Collection method and run settings
 
-资源约每秒采一次。进程累计 CPU 时间由 `proc_pid_rusage` 读取并按 Mach timebase 转为秒，CPU 百分比由相邻采样差值计算；全机 CPU 用 `host_statistics` 的 busy / total tick 差值。GPU 用无需 sudo 的 `ioreg -r -c IOAccelerator -a -l -d 1`，MLX / 系统内存和 memory guard 由 `/metrics` 读取。均值为有效采样值的算术平均，峰值为采样最大值；一秒采样可能漏掉短暂峰值。
+Resources are sampled approximately once per second. Cumulative process CPU time comes from `proc_pid_rusage`, converted to seconds with Mach timebase; CPU percentage uses adjacent-sample differences. System CPU uses `host_statistics` busy/total tick differences. GPU uses unprivileged `ioreg -r -c IOAccelerator -a -l -d 1`; MLX/system memory and memory guard come from `/metrics`. Means are arithmetic averages of valid samples and peaks are sampled maxima. One-second sampling can miss transient peaks.
 
-阶段边界为近似值：取首个 decode round 的观测时间，减去该 round 的 `ms / 1000` 估计 engine_start，再加 API 的 `prefill_seconds` 得到 prefill_end，继续加 `decode_seconds` 得到 decode_end。首轮 `ms` 包含 prefill；网络事件交付存在延迟，边界附近的一秒样本可能跨阶段。CPU 差分还覆盖前一采样区间。采集和 `/metrics` 轮询本身也有少量开销。
+Phase boundaries are approximate: the first decode-round observation time minus that round's `ms / 1000` estimates engine_start; adding API `prefill_seconds` gives prefill_end, then `decode_seconds` gives decode_end. First-round `ms` includes prefill. Network delivery has latency, so one-second samples near boundaries can cross phases. CPU differences also cover the preceding sampling interval. Collection and `/metrics` polling introduce small overhead.
 
-| 设置 | 记录 |
+| Setting | Record |
 | --- | --- |
-| 硬件 | Apple M5 Max，40 GPU 核，18 逻辑 CPU，128 GiB 统一内存 |
-| 解码模式 | `--mode auto`，DFlash2，`--max-draft auto` |
-| 服务总上下文 / 输出上限 | `262144` / `32768` |
-| Small-M | `--no-small-m`，已关闭 |
-| KV 精度 | health `kv_bits=0`；未主动启用 KV 量化 |
-| Prefix cache | rungs `32768` / slots `1`；每项新进程，未命中前缀 |
-| wired-limit | 未显式设置；没有更改系统 wired limit |
-| CPU 亲和性 | 没有设置进程 CPU 亲和性 |
+| Hardware | Apple M5 Max, 40 GPU cores, 18 logical CPUs, 128 GiB unified memory |
+| Decode mode | `--mode auto`, DFlash2, `--max-draft auto` |
+| Service total context / output cap | `262144` / `32768` |
+| Small-M | `--no-small-m`, disabled |
+| KV precision | health `kv_bits=0`; KV quantization not explicitly enabled |
+| Prefix cache | rungs `32768` / slots `1`; fresh process per condition, no prefix hit |
+| wired-limit | Not explicitly set; system wired limit unchanged |
+| CPU affinity | No process CPU affinity configured |
 | macOS | `27.0.1` |
-| 电源状态 | `AC Power`；充电中：`True` |
-| pmset 功耗设置 | `powermode` 原始值为 `0`；不推断该枚举的含义 |
+| Power state | `AC Power`; charging: `True` |
+| pmset power setting | Raw `powermode` value `0`; enum meaning not inferred |
 
-测试时 `8080` 由 agent-post 占用，因此测试使用 `127.0.0.1:18080`；日常脚本和客户端保留 `8080`。两项结果在各自 finally 清理并记录服务退出码后保存，测试服务在运行结束时已停止；此记录不代表日后端口状态。
+During testing, `8080` is occupied by agent-post, so tests use `127.0.0.1:18080`; routine scripts/clients retain `8080`. Each result is saved after finally cleanup and recording the service exit code. Test services stop after the runs; these records do not establish later port state.
 
-长文本与视觉验证收尾后，两个测试端口 18080 / 8082 均已关闭，系统内存压力等级恢复为 1（normal）；清理后的状态见 cleanup-status.json（历史本机文件，未随本报告发布）。这不表示测试期间新增的 swap 文件立即缩小。
+After long-text and vision verification, both test ports 18080 / 8082 are closed and system memory-pressure level returns to 1 (normal). Post-cleanup status is in cleanup-status.json (historical local file; not published with this report). This does not mean swap files created during the tests immediately shrink.
 
-128K：样本起止 `2026-10-19T10:49:46-04:00 / 2026-10-19T10:54:48-04:00`；服务 PID `74336`，退出码 `-15`；finish_reason `length`；lookup_rounds `0`。
+128K: sampling interval `2026-10-19T10:49:46-04:00 / 2026-10-19T10:54:48-04:00`; service PID `74336`, exit code `-15`; finish_reason `length`; lookup_rounds `0`.
 
-256K：样本起止 `2026-10-19T10:54:57-04:00 / 2026-10-19T11:11:22-04:00`；服务 PID `75117`，退出码 `-15`；finish_reason `length`；lookup_rounds `0`。
+256K: sampling interval `2026-10-19T10:54:57-04:00 / 2026-10-19T11:11:22-04:00`; service PID `75117`, exit code `-15`; finish_reason `length`; lookup_rounds `0`.
 
-硬件、电源与版本元数据在 `128K prefill` 阶段抓取，原始文件没有单独记录精确抓取时间戳。当时 pmset 未记录热警告、性能警告或 CPU power status；这不是全程温度或降频监控。
+Hardware, power and version metadata are captured during `128K prefill`; the original file does not separately record an exact capture timestamp. pmset records no thermal warning, performance warning or CPU power status at that time. This is not full-run temperature/throttling monitoring.
 
-依赖版本：`mlx-dspark 0.20.3`、`mlx 0.32.4`、`mlx-metal 0.32.4`、`mlx-lm 0.32.2`、`mlx-vlm 0.7.8`、`transformers 5.20.1`。
+Dependency versions: `mlx-dspark 0.20.3`, `mlx 0.32.4`, `mlx-metal 0.32.4`, `mlx-lm 0.32.2`, `mlx-vlm 0.7.8`, `transformers 5.20.1`.
 
-测试前客户端结构化差异核查：qwen CLI 与 pi 各只改动该模型的一个 context 字段，`131072 → 262144`；其他模型条目与限制没有改动。测试后已按用户要求降回 `131072`。
+Structured client-configuration comparison before testing confirms that qwen CLI and pi each change only one context field for this model, `131072 → 262144`. Other model entries/limits are unchanged. The value is restored to `131072` afterward at the user's request.
 
-## 原始记录与复现文件
+## Raw records and reproduction files
 
-- 测试程序（历史本机文件，未随本报告发布）、遥测实现（历史本机文件，未随本报告发布）、汇总程序（历史本机文件，未随本报告发布）。
-- 机器可读汇总 JSON（历史本机文件，未随本报告发布）、汇总 CSV（历史本机文件，未随本报告发布）、测试控制台日志（历史本机文件，未随本报告发布）。
-- 客户端配置变更（历史本机文件，未随本报告发布）、硬件与功耗快照（历史本机文件，未随本报告发布）、修改前启动脚本（历史本机文件，未随本报告发布）、当前文本服务脚本（历史本机文件，未随本报告发布）。
-- 128K：结果 JSON（历史本机文件，未随本报告发布）、逐秒 CSV（历史本机文件，未随本报告发布）、逐秒 JSONL（历史本机文件，未随本报告发布）、事件 JSONL（历史本机文件，未随本报告发布）、服务日志（历史本机文件，未随本报告发布）、精确请求（历史本机文件，未随本报告发布）。
-- 256K：结果 JSON（历史本机文件，未随本报告发布）、逐秒 CSV（历史本机文件，未随本报告发布）、逐秒 JSONL（历史本机文件，未随本报告发布）、事件 JSONL（历史本机文件，未随本报告发布）、服务日志（历史本机文件，未随本报告发布）、精确请求（历史本机文件，未随本报告发布）。
+- Test program (historical local file; not published with this report), telemetry implementation (historical local file; not published with this report), summary program (historical local file; not published with this report).
+- Machine-readable summary JSON (historical local file; not published with this report), summary CSV (historical local file; not published with this report), console log (historical local file; not published with this report).
+- Client configuration changes (historical local file; not published with this report), hardware/power snapshot (historical local file; not published with this report), original launch script (historical local file; not published with this report), current text-service script (historical local file; not published with this report).
+- 128K: result JSON (historical local file; not published with this report), per-second CSV (historical local file; not published with this report), per-second JSONL (historical local file; not published with this report), event JSONL (historical local file; not published with this report), service log (historical local file; not published with this report), exact request (historical local file; not published with this report).
+- 256K: result JSON (historical local file; not published with this report), per-second CSV (historical local file; not published with this report), per-second JSONL (historical local file; not published with this report), event JSONL (historical local file; not published with this report), service log (historical local file; not published with this report), exact request (historical local file; not published with this report).
 
-## Vision 的独立核查
+## Independent vision verification
 
-本次为 mlx-dspark 的纯文本测试。现有权重包含 vision tower，mlx-dspark 文本路径会丢弃视觉部分；视觉可通过复用同一磁盘缓存的 mlx-vlm / DFlash2 服务恢复。视觉运行验证与吞吐量不包含在上表中，请单独查看视觉核查与运行记录（历史本机文件，未随本报告发布）和视觉服务脚本（历史本机文件，未随本报告发布）。共享磁盘缓存不会共享两进程中的模型张量。
+This is an mlx-dspark text-only test. Existing weights contain a vision tower, which mlx-dspark's text path discards. Vision can be restored through an mlx-vlm / DFlash2 service reusing the same disk cache. Vision verification/throughput are excluded from the tables above; see separate vision verification/run records (historical local file; not published with this report) and vision-service script (historical local file; not published with this report). Sharing disk cache does not share model tensors across processes.

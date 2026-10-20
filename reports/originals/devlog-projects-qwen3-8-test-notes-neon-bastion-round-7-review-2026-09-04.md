@@ -1,138 +1,156 @@
 ---
-title: Neon Bastion 第七轮评审 — R6 交付复盘与「探针窗口」失效类
+title: "Neon Bastion Round 7 Review — R6 Delivery Retrospective and the \"Probe Window\" Failure Class"
 date: 2026-09-04
 project: qwen3.8-test
 tags: [neon-bastion, review, qwen3.8-27b, pi, verification]
 ---
 
-# 第七轮评审
+# Round 7 Review
 
-对象：第六轮（R6）11 个任务，全部由 pi + Qwen3.8-27B-8bit（mlx-dspark 本地部署）实施。
-评审方：Claude（本 session）。独立复核：另一 Claude session（worktree @ 4273 端口）。
+[English](devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04.md) | [简体中文](devlog-projects-qwen3-8-test-notes-neon-bastion-round-7-review-2026-09-04_CN.md)
 
-## 1. 交付结果
+<!-- environment-context:start -->
 
-| # | ID | commit | unit | e2e | pi 耗时 | 介入 |
+## Workstation and system (context added 2026-10-20)
+
+| Item | Record and evidence boundary |
+|---|---|
+| Workstation role | Local inference workstation |
+| Current hardware reference | MacBook Pro `Mac17,6`; Apple M5 Max; 18-core CPU; 40-core GPU; 128 GB unified memory (128 GiB / 137438953472 bytes) |
+| Host explicitly recorded by the source | See original report; current snapshot does not fill missing historical configuration |
+| Current system snapshot | macOS 27.0.1, build `26A434`, arm64, Metal 4; captured 2026-10-20 22:03:27 UTC |
+| Test-time OS | Not recorded in the surviving test evidence; current OS is not substituted |
+| Historical limits | Without a separate test-time snapshot, detailed core counts are a current workstation reference. Mac specifications do not establish LAN PC or cloud inference hardware. |
+
+[Full environment notes](../../environment.md). Model, quantization, engine, cache and request settings remain those recorded in this report. Original figures, source code and command output retain source-language evidence.
+
+<!-- environment-context:end -->
+
+Subject: 11 tasks from Round 6 (R6), all implemented by pi + Qwen3.8-27B-8bit (mlx-dspark local deployment).
+Reviewer: Claude (this session). Independent verification: Another Claude session (worktree @ port 4273).
+
+## 1. Delivery Results
+
+| # | ID | commit | unit | e2e | pi duration | Intervention |
 |---|---|---|---|---|---|---|
-| 1 | FX-04 | `f00480d` | 106 | 16 | 57m | 无 |
-| 2 | FX-05 | `e9ae7be`+`b27db27` | 113 | 17 | 52m | 无 |
-| 3 | ART-08 | `d19665e` | 113 | 18 | 30m | 无 |
-| 4 | ART-09 | `9af3569` | 121 | 18 | 22m | 无 |
-| 5 | ART-10 | `c2aa1ef` | 125 | 19 | 50m | 无 |
-| 6 | ART-11 | `1b48440` | 125 | 20 | 42m | 无 |
-| 7 | ART-12 | `b851b93` | 125 | 24 | 92m | 无（评审方发现 ART-16 回归） |
-| 8 | ART-13 | `163a788` | 125 | 25 | 110m | 无（评审方发现 ART-17） |
-| 9 | AUD-03 | `6472431` | 136 | 25 | 19m | 无 |
-| 10 | UI-03 | `d660b4d` | 136 | 26 | 6m | 无 |
-| 11 | ART-15+16 | `31bb8d3` | 149 | 26 | 3h26m | **有，见 §4** |
+| 1 | FX-04 | `f00480d` | 106 | 16 | 57m | None |
+| 2 | FX-05 | `e9ae7be`+`b27db27` | 113 | 17 | 52m | None |
+| 3 | ART-08 | `d19665e` | 113 | 18 | 30m | None |
+| 4 | ART-09 | `9af3569` | 121 | 18 | 22m | None |
+| 5 | ART-10 | `c2aa1ef` | 125 | 19 | 50m | None |
+| 6 | ART-11 | `1b48440` | 125 | 20 | 42m | None |
+| 7 | ART-12 | `b851b93` | 125 | 24 | 92m | None (Reviewer discovered ART-16 regression) |
+| 8 | ART-13 | `163a788` | 125 | 25 | 110m | None (Reviewer discovered ART-17) |
+| 9 | AUD-03 | `6472431` | 136 | 25 | 19m | None |
+| 10 | UI-03 | `d660b4d` | 136 | 26 | 6m | None |
+| 11 | ART-15+16 | `31bb8d3` | 149 | 26 | 3h26m | **Yes, see §4** |
 
-11/11 交付，10 个零介入。最终状态：`tsc` 0 错误 · 149 单测 · 26 e2e · 构建通过 · 工作区干净。
+11/11 delivered, 10 with zero intervention. Final state: `tsc` 0 errors · 149 unit tests · 26 e2e · build passed · workspace clean.
 
-## 2. 本轮最重要的发现：「探针窗口」失效类
+## 2. Most Important Finding This Round: The "Probe Window" Failure Class
 
-R6 之前已知一类问题：**区域统计挡得住「有没有」，挡不住「像不像」**（ART-07 / ART-14 / ART-15 / ART-17）。
-R6 暴露出这一类的**第二种形态**，比第一种隐蔽得多——探针窗口本身失效。
+Before R6, a class of problems was known: **Regional statistics can catch "presence/absence" but not "resemblance"** (ART-07 / ART-14 / ART-15 / ART-17).
+R6 exposed a **second form** of this class, much more subtle than the first—the probe window itself fails.
 
-### 2.1 阈值余量吞掉 12 倍劣化（ART-16）
+### 2.1 Threshold Margin Swallows 12x Degradation (ART-16)
 
-ART-12 的玻璃贴图把外观全塞进纹理 RGBA，窄侧面采样到的几乎全是深色边框，渲染成纯黑板。
-原始画布 `darkFrac`：**0.008 → 0.096（12 倍）**。
-ART-06 的五条断言**全部照常通过**，因为 `darkFrac ≤ 0.15` 的余量刚好装得下 0.096。
+ART-12's glass texture packed all appearance into texture RGBA; narrow side samples were almost entirely dark borders, rendering as a pure blackboard.
+Original canvas `darkFrac`: **0.008 → 0.096 (12x)**.
+All five assertions in ART-06 **passed as usual**, because the margin of `darkFrac ≤ 0.15` just barely accommodated 0.096.
 
-### 2.2 移动物体飘进固定采样窗（ART-13，本轮新发现）
+### 2.2 Moving Object Drifts into Fixed Sampling Window (ART-13, New Finding This Round)
 
-由独立复核方发现，评审方复算确认。
+Discovered by the independent verifier, confirmed by the reviewer's recalculation.
 
-ART-13 的地面细节断言取 `getImageData(100, 100, 120, 30)`，作用在 320×180 缩略图上，
-对应全分辨率 **x 400–880, y 400–520**。任务 11 把第一人称视角武器放大后，其包围盒为
-**x 660–1169, y 288–719**——**覆盖该采样窗 x 方向的约 46%**。
+ART-13's ground detail assertion samples `getImageData(100, 100, 120, 30)`, applied to a 320×180 thumbnail,
+corresponding to full resolution **x 400–880, y 400–520**. After Task 11 enlarged the first-person weapon, its bounding box is
+**x 660–1169, y 288–719**—**covering approximately 46% of the sampling window in the x-direction**.
 
-结果：
+Result:
 
 ```
 ART-13 GROUND PATCH STD   5.72  →  62.26     （断言要求 >= 5.5）
 采样窗内暗像素占比(L<60)   0.000 →  0.220
 ```
 
-**一个 11 倍的「地面细节大幅改善」，实际上是一道近黑色的枪身轮廓边切过了取样框。**
-这条断言现在即使把地面纹理整个删掉也照样通过。
+**An 11x "significant improvement in ground detail" was actually a near-black gun barrel outline cutting across the sampling frame.**
+This assertion now passes even if the ground texture is deleted entirely.
 
-### 2.3 归纳
+### 2.3 Induction
 
-> **一个屏幕空间矩形只在「没有别的东西能进来」的前提下才是有效探针，而测试套件里没有任何东西保证这个前提。**
+> **A screen-space rectangle is only a valid probe under the premise that "nothing else can enter," and nothing in the test suite guarantees this premise.**
 
-这两个形态的共同点：断言仍然是绿的，数字仍然在动，但数字已经和它声称度量的东西脱钩了。
-比「断言太松」更危险，因为它会伪装成改善。
+Commonality of these two forms: The assertion remains green, the numbers still move, but the numbers have decoupled from what they claim to measure.
+More dangerous than "assertions too loose," because it disguises itself as improvement.
 
-## 3. 构建完整性失效类 —— 一个模式，三次实例
+## 3. Build Integrity Failure Class — One Pattern, Three Instances
 
-归纳框架由独立复核方提出，评审方补充机制说明。三次实例按隐蔽程度递增：
+The induction framework was proposed by the independent verifier; the reviewer supplemented the mechanism explanation. The three instances are listed in increasing order of subtlety:
 
-| | 表现 | 实际测的是什么 |
+| | Manifestation | What was actually tested |
 |---|---|---|
-| R5 | 跑 E2E 前忘了 `npm run build` | 上一次的构建 |
-| R6（今日） | 两个 agent 共用 `dist/` 与 4173 端口 | 对方的构建 |
-| R6 任务 11 | `npm run build` 失败但没人检查退出码 | 一个已经不存在的构建 |
+| R5 | Forgot `npm run build` before running E2E | The previous build |
+| R6 (Today) | Two agents shared `dist/` and port 4173 | The other's build |
+| R6 Task 11 | `npm run build` failed but no one checked the exit code | A build that no longer exists |
 
-**机制**：一个陈旧但有效的 `dist/` 在 HTTP 层面与新鲜构建完全无法区分，
-所以**套件内部再加多少断言都抓不到这一类**。
+**Mechanism**: A stale but valid `dist/` is indistinguishable from a fresh build at the HTTP level,
+so **no matter how many assertions are added within the suite, this class cannot be caught**.
 
-**共同使能条件**：`playwright.config.ts:40` 的 `reuseExistingServer: true` 打在固定端口 4173 上。
-常见写法 `reuseExistingServer: !process.env.CI` 在这里恰恰是反的——它正好在
-「本地、多 runner」这个复用即危险的场景下选择复用。
+**Common Enabling Condition**: `reuseExistingServer: true` in `playwright.config.ts:40` is set on fixed port 4173.
+The common practice `reuseExistingServer: !process.env.CI` is exactly the opposite here—it chooses to reuse precisely in the "local, multi-runner" scenario where reuse is dangerous.
 
-**修法**：把构建退出码变成硬闸门；每个 runner 独立端口（或 `reuseExistingServer: false`）。
+**Fix**: Make the build exit code a hard gate; independent port for each runner (or `reuseExistingServer: false`).
 
-实例二的两个具体后果，均已查证：
-- 复核方 test 10（ART-05）连续 4 次确定性失败（frozen=38155，数值完全相同），
-  全部落在 pi 的 task-10 构建窗口（19:04:59–19:10:39）内；pi 空闲后连续 7 次通过。
-  确定性而非随机，正是「一个特定的错误构建被稳定地服务了一段时间」的特征。
-- 评审方一次 18/26 失败，当时归因为「自己的端口没释放」，实为同一时段复核方在同一端口跑套件。
+Two specific consequences of Instance 2, both verified:
+- Verifier's test 10 (ART-05) failed deterministically 4 times in a row (frozen=38155, numerically identical),
+  all falling within pi's task-10 build window (19:04:59–19:10:39); 7 consecutive passes after pi was idle.
+  Deterministic rather than random is the characteristic of "a specific erroneous build being served stably for a period."
+- Reviewer had one instance of 18/26 failures, initially attributed to "own port not released," actually caused by the verifier running the suite on the same port during the same time period.
 
-## 4. 任务 11：本轮唯一一次介入
+## 4. Task 11: The Only Intervention This Round
 
-**pi 的失误是操作性的，不是判断性的。**
+**pi's mistake was operational, not judgmental.**
 
-它做反面对照需要「临时改回旧代码 → 跑 → 再改回来」。恢复那一步 `cp` 的目标目录写错，
-把改好的 `testHooks.ts` 放到了 `src/render/` 而不是 `src/`。后果成链：
+It needed "temporarily revert to old code → run → revert back" for negative control. The target directory for the restoration step `cp` was written incorrectly,
+placing the fixed `testHooks.ts` in `src/render/` instead of `src/`. The consequences chained:
 
-1. `src/render/testHooks.ts` 里的 `./app`、`./game/types` 解析不到 → `tsc` 与 `npm run build` **持续失败**
-2. 真正的 `src/testHooks.ts` 停留在被 `git checkout` 还原的 HEAD 版本
-3. 之后每次 `npx playwright test` 服务的都是**未更新的 dist**
-4. A/B 两侧是同一个二进制，它观测到的「地板暗区」是纯粹的幻影
+1. `./app`, `./game/types` in `src/render/testHooks.ts` could not be resolved → `tsc` and `npm run build` **continuously failed**
+2. The real `src/testHooks.ts` remained at the HEAD version restored by `git checkout`
+3. Every subsequent `npx playwright test` served the **unupdated dist**
+4. Both sides of the A/B test were the same binary; the "floor dark area" it observed was a pure phantom
 
-它为此连续排查约 1 小时，方向越来越细（把队友挪开再对比亮度网格），
-而**方向从第一步就是错的**。3h26m 后由评审方给出精确提示才收敛。
+It spent about 1 hour continuously troubleshooting, with the direction becoming increasingly granular (moving teammates away to compare brightness grids),
+but **the direction was wrong from the first step**. It only converged after the reviewer provided a precise hint at 3h26m.
 
-**根因不是模型不够聪明，是流程缺一个断言**：
-「临时改坏再改回」这类操作，每一步之后必须先 `tsc` 确认工作树是干净的，再往下走。
-本轮任务书要求了反面对照，但没有要求在反面对照的每个切换点校验树的完整性。
+**The root cause is not that the model is not smart enough, but that the process lacks an assertion**:
+For operations like "temporarily break then fix," one must first `tsc` to confirm the working tree is clean after each step before proceeding.
+This round's task specification required negative control, but did not require verifying tree integrity at each switching point of the negative control.
 
-值得记的是**同一根因在评审方身上也出现过两次**（Ctrl-C 重启服务器没生效、prompt 发错面板）：
-**假设终端操作生效了而不去验证**。区别只在于评审方有人当场指出，pi 只能自己撞三小时。
+It is worth noting that **the same root cause occurred twice on the reviewer's side** (Ctrl-C server restart didn't take effect, prompt sent to wrong panel):
+**Assuming terminal operations took effect without verifying**. The only difference is that the reviewer was pointed out on the spot, while pi had to hit the wall for three hours on its own.
 
-## 5. 任务 11 的交付质量
+## 5. Delivery Quality of Task 11
 
-pi 的提交信息**主动、准确地列出了自己没做到的三项**，这一点质量很高：
+pi's commit message **proactively and accurately listed three items it failed to achieve**, which is of high quality:
 
-> - 像素级反面对照未运行
-> - 任务中途的 A/B `darkFrac`/bbox 数字**无效**（构建静默失败导致）
-> - 收紧后的 `darkFrac` 阈值、窄侧面断言、视角模型包围盒断言**均未落地**
+> - Pixel-level negative control not run
+> - Mid-task A/B `darkFrac`/bbox numbers **invalid** (due to silent build failure)
+> - Tightened `darkFrac` threshold, narrow side assertion, view model bounding box assertion **none implemented**
 
-三项都属实。它在明知拿不到有效数据的情况下选择「落地代码 + 单测，如实标注缺口」，
-而不是补一个基于无效数据的阈值——这是正确的判断。
+All three are true. In knowing it could not obtain valid data, it chose "implement code + unit tests, honestly mark gaps,"
+rather than patching a threshold based on invalid data—this is the correct judgment.
 
-### 逐项验收
+### Item-by-item Acceptance
 
-| 项 | 结论 | 证据 |
+| Item | Conclusion | Evidence |
 |---|---|---|
-| **ART-16** 玻璃黑板 | **修好，且彻底** | level 视角剔除武器后 `darkFrac` = **0.0036**，优于回归前基线 0.008；玻璃现为可透视的竖框玻璃格 |
-| **ART-15(1)** 第三人称持枪 | **修好** | `weapon_hand.test.ts` 12 条含反面对照（旧胸口锚点挂掉）；侧视截图确认枪位于手部高度而非颈前 |
-| **ART-15(2)** 视角模型过大 | **未达标，且退步** | 见下 |
+| **ART-16** Glass Blackboard | **Fixed, and thoroughly** | After removing weapon in level view, `darkFrac` = **0.0036**, better than pre-regression baseline 0.008; glass is now a transparent vertical frame grid |
+| **ART-15(1)** Third-person Gun Holding | **Fixed** | `weapon_hand.test.ts` 12 items including negative control (old chest anchor failed); side view screenshot confirms gun is at hand height, not in front of neck |
+| **ART-15(2)** View Model Too Large | **Not met, and regressed** | See below |
 
-### ART-15(2) 实测
+### ART-15(2) Measured
 
-用 `viewModelVisible(true/false)` 差分求包围盒（1280×720）：
+Using `viewModelVisible(true/false)` differential to find bounding box (1280×720):
 
 ```
 bbox            x 660–1169, y 288–719
@@ -142,9 +160,9 @@ bbox            x 660–1169, y 288–719
 准星区块 diff   0                          ✓
 ```
 
-外观上确实从「灰色石柱」变成了**可辨认的枪**（枪管、机匣、握把），这是进步。
-但它更大了，且转成了斜跨画面中部的角度，枪口越过屏幕中心。
-连带效应是它现在是近黑色且出现在所有视角里：
+Visually, it indeed changed from "gray stone pillar" to a **recognizable gun** (barrel, receiver, grip), which is progress.
+But it is larger, and rotated to an angle crossing the middle of the screen, with the muzzle crossing the screen center.
+The side effect is that it is now near-black and appears in all views:
 
 ```
 raw canvas darkFrac      任务11前 → 任务11后
@@ -153,13 +171,13 @@ raw canvas darkFrac      任务11前 → 任务11后
   level                   0.096  →  0.088   （仅因 ART-16 拿掉了其中约 73%，枪又加了回来）
 ```
 
-**这直接印证了任务书的一处错误**（见 §6）：在武器缩小之前收紧 `darkFrac` 阈值，
-就是拿一个正在移动的靶子定阈值。现在 level 视角的暗像素里约 **96%** 来自视角模型。
+**This directly confirms an error in the task specification** (see §6): Tightening the `darkFrac` threshold before shrinking the weapon
+is setting a threshold on a moving target. Now, about **96%** of the dark pixels in the level view come from the view model.
 
-## 6. 任务书自身的错误（评审方的）
+## 6. Errors in the Task Specification Itself (Reviewer's)
 
-`task-11.md` 把 ART-16 的 `darkFrac` **全部**归因于玻璃，并写了「不必重新排查，直接修」。
-按屏幕列对暗像素分箱后，实际构成是：
+`task-11.md` attributed **all** of ART-16's `darkFrac` to glass, and wrote "no need to re-investigate, fix directly."
+After binning dark pixels by screen column, the actual composition is:
 
 ```
 x    0– 160   34.1%   左侧黑板（玻璃）
@@ -168,47 +186,47 @@ x  880–1120   21.9%   第一人称武器
 x 1120–1280   39.3%   右侧黑板（玻璃）
 ```
 
-玻璃约 73%，**武器约 22%**。归因的**目标**是对的，**排他性**是错的。
-「不必重新排查」这句话在证据不完整时不该写——它剥夺了实施方发现第二个来源的机会。
+Glass about 73%, **weapon about 22%**. The **target** of the attribution was correct, the **exclusivity** was wrong.
+The phrase "no need to re-investigate" should not be written when evidence is incomplete—it deprived the implementer of the opportunity to discover the second source.
 
-另：pi 运行时探针报告「玩家面朝 +Z」符号反了。`match.ts:164` 为 `forward = (sinθ, cosθ)`，
-蓝方出生 `yaw = π` → `(0, −1)`，玩家面朝 **−Z**。这个修正**支持**墙面归因
-（z=17、z=14 确实在 z=20 前方），而非推翻它。
+Also: pi's runtime probe reported "player facing +Z" with reversed sign. `match.ts:164` is `forward = (sinθ, cosθ)`,
+Blue team spawn `yaw = π` → `(0, −1)`, player facing **−Z**. This correction **supports** the wall attribution
+(z=17, z=14 are indeed in front of z=20), rather than overturning it.
 
-## 7. 对研究问题的回答
+## 7. Answer to the Research Question
 
-> Qwen3.8-27B-8bit 在这套本地部署下，能不能自主做出一个稍微复杂的游戏？
+> Can Qwen3.8-27B-8bit autonomously make a slightly complex game under this local deployment?
 
-**能，但有一条明确的能力边界，且边界的位置由部署决定而不是由模型决定。**
+**Yes, but there is a clear capability boundary, and the position of the boundary is determined by the deployment, not the model.**
 
-- **验证闭环是文本时（逻辑、测试、重构、根因定位、诚实报告缺口）：表现优秀。**
-  R6 前 10 个任务零介入，单测从 106 长到 149，提交信息主动标注未完成项。
-- **验证闭环需要眼睛时：完全无法闭合。**
-  本轮全部视觉缺陷（ART-07 / ART-14 / ART-15 / ART-16 / ART-17）**无一由 pi 发现**，
-  全部由评审方看截图发现。
+- **When the verification loop is text-based (logic, tests, refactoring, root cause identification, honest reporting of gaps): Performance is excellent.**
+  First 10 tasks of R6 had zero intervention, unit tests grew from 106 to 149, commit messages proactively marked incomplete items.
+- **When the verification loop requires eyes: Completely unable to close.**
+  All visual defects this round (ART-07 / ART-14 / ART-15 / ART-16 / ART-17) **were not discovered by pi**,
+  all were discovered by the reviewer looking at screenshots.
 
-原因不是能力，是**感官缺失**：见 `notes/mlx-dspark-vision-unavailable-2026-09-03.md`（OPS-11）。
-权重带视觉塔，但 mlx-dspark 在三处静默丢弃图像输入，实测 `prompt_tokens: 17`。
+The reason is not capability, but **sensory deprivation**: see `notes/mlx-dspark-vision-unavailable-2026-09-03.md` (OPS-11).
+Weights include a vision tower, but mlx-dspark silently discards image input in three places, measured `prompt_tokens: 17`.
 
-**这条边界是可迁移的结论**：给一个看不见的 agent 派美术任务，
-它会忠实地把你写的可测量断言做绿，而断言与观感之间的差距会全部沉淀成技术债。
-R6 的 ART-13 断言正是这个过程的极端样本——**它现在测的是枪，而且是绿的**。
+**This boundary is a transferable conclusion**: Assigning art tasks to a blind agent,
+it will faithfully make the measurable assertions you write green, while the gap between assertions and visual perception will all settle into technical debt.
+R6's ART-13 assertion is an extreme sample of this process—**it now measures the gun, and it is green**.
 
-## 8. 第八轮（R7）建议顺序
+## 8. Recommended Order for Round 8 (R7)
 
-1. **ART-15(2)** 视角模型缩到 6–18% 包围盒（先做，后面两条依赖它的最终尺寸）
-2. **ART-13 断言修复** 采样窗必须排除视角模型区域，或在关闭视角模型的帧上取样；
-   附反面对照：删掉地面纹理，断言必须挂掉
-3. **ART-06 阈值收紧** + 窄侧面专项断言（在 1 完成后重新测基线）
-4. **AI-02** 每单位 30 秒无接触 → 主动探索（用户明确要求，迂回 vs 迂回死局）
-5. **BUG-03** AI 卡墙角
-6. **ART-17** 树篱贴图（多尺度噪声 + 叶片明暗面；验收指标要能区分「结构化纹理」与「随机撒点」）
-7. **BUG-02** seed 74 停滞
-8. **OPS-12（新）** `reuseExistingServer` + 构建退出码硬闸门
+1. **ART-15(2)** Shrink view model to 6–18% bounding box (do first, the next two depend on its final size)
+2. **ART-13 Assertion Fix** Sampling window must exclude view model area, or sample on frames with view model disabled;
+   Include negative control: delete ground texture, assertion must fail
+3. **ART-06 Threshold Tightening** + Narrow side specific assertion (re-measure baseline after 1 is completed)
+4. **AI-02** 30 seconds no contact per unit → active exploration (User explicitly requested, detour vs detour deadlock)
+5. **BUG-03** AI stuck in wall corner
+6. **ART-17** Hedge texture (multi-scale noise + leaf light/dark sides; acceptance metrics must distinguish "structured texture" from "random scattering")
+7. **BUG-02** seed 74 stagnation
+8. **OPS-12 (New)** `reuseExistingServer` + build exit code hard gate
 
-## 9. 遗留未验证
+## 9. Remaining Unverified
 
-- ART-15(1) 的握持保真度只做到「枪在手部高度」，未做精细 IK，也未做像素级验收
-- BGM（AUD-03）**评审方与 pi 都无法听**。可测量的约束（BPM、循环长度、
-  `BGM_LEVEL` 相对 SFX 比例）已全部核对通过，音乐性本身未验证
-- 任务 11 的三组像素级反面对照仍然欠账
+- ART-15(1) holding fidelity only achieved "gun at hand height," no fine IK, no pixel-level acceptance
+- BGM (AUD-03) **Neither reviewer nor pi can hear it**. Measurable constraints (BPM, loop length,
+  `BGM_LEVEL` relative to SFX ratio) have all been checked and passed, musicality itself unverified
+- Task 11's three sets of pixel-level negative controls are still outstanding

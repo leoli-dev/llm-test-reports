@@ -1,41 +1,53 @@
-# 添加一份测试报告
+# Add a test report
 
-这个仓库集中保存报告。游戏、网站和其他测试产物保存在独立作品仓库；在报告中链接到对应提交。
+[English](CONTRIBUTING.md) | [简体中文](CONTRIBUTING_CN.md)
 
-## 命名与日期
+This repository stores reports. Games, websites and other artifacts live in separate repositories; link a fixed artifact commit whenever available.
 
-- 作品仓库：`llm-test-YYYY-MM-DD-{type}-{name}`，采用该轮测试的**开始日期**。
-- 已发布范例：`llm-test-2026-09-01-game-neon-bastion`、`llm-test-2026-10-20-game-tank-battle`。
-- 同一项目的修复轮保留在原测试链里；不同模型的独立重跑可以另开记录。日期不清楚时明确说明，不用导入日期替代。
+## Names and languages
 
-## 添加步骤
+- English is the default. Use `reports/originals/YYYY-MM-DD-topic.md` and a complete Chinese counterpart `YYYY-MM-DD-topic_CN.md`. Translate the full report, including tables, failures and limits. A summary is not a replacement for the full translation.
+- Chinese documentation, JSON catalogs and HTML entry points use `_CN` before their extension. Technical source code and original screenshots retain their evidence language; explain them in both report editions.
+- Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by the test's **start date**. Examples: `llm-test-2026-09-01-game-neon-bastion` and `llm-test-2026-10-20-game-tank-battle`.
+- Repair rounds remain in one experiment chain. Independent model reruns can have separate records. Unknown dates must be labeled; an import date must not replace a test date.
 
-1. 从 [报告模板](templates/report.md) 新建 `reports/originals/YYYY-MM-DD-topic.md`，填写实际条件、任务、结果、失败与局限。
-2. 将报告图片放到 `assets/`，在 Markdown 中用 `../../assets/...` 引用。发布前移除凭据、私人聊天和私有端点；保留指标及实验事实。
-3. 注册报告：
+## Record the actual environment
+
+Use the paired [report template](templates/report.md). Record the inference host's chip/CPU, GPU, memory, OS version and build, architecture, inference engine and agent versions, model revision/quantization, cache and request settings. For a remote PC or cloud model, record client and inference host separately. Mark unavailable details **not recorded**.
+
+The [workstation snapshot](environment.md) is a dated reference. Never use its current OS version to fill an undocumented historical OS. Preserve any captured hardware/status evidence, excluding identifiers and credentials.
+
+## Register a report pair
+
+1. Save both full Markdown reports, with language links. Put images in `assets/` and reference them from reports with `../../assets/...`. Remove credentials, private conversations and private endpoints while preserving measurements and experimental facts.
+2. Run the registrar (the following values are illustrative, not measurements):
 
 ```sh
 node scripts/add-report.mjs \
   --id EXP-2026-10-21-example \
-  --title '实验标题' \
+  --title 'Example experiment' \
+  --title-cn '实验示例' \
   --date 2026-10-21 \
-  --model '完整模型名称与量化' \
+  --model 'Exact model name and quantization' \
   --engine MLTF \
   --scope local \
   --file reports/originals/2026-10-21-example.md \
-  --summary '实际结果与证据边界' \
-  --repo https://github.com/leoli-dev/example
+  --summary 'Observed result and evidence limits' \
+  --summary-cn '实测结果与证据边界' \
+  --hardware 'MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GB' \
+  --test-os 'Not recorded' \
+  --test-os-cn '未记录'
 ```
 
-`--scope` 为 `local`、`lan` 或 `cloud`；`--repo` 可省略。`--engine` 可以用逗号分隔多个引擎。脚本写入实验 Markdown 和 `data/catalog.json`。
+`--scope` is `local`, `lan` or `cloud`; use the **inference location**, not the source-code folder location. `--file` is the English file; the `_CN.md` counterpart must exist. `--engine` accepts comma-separated engines. Optional `--repo` links an artifact; optional caveats require both `--caveat` and `--caveat-cn`. The script creates both experiment entry files and updates both catalogs. `--hardware` describes the actual inference host, or explicitly says it was not recorded; `--test-os` and `--test-os-cn` describe test-time evidence.
 
-4. 运行 `npm ci --ignore-scripts`、`npm run build`、`npm run check`；用 `npm run preview` 后在 Chromium 中检查新报告、图片和窄屏布局。
-5. 提交 Markdown、图片和 catalog，push 到 main。GitHub Actions 构建纯静态站，发布到 GitHub Pages。
+3. Run `npm ci --ignore-scripts`, `npm run build`, and `npm run check`. Preview with `npm run preview`; check both languages, current-report language switching, search, combined filters, images, downloads and a narrow viewport in Chromium.
+4. Commit report pairs, assets and both catalogs. A push to main builds and publishes the static GitHub Pages site.
 
-## 文档与事实
+## Historical evidence and provenance
 
-- `reports/originals/` 保留原报告文字、表格和图片；`reports/experiments/` 是按测试组织的阅读入口。
-- 最初导入的 HTML 报告已转成 Markdown；只有会话证据的旧测试标为 session-recovered，不能当作源码已恢复。
-- 初次导入会调整本机链接、概括本机账号路径和私人 LAN 地址，并更新重命名后的作品链接。原报告内容哈希与发布后哈希存入 `data/provenance.json`。
-- 本机找到了代码与代码已发布是两回事。为新作品添加独立 repo 链接后，档案才显示作品入口。
-- 请勿上传模型权重、node_modules、虚拟环境、客户端 auth、原始私人会话或含凭据的请求日志。
+`reports/originals/` holds full report editions; `reports/experiments/` groups them by test. HTML reports from the first import were converted to Markdown. Conversation-only recovery stays labeled as such and does not establish that source code was recovered.
+
+`data/provenance.json` retains original source hashes, the initial import hashes and current localized file hashes. Original figures, code, commands, numeric literals, failures, uncertainty and human intervention must survive translation. When publication generalizes private paths or relocates links, document that transformation. Do not re-run the initial importer over this maintained bilingual archive.
+
+Finding local source and publishing an artifact are separate facts. Never upload weights, `node_modules`, virtual environments, client auth, full private sessions or request logs containing credentials. Publication checks do not create a new model benchmark.
