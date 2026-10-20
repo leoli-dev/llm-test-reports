@@ -18,7 +18,7 @@
 ## 实验索引
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
-|---|---|---|
+|---|---|---|---|
 | 2026-10-20 | MLTF × Pi / 3D 坦克大战四轮 | MLTF 0.1.2 + Qwen3.8-27B 8bit q8c + Pi | [TANK-01](reports/experiments/tank-01.md) |
 | 2026-10-19 | mlx-dspark 128K / 256K 长上下文 | Qwen3.8-27B 8bit；mlx-dspark 128K  | [PERF-04](reports/experiments/perf-04.md) |
 | 2026-10-19 | mlx-vlm 视觉 + DFlash2 阶梯稳定性 | Qwen3.8-27B 8bit；mlx-vlm 视觉 + DFlash2 阶梯稳定性 | [PERF-05](reports/experiments/perf-05.md) |
