@@ -6,7 +6,7 @@ My LLM test archive: models and inference engines observed through real tasks, f
 
 **[Browse the report site](https://leoli-dev.github.io/llm-test-reports/)** · **[Full Markdown reports](reports/originals/)** · [Add a report](CONTRIBUTING.md)
 
-The archive contains **53 experiment, parameter or comparison records and 76 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
+The archive contains **54 experiment, parameter or comparison records and 77 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
 
 ## Workstation and system
 
@@ -33,6 +33,7 @@ Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test sta
 
 | Date | Experiment / parameters | Model and runtime | Report |
 |---|---|---|---|
+| 2026-10-21 | Splash affine8 native 256K context stress test | Qwen3.8-27B MLX affine8 / INT8 KV | [PERF-11](reports/experiments/perf-11.md) |
 | 2026-10-21 | Pi capability exam: Qwen3.8-27B 8-bit on MLTF / Splash | Qwen3.8-27B 8-bit (MLTF q8c / MLX affine8) | [CAP-01](reports/experiments/cap-01.md) |
 | 2026-10-21 | Qwen3.8-27B: three local 8-bit configurations and GGUF record | Qwen3.8-27B MLX affine8 / MLTF q8c / GGUF Q8_0 | [PERF-10](reports/experiments/perf-10.md) |
 | 2026-10-21 | Splash vs MLTF / PERF-06 128K vision replay | Qwen3.8-27B MLX affine 8bit / MLTF q8c; INT8 KV | [PERF-09](reports/experiments/perf-09.md) |
