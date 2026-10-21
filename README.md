@@ -6,7 +6,7 @@ My LLM test archive: models and inference engines observed through real tasks, f
 
 **[Browse the report site](https://leoli-dev.github.io/llm-test-reports/)** · **[Full Markdown reports](reports/originals/)** · [Add a report](CONTRIBUTING.md)
 
-The archive contains **51 experiment, parameter or comparison records and 74 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
+The archive contains **52 experiment, parameter or comparison records and 75 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
 
 ## Workstation and system
 
@@ -33,6 +33,7 @@ Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test sta
 
 | Date | Experiment / parameters | Model and runtime | Report |
 |---|---|---|---|
+| 2026-10-21 | Splash GGUF Q8_0 / PERF-06 128K vision follow-up | Qwen3.8-27B Unsloth GGUF Q8_0; BF16 projector; INT8 KV | [PERF-10](reports/experiments/perf-10.md) |
 | 2026-10-21 | Splash vs MLTF / PERF-06 128K vision replay | Qwen3.8-27B MLX affine 8bit / MLTF q8c; INT8 KV | [PERF-09](reports/experiments/perf-09.md) |
 | 2026-10-20 | MLTF × Pi / four rounds of 3D Tank Battle | MLTF 0.1.2 + Qwen3.8-27B 8bit q8c + Pi | [TANK-01](reports/experiments/tank-01.md) |
 | 2026-10-19 | MLTF vs mlx-vlm / 128-request quality comparison | Qwen3.8-27B 8bit; MLTF vs mlx-vlm  | [PERF-08](reports/experiments/perf-08.md) |

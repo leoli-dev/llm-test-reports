@@ -1550,6 +1550,33 @@
         "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "PERF-10",
+      "title": "Splash GGUF Q8_0 / PERF-06 128K 图文补测",
+      "date": "2026-10-21",
+      "sortDate": "2026-10-21",
+      "model": "Qwen3.8-27B Unsloth GGUF Q8_0; BF16 projector; INT8 KV",
+      "engines": [
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "两项新进程 GGUF Q8_0 图文请求，2/2 满 4096 输出；平均完整耗时 1036.37 秒，正文交付 15.64 tok/s。早先同日 PERF-09 参考另行标注。",
+      "caveat": "PERF-09 基线未重跑/交错运行。Q8_0 与 affine8 量化数值不同，不作文件格式单因素或通用质量结论；PERF-09 未复现历史 PERF-06 速度。 后台负载未受控制，解码期整机 CPU 约 53%–55%；不能全部归因于量化格式。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-10_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1（26A434），arm64；实验时 hardware.json",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2733,6 +2760,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 核 CPU / 40 核 GPU / 128 GiB 统一内存",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay_CN.md"
+      }
+    },
+    {
+      "id": "2026-10-21-splash-gguf-q8-perf06-replay",
+      "title": "Splash GGUF Q8_0 / PERF-06 128K 图文补测",
+      "path": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md",
+      "format": "markdown",
+      "source": "new-report/PERF-10",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1（26A434），arm64；实验时 hardware.json",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md"
       }
     }
   ],

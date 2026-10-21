@@ -1550,6 +1550,33 @@
         "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay.md"
       },
       "artifact": null
+    },
+    {
+      "id": "PERF-10",
+      "title": "Splash GGUF Q8_0 / PERF-06 128K vision follow-up",
+      "date": "2026-10-21",
+      "sortDate": "2026-10-21",
+      "model": "Qwen3.8-27B Unsloth GGUF Q8_0; BF16 projector; INT8 KV",
+      "engines": [
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "Local engine performance and quality",
+      "summary": "Two fresh-process GGUF Q8_0 image requests; 2/2 full 4096-token outputs. Mean complete time 1036.37 s; content delivery 15.64 tok/s. Earlier same-day PERF-09 references are labeled separately.",
+      "caveat": "PERF-09 baselines were not rerun/interleaved. Q8_0 and affine8 contain different quantized values; no format-only causal or general quality claim. Historical PERF-06 speed remained unreproduced in PERF-09. Background load was uncontrolled, with global CPU ~53%–55% during decode; the gap is not attributable solely to quantization format.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md"
+      ],
+      "markdown": "reports/experiments/perf-10.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; test-time hardware.json",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2733,6 +2760,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay.md"
+      }
+    },
+    {
+      "id": "2026-10-21-splash-gguf-q8-perf06-replay",
+      "title": "Splash GGUF Q8_0 / PERF-06 128K vision follow-up",
+      "path": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md",
+      "format": "markdown",
+      "source": "new-report/PERF-10",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; test-time hardware.json",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md"
       }
     }
   ],
