@@ -1578,6 +1578,34 @@
         "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-01",
+      "title": "Pi能力考试：Qwen3.8-27B 8bit 在MLTF / Splash上的表现",
+      "date": "2026-10-21",
+      "sortDate": "2026-10-21",
+      "model": "Qwen3.8-27B 8-bit (MLTF q8c / MLX affine8)",
+      "engines": [
+        "MLTF",
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "冻结18题、8领域，经实际Pi CLI主测，同128K上下文/medium/采样及每轮8K输出：MLTF 70.83、Splash 66.67。另列32K输出视觉补充：2D 50.00 / 94.44、3D 0.00 / 0.00（MLTF / Splash）。保留全部44会话，包含功能测试、渲染、逐项判分与证据；是本地选题适配，不是官方完整benchmark分数。",
+      "caveat": "一次MLTF会话在写文件后被外部误中断，已核对的交付文件照常评分，计时不完整单列。每引擎/题目/预算仅一次随机会话，视觉由监督助手判分。Pi在不同预算阶段注入不同工作目录元数据，仅同阶段两端首输入一致；缺失/截断产物均保留在分母。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities_CN.md"
+      ],
+      "markdown": "reports/experiments/cap-01_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434)，arm64；实验时采集",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2775,6 +2803,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md"
+      }
+    },
+    {
+      "id": "2026-10-21-pi-qwen38-27b-mltf-splash-capabilities",
+      "title": "Pi能力考试：Qwen3.8-27B 8bit 在MLTF / Splash上的表现",
+      "path": "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities_CN.md",
+      "format": "markdown",
+      "source": "new-report/CAP-01",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434)，arm64；实验时采集",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities_CN.md"
       }
     }
   ],

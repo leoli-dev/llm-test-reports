@@ -1578,6 +1578,34 @@
         "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-01",
+      "title": "Pi capability exam: Qwen3.8-27B 8-bit on MLTF / Splash",
+      "date": "2026-10-21",
+      "sortDate": "2026-10-21",
+      "model": "Qwen3.8-27B 8-bit (MLTF q8c / MLX affine8)",
+      "engines": [
+        "MLTF",
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "Local engine performance and quality",
+      "summary": "Frozen 18-question, eight-domain primary examination through actual Pi CLI, same 128K context/medium/sampling and 8K per-turn output: MLTF 70.83, Splash 66.67. Separate 32K-output visual supplement: 2D 50.00 / 94.44, 3D 0.00 / 0.00 (MLTF / Splash). All 44 sessions retained; functional tests, renders, criterion judgments and evidence included. Curated local adaptation, not official full-benchmark scores.",
+      "caveat": "One MLTF post-write session was externally interrupted; its verified delivered file is graded, with incomplete timing disclosed. One stochastic session per engine/task/budget; visual judgments are by the supervising assistant. Pi injects different workspace metadata across budget phases; only within-phase pairs have matching initial input. Missing/truncated artifacts remain in the denominator.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities.md"
+      ],
+      "markdown": "reports/experiments/cap-01.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; captured at test time",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2775,6 +2803,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md"
+      }
+    },
+    {
+      "id": "2026-10-21-pi-qwen38-27b-mltf-splash-capabilities",
+      "title": "Pi capability exam: Qwen3.8-27B 8-bit on MLTF / Splash",
+      "path": "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities.md",
+      "format": "markdown",
+      "source": "new-report/CAP-01",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; captured at test time",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-pi-qwen38-27b-mltf-splash-capabilities.md"
       }
     }
   ],
