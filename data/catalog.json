@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1522,6 +1522,34 @@
         "testHardware": null,
         "hardwareStatus": "current-reference-only"
       }
+    },
+    {
+      "id": "PERF-09",
+      "title": "Splash vs MLTF / PERF-06 128K vision replay",
+      "date": "2026-10-21",
+      "sortDate": "2026-10-21",
+      "model": "Qwen3.8-27B MLX affine 8bit / MLTF q8c; INT8 KV",
+      "engines": [
+        "Splash",
+        "MLTF"
+      ],
+      "scope": "local",
+      "category": "Local engine performance and quality",
+      "summary": "Fresh-process ABBA replay: four full 4096-token outputs and vision/recovery checks passed. Splash mean complete time 633.02 s vs MLTF 777.38 s; content delivery 29.36 vs 27.97 tok/s.",
+      "caveat": "Two tasks per backend. Fresh MLTF did not reproduce historical PERF-06 speed; cause not isolated. One status-telemetry timeout is retained (66/67 evidence checks). No generated-code correctness or general quality claim.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay.md"
+      ],
+      "markdown": "reports/experiments/perf-09.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; test-time hardware.json",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2691,6 +2719,20 @@
         "workstationSnapshot": "2026-10-20T22:03:27Z",
         "testHardware": null,
         "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "2026-10-21-splash-vs-mltf-perf06-replay",
+      "title": "Splash vs MLTF / PERF-06 128K vision replay",
+      "path": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay.md",
+      "format": "markdown",
+      "source": "new-report/PERF-09",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; test-time hardware.json",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay.md"
       }
     }
   ],

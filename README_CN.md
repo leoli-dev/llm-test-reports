@@ -6,7 +6,7 @@
 
 **[浏览中文报告站](https://leoli-dev.github.io/llm-test-reports/index_CN.html)** · **[完整 Markdown 报告](reports/originals/)** · [新增报告](CONTRIBUTING_CN.md)
 
-当前收录 **50 项实验、参数组或对照记录，73 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
+当前收录 **51 项实验、参数组或对照记录，74 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
 
 ## 本机配置与系统
 
@@ -33,6 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
+| 2026-10-21 | Splash vs MLTF / 复现 PERF-06 的 128K 图文性能 | Qwen3.8-27B MLX affine 8bit / MLTF q8c; INT8 KV | [PERF-09](reports/experiments/perf-09_CN.md) |
 | 2026-10-20 | MLTF × Pi / 3D 坦克大战四轮 | MLTF 0.1.2 + Qwen3.8-27B 8bit q8c + Pi | [TANK-01](reports/experiments/tank-01_CN.md) |
 | 2026-10-19 | MLTF vs mlx-vlm / 128 请求质量对照 | Qwen3.8-27B 8bit；MLTF vs mlx-vlm  | [PERF-08](reports/experiments/perf-08_CN.md) |
 | 2026-10-19 | MLTF / Qwen、Pi、Hermes 三种真实 CLI | Qwen3.8-27B 8bit；MLTF  | [PERF-07](reports/experiments/perf-07_CN.md) |

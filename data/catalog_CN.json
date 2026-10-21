@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1522,6 +1522,34 @@
         "testHardware": null,
         "hardwareStatus": "current-reference-only"
       }
+    },
+    {
+      "id": "PERF-09",
+      "title": "Splash vs MLTF / 复现 PERF-06 的 128K 图文性能",
+      "date": "2026-10-21",
+      "sortDate": "2026-10-21",
+      "model": "Qwen3.8-27B MLX affine 8bit / MLTF q8c; INT8 KV",
+      "engines": [
+        "Splash",
+        "MLTF"
+      ],
+      "scope": "local",
+      "category": "本机引擎性能与质量",
+      "summary": "新进程 ABBA 复测：四轮均满 4096 输出，图片与恢复检查通过。Splash 平均总耗时 633.02 秒，MLTF 777.38 秒；正文交付率 29.36 vs 27.97 tok/s。",
+      "caveat": "每个后端两项任务。本次 MLTF 未复现历史 PERF-06 速度，原因尚未隔离。保留一次 status 遥测超时（证据审计 66/67）；未验证生成代码正确性或一般质量。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-09_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1（26A434），arm64；测试时 hardware.json 快照",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 核 CPU / 40 核 GPU / 128 GiB 统一内存",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2691,6 +2719,20 @@
         "workstationSnapshot": "2026-10-20T22:03:27Z",
         "testHardware": null,
         "hardwareStatus": "current-reference-only"
+      }
+    },
+    {
+      "id": "2026-10-21-splash-vs-mltf-perf06-replay",
+      "title": "Splash vs MLTF / 复现 PERF-06 的 128K 图文性能",
+      "path": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay_CN.md",
+      "format": "markdown",
+      "source": "new-report/PERF-09",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1（26A434），arm64；测试时 hardware.json 快照",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 核 CPU / 40 核 GPU / 128 GiB 统一内存",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-21-splash-vs-mltf-perf06-replay_CN.md"
       }
     }
   ],
