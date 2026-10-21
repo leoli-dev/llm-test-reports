@@ -1,4 +1,4 @@
-# Splash GGUF Q8_0: PERF-06 128K vision follow-up
+# Qwen3.8-27B: three local 8-bit configurations and GGUF follow-up
 
 [English](2026-10-21-splash-gguf-q8-perf06-replay.md) | [简体中文](2026-10-21-splash-gguf-q8-perf06-replay_CN.md)
 
@@ -17,6 +17,37 @@ Test Unsloth Q8_0 on Splash using the two original PERF-06 long image requests. 
 These are descriptive observations, not a controlled format-only speed comparison. Q8_0 and MLX affine8 contain different quantized values, and use different native projection paths. Both have BF16 vision linears, with different source containers and auxiliary dtypes. Test order, thermal state, filesystem cache and stochastic output/speculation also matter. Two tasks do not establish a stable ranking or general quality equivalence.
 
 Background load was not controlled. During GGUF content delivery, global CPU averaged 53.25% / 55.19% and global GPU busy 26.91% / 24.98% for A/B. A post-test read-only process snapshot found multiple browser helpers each above 50% of one CPU core. That snapshot is after inference and cannot establish their exact load throughout the requests. These conditions further limit causal attribution of the speed difference; user applications were left running.
+
+## 2026-10-21 update: three local 8-bit configurations
+
+The user requested a three-way local comparison and chose to remove the GGUF files because their observed speed was not useful for this machine’s intended use. This is a local retention decision, not a model-intelligence or universal GGUF-quality conclusion. No inference was rerun for this update.
+
+| Configuration | Source experiment | Full 4096 output | Vision + recovery | Cold KV | Native footprint peak GiB | Local decision |
+|---|---|---|---|---|---|---|
+| Splash MLX affine8 | PERF-09 | 2/2 | 2/2 | verified | 35.46 | retain |
+| MLTF q8c | PERF-09 | 2/2 | 2/2 | verified | 6.34 | retain |
+| Splash GGUF Q8_0 | PERF-10 | 2/2 | 2/2 | verified | 35.40 | remove GGUF files |
+
+MLTF q8c is packed from the same MLX affine8 source used by the Splash MLX run. Thus these are three engine/input configurations, not three independently quantized source models. Splash MLX and GGUF both use Splash 1.4.0 native Metal; MLTF uses 0.1.2. All measurements are local M5 Max / 128 GiB / macOS 27.0.1 (26A434), using the same A/B request bytes, 126976 input + 4096 output, INT8 KV, 96 GiB cap, sampling and thinking-OFF settings.
+
+Footprint is the maximum observed native-process physical footprint across each configuration’s two requests. The packed MLTF path uses different mapping/accounting behavior; footprint excludes other process/global scopes and is not total model RAM. Do not interpret the smaller MLTF value as equivalent total-system memory savings.
+
+| Configuration | Task | TTFT s | Complete s | Content tok/s |
+|---|---|---|---|---|
+| Splash MLX affine8 | A | 434.69 | 574.97 | 29.20 |
+| Splash MLX affine8 | B | 552.32 | 691.06 | 29.52 |
+| MLTF q8c | A | 619.32 | 764.82 | 28.15 |
+| MLTF q8c | B | 642.51 | 789.95 | 27.78 |
+| Splash GGUF Q8_0 | A | 633.19 | 886.89 | 16.15 |
+| Splash GGUF Q8_0 | B | 915.14 | 1185.84 | 15.13 |
+
+The initial mean-performance table and the six individual measurements should be read together. PERF-09 is an earlier same-day reference, not a fresh interleaved control for PERF-10. Background CPU/GPU load, thermal state, automatic ANE plans, output content and quantized values were not held equal. The observed GGUF slowdown supports the user’s local retention choice but does not establish a format-only causal ranking. Historical PERF-06 ~58.06 tok/s is excluded from this three-way comparison.
+
+### GGUF removal completed after archiving
+
+Removed the Q8_0 target and its dedicated GGUF vision projector: 29,978,232,480 bytes (29.98 GB) of weight files. Also removed the dedicated prepared assembly, derived tokenizer metadata and selection/cache-lock entries. This is logical file size removed, not a guaranteed increase in APFS free space.
+
+The complete bilingual report, figures, raw requests/SSE/outputs/resource traces, checksums and provenance remain archived. MLX8, MLTF q8c and the shared DFlash2 checkpoint remain present. Reproducing the GGUF test requires downloading the pinned files again. A deletion receipt is included in the evidence bundle; the original test-time download/manifest records remain historical evidence.
 
 ## Host, runtime and model provenance
 

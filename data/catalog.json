@@ -1553,16 +1553,17 @@
     },
     {
       "id": "PERF-10",
-      "title": "Splash GGUF Q8_0 / PERF-06 128K vision follow-up",
+      "title": "Qwen3.8-27B: three local 8-bit configurations and GGUF record",
       "date": "2026-10-21",
       "sortDate": "2026-10-21",
-      "model": "Qwen3.8-27B Unsloth GGUF Q8_0; BF16 projector; INT8 KV",
+      "model": "Qwen3.8-27B: MLX affine8 / MLTF q8c / Unsloth GGUF Q8_0; INT8 KV",
       "engines": [
-        "Splash"
+        "Splash",
+        "MLTF"
       ],
       "scope": "local",
       "category": "Local engine performance and quality",
-      "summary": "Two fresh-process GGUF Q8_0 image requests; 2/2 full 4096-token outputs. Mean complete time 1036.37 s; content delivery 15.64 tok/s. Earlier same-day PERF-09 references are labeled separately.",
+      "summary": "Local mean content delivery: Splash MLX affine8 29.36, MLTF q8c 27.97, Splash GGUF Q8_0 15.64 tok/s. All configurations completed 4096 outputs with vision/recovery checks. The user chose to remove GGUF weights because of observed speed.",
       "caveat": "PERF-09 baselines were not rerun/interleaved. Q8_0 and affine8 contain different quantized values; no format-only causal or general quality claim. Historical PERF-06 speed remained unreproduced in PERF-09. Background load was uncontrolled, with global CPU ~53%–55% during decode; the gap is not attributable solely to quantization format.",
       "sourceStatus": "report-only",
       "documents": [
@@ -2764,7 +2765,7 @@
     },
     {
       "id": "2026-10-21-splash-gguf-q8-perf06-replay",
-      "title": "Splash GGUF Q8_0 / PERF-06 128K vision follow-up",
+      "title": "Qwen3.8-27B: three local 8-bit configurations and GGUF record",
       "path": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay.md",
       "format": "markdown",
       "source": "new-report/PERF-10",

@@ -33,7 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
-| 2026-10-21 | Splash GGUF Q8_0 / PERF-06 128K 图文补测 | Qwen3.8-27B Unsloth GGUF Q8_0; BF16 projector; INT8 KV | [PERF-10](reports/experiments/perf-10_CN.md) |
+| 2026-10-21 | Qwen3.8-27B：三种本机 8bit 配置比较与 GGUF 记录 | Qwen3.8-27B MLX affine8 / MLTF q8c / GGUF Q8_0 | [PERF-10](reports/experiments/perf-10_CN.md) |
 | 2026-10-21 | Splash vs MLTF / 复现 PERF-06 的 128K 图文性能 | Qwen3.8-27B MLX affine 8bit / MLTF q8c; INT8 KV | [PERF-09](reports/experiments/perf-09_CN.md) |
 | 2026-10-20 | MLTF × Pi / 3D 坦克大战四轮 | MLTF 0.1.2 + Qwen3.8-27B 8bit q8c + Pi | [TANK-01](reports/experiments/tank-01_CN.md) |
 | 2026-10-19 | MLTF vs mlx-vlm / 128 请求质量对照 | Qwen3.8-27B 8bit；MLTF vs mlx-vlm  | [PERF-08](reports/experiments/perf-08_CN.md) |

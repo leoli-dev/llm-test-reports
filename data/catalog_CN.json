@@ -1553,16 +1553,17 @@
     },
     {
       "id": "PERF-10",
-      "title": "Splash GGUF Q8_0 / PERF-06 128K 图文补测",
+      "title": "Qwen3.8-27B：三种本机 8bit 配置比较与 GGUF 记录",
       "date": "2026-10-21",
       "sortDate": "2026-10-21",
-      "model": "Qwen3.8-27B Unsloth GGUF Q8_0; BF16 projector; INT8 KV",
+      "model": "Qwen3.8-27B: MLX affine8 / MLTF q8c / Unsloth GGUF Q8_0; INT8 KV",
       "engines": [
-        "Splash"
+        "Splash",
+        "MLTF"
       ],
       "scope": "local",
       "category": "本机引擎性能与质量",
-      "summary": "两项新进程 GGUF Q8_0 图文请求，2/2 满 4096 输出；平均完整耗时 1036.37 秒，正文交付 15.64 tok/s。早先同日 PERF-09 参考另行标注。",
+      "summary": "本机正文均值：Splash MLX affine8 29.36、MLTF q8c 27.97、Splash GGUF Q8_0 15.64 tok/s；三种配置均满4096且图片/恢复通过。记录用户因速度决定删除GGUF权重。",
       "caveat": "PERF-09 基线未重跑/交错运行。Q8_0 与 affine8 量化数值不同，不作文件格式单因素或通用质量结论；PERF-09 未复现历史 PERF-06 速度。 后台负载未受控制，解码期整机 CPU 约 53%–55%；不能全部归因于量化格式。",
       "sourceStatus": "report-only",
       "documents": [
@@ -2764,7 +2765,7 @@
     },
     {
       "id": "2026-10-21-splash-gguf-q8-perf06-replay",
-      "title": "Splash GGUF Q8_0 / PERF-06 128K 图文补测",
+      "title": "Qwen3.8-27B：三种本机 8bit 配置比较与 GGUF 记录",
       "path": "reports/originals/2026-10-21-splash-gguf-q8-perf06-replay_CN.md",
       "format": "markdown",
       "source": "new-report/PERF-10",
