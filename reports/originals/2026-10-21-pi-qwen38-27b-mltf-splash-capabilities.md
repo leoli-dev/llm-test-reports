@@ -4,6 +4,18 @@
 
 CAP-01 · Local test started 2026-10-21, America/Toronto. 18 primary questions, eight domains, 36 primary sessions, plus eight separately scored 32K-output visual supplement sessions. This is a curated subset and adaptation, not any named benchmark’s official full-run score.
 
+## 2026-10-21 update: visual quality is for the user to judge
+
+At the user's request, screenshots of every successfully rendered 2D/3D artifact are presented for human review. **Human visual verdicts are pending.** Earlier assistant rubric assessments below are retained as historical preliminary assessments, not user-approved quality scores or preferences. The earlier 32K 2D domain figures (MLTF 50.00 / Splash 94.44) must be read in that light. Objective file-delivery and execution results remain separate; the 8K primary scores are unchanged.
+
+| Review ID | Task / engine | Actual Chromium screenshot | User verdict |
+|---|---|---|---|
+| A | SVG-02 grandfather clock / MLTF | [Full-size screenshot](../../assets/figures/cap-01-32k-mltf-svg-02.png) | Pending |
+| B | SVG-02 grandfather clock / Splash | [Full-size screenshot](../../assets/figures/cap-01-32k-splash-svg-02.png) | Pending |
+| C | SVG-01 solar system / Splash | [Full-size screenshot](../../assets/figures/cap-01-32k-splash-svg-01.png) | Pending |
+
+The screenshots appear in full below and come from the original model outputs without visual repair. MLTF SVG-01 delivered no file. No 3D submission produced a valid project/render, so there is no scene screenshot to judge; the recorded missing-delivery/execution failures remain available. These failures do not represent a human aesthetic rating of a finished scene. User feedback will be recorded separately with attribution, without overwriting the earlier assistant record.
+
 ## 8K primary scores and interpretation
 
 | Domain (equal overall weight) | Questions | MLTF | Splash |
