@@ -6,7 +6,7 @@
 
 **[浏览中文报告站](https://leoli-dev.github.io/llm-test-reports/index_CN.html)** · **[完整 Markdown 报告](reports/originals/)** · [新增报告](CONTRIBUTING_CN.md)
 
-当前收录 **54 项实验、参数组或对照记录，77 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
+当前收录 **55 项实验、参数组或对照记录，78 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
 
 ## 本机配置与系统
 
@@ -33,6 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
+| 2026-10-23 | 水景 / Opus 5.5 与 GPT 6.1 sol 实现同一份 WebGL 需求 | Claude Opus 5.5 (high effort, Claude Code) vs GPT 6.1 sol (high reasoning, Codex); cloud | [CLOUD-02](reports/experiments/cloud-02_CN.md) |
 | 2026-10-21 | Splash affine8原生256K上下文压力测试 | Qwen3.8-27B MLX affine8 / INT8 KV | [PERF-11](reports/experiments/perf-11_CN.md) |
 | 2026-10-21 | Pi能力考试：Qwen3.8-27B 8bit 在MLTF / Splash上的表现 | Qwen3.8-27B 8-bit (MLTF q8c / MLX affine8) | [CAP-01](reports/experiments/cap-01_CN.md) |
 | 2026-10-21 | Qwen3.8-27B：三种本机 8bit 配置比较与 GGUF 记录 | Qwen3.8-27B MLX affine8 / MLTF q8c / GGUF Q8_0 | [PERF-10](reports/experiments/perf-10_CN.md) |

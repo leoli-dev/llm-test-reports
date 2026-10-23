@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-21",
+  "updated": "2026-10-23",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1633,6 +1633,34 @@
         "testOSSource": "reports/originals/2026-10-21-splash-affine8-256k-stress.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CLOUD-02",
+      "title": "Water garden / Opus 5.5 vs GPT 6.1 sol on one WebGL brief",
+      "date": "2026-10-23",
+      "sortDate": "2026-10-23",
+      "model": "Claude Opus 5.5 (high effort, Claude Code) vs GPT 6.1 sol (high reasoning, Codex); cloud",
+      "engines": [
+        "Claude Code",
+        "Codex"
+      ],
+      "scope": "cloud",
+      "category": "Cloud comparisons",
+      "summary": "Same Three.js/WebGL 2 shallow-water brief. Joint verdict after a conflict-disclosed debate between two reviewer agents: opus55 has a moderate overall lead (readable ripples, depth ray-march refraction, closer main scene, R16F heights, 4 presets); gpt61sol ships stronger reproducible browser QA and accessibility and higher uncapped throughput in repeated DPR 2 medium/high runs (about 1.2–1.6× dense, 2.5–3× main). GPT R32F heights lose the rendered ripple without float-linear filtering; Opus has a Space-key defect. Dense scene mixed.",
+      "caveat": "One artifact per model, generation process not observed, reviewers each belong to one artifact family, visual judgments subjective, no real phone, Safari or Firefox; R32F finding by capability emulation only.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol.md"
+      ],
+      "markdown": "reports/experiments/cloud-02.md",
+      "environment": {
+        "scope": "cloud",
+        "testOS": "Evaluation host macOS 27.0.1 (26A434), arm64; generation-time client OS not separately recorded",
+        "inferenceHardware": "Cloud inference; client and evaluation host MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2858,6 +2886,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-21-splash-affine8-256k-stress.md"
+      }
+    },
+    {
+      "id": "2026-10-23-water-garden-opus55-vs-gpt61sol",
+      "title": "Water garden / Opus 5.5 vs GPT 6.1 sol on one WebGL brief",
+      "path": "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol.md",
+      "format": "markdown",
+      "source": "new-report/CLOUD-02",
+      "environment": {
+        "scope": "cloud",
+        "testOS": "Evaluation host macOS 27.0.1 (26A434), arm64; generation-time client OS not separately recorded",
+        "inferenceHardware": "Cloud inference; client and evaluation host MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol.md"
       }
     }
   ],
