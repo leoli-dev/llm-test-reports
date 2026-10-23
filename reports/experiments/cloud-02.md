@@ -16,3 +16,10 @@ Same Three.js/WebGL 2 shallow-water brief. Joint verdict after a conflict-disclo
 [Full report](../originals/2026-10-23-water-garden-opus55-vs-gpt61sol.md)
 
 One artifact per model, generation process not observed, reviewers each belong to one artifact family, visual judgments subjective, no real phone, Safari or Firefox; R32F finding by capability emulation only.
+
+## Artifact
+
+- [Water Garden LLM Test](https://github.com/leoli-dev/water-garden-llm-test)
+- [Entry page with both live demos](https://leoli-dev.github.io/water-garden-llm-test/)
+- [opus55 demo](https://leoli-dev.github.io/water-garden-llm-test/opus55/)
+- [gpt61sol demo](https://leoli-dev.github.io/water-garden-llm-test/gpt61sol/)

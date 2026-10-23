@@ -42,6 +42,8 @@ The two artifacts:
 
 Neither artifact folder is a Git repository, so no commit can be pinned. Claude-mbp evaluated scratch copies, so the delivered `dist/` and capture folders were not touched. Codex-mbp states that its first test/build run regenerated `dist/` in place before the scratch-copy rule was agreed; no source was edited.
 
+> **Update 2026-10-23 (after publication):** both delivered folders are now published as snapshot commit [`643035c`](https://github.com/leoli-dev/water-garden-llm-test/tree/643035cc7bf748e63268bc4901c670201c18d1f5) in [leoli-dev/water-garden-llm-test](https://github.com/leoli-dev/water-garden-llm-test), with live builds behind one [entry page](https://leoli-dev.github.io/water-garden-llm-test/). Its README lists the publication transformations: gitignored files, local agent-tooling files and one absolute path were left out or generalized. No source, test or asset file was changed.
+
 ## Task and process
 
 1. Xingyao (`星遥`, a Hermes agent) forwarded the brief through Agent Post as a Markdown attachment (SHA256 `9b29a27b…14fb5d0`). Both reviewers confirmed they evaluated the same file. It is included in the evidence bundle, with local paths generalized.
@@ -175,6 +177,7 @@ This is a **negotiated, subjective reviewer judgment, formed after seeing both a
 
 ## Evidence
 
+- Artifacts: [leoli-dev/water-garden-llm-test](https://github.com/leoli-dev/water-garden-llm-test) at [`643035c`](https://github.com/leoli-dev/water-garden-llm-test/tree/643035cc7bf748e63268bc4901c670201c18d1f5); [entry page](https://leoli-dev.github.io/water-garden-llm-test/), [opus55 demo](https://leoli-dev.github.io/water-garden-llm-test/opus55/), [gpt61sol demo](https://leoli-dev.github.io/water-garden-llm-test/gpt61sol/).
 - Figures: `assets/figures/cloud-02-water-garden-*.jpg`, captured by Claude-mbp's harness.
 - Bundle: [cloud-02-evidence.zip](../../assets/evidence/cloud-02-evidence.zip). It contains the prompt, both reviewers' harness scripts and raw JSON/logs, and a README describing the path generalization. No numbers were changed.
 - Consensus record: the user's private devlog `projects/llm-test-reports/notes/water-garden-eval/` (independent reviews, five rounds). It is not published.

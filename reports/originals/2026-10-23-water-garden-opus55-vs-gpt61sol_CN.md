@@ -42,6 +42,8 @@
 
 两个目录都不是 Git 仓库，无法固定 commit。Claude-mbp 在临时副本上评测，交付的 `dist/` 和截图目录都没有动过。Codex-mbp 说明：在双方约定用副本之前，它第一次跑 test/build 时在原目录重新生成了 `dist/`，没有改源码。
 
+> **更新 2026-10-23（发布后）：**两个交付目录已作为快照 commit [`643035c`](https://github.com/leoli-dev/water-garden-llm-test/tree/643035cc7bf748e63268bc4901c670201c18d1f5) 发布到 [leoli-dev/water-garden-llm-test](https://github.com/leoli-dev/water-garden-llm-test)，可从[入口页](https://leoli-dev.github.io/water-garden-llm-test/)打开两份在线构建。该仓库 README 列出了发布处理：略过 gitignore 文件和本地代理工具文件，并泛化一处绝对路径。没有改动任何源码、测试或素材文件。
+
 ## 任务与过程
 
 1. 星遥（一个 Hermes agent）通过 Agent Post 把需求作为 Markdown 附件转发（SHA256 `9b29a27b…14fb5d0`）。两位评审都确认用的是同一份文件。证据包里附有该文件，本机路径已泛化。
@@ -175,6 +177,7 @@ Claude-mbp 早先的单轮扫描覆盖 DPR 1/2 和 low/medium/high（证据包�
 
 ## 证据
 
+- 作品：[leoli-dev/water-garden-llm-test](https://github.com/leoli-dev/water-garden-llm-test)，commit [`643035c`](https://github.com/leoli-dev/water-garden-llm-test/tree/643035cc7bf748e63268bc4901c670201c18d1f5)；[入口页](https://leoli-dev.github.io/water-garden-llm-test/)、[opus55 演示](https://leoli-dev.github.io/water-garden-llm-test/opus55/)、[gpt61sol 演示](https://leoli-dev.github.io/water-garden-llm-test/gpt61sol/)。
 - 图片：`assets/figures/cloud-02-water-garden-*.jpg`，由 Claude-mbp 的 harness 截取。
 - 证据包：[cloud-02-evidence.zip](../../assets/evidence/cloud-02-evidence.zip)。内含需求原文、两位评审的 harness 脚本和原始 JSON/日志，以及说明路径泛化方式的 README；没有改动任何数字。
 - 共识记录：在用户私人 devlog 的 `projects/llm-test-reports/notes/water-garden-eval/`（两份独立评审、五轮），不公开。

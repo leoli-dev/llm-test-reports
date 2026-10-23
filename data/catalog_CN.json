@@ -1660,7 +1660,11 @@
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol_CN.md"
       },
-      "artifact": null
+      "artifact": {
+        "url": "https://github.com/leoli-dev/water-garden-llm-test",
+        "play": "https://leoli-dev.github.io/water-garden-llm-test/",
+        "name": "Water Garden LLM Test"
+      }
     }
   ],
   "documents": [

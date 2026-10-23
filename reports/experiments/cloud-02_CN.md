@@ -16,3 +16,10 @@
 [完整报告](../originals/2026-10-23-water-garden-opus55-vs-gpt61sol_CN.md)
 
 每个模型只有一份交付，生成过程未观察，评审各属一方模型家族，视觉判断为主观，未测真机、Safari 或 Firefox；R32F 结论仅来自能力模拟。
+
+## 测试产物
+
+- [Water Garden LLM Test](https://github.com/leoli-dev/water-garden-llm-test)
+- [入口页（两份在线演示）](https://leoli-dev.github.io/water-garden-llm-test/)
+- [opus55 演示](https://leoli-dev.github.io/water-garden-llm-test/opus55/)
+- [gpt61sol 演示](https://leoli-dev.github.io/water-garden-llm-test/gpt61sol/)
