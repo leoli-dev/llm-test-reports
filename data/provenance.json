@@ -1690,5 +1690,28 @@
       "review": "Numeric and source-code preservation checks with Codex editorial review; historical model evaluations were not repeated.",
       "method": "Full prose localization using local MLTF translation and Codex editorial translation; immutable code, literals and linked evidence retained; environment context added separately."
     }
+  },
+  {
+    "path": "reports/originals/2026-10-26-strata-cold-kv-128k-256k.md",
+    "source": "PERF-13/REPORT.md",
+    "sourceSha256": "030e42ff44e5346e55fd5ec0e4d52279c0a88ce0bbb1d5756f214d7811752c4c",
+    "publishedSha256": "49609a30f037757396e15384491dbd7c9c11eaa4f3eb65fe67b53f877d7f4257",
+    "changes": [
+      "full bilingual report prose",
+      "private account paths generalized to <home>",
+      "battery identifier omitted",
+      "resource columns selected; process inventory omitted",
+      "SSE event excerpts, not full streams",
+      "full input payloads retained locally",
+      "original figures and CSV unchanged"
+    ],
+    "localization": {
+      "date": "2026-10-26",
+      "english": "reports/originals/2026-10-26-strata-cold-kv-128k-256k.md",
+      "chinese": "reports/originals/2026-10-26-strata-cold-kv-128k-256k_CN.md",
+      "chineseSha256": "2a27e7a32bacc090331bb72f9099d7658dcf16b6e56552a3a829f771a3ddc7f2",
+      "translationModel": "Codex editorial translation",
+      "review": "All original table numeric cells and inline literals paired; measured inference not repeated."
+    }
   }
 ]
