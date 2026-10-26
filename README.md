@@ -6,7 +6,7 @@ My LLM test archive: models and inference engines observed through real tasks, f
 
 **[Browse the report site](https://leoli-dev.github.io/llm-test-reports/)** · **[Full Markdown reports](reports/originals/)** · [Add a report](CONTRIBUTING.md)
 
-The archive contains **55 experiment, parameter or comparison records and 78 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
+The archive contains **56 experiment, parameter or comparison records and 79 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
 
 ## Workstation and system
 
@@ -33,6 +33,7 @@ Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test sta
 
 | Date | Experiment / parameters | Model and runtime | Report |
 |---|---|---|---|
+| 2026-10-25 | RepairDesk / Pi on Strata and Splash at 256K | Qwen3.8-Flash-Next GSQ-RCO IQ3_S vs Qwen3.8-27B MLX affine8 | [CAP-03](reports/experiments/cap-03.md) |
 | 2026-10-23 | Water garden / Opus 5.5 vs GPT 6.1 sol on one WebGL brief | Claude Opus 5.5 (high effort, Claude Code) vs GPT 6.1 sol (high reasoning, Codex); cloud | [CLOUD-02](reports/experiments/cloud-02.md) |
 | 2026-10-21 | Splash affine8 native 256K context stress test | Qwen3.8-27B MLX affine8 / INT8 KV | [PERF-11](reports/experiments/perf-11.md) |
 | 2026-10-21 | Pi capability exam: Qwen3.8-27B 8-bit on MLTF / Splash | Qwen3.8-27B 8-bit (MLTF q8c / MLX affine8) | [CAP-01](reports/experiments/cap-01.md) |

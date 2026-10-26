@@ -1,0 +1,13 @@
+{
+  "experiment": "CAP-03",
+  "method": "Full editorial English translation; Traditional-to-Simplified prose conversion outside protected source literals; source code and original screenshots retained; relocated publication links audited separately.",
+  "source_report_sha256": "ab308e32cf1c80666d5244906f7cf6ccefb9327a883257ab22f680d3273ade4f",
+  "english_sha256": "28d8ca6e9455dd594ad7299457a7ab628cb4d27f5437a1aa8318a2672c5530b1",
+  "chinese_sha256": "d5df23d7477a6f31e295258c9d3a49d4e3e2fcb4824b9be13dc09eeed1427ab2",
+  "numeric_table_rows": 99,
+  "numeric_measurement_cells_equal_excluding_relocated_links": true,
+  "fenced_source_equal_to_original_in_both_languages": true,
+  "original_code_blocks": 1,
+  "screenshots": "byte-identical copied originals",
+  "not_rerun": "No model experiment or application repair in archive task."
+}

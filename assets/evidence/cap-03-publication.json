@@ -1,0 +1,11 @@
+{
+  "bytes": 1510710,
+  "sha256": "c2c1cfa08546526642d536f9e53770760ece05484ab8c0a9b4eab23560fb86ab",
+  "files": 441,
+  "source_report_sha256": "ab308e32cf1c80666d5244906f7cf6ccefb9327a883257ab22f680d3273ade4f",
+  "source_evaluation_commit": "fe5bf41",
+  "original_local_archive_sha256": "b70425d1ba6bec570b734df5251dfb45a509252f1e0e9782bcb9e310b2a96191",
+  "policy": "curated publication edition; no full sessions/product source/private config/weights/runtime DBs",
+  "generalized_home": "/Users/benchmark",
+  "full_transform_log": "cap-03-evidence.zip/publication.json"
+}

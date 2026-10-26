@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-23",
+  "updated": "2026-10-25",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1665,6 +1665,34 @@
         "play": "https://leoli-dev.github.io/water-garden-llm-test/",
         "name": "Water Garden LLM Test"
       }
+    },
+    {
+      "id": "CAP-03",
+      "title": "RepairDesk / Pi on Strata and Splash at 256K",
+      "date": "2026-10-25",
+      "sortDate": "2026-10-25",
+      "model": "Qwen3.8-Flash-Next GSQ-RCO IQ3_S vs Qwen3.8-27B MLX affine8",
+      "engines": [
+        "Strata",
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "Paired coding-agent project",
+      "summary": "Same four-phase brief, 60 minutes each: Strata 38.16 min, completion 79/80 and quality 14/20; Splash 50.89 min, 77/80 and 10/20. Preserves reproduced data-integrity/security/UI defects and evaluator corrections; no supervisor product-code fixes.",
+      "caveat": "One project, one run per system, identity-aware review and fixed order; base models, quantization, engines and self-selected visual strategies differ. Configured 256K was verified; maximum observed input was 162672/124477. Curated evidence excludes full sessions, private config and complete product source. Local commit only, no push.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-25-pi-strata-splash-repairdesk.md"
+      ],
+      "markdown": "reports/experiments/cap-03.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; captured test-time host.json",
+        "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2904,6 +2932,20 @@
         "inferenceHardware": "Cloud inference; client and evaluation host MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol.md"
+      }
+    },
+    {
+      "id": "2026-10-25-pi-strata-splash-repairdesk",
+      "title": "RepairDesk / Pi on Strata and Splash at 256K",
+      "path": "reports/originals/2026-10-25-pi-strata-splash-repairdesk.md",
+      "format": "markdown",
+      "source": "new-report/CAP-03",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434), arm64; captured test-time host.json",
+        "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk.md"
       }
     }
   ],

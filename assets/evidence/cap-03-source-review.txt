@@ -1,0 +1,235 @@
+Review excerpts only; full product source remains in separate local repositories. Source language and line numbers preserved.
+
+## S01: strata/static/app.js:461
+source SHA256: 7cfaf0a31a548a0f3980d45e47545b20e5511925a90c68f6b33fd47b513971ac
+frozen commit: 8ef8a5f4c7206f4953d495ed351f051916fefacd
+
+453:     start,
+454:     end,
+455:   });
+456:   if (!result.ok) {
+457:     const hint = result.error && result.error.code === "booking_conflict"
+458:       ? "　該時段已被其他工單使用，請改用相鄰時段或另一個工作棚。"
+459:       : "　排程未變更。";
+460:     setRegionError($("booking-error"), describeError(result) + hint);
+461:     await refreshAfterMutation();
+462:     return;
+463:   }
+464:   state.currentOrder = result.data;
+465:   setRegionError($("booking-error"), "");
+466:   setStatus("工作棚 " + bay + " 排程已儲存：" + formatSpan(start, end) + "。");
+467:   renderOrderDetail();
+468:   await refreshAfterMutation();
+469: }
+470:
+471: /* -------------------------------------------------------------------- parts */
+472: async function loadParts() {
+473:   const result = await api("GET", "/api/parts");
+
+## S02: strata/workshop/service.py:658
+source SHA256: 0cd4adf635ee4d914c9f67d1c00509dbc7fb6555b5b8de5b1cf06bc386a05b40
+frozen commit: 8ef8a5f4c7206f4953d495ed351f051916fefacd
+
+650:             "reservations": reservations,
+651:             "bookings": bookings,
+652:             "audit": audit,
+653:         }
+654:
+655:     def import_state(self, body) -> dict:
+656:         """Validate the whole backup first, then replace DB state atomically."""
+657:         body = require_object(body)
+658:         if "schemaVersion" not in body or body["schemaVersion"] != SCHEMA_VERSION:
+659:             raise invalid(f"schemaVersion must be {SCHEMA_VERSION}")
+660:         for key in ("parts", "orders", "reservations", "bookings", "audit"):
+661:             if not isinstance(body.get(key), list):
+662:                 raise invalid(f"{key} must be an array")
+663:
+664:         parts: list[dict] = []
+665:         part_ids: set[str] = set()
+666:         skus: set[str] = set()
+667:         for raw in body["parts"]:
+668:             p = require_object(raw)
+669:             pid, sku, name = req_text(p, "id"), req_text(p, "sku"), req_text(p, "name")
+670:             stock = req_int(p, "stock", minimum=0)
+
+## S03: strata/tests/test_phase4_audit.py:72
+source SHA256: 9fe4931b58e8f6230cc8310491a71a6f585515d2ff1f28f9f118aefe14cc6e12
+frozen commit: 8ef8a5f4c7206f4953d495ed351f051916fefacd
+
+64:             t.start()
+65:         for t in threads:
+66:             t.join(timeout=10)
+67:
+68:         self.assertEqual(sorted(outcomes), [200, 409], f"outcomes={outcomes}")
+69:         detail = self.ok("GET", f"/api/orders/{order['id']}")
+70:         self.assertEqual(detail["version"], 2)
+71:         self.assertIn(detail["status"], ("open", "in_progress"))
+72:         self.assertEqual(len(detail["reservations"]), 1)
+73:
+74:     def test_concurrent_part_stock_updates_keep_one_winner(self):
+75:         part = self.make_part("RACE-STOCK", "螢幕", 10)
+76:         outcomes = []
+77:         barrier = threading.Barrier(2)
+78:
+79:         def update(stock):
+80:             barrier.wait(timeout=5)
+81:             status, _ = self.call("PATCH", f"/api/parts/{part['id']}",
+82:                                   {"version": 1, "stock": stock})
+83:             outcomes.append(status)
+84:
+
+## P01: splash/app.py:301
+source SHA256: 984dde74b3cdef5ace72db4d7d6f71d84c50bcee5419fba59c58f099ef4f6150
+frozen commit: 1de5c3088520f9beeeb5ff7ef67a35dbfeaf2908
+
+293:     booked_orders: set[str] = set()
+294:     for i, b in enumerate(obj["bookings"]):
+295:         if not isinstance(b, dict):
+296:             raise ValidationError(f"bookings[{i}] must be an object")
+297:         oid = b.get("orderId")
+298:         if oid not in order_ids:
+299:             raise ValidationError(f"bookings[{i}].orderId references unknown order")
+300:         if order_status[oid] not in ACTIVE_STATUSES:
+301:             raise ValidationError(f"bookings[{i}] references inactive order {oid}")
+302:         if oid in booked_orders:
+303:             raise ValidationError(f"more than one booking for order {oid}")
+304:         booked_orders.add(oid)
+305:         bay = b.get("bay")
+306:         if not isinstance(bay, int) or isinstance(bay, bool) or bay not in (1, 2):
+307:             raise ValidationError(f"bookings[{i}].bay must be integer 1 or 2")
+308:         start = validate_utc_ts(b.get("start"), f"bookings[{i}].start")
+309:         end = validate_utc_ts(b.get("end"), f"bookings[{i}].end")
+310:         if end <= start:
+311:             raise ValidationError(f"bookings[{i}].end must be after start")
+312:         bookings.append({"orderId": oid, "bay": bay, "start": start, "end": end})
+313:     # half-open overlap per bay
+
+## P02: splash/app.py:493
+source SHA256: 984dde74b3cdef5ace72db4d7d6f71d84c50bcee5419fba59c58f099ef4f6150
+frozen commit: 1de5c3088520f9beeeb5ff7ef67a35dbfeaf2908
+
+485:                 raise ConflictError("duplicate_sku", f"SKU already exists: {sku}")
+486:             reserved = self._reserved_active(conn, part_id)
+487:             row = conn.execute(
+488:                 "SELECT id, sku, name, stock, version FROM parts WHERE id=?",
+489:                 (part_id,),
+490:             ).fetchone()
+491:             return self.part_view({**dict(row), "reserved": reserved})
+492:         result = self.transaction(work)
+493:         self.audit("part.created", part_id, {"sku": sku, "name": name, "stock": stock})
+494:         return result
+495:
+496:     def get_part(self, part_id: str):
+497:         row = self.query_one(
+498:             "SELECT id, sku, name, stock, version FROM parts WHERE id=?", (part_id,)
+499:         )
+500:         if row is None:
+501:             raise NotFoundError("part not found")
+502:         reserved = self.query_one(
+503:             "SELECT COALESCE(SUM(CASE WHEN o.status IN ('open','in_progress') "
+504:             "THEN r.quantity ELSE 0 END), 0) AS n FROM reservations r "
+505:             "JOIN orders o ON o.id=r.order_id WHERE r.part_id=?",
+
+## P03: splash/static/app.js:181
+source SHA256: eb9d461093ab58c81a86e7551cf251ab402ec60453112d3f4571cce3ce284dc5
+frozen commit: 1de5c3088520f9beeeb5ff7ef67a35dbfeaf2908
+
+173:   const partName = pid => {
+174:     const p = state.parts.find(x => x.id === pid);
+175:     return p ? `${p.name}（${p.sku}）` : pid;
+176:   };
+177:
+178:   const active = order.status === 'open' || order.status === 'in_progress';
+179:   const statusBtns = [];
+180:   if (order.status === 'open') {
+181:     statusBtns.push(`<button type="button" class="btn primary" data-action="order-status" data-id="${id}" data-status="in_progress" data-testid="order-start">開始處理</button>`);
+182:   }
+183:   if (order.status === 'in_progress') {
+184:     statusBtns.push(`<button type="button" class="btn primary" data-action="order-status" data-id="${id}" data-status="done" data-testid="order-complete">完成</button>`);
+185:   }
+186:   if (active) {
+187:     statusBtns.push(`<button type="button" class="btn danger" data-action="order-status" data-id="${id}" data-status="cancelled" data-testid="order-cancel">取消訂單</button>`);
+188:   }
+189:
+190:   const resRows = order.reservations.map(r =>
+191:     `<tr><td>${esc(partName(r.partId))}</td><td>${r.quantity}</td></tr>`).join('');
+192:
+193:   const booking = order.booking;
+
+## P04: splash/static/app.js:499
+source SHA256: eb9d461093ab58c81a86e7551cf251ab402ec60453112d3f4571cce3ce284dc5
+frozen commit: 1de5c3088520f9beeeb5ff7ef67a35dbfeaf2908
+
+491:
+492: function onOrderAction(e) {
+493:   const btn = e.target.closest('[data-action]');
+494:   if (!btn) return;
+495:   const action = btn.dataset.action;
+496:   const id = btn.dataset.id;
+497:   if (action === 'order-new') { openOrderDialog(null); return; }
+498:   if (action === 'order-view') { state.detailId = id; clearNotices('orders'); renderOrdersView(); return; }
+499:   if (action === 'order-back') { state.detailId = null; renderOrdersView(); return; }
+500:   if (action === 'order-edit-open') {
+501:     const order = state.orders.find(o => o.id === id);
+502:     if (order) openOrderDialog(order);
+503:     return;
+504:   }
+505:   if (action === 'order-status') {
+506:     const order = state.orders.find(o => o.id === id);
+507:     if (!order) return;
+508:     const label = STATUS_LABEL[btn.dataset.status] || btn.dataset.status;
+509:     if (!window.confirm(`確定要將訂單「${order.title}」標記為「${label}」嗎？`)) return;
+510:     (async () => {
+511:       try {
+
+## B01: strata/workshop/http_app.py:152
+source SHA256: f79a00fef0f3ea94257e6c12b64a25f6b14818a684e21fc019c2c495419200a4
+frozen commit: 8ef8a5f4c7206f4953d495ed351f051916fefacd
+
+144:         try:
+145:             length = int(length_header)
+146:         except ValueError:
+147:             raise ApiError("invalid_input", "invalid Content-Length header", 422)
+148:         if length < 0:
+149:             raise ApiError("invalid_input", "invalid Content-Length header", 422)
+150:         if length > MAX_BODY:
+151:             raise ApiError("payload_too_large", "request body too large", 413)
+152:         raw = self.rfile.read(length) if length else b""
+153:         if not raw:
+154:             raise ApiError("invalid_json", "request body must be a JSON object", 422)
+155:         try:
+156:             return json.loads(raw.decode("utf-8"))
+157:         except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+158:             raise ApiError("invalid_json", f"malformed JSON body: {exc.__class__.__name__}", 422)
+159:
+160:     def _static(self, path: str) -> None:
+161:         if self.command not in ("GET", "HEAD"):
+162:             self._send_error(405, "method_not_allowed", "static files only allow GET")
+163:             return
+164:         rel = "index.html" if path in ("/", "") else path.lstrip("/")
+
+## B01: splash/app.py:945
+source SHA256: 984dde74b3cdef5ace72db4d7d6f71d84c50bcee5419fba59c58f099ef4f6150
+frozen commit: 1de5c3088520f9beeeb5ff7ef67a35dbfeaf2908
+
+937:     def send_json(self, status: int, obj):
+938:         data = json.dumps(obj, ensure_ascii=False).encode("utf-8")
+939:         self.send_response(status)
+940:         self.send_header("Content-Type", "application/json; charset=utf-8")
+941:         self.send_header("Content-Length", str(len(data)))
+942:         self.send_header("Cache-Control", "no-store")
+943:         self.end_headers()
+944:         self.wfile.write(data)
+945:
+946:     def send_error_json(self, status: int, code: str, message: str):
+947:         self.send_json(status, {"error": {"code": code, "message": message}})
+948:
+949:     def send_file(self, path: Path):
+950:         data = path.read_bytes()
+951:         ctype = CONTENT_TYPES.get(path.suffix, "application/octet-stream")
+952:         self.send_response(200)
+953:         self.send_header("Content-Type", ctype)
+954:         self.send_header("Content-Length", str(len(data)))
+955:         self.end_headers()
+956:         self.wfile.write(data)
+957:

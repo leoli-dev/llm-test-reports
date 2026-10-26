@@ -1,0 +1,1085 @@
+{
+  "task": "RepairDesk",
+  "date": "2026-10-25",
+  "protocol": "one paired project; system comparison; identity-aware reviewer",
+  "results": {
+    "strata": {
+      "api_passed": 30,
+      "api_total": 30,
+      "api_score": 60,
+      "ui_score": 19,
+      "completion_score": 79,
+      "completion_max": 80,
+      "quality_score": 14,
+      "quality_max": 20,
+      "total": 93,
+      "api": [
+        {
+          "id": "A01",
+          "passed": true,
+          "wall_s": 0.11750625004060566
+        },
+        {
+          "id": "A02",
+          "passed": true,
+          "wall_s": 0.11662879190407693
+        },
+        {
+          "id": "A03",
+          "passed": true,
+          "wall_s": 0.11784804100170732
+        },
+        {
+          "id": "A04",
+          "passed": true,
+          "wall_s": 0.10861062491312623
+        },
+        {
+          "id": "A05",
+          "passed": true,
+          "wall_s": 0.11634437483735383
+        },
+        {
+          "id": "A06",
+          "passed": true,
+          "wall_s": 0.11890333308838308
+        },
+        {
+          "id": "A07",
+          "passed": true,
+          "wall_s": 0.11499574990011752
+        },
+        {
+          "id": "A08",
+          "passed": true,
+          "wall_s": 0.11883904179558158
+        },
+        {
+          "id": "A09",
+          "passed": true,
+          "wall_s": 0.11439212504774332
+        },
+        {
+          "id": "A10",
+          "passed": true,
+          "wall_s": 0.1178955000359565
+        },
+        {
+          "id": "A11",
+          "passed": true,
+          "wall_s": 0.11371650011278689
+        },
+        {
+          "id": "A12",
+          "passed": true,
+          "wall_s": 0.10836245794780552
+        },
+        {
+          "id": "A13",
+          "passed": true,
+          "wall_s": 0.110104416962713
+        },
+        {
+          "id": "A14",
+          "passed": true,
+          "wall_s": 0.12725533288903534
+        },
+        {
+          "id": "A15",
+          "passed": true,
+          "wall_s": 0.1140725000295788
+        },
+        {
+          "id": "A16",
+          "passed": true,
+          "wall_s": 0.11496879090555012
+        },
+        {
+          "id": "A17",
+          "passed": true,
+          "wall_s": 0.1206257080193609
+        },
+        {
+          "id": "A18",
+          "passed": true,
+          "wall_s": 0.1152460421435535
+        },
+        {
+          "id": "A19",
+          "passed": true,
+          "wall_s": 0.113045624922961
+        },
+        {
+          "id": "A20",
+          "passed": true,
+          "wall_s": 0.11922454205341637
+        },
+        {
+          "id": "A21",
+          "passed": true,
+          "wall_s": 0.12349299993366003
+        },
+        {
+          "id": "A22",
+          "passed": true,
+          "wall_s": 0.11610954091884196
+        },
+        {
+          "id": "A23",
+          "passed": true,
+          "wall_s": 0.11955499998293817
+        },
+        {
+          "id": "A24",
+          "passed": true,
+          "wall_s": 0.11407679109834135
+        },
+        {
+          "id": "A25",
+          "passed": true,
+          "wall_s": 0.2284920420497656
+        },
+        {
+          "id": "A26",
+          "passed": true,
+          "wall_s": 0.10759508400224149
+        },
+        {
+          "id": "A27",
+          "passed": true,
+          "wall_s": 0.2330307918600738
+        },
+        {
+          "id": "A28",
+          "passed": true,
+          "wall_s": 0.12346404185518622
+        },
+        {
+          "id": "A29",
+          "passed": true,
+          "wall_s": 0.12121737492270768
+        },
+        {
+          "id": "A30",
+          "passed": true,
+          "wall_s": 0.11135954200290143
+        }
+      ],
+      "ui": [
+        {
+          "id": "U01",
+          "points": 2,
+          "max": 2,
+          "navigation": 4
+        },
+        {
+          "id": "U02",
+          "points": 2,
+          "max": 2,
+          "orderId": "ord_72af1e010e944636bc4e40d705180940"
+        },
+        {
+          "id": "U03",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U04",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U05",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U06",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U07",
+          "points": 1,
+          "max": 2,
+          "preservedInputs": false,
+          "conflict_and_rebooking": true,
+          "reason": "衝突有提示、重輸日期後可改約；但失敗刷新把已填日期清空，違反保留輸入要求。",
+          "evidence": "scoring/strata/browser-v3/results.json",
+          "manual_adjudication": true
+        },
+        {
+          "id": "U08",
+          "points": 2,
+          "max": 2,
+          "nativeConfirmation": false
+        },
+        {
+          "id": "U09",
+          "points": 2,
+          "max": 2,
+          "focus": {
+            "tag": "INPUT",
+            "outline": "solid",
+            "shadow": "none"
+          }
+        },
+        {
+          "id": "U10",
+          "points": 2,
+          "max": 2,
+          "sizes": {
+            "width": 390,
+            "scroll": 390
+          }
+        }
+      ],
+      "quality": {
+        "correctness": {
+          "score": 4,
+          "reason": "固定API30/30，audit故障可回滾；仍接受錯誤schemaVersion型別，衝突後遺失表單日期。"
+        },
+        "security": {
+          "score": 3,
+          "reason": "參數化SQL、靜態目錄邊界、DOM文字渲染較完整；但接受不可信Origin及text/plain破壞性匯入。"
+        },
+        "architecture": {
+          "score": 4,
+          "reason": "CLI／HTTP／domain分離，測試共用支援碼；850行service與797行JS仍偏大。"
+        },
+        "tests_docs": {
+          "score": 3,
+          "reason": "測試面廣、文件誠實列限制；108項復驗107過，一項競態測試錯誤假定預留一定勝出，重跑10次僅6過。"
+        }
+      },
+      "run": {
+        "unclosed_tool_call_ids": [],
+        "native_restart_observed": false,
+        "summary": {
+          "label": "strata",
+          "mode": "formal",
+          "completed_phases": true,
+          "reason": "completed_phases",
+          "wall_s": 2289.598709916929,
+          "phase_count": 4,
+          "tool_starts": 137,
+          "assistant_output_tokens": 122489,
+          "request_count": 126,
+          "backend_identity_unchanged": true,
+          "backend_after": {
+            "archived_as": "configuration-audit.json and final-services.json; full live status retained locally"
+          },
+          "pi_returncode": 0
+        },
+        "resources": {
+          "samples_all": 2284,
+          "samples_development": 2274,
+          "native_rss_bytes": {
+            "n": 2274,
+            "min": 57431670784,
+            "max": 57521848320,
+            "mean": 57493075191.669304,
+            "median": 57502793728.0
+          },
+          "native_footprint_bytes": {
+            "n": 2274,
+            "min": 23343948584,
+            "max": 23537050432,
+            "mean": 23458365640.73175,
+            "median": 23488553768.0
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 2274,
+            "min": 102596608,
+            "max": 1508556800,
+            "mean": 183797650.12489006,
+            "median": 167100416.0
+          },
+          "system_cpu_percent": {
+            "n": 2274,
+            "min": 3.9757040309221425,
+            "max": 38.73473917869035,
+            "mean": 7.301357884786176,
+            "median": 6.121881139768094
+          },
+          "gpu_global_busy_percent": {
+            "n": 2274,
+            "min": 0,
+            "max": 100,
+            "mean": 72.30738786279683,
+            "median": 96.0
+          },
+          "gpu_global_memory_bytes": {
+            "n": 2274,
+            "min": 1222819840,
+            "max": 68398006272,
+            "mean": 47315841092.44679,
+            "median": 62710726656.0
+          },
+          "swap_used_bytes": {
+            "n": 2274,
+            "min": 2945051525.12,
+            "max": 2945051525.12,
+            "mean": 2945051525.12,
+            "median": 2945051525.12
+          },
+          "swap_delta_bytes_raw": {
+            "n": 2274,
+            "min": -5242.880000114441,
+            "max": -5242.880000114441,
+            "mean": -5242.880000114441,
+            "median": -5242.880000114441
+          },
+          "swap_growth_peak_bytes": 0,
+          "pressure": {
+            "normal": 2274
+          },
+          "telemetry_errors": {}
+        },
+        "tokens": {
+          "input_total_including_cached": 10658939,
+          "output_total_api": 122489,
+          "cached_input_total": 10597677,
+          "max_actual_input": 162672,
+          "input_per_request": {
+            "n": 126,
+            "min": 1661,
+            "max": 162672,
+            "mean": 84594.75396825396,
+            "median": 78848.5
+          },
+          "first_model_event_s": {
+            "n": 126,
+            "min": 0.1693676661234349,
+            "max": 11.689903541002423,
+            "mean": 0.8224731550980655,
+            "median": 0.37658629147335887
+          },
+          "api_request_wall_s": {
+            "n": 126,
+            "min": 0.5985929579474032,
+            "max": 149.28615037514828,
+            "mean": 13.218932755343202,
+            "median": 6.640201229020022
+          }
+        },
+        "native_timings": {
+          "decode": {
+            "requests": 126,
+            "tokens": 122489,
+            "seconds": 1564.1243,
+            "weighted_tok_s": 78.3115510704616
+          },
+          "prefill": {
+            "requests": 126,
+            "tokens": 61262,
+            "seconds": 96.9639,
+            "weighted_tok_s": 631.8021449219762
+          }
+        },
+        "api_failures": [],
+        "assistant_errors": [],
+        "event_counts": {
+          "response": 6,
+          "agent_start": 4,
+          "turn_start": 126,
+          "message_start": 268,
+          "message_end": 268,
+          "message_update": 97405,
+          "tool_execution_start": 137,
+          "tool_execution_update": 180,
+          "tool_execution_end": 137,
+          "turn_end": 126,
+          "agent_end": 4,
+          "agent_settled": 4
+        },
+        "tool_starts": {
+          "read": 5,
+          "bash": 57,
+          "write": 24,
+          "edit": 51
+        },
+        "tool_error_flags": 3,
+        "compactions": [],
+        "phases": [
+          {
+            "phase": 1,
+            "wall_s": 674.7609346669633,
+            "output_tokens_total": 38655,
+            "tool_starts_total": 51
+          },
+          {
+            "phase": 2,
+            "wall_s": 414.1376820001751,
+            "output_tokens_total": 63201,
+            "tool_starts_total": 74
+          },
+          {
+            "phase": 3,
+            "wall_s": 728.5594302080572,
+            "output_tokens_total": 104433,
+            "tool_starts_total": 117
+          },
+          {
+            "phase": 4,
+            "wall_s": 472.13960016705096,
+            "output_tokens_total": 122489,
+            "tool_starts_total": 137
+          }
+        ],
+        "snapshot": {
+          "head": "8ef8a5f4c7206f4953d495ed351f051916fefacd",
+          "status": "",
+          "source_files": [
+            ".gitignore",
+            "BRIEF.md",
+            "DELIVERY.md",
+            "README.md",
+            "app.py",
+            "static/app.js",
+            "static/index.html",
+            "static/styles.css",
+            "tests/_support.py",
+            "tests/test_audit_api.py",
+            "tests/test_backup_api.py",
+            "tests/test_booking_api.py",
+            "tests/test_health_and_static.py",
+            "tests/test_orders_api.py",
+            "tests/test_parts_api.py",
+            "tests/test_phase4_audit.py",
+            "tests/test_reservations_api.py",
+            "tests/test_restart_persistence.py",
+            "tests/test_ui_browser.py",
+            "tests/test_ui_static.py",
+            "workshop/__init__.py",
+            "workshop/http_app.py",
+            "workshop/service.py"
+          ]
+        },
+        "observed_native_identity_count": 1
+      }
+    },
+    "splash": {
+      "api_passed": 29,
+      "api_total": 30,
+      "api_score": 58,
+      "ui_score": 19,
+      "completion_score": 77,
+      "completion_max": 80,
+      "quality_score": 10,
+      "quality_max": 20,
+      "total": 87,
+      "api": [
+        {
+          "id": "A01",
+          "passed": true,
+          "wall_s": 0.12479708413593471
+        },
+        {
+          "id": "A02",
+          "passed": true,
+          "wall_s": 0.11644574999809265
+        },
+        {
+          "id": "A03",
+          "passed": true,
+          "wall_s": 0.10795512492768466
+        },
+        {
+          "id": "A04",
+          "passed": true,
+          "wall_s": 0.1078162498306483
+        },
+        {
+          "id": "A05",
+          "passed": true,
+          "wall_s": 0.11668483400717378
+        },
+        {
+          "id": "A06",
+          "passed": true,
+          "wall_s": 0.11093887500464916
+        },
+        {
+          "id": "A07",
+          "passed": true,
+          "wall_s": 0.11225291714072227
+        },
+        {
+          "id": "A08",
+          "passed": true,
+          "wall_s": 0.11938474979251623
+        },
+        {
+          "id": "A09",
+          "passed": true,
+          "wall_s": 0.11046595894731581
+        },
+        {
+          "id": "A10",
+          "passed": true,
+          "wall_s": 0.11951733403839171
+        },
+        {
+          "id": "A11",
+          "passed": true,
+          "wall_s": 0.11400233302265406
+        },
+        {
+          "id": "A12",
+          "passed": true,
+          "wall_s": 0.11818433296866715
+        },
+        {
+          "id": "A13",
+          "passed": true,
+          "wall_s": 0.1115503329783678
+        },
+        {
+          "id": "A14",
+          "passed": true,
+          "wall_s": 0.12182954093441367
+        },
+        {
+          "id": "A15",
+          "passed": true,
+          "wall_s": 0.12065662513487041
+        },
+        {
+          "id": "A16",
+          "passed": true,
+          "wall_s": 0.11239216709509492
+        },
+        {
+          "id": "A17",
+          "passed": true,
+          "wall_s": 0.11207649996504188
+        },
+        {
+          "id": "A18",
+          "passed": true,
+          "wall_s": 0.1157980419229716
+        },
+        {
+          "id": "A19",
+          "passed": true,
+          "wall_s": 0.11442891601473093
+        },
+        {
+          "id": "A20",
+          "passed": true,
+          "wall_s": 0.10990783292800188
+        },
+        {
+          "id": "A21",
+          "passed": true,
+          "wall_s": 0.12046083295717835
+        },
+        {
+          "id": "A22",
+          "passed": true,
+          "wall_s": 0.1204450000077486
+        },
+        {
+          "id": "A23",
+          "passed": true,
+          "wall_s": 0.12643250008113682
+        },
+        {
+          "id": "A24",
+          "passed": true,
+          "wall_s": 0.11811833409592509
+        },
+        {
+          "id": "A25",
+          "passed": true,
+          "wall_s": 0.2302212081849575
+        },
+        {
+          "id": "A26",
+          "passed": true,
+          "wall_s": 0.11620279191993177
+        },
+        {
+          "id": "A27",
+          "passed": false,
+          "error": "AssertionError(\"POST /api/import: expected200, got422: {'error': {'code': 'invalid_input', 'message': 'bookings[0] references inactive order fbf983297726461c9d1ca3204c87ecb5'}}\")",
+          "wall_s": 0.123711165972054
+        },
+        {
+          "id": "A28",
+          "passed": true,
+          "wall_s": 0.12170949997380376
+        },
+        {
+          "id": "A29",
+          "passed": true,
+          "wall_s": 0.11438099993392825
+        },
+        {
+          "id": "A30",
+          "passed": true,
+          "wall_s": 0.11196733289398253
+        }
+      ],
+      "ui": [
+        {
+          "id": "U01",
+          "points": 2,
+          "max": 2,
+          "navigation": 4
+        },
+        {
+          "id": "U02",
+          "points": 2,
+          "max": 2,
+          "orderId": "305cf2a456c04792bdd57b817242f7c9"
+        },
+        {
+          "id": "U03",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U04",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U05",
+          "points": 1,
+          "max": 2,
+          "error": "TimeoutError: locator.waitFor: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('order-search') to be visible\u001b[22m\n\u001b[2m    14 × locator resolved to hidden <input type=\"search\" autocomplete=\"off\" placeholder=\"搜尋標題或客戶\" id=\"order-search-input\" data-testid=\"order-search\"/>\u001b[22m\n",
+          "reason": "獨立重驗詳情/編輯/開始/完成均成功；返回清單確實失效，保留部分分，非將隱藏search框當成全面功能失敗。",
+          "evidence": "scoring/splash/manual-ui-v2/result.json",
+          "manual_adjudication": true
+        },
+        {
+          "id": "U06",
+          "points": 2,
+          "max": 2
+        },
+        {
+          "id": "U07",
+          "points": 2,
+          "max": 2,
+          "preservedInputs": true,
+          "conflict_and_rebooking": true
+        },
+        {
+          "id": "U08",
+          "points": 2,
+          "max": 2,
+          "nativeConfirmation": false
+        },
+        {
+          "id": "U09",
+          "points": 2,
+          "max": 2,
+          "error": "TimeoutError: locator.waitFor: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('order-search') to be visible\u001b[22m\n\u001b[2m    14 × locator resolved to hidden <input type=\"search\" autocomplete=\"off\" placeholder=\"搜尋標題或客戶\" id=\"order-search-input\" data-testid=\"order-search\"/>\u001b[22m\n",
+          "reason": "原自動化受上一個詳情返回缺陷連帶影響；新頁獨立鍵盤/labels/驗證提示全過，不重複扣分。",
+          "evidence": "scoring/splash/manual-ui-v2/result.json",
+          "manual_adjudication": true
+        },
+        {
+          "id": "U10",
+          "points": 2,
+          "max": 2,
+          "sizes": {
+            "width": 390,
+            "scroll": 390
+          }
+        }
+      ],
+      "quality": {
+        "correctness": {
+          "score": 2,
+          "reason": "核心CRUD/庫存/排程可運作；但自己匯出的歷史booking不能還原，audit失敗留下已提交資料，返回清單壞掉。"
+        },
+        "security": {
+          "score": 2,
+          "reason": "SQL與靜態路徑有防護，但匯入ID進入未轉義HTML屬性，已重現stored XSS；亦接受不可信Origin/text/plain匯入。"
+        },
+        "architecture": {
+          "score": 3,
+          "reason": "1214行app.py以區段/類別組織，能閱讀但驗證、DB、HTTP集中一檔；商業交易與audit的抽象邊界錯置。"
+        },
+        "tests_docs": {
+          "score": 3,
+          "reason": "69項復驗全過，負例矩陣實質；未提交瀏覽器測試器，漏掉歷史booking往返、audit故障及清單返回問題。"
+        }
+      },
+      "run": {
+        "unclosed_tool_call_ids": [],
+        "native_restart_observed": false,
+        "summary": {
+          "label": "splash",
+          "mode": "formal",
+          "completed_phases": true,
+          "reason": "completed_phases",
+          "wall_s": 3053.6399033328053,
+          "phase_count": 4,
+          "tool_starts": 65,
+          "assistant_output_tokens": 101779,
+          "request_count": 58,
+          "backend_identity_unchanged": true,
+          "backend_after": {
+            "archived_as": "configuration-audit.json and final-services.json; full live status retained locally"
+          },
+          "pi_returncode": 0
+        },
+        "resources": {
+          "samples_all": 3042,
+          "samples_development": 3032,
+          "native_rss_bytes": {
+            "n": 3032,
+            "min": 3870588928,
+            "max": 16452698112,
+            "mean": 10505949335.30343,
+            "median": 11017175040.0
+          },
+          "native_footprint_bytes": {
+            "n": 3032,
+            "min": 33789490160,
+            "max": 48446364184,
+            "mean": 41626901861.5066,
+            "median": 42172090848.0
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 3032,
+            "min": 111001600,
+            "max": 1326137344,
+            "mean": 166481779.50395778,
+            "median": 163938304.0
+          },
+          "system_cpu_percent": {
+            "n": 3032,
+            "min": 3.1790295593976574,
+            "max": 25.289256198347108,
+            "mean": 5.609992451671254,
+            "median": 5.207756232686981
+          },
+          "gpu_global_busy_percent": {
+            "n": 3032,
+            "min": 0,
+            "max": 100,
+            "mean": 88.0372691292876,
+            "median": 99.0
+          },
+          "gpu_global_memory_bytes": {
+            "n": 3032,
+            "min": 34265939968,
+            "max": 49772609536,
+            "mean": 42292244760.99208,
+            "median": 42806288384.0
+          },
+          "swap_used_bytes": {
+            "n": 3032,
+            "min": 2945051525.12,
+            "max": 2945051525.12,
+            "mean": 2945051525.12,
+            "median": 2945051525.12
+          },
+          "swap_delta_bytes_raw": {
+            "n": 3032,
+            "min": -5242.880000114441,
+            "max": -5242.880000114441,
+            "mean": -5242.880000114441,
+            "median": -5242.880000114441
+          },
+          "swap_growth_peak_bytes": 0,
+          "pressure": {
+            "normal": 3032
+          },
+          "telemetry_errors": {}
+        },
+        "tokens": {
+          "input_total_including_cached": 3761319,
+          "output_total_api": 101779,
+          "cached_input_total": 3635680,
+          "max_actual_input": 124477,
+          "input_per_request": {
+            "n": 58,
+            "min": 1696,
+            "max": 124477,
+            "mean": 64850.3275862069,
+            "median": 63517.5
+          },
+          "first_model_event_s": {
+            "n": 58,
+            "min": 0.4745150408707559,
+            "max": 24.201159958029166,
+            "mean": 5.5474055459008325,
+            "median": 2.3235852915095165
+          },
+          "api_request_wall_s": {
+            "n": 58,
+            "min": 3.0187450000084937,
+            "max": 278.06522925011814,
+            "mean": 46.056601189691094,
+            "median": 18.3097177289892
+          }
+        },
+        "native_timings": {
+          "decode": {
+            "requests": 58,
+            "tokens": 101779,
+            "seconds": 2349.454968,
+            "weighted_tok_s": 43.3202599693326
+          },
+          "prefill": {
+            "requests": 58,
+            "tokens": 3761319,
+            "seconds": 320.591764,
+            "weighted_tok_s": 11732.42554041407
+          }
+        },
+        "api_failures": [],
+        "assistant_errors": [],
+        "event_counts": {
+          "response": 6,
+          "agent_start": 4,
+          "turn_start": 58,
+          "message_start": 128,
+          "message_end": 128,
+          "message_update": 81215,
+          "tool_execution_start": 65,
+          "tool_execution_update": 82,
+          "tool_execution_end": 65,
+          "turn_end": 58,
+          "agent_end": 4,
+          "agent_settled": 4
+        },
+        "tool_starts": {
+          "read": 6,
+          "bash": 31,
+          "write": 10,
+          "edit": 18
+        },
+        "tool_error_flags": 5,
+        "compactions": [],
+        "phases": [
+          {
+            "phase": 1,
+            "wall_s": 780.5593801669311,
+            "output_tokens_total": 29987,
+            "tool_starts_total": 26
+          },
+          {
+            "phase": 2,
+            "wall_s": 870.1818757920992,
+            "output_tokens_total": 61418,
+            "tool_starts_total": 41
+          },
+          {
+            "phase": 3,
+            "wall_s": 1113.1719922078773,
+            "output_tokens_total": 95072,
+            "tool_starts_total": 59
+          },
+          {
+            "phase": 4,
+            "wall_s": 289.72570049995556,
+            "output_tokens_total": 101779,
+            "tool_starts_total": 65
+          }
+        ],
+        "snapshot": {
+          "head": "1de5c3088520f9beeeb5ff7ef67a35dbfeaf2908",
+          "status": "",
+          "source_files": [
+            ".gitignore",
+            "BRIEF.md",
+            "DELIVERY.md",
+            "README.md",
+            "app.py",
+            "static/app.js",
+            "static/index.html",
+            "static/styles.css",
+            "tests/test_api.py",
+            "tests/test_booking_audit_backup.py"
+          ]
+        },
+        "observed_native_identity_count": 1
+      }
+    }
+  },
+  "findings": [
+    {
+      "id": "S01",
+      "label": "strata",
+      "severity": "medium",
+      "file": "strata/static/app.js",
+      "line": 461,
+      "title": "排程衝突後清空日期",
+      "detail": "失敗分支呼叫refreshAfterMutation→reloadCurrentOrder→renderBookingForm，以伺服器尚無booking的空值覆蓋表單；保留使用者草稿即可修正。",
+      "evidence": "scoring/strata/browser-v3/results.json"
+    },
+    {
+      "id": "S02",
+      "label": "strata",
+      "severity": "low",
+      "file": "strata/workshop/service.py",
+      "line": 658,
+      "title": "schemaVersion型別驗證不足",
+      "detail": "Python的True==1及1.0==1使錯誤型別也成功匯入；需要明確檢查整數且排除bool。",
+      "evidence": "scoring/diagnostics.json"
+    },
+    {
+      "id": "S03",
+      "label": "strata",
+      "severity": "medium",
+      "file": "strata/tests/test_phase4_audit.py",
+      "line": 72,
+      "title": "競態測試假定固定勝者",
+      "detail": "同版本的開始與預留競爭，任一方勝出都合法；測試卻一律要求有預留。復驗107/108；此項重跑10次6過4失敗，不能拿一次108全綠當穩定保證。",
+      "evidence": "scoring/strata/flaky-test-repeats.json"
+    },
+    {
+      "id": "P01",
+      "label": "splash",
+      "severity": "high",
+      "file": "splash/app.py",
+      "line": 301,
+      "title": "備份拒絕自身匯出的歷史預約",
+      "detail": "export保留closed order的booking，validate_backup卻拒絕inactive order；建立booking→in_progress→done→export→import會422。應允許歷史booking並只對active項套用占用檢查。",
+      "evidence": "scoring/splash/api/A27/http.jsonl"
+    },
+    {
+      "id": "P02",
+      "label": "splash",
+      "severity": "high",
+      "file": "splash/app.py",
+      "line": 493,
+      "title": "商業寫入與audit非同一交易",
+      "detail": "transaction(work)先commit，audit之後才另寫；注入audit INSERT失敗後POST零件500，但零件已留在DB。應將audit納入同一BEGIN IMMEDIATE交易。",
+      "evidence": "scoring/diagnostics.json"
+    },
+    {
+      "id": "P03",
+      "label": "splash",
+      "severity": "high",
+      "file": "splash/static/app.js",
+      "line": 181,
+      "title": "匯入ID造成stored XSS",
+      "detail": "data-id直接插入未轉義id。匯入合法字串型別但含引號/onclick的工單ID，開詳情再點開始按鈕，Chromium實際彈出注入alert；應使用DOM屬性賦值或完整屬性轉義。Strata同一探針沒有執行。",
+      "evidence": "scoring/splash/id-xss-v2/result.json"
+    },
+    {
+      "id": "P04",
+      "label": "splash",
+      "severity": "medium",
+      "file": "splash/static/app.js",
+      "line": 499,
+      "title": "返回清單未還原DOM狀態",
+      "detail": "renderOrderDetail把orders-list設為display:none，返回僅清detailId再renderOrdersView，未清舊detail/還原list。新頁可用、開過詳情後清單不可見；需同步還原兩區。",
+      "evidence": "scoring/splash/manual-ui-v2/result.json"
+    },
+    {
+      "id": "B01",
+      "label": "both",
+      "severity": "high",
+      "file": "strata/workshop/http_app.py",
+      "line": 152,
+      "other_file": "splash/app.py:945",
+      "title": "不可信Origin/text/plain匯入被接受",
+      "detail": "兩邊只解析JSON內容，未核對Origin或Content-Type。隔離HTTP探針帶不可信Origin及text/plain仍200並清空測試零件。這證明入口防護缺失；未宣稱已完成所有瀏覽器/Private-Network政策下的真實跨站攻擊。建議限制來源及JSON媒體型別，必要時使用本地操作token。",
+      "evidence": "scoring/cross-origin.json"
+    }
+  ],
+  "audit": {
+    "checks": 22,
+    "passed": 22,
+    "failures": [],
+    "items": [
+      {
+        "id": "strata:four_phases_completed",
+        "pass": true
+      },
+      {
+        "id": "strata:API30_recorded",
+        "pass": true
+      },
+      {
+        "id": "strata:UI10_recorded",
+        "pass": true
+      },
+      {
+        "id": "strata:Pi256K",
+        "pass": true
+      },
+      {
+        "id": "strata:one_sampling_variant",
+        "pass": true
+      },
+      {
+        "id": "strata:no_model_API_failures",
+        "pass": true
+      },
+      {
+        "id": "strata:no_native_restart",
+        "pass": true
+      },
+      {
+        "id": "strata:all_tools_closed",
+        "pass": true
+      },
+      {
+        "id": "strata:original_and_copy_unchanged",
+        "pass": true
+      },
+      {
+        "id": "strata:brief_unchanged",
+        "pass": true
+      },
+      {
+        "id": "splash:four_phases_completed",
+        "pass": true
+      },
+      {
+        "id": "splash:API30_recorded",
+        "pass": true
+      },
+      {
+        "id": "splash:UI10_recorded",
+        "pass": true
+      },
+      {
+        "id": "splash:Pi256K",
+        "pass": true
+      },
+      {
+        "id": "splash:one_sampling_variant",
+        "pass": true
+      },
+      {
+        "id": "splash:no_model_API_failures",
+        "pass": true
+      },
+      {
+        "id": "splash:no_native_restart",
+        "pass": true
+      },
+      {
+        "id": "splash:all_tools_closed",
+        "pass": true
+      },
+      {
+        "id": "splash:original_and_copy_unchanged",
+        "pass": true
+      },
+      {
+        "id": "splash:brief_unchanged",
+        "pass": true
+      },
+      {
+        "id": "global_Pi_configs_unchanged",
+        "pass": true
+      },
+      {
+        "id": "initial_service_state_restored",
+        "pass": true
+      }
+    ]
+  }
+}

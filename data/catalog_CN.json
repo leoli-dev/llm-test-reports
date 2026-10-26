@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-23",
+  "updated": "2026-10-25",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1665,6 +1665,34 @@
         "play": "https://leoli-dev.github.io/water-garden-llm-test/",
         "name": "Water Garden LLM Test"
       }
+    },
+    {
+      "id": "CAP-03",
+      "title": "RepairDesk / Pi 在 Strata 与 Splash 的256K复杂项目配对评测",
+      "date": "2026-10-25",
+      "sortDate": "2026-10-25",
+      "model": "Qwen3.8-Flash-Next GSQ-RCO IQ3_S vs Qwen3.8-27B MLX affine8",
+      "engines": [
+        "Strata",
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "编程代理配对项目",
+      "summary": "同题四阶段、各60分钟：Strata 38.16分钟，完成度79/80、质量14/20；Splash 50.89分钟，77/80、10/20。保留已重现的数据完整性/安全/UI缺陷与评测器修正，监督者未代修产品代码。",
+      "caveat": "单项目每边一轮、非盲评、固定顺序；基础模型/量化/引擎及自主视觉策略不同。已核实配置256K，最大实际输入162672/124477。整理证据排除完整会话、私有配置及完整产品源码；只做本地提交，不push。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-25-pi-strata-splash-repairdesk_CN.md"
+      ],
+      "markdown": "reports/experiments/cap-03_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434)，arm64；实验时host.json记录",
+        "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2904,6 +2932,20 @@
         "inferenceHardware": "云端推理；客户端与评测主机 MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-23-water-garden-opus55-vs-gpt61sol_CN.md"
+      }
+    },
+    {
+      "id": "2026-10-25-pi-strata-splash-repairdesk",
+      "title": "RepairDesk / Pi 在 Strata 与 Splash 的256K复杂项目配对评测",
+      "path": "reports/originals/2026-10-25-pi-strata-splash-repairdesk_CN.md",
+      "format": "markdown",
+      "source": "new-report/CAP-03",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 (26A434)，arm64；实验时host.json记录",
+        "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB unified memory",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk_CN.md"
       }
     }
   ],

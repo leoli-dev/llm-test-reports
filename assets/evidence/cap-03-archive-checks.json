@@ -1,0 +1,41 @@
+{
+  "experiment": "CAP-03",
+  "archive_checks_date": "2026-10-25",
+  "scope": "Report import only; original model evaluation not repeated.",
+  "build": "npm run build passed; 56 experiments and79 reports per locale",
+  "validation": "npm run check passed; bilingual links/source-code audit/README indexes",
+  "browser": {
+    "checks": [
+      "en:combined-search-engine-scope",
+      "en:report-and4-original-images",
+      "en:evidence-download",
+      "en:markdown-download",
+      "en:mobile-no-page-overflow",
+      "en:language-switch-preserves-report",
+      "cn:combined-search-engine-scope",
+      "cn:report-and4-original-images",
+      "cn:evidence-download",
+      "cn:markdown-download",
+      "cn:mobile-no-page-overflow",
+      "cn:language-switch-preserves-report"
+    ],
+    "errors": [],
+    "failed": [],
+    "executable": "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "version": "155.0.8051.0",
+    "subpath": "/llm-test-reports/"
+  },
+  "preexisting_AGENTS": "Preserved and excluded from this report commit.",
+  "publication": "Local commit only; no push/deploy.",
+  "evidence": {
+    "bytes": 1510710,
+    "sha256": "c2c1cfa08546526642d536f9e53770760ece05484ab8c0a9b4eab23560fb86ab",
+    "files": 441,
+    "source_report_sha256": "ab308e32cf1c80666d5244906f7cf6ccefb9327a883257ab22f680d3273ade4f",
+    "source_evaluation_commit": "fe5bf41",
+    "original_local_archive_sha256": "b70425d1ba6bec570b734df5251dfb45a509252f1e0e9782bcb9e310b2a96191",
+    "policy": "curated publication edition; no full sessions/product source/private config/weights/runtime DBs",
+    "generalized_home": "/Users/benchmark",
+    "full_transform_log": "cap-03-evidence.zip/publication.json"
+  }
+}
