@@ -515,3 +515,26 @@ Publication excludes full private Pi sessions/messages, full SSE streams, creden
 ## Interpretation limits
 
 This is one observed project per topic/system, with identity-aware subjective craft ratings. Different models, parameter counts, quantisations, native engines, cache/draft/vision paths and self-selected strategies are bundled together; the result does not isolate engine causality or quantisation quality. The fixed order balances positions but does not remove background-load/time effects. Actual development times differ because agents can finish early. The full256K window was not saturated. There is no PPL/KL measurement, statistical confidence interval, human audience study or universal intelligence ranking. Responsive controls, a60Hz browser loop and checklist coverage do not by themselves establish professional visual quality, historical accuracy or scientific simulation.
+
+
+## Artifact publication · 2026-10-26
+
+After the benchmark, the user requested one public repository and a Pages navigation index for all nine projects. Added the [Visual Triad source repository](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad), [bilingual gallery](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/) and [full README report](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/blob/540ab4469a10ecac11583eaef10b3fbde7727be5/README.md). The repository uses the test-start date: `llm-test-2026-10-25-visual-triad`; pinned publication commit: `540ab4469a10ecac11583eaef10b3fbde7727be5`.
+
+This is a post-test publication update. Earlier statements about no published artifact/push describe the original delivery state. The original assessment report remains available at report-archive commit `c55c157`, and its verification receipt/evidence archives still refer to that snapshot. Publication does not rerun the models, change scores or turn the MLTF courtyard timeout into successful delivery.
+
+All application HTML/JS/CSS/vendor are byte-identical to their frozen sources, with94 source/document files traced by hashes. Only private Playwright dependency imports in original observer scripts and account paths in documentation were made portable/generalised; see [source-snapshots.json](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/blob/540ab4469a10ecac11583eaef10b3fbde7727be5/data/source-snapshots.json). Navigation, README, unchanged screenshot copies, data and deployment workflow were added; no weights, caches, credentials or private sessions are published.
+
+| Project | Live artwork | Pinned source |
+|---|---|---|
+| pelican-mltf | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/pelican/mltf/) | [projects/pelican/mltf/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/pelican/mltf/) |
+| pelican-splash | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/pelican/splash/) | [projects/pelican/splash/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/pelican/splash/) |
+| pelican-strata | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/pelican/strata/) | [projects/pelican/strata/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/pelican/strata/) |
+| courtyard-splash | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/courtyard/splash/) | [projects/courtyard/splash/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/courtyard/splash/) |
+| courtyard-strata | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/courtyard/strata/) | [projects/courtyard/strata/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/courtyard/strata/) |
+| courtyard-mltf | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/courtyard/mltf/) | [projects/courtyard/mltf/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/courtyard/mltf/) |
+| sun-strata | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/sun/strata/) | [projects/sun/strata/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/sun/strata/) |
+| sun-mltf | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/sun/mltf/) | [projects/sun/mltf/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/sun/mltf/) |
+| sun-splash | [Open](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/sun/splash/) | [projects/sun/splash/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/sun/splash/) |
+
+[Publication verification record](../../assets/evidence/cap-04-artifact-publication.json). Local and live Chromium checks cover bilingual navigation, all nine real entry links, mobile layout and application source hashes over HTTP. These are publication checks, not new model-performance samples.

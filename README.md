@@ -33,7 +33,7 @@ Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test sta
 
 | Date | Experiment / parameters | Model and runtime | Report |
 |---|---|---|---|
-| 2026-10-25 | Pi visual triad: MLTF, Splash and Strata at 256K | Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S | [CAP-04](reports/experiments/cap-04.md) |
+| 2026-10-25 | Pi visual triad: MLTF, Splash and Strata at 256K | Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S | [CAP-04](reports/experiments/cap-04.md) · [Code](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) · [Demo](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/) |
 | 2026-10-25 | RepairDesk / Pi on Strata and Splash at 256K | Qwen3.8-Flash-Next GSQ-RCO IQ3_S vs Qwen3.8-27B MLX affine8 | [CAP-03](reports/experiments/cap-03.md) |
 | 2026-10-23 | Water garden / Opus 5.5 vs GPT 6.1 sol on one WebGL brief | Claude Opus 5.5 (high effort, Claude Code) vs GPT 6.1 sol (high reasoning, Codex); cloud | [CLOUD-02](reports/experiments/cloud-02.md) |
 | 2026-10-21 | Splash affine8 native 256K context stress test | Qwen3.8-27B MLX affine8 / INT8 KV | [PERF-11](reports/experiments/perf-11.md) |

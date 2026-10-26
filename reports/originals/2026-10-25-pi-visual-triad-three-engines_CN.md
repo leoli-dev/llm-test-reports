@@ -515,3 +515,26 @@ python3 -m http.server 4201 --bind 127.0.0.1
 ## 结论边界
 
 每题每系统只有一个实际样本，视觉制作评分主观且知晓身份。模型、参数规模、量化、原生引擎、缓存/draft/视觉路径及自主策略同时变化，不能隔离引擎因果或量化质量。固定顺序均衡位置但无法消除后台负载与时间影响。允许提前完成，因此实际开发时长不同。没有压满256K，没有 PPL/KL、统计置信区间、真人观众研究或通用智力排名。控件响应、60Hz 浏览器循环与元素齐全，均不能单独证明专业视觉品质、历史准确或科学模拟正确。
+
+
+## 2026-10-26 作品公开发布
+
+用户在测试完成后要求合并九份代码、公开仓库和Pages导航，已新增 [Visual Triad代码仓库](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad)、[中英文导航](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html) 与 [README完整报告](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/blob/540ab4469a10ecac11583eaef10b3fbde7727be5/README_CN.md)。仓库按测试开始日命名 `llm-test-2026-10-25-visual-triad`，固定发布提交为 `540ab4469a10ecac11583eaef10b3fbde7727be5`。
+
+这是测试结束后的发布更新。正文关于“未公开作品/未推送”的表述记录原始交付时状态；原测评报告快照仍可在报告仓库提交 `c55c157` 查看，原核对收据及证据包继续对应该版本。此后发布不重跑模型、不改变评分或把MLTF庭院超时改写成成功。
+
+全部应用HTML/JS/CSS/vendor与各自冻结源码字节一致，共94份代码/文档文件有来源哈希。只对原始自测脚本的私人Playwright依赖导入和文档账户路径作可移植/隐私变换，清单见 [source-snapshots.json](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/blob/540ab4469a10ecac11583eaef10b3fbde7727be5/data/source-snapshots.json)。新增导航、README、原图副本、数据及部署流程；不发布权重、缓存、凭据或私人会话。
+
+| 项目 | 在线作品 | 固定源码 |
+|---|---|---|
+| pelican-mltf | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/pelican/mltf/) | [projects/pelican/mltf/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/pelican/mltf/) |
+| pelican-splash | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/pelican/splash/) | [projects/pelican/splash/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/pelican/splash/) |
+| pelican-strata | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/pelican/strata/) | [projects/pelican/strata/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/pelican/strata/) |
+| courtyard-splash | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/courtyard/splash/) | [projects/courtyard/splash/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/courtyard/splash/) |
+| courtyard-strata | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/courtyard/strata/) | [projects/courtyard/strata/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/courtyard/strata/) |
+| courtyard-mltf | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/courtyard/mltf/) | [projects/courtyard/mltf/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/courtyard/mltf/) |
+| sun-strata | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/sun/strata/) | [projects/sun/strata/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/sun/strata/) |
+| sun-mltf | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/sun/mltf/) | [projects/sun/mltf/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/sun/mltf/) |
+| sun-splash | [打开](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/projects/sun/splash/) | [projects/sun/splash/](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5/projects/sun/splash/) |
+
+[发布核对记录](../../assets/evidence/cap-04-artifact-publication.json)。本机及线上均使用Chromium检查中英导航、九个真实入口、手机布局及HTTP源码哈希；这是发布验收，不产生新的模型性能样本。

@@ -33,7 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
-| 2026-10-25 | Pi 视觉三题：MLTF、Splash、Strata，256K 上下文 | Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S | [CAP-04](reports/experiments/cap-04_CN.md) |
+| 2026-10-25 | Pi 视觉三题：MLTF、Splash、Strata，256K 上下文 | Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S | [CAP-04](reports/experiments/cap-04_CN.md) · [代码](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) · [演示](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html) |
 | 2026-10-25 | RepairDesk / Pi 在 Strata 与 Splash 的256K复杂项目配对评测 | Qwen3.8-Flash-Next GSQ-RCO IQ3_S vs Qwen3.8-27B MLX affine8 | [CAP-03](reports/experiments/cap-03_CN.md) |
 | 2026-10-23 | 水景 / Opus 5.5 与 GPT 6.1 sol 实现同一份 WebGL 需求 | Claude Opus 5.5 (high effort, Claude Code) vs GPT 6.1 sol (high reasoning, Codex); cloud | [CLOUD-02](reports/experiments/cloud-02_CN.md) |
 | 2026-10-21 | Splash affine8原生256K上下文压力测试 | Qwen3.8-27B MLX affine8 / INT8 KV | [PERF-11](reports/experiments/perf-11_CN.md) |

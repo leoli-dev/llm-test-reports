@@ -15,4 +15,11 @@
 
 [完整报告](../originals/2026-10-25-pi-visual-triad-three-engines_CN.md)
 
-每格单次样本；知晓身份评分；模型/量化/引擎组合不同。最大输入168095，未压满256K。未推送或部署。
+每格单次样本；知晓身份评分；模型/量化/引擎组合不同。最大输入168095，未压满256K。
+
+
+## 2026-10-26 作品公开发布
+
+[九作品代码仓库](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) · [GitHub Pages 导航](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html) · [固定发布提交](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5)
+
+九件应用HTML/JS/CSS/vendor与原冻结版本字节一致，新增导航、完整README报告、原图及数据。MLTF庭院代理超时及原评分保持不变。

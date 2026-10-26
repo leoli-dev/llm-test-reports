@@ -1708,8 +1708,8 @@
       "scope": "local",
       "category": "New experiment",
       "summary": "Nine visual projects at 256K: Strata leads observed craft; all scenes render, MLTF courtyard times out in its own test. Full pressure/status records, original screenshots and criterion ratings.",
-      "caveat": "One sample per cell; identity-aware judgments; different model/quant/engine bundles. Max input168095, not full256K saturation. No push or deployment.",
-      "sourceStatus": "report-only",
+      "caveat": "One sample per cell; identity-aware judgments; different model/quant/engine bundles. Max input168095, not full256K saturation.",
+      "sourceStatus": "located",
       "documents": [
         "reports/originals/2026-10-25-pi-visual-triad-three-engines.md"
       ],
@@ -1721,7 +1721,12 @@
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-25-pi-visual-triad-three-engines.md"
       },
-      "artifact": null
+      "artifact": {
+        "url": "https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad",
+        "name": "Visual Triad — nine visual projects",
+        "demo": "https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/",
+        "commit": "540ab4469a10ecac11583eaef10b3fbde7727be5"
+      }
     }
   ],
   "documents": [

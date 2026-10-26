@@ -15,4 +15,11 @@ Nine visual projects at 256K: Strata leads observed craft; all scenes render, ML
 
 [Full report](../originals/2026-10-25-pi-visual-triad-three-engines.md)
 
-One sample per cell; identity-aware judgments; different model/quant/engine bundles. Max input168095, not full256K saturation. No push or deployment.
+One sample per cell; identity-aware judgments; different model/quant/engine bundles. Max input168095, not full256K saturation.
+
+
+## Artifact publication · 2026-10-26
+
+[Nine-project source repository](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) · [GitHub Pages gallery](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/) · [Pinned publication commit](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/tree/540ab4469a10ecac11583eaef10b3fbde7727be5)
+
+Application HTML/JS/CSS/vendor match the original frozen versions byte for byte. Added navigation, the full README report, original screenshots and data. The MLTF courtyard agent timeout and original scores remain unchanged.

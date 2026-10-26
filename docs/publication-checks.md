@@ -35,3 +35,8 @@ These checks verify the archive publication and preservation of evidence. They d
 - The benchmark itself records one timed-out MLTF courtyard agent, eight completed agents and nine renderable artifacts; publication checks do not turn the timeout into a pass. No push or deployment was performed.
 
 [Full report](../reports/originals/2026-10-25-pi-visual-triad-three-engines.md) · [Verification receipt](../assets/evidence/cap-04-verification.json)
+
+
+## CAP-04 artifact release · 2026-10-26
+
+Published the nine frozen projects in [Visual Triad](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad), with a [Pages gallery](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/) and a full bilingual README report. Application code is unchanged; only observer dependency imports and documentation paths are generalised. Local and live Chromium checks passed25/25 each, with nine entry links/source hashes and mobile navigation. The first configure-pages attempt ran before Pages enablement; attempt2 deployed the same commit successfully. Original CAP-04 report text remains an exact prefix at c55c157; the dated publication addendum changes no scores. [Publication receipt](../assets/evidence/cap-04-artifact-publication.json).

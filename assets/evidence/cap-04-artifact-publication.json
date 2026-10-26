@@ -1,0 +1,44 @@
+{
+  "experiment": "CAP-04",
+  "publication_date": "2026-10-26",
+  "repo": "https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad",
+  "pages": "https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/",
+  "visibility": "PUBLIC",
+  "artifact_commit": "540ab4469a10ecac11583eaef10b3fbde7727be5",
+  "source_files": 94,
+  "runtime_policy": "HTML/JS/CSS/vendor byte-identical to original frozen snapshots; documented observer import and account-path transformations only.",
+  "local_chromium_checks": 25,
+  "live_chromium_checks": 25,
+  "all_pass": true,
+  "page_errors": [],
+  "deployment": {
+    "url": "https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad/actions/runs/40318036081",
+    "successful_attempt": 2,
+    "first_attempt": "Pages configure step ran before Pages was enabled, returned404; enabled workflow Pages and reran without source edits"
+  },
+  "original_report_commit": "c55c157",
+  "reports": {
+    "reports/originals/2026-10-25-pi-visual-triad-three-engines.md": {
+      "original_record_preserved_as_prefix": true,
+      "original_sha256": "717279254f6abe8dd2e6775bff473939eddf6f198fae16a9474ebe92f5cd9c53",
+      "updated_sha256": "b22956b9f030895bdeacfa5074ae1047e669395e6c7fca0b8ed1cf4d954bb406"
+    },
+    "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md": {
+      "original_record_preserved_as_prefix": true,
+      "original_sha256": "de33609717e36df340d9b29a9b8a9237996d47a91e8497bda6dc4b5a1004d9cc",
+      "updated_sha256": "6e1b4b7d30f1f1e1f619b428477a568ab68a1054858882df5c4b36934368a204"
+    }
+  },
+  "numeric_table_rows_checked": 225,
+  "model_scores_changed": false,
+  "benchmark_rerun": false,
+  "live_browser_result_sha256": "00e085db91108a95e906b6dcddc25bf1a3c9a6ee8678652f8907ccd937b1ba0f",
+  "live_source_navigation_report_data_files_verified": 102,
+  "live_file_record_sha256": "87aae1ac02315bbdaef135f88abf32c2aa8292182a0204541ae9378f1657b875",
+  "updated_archive_local_chromium": {
+    "checks": 13,
+    "all_pass": true,
+    "page_errors": [],
+    "result_sha256": "720541337175f34f838e1b7832794da69762ff673835eec8fb187d956321ab4a"
+  }
+}

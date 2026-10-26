@@ -35,3 +35,8 @@
 - 测试实际有一项 MLTF 庭院代理超时、八项代理完成、九件作品可渲染；归档检查不会将超时改写成成功。没有推送或部署。
 
 [完整报告](../reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md) · [核对收据](../assets/evidence/cap-04-verification.json)
+
+
+## CAP-04 作品公开发布 · 2026-10-26
+
+九份冻结作品已在 [Visual Triad](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) 公开，提供 [Pages导航](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html) 及完整双语README报告。应用代码未变，仅泛化自测依赖导入和文档路径。本机及线上Chromium各25/25，覆盖九个入口/源码哈希及手机导航。首次configure-pages先于Pages启用，第二次用同一提交成功部署。c55c157原报告全文仍为当前报告的字节一致前缀，带日期发布附录不改评分。[发布核对收据](../assets/evidence/cap-04-artifact-publication.json)。

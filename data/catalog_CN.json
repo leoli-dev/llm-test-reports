@@ -1708,8 +1708,8 @@
       "scope": "local",
       "category": "新增实验",
       "summary": "256K 下九个视觉项目：Strata 本次制作较强，全部场景可渲染；MLTF 庭院卡在自测超时。含完整压力/状态、原始截图及逐条评分。",
-      "caveat": "每格单次样本；知晓身份评分；模型/量化/引擎组合不同。最大输入168095，未压满256K。未推送或部署。",
-      "sourceStatus": "report-only",
+      "caveat": "每格单次样本；知晓身份评分；模型/量化/引擎组合不同。最大输入168095，未压满256K。",
+      "sourceStatus": "located",
       "documents": [
         "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md"
       ],
@@ -1721,7 +1721,12 @@
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md"
       },
-      "artifact": null
+      "artifact": {
+        "url": "https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad",
+        "name": "Visual Triad — nine visual projects",
+        "demo": "https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html",
+        "commit": "540ab4469a10ecac11583eaef10b3fbde7727be5"
+      }
     }
   ],
   "documents": [
