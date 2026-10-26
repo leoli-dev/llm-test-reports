@@ -14,3 +14,13 @@ This repository stores reports, rather than a model runtime or generated-product
 - Run `npm run build` and `npm run check` after changes. For UI changes, verify both languages, search, combined filters, report switching, images, downloads and mobile overflow in Chromium. Do not use Google Chrome or Playwright channel chrome.
 - Original code, commands, figures and literal evidence retain their source language. Translate surrounding explanations; do not redraw screenshots or alter numbers to suggest a different outcome. Preserve provenance and the source-code translation audit.
 - The original local import inventory is external. The initial importer must not overwrite the maintained bilingual archive; add paired reports instead.
+
+## Local devlog scope
+
+- Project slug: `llm-test-reports`.
+- Devlog root: `~/Code/project-devlog/`; follow that repository's `AGENTS.md` and the `devlog` skill.
+- Project hub: `~/Code/project-devlog/projects/llm-test-reports/index.md`.
+- Before project work, read the hub and `~/Code/project-devlog/projects/llm-test-reports/backlog.md`.
+- Keep project progress and TODOs in that backlog; append meaningful session outcomes to `log.md` and link supporting notes from `index.md`.
+- This scope owns the report archive, static site, report import/publication and documentation.
+- Historical model-test methodology and cross-model comparisons remain in `~/Code/project-devlog/projects/qwen3.8-test/`; the global public report archive is `~/Code/llm-test-reports/`. Cross-link rather than duplicate their progress lists.
