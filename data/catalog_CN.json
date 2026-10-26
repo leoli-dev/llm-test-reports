@@ -1768,7 +1768,7 @@
       "scope": "local",
       "category": "能力与性能",
       "summary": "M5 Max 上相同来源 IQ3_S。受控 decode 157.42 对 83.36 tok/s；六份冻结作品、614 请求，独立浏览器试玩、代码审查和 85 项评分。",
-      "caveat": "每任务/引擎 n=1，原生转换和推测路径不同。开始后修订一次工具超时；受控提供商响应不代表真实 TMDB 验收。仅本地保存，未 push。",
+      "caveat": "每任务/引擎 n=1，原生转换和推测路径不同。开始后修订一次工具超时；受控提供商响应不代表真实 TMDB 验收。原记录仅本地交付；用户随后授权发布报告，作品继续保留本地。",
       "sourceStatus": "report-only",
       "documents": [
         "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad_CN.md"

@@ -479,3 +479,10 @@ ZIP 包含完整任务、提示与协议，选定安装和模型来源，每次�
 安装来源：[Splash 发布记录](https://github.com/incoai/splash/releases)、[固定提交的 Splash 开发文档](https://github.com/incoai/splash/blob/1744cfafee415fb463b289449cec59a864e768e9/DEVELOPMENT.md)、[目标模型版本](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF/tree/ed59f92082b1e93c0e96d60a8b11aab089b52f09)、[draft 版本](https://huggingface.co/incoai/Qwen3.8-Flash-Next-DFlash2/tree/a22a1744e85c17364dcc54a6a420af7135d4c7f6)。美术目标：[故宫藏张择端原作](https://www.dpm.org.cn/collection/paint/228226.html)。本地源码、运行时与头部证据另行封装，不以外部链接代替。
 
 归档验收执行 npm run build、npm run check，并在 Chromium 检查英文、中文报告选择，语言切换保留当前报告，搜索与组合筛选，图片、下载链接及 390px 溢出。结果记录在 cap-05-archive-checks.json。双语报告共用数字和评分来源、相同原始 PNG，保真检查记录对应关系。仅本地归档提交，没有 push。
+
+
+## 发布更新 — 2026-10-26
+
+原先仅本地交付后，用户已明确授权将本报告 push 上网。本次日期更新完整保留上方 `e58c486` 提交的原报告，包括当时“未 push”的历史说明；测量结果、评分、截图及证据 ZIP 均未改变。
+
+[在线中文报告](https://leoli-dev.github.io/llm-test-reports/index_CN.html#test=CAP-05) · [在线英文报告](https://leoli-dev.github.io/llm-test-reports/index.html#test=CAP-05)。发布范围为双语报告和整理证据；六个产品仓库与私有原始会话继续保留本地。历史双语保真及归档核查对应原报告哈希；日期发布收据记录原文前缀保留与本次纯发布变更：[发布收据](../../assets/evidence/cap-05-release.json)。

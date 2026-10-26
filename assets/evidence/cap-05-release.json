@@ -1,0 +1,33 @@
+{
+  "experiment": "CAP-05",
+  "publication_authorized_by_user": "把report push上网",
+  "date": "2026-10-26",
+  "original_commit": "e58c4861e2ded0a47d82b2d0346f5116613d5533",
+  "scope": "Report and sanitized evidence only; six products/private traces remain local",
+  "reports": {
+    "en": {
+      "original_sha256": "46105d99512164ff65beb2fa74a78fbb3242e133bfed8ec1ede3e8407dea00e5",
+      "published_report_sha256": "3f41f0fa914309d3823f5ddfad45da55adb94b4b719b549f9a1b21fe7a050b74",
+      "original_prefix_bytes": 50002,
+      "original_prefix_unchanged": true
+    },
+    "cn": {
+      "original_sha256": "a4f8d885a27f1e0527e3143f27a555d2ba92f3db04a9b4efd92ff22d4ad251c4",
+      "published_report_sha256": "4c2354960932e4d34619a8be288c018d61548a179113be7be3ec0ca70c244c39",
+      "original_prefix_bytes": 45816,
+      "original_prefix_unchanged": true
+    }
+  },
+  "unchanged_existing_asset_count": 29,
+  "existing_assets_unchanged": true,
+  "zip_manifest_verified": true,
+  "installed_service_credentials_absent": true,
+  "historical_audit_scope": "Existing localization/archive checks remain unchanged and refer to the original local-only report. This receipt covers the dated publication appendices.",
+  "publication_preflight": {
+    "build": "passed",
+    "archive_validation": "passed",
+    "Chromium_checks": 44,
+    "Chromium_failures": 0,
+    "scope": "Dated publication appendices, language preservation, search/combined filters, 20 images, report/ZIP downloads and 390px viewport"
+  }
+}

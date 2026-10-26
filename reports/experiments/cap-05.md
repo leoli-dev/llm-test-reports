@@ -15,4 +15,4 @@ Same IQ3_S source on M5 Max. Controlled decode 157.42 vs 83.36 tok/s; six frozen
 
 [Full report](../originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md)
 
-n=1 per task/engine; native conversions/speculation differ. One post-start tool timeout amendment; provider fixtures are not live TMDB acceptance. Local only; no push.
+n=1 per task/engine; native conversions/speculation differ. One post-start tool timeout amendment; provider fixtures are not live TMDB acceptance. Originally delivered locally; the user subsequently authorized report publication. Product repositories remain local.

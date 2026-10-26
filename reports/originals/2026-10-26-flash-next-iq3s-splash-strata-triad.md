@@ -479,3 +479,10 @@ For this 128GiB M5 Max, the installed Splash resident configuration offers a cle
 Setup sources: [Splash releases](https://github.com/incoai/splash/releases), [pinned Splash development documentation](https://github.com/incoai/splash/blob/1744cfafee415fb463b289449cec59a864e768e9/DEVELOPMENT.md), [target model revision](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF/tree/ed59f92082b1e93c0e96d60a8b11aab089b52f09), [draft revision](https://huggingface.co/incoai/Qwen3.8-Flash-Next-DFlash2/tree/a22a1744e85c17364dcc54a6a420af7135d4c7f6). Art target: [Palace Museum original Zhang Zeduan scroll](https://www.dpm.org.cn/collection/paint/228226.html). Local source/runtime/header evidence is packaged separately from these external references.
 
 Archive acceptance requires npm run build and npm run check, then Chromium checks of English/Chinese report selection, language preservation, search with combined filters, images/download links and 390px overflow. Results are recorded in cap-05-archive-checks.json. The report pair uses shared numeric/score sources and identical original PNGs; localization checks record that correspondence. Local archive commit only; no push.
+
+
+## Publication update — 2026-10-26
+
+After the original local-only delivery, the user explicitly authorized pushing this report online. This dated update preserves the entire original report from commit `e58c486` above, including its historical no-push statements. The measured results, scores, screenshots and evidence ZIP are unchanged.
+
+[Online report](https://leoli-dev.github.io/llm-test-reports/index.html#test=CAP-05) · [Chinese online report](https://leoli-dev.github.io/llm-test-reports/index_CN.html#test=CAP-05). Publication covers the bilingual report and sanitized evidence; the six product repositories and private raw sessions remain local. The historical localization/archive audits refer to the original report hashes. The dated release receipt records the preserved prefix and publication-only changes: [release receipt](../../assets/evidence/cap-05-release.json).
