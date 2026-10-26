@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-25",
+  "updated": "2026-10-26",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1693,6 +1693,35 @@
         "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-04",
+      "title": "Pi visual triad: MLTF, Splash and Strata at 256K",
+      "date": "2026-10-25",
+      "sortDate": "2026-10-25",
+      "model": "Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S",
+      "engines": [
+        "MLTF",
+        "Splash",
+        "Strata"
+      ],
+      "scope": "local",
+      "category": "New experiment",
+      "summary": "Nine visual projects at 256K: Strata leads observed craft; all scenes render, MLTF courtyard times out in its own test. Full pressure/status records, original screenshots and criterion ratings.",
+      "caveat": "One sample per cell; identity-aware judgments; different model/quant/engine bundles. Max input168095, not full256K saturation. No push or deployment.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-25-pi-visual-triad-three-engines.md"
+      ],
+      "markdown": "reports/experiments/cap-04.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS27.0.1 build26A434 arm64, captured during the experiment",
+        "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU18 / GPU40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-visual-triad-three-engines.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2946,6 +2975,20 @@
         "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB unified memory",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk.md"
+      }
+    },
+    {
+      "id": "2026-10-25-pi-visual-triad-three-engines",
+      "title": "Pi visual triad: MLTF, Splash and Strata at 256K",
+      "path": "reports/originals/2026-10-25-pi-visual-triad-three-engines.md",
+      "format": "markdown",
+      "source": "new-report/CAP-04",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS27.0.1 build26A434 arm64, captured during the experiment",
+        "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU18 / GPU40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-visual-triad-three-engines.md"
       }
     }
   ],

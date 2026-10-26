@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-25",
+  "updated": "2026-10-26",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1693,6 +1693,35 @@
         "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-04",
+      "title": "Pi 视觉三题：MLTF、Splash、Strata，256K 上下文",
+      "date": "2026-10-25",
+      "sortDate": "2026-10-25",
+      "model": "Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S",
+      "engines": [
+        "MLTF",
+        "Splash",
+        "Strata"
+      ],
+      "scope": "local",
+      "category": "新增实验",
+      "summary": "256K 下九个视觉项目：Strata 本次制作较强，全部场景可渲染；MLTF 庭院卡在自测超时。含完整压力/状态、原始截图及逐条评分。",
+      "caveat": "每格单次样本；知晓身份评分；模型/量化/引擎组合不同。最大输入168095，未压满256K。未推送或部署。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md"
+      ],
+      "markdown": "reports/experiments/cap-04_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "实验时采集：macOS27.0.1 build26A434 arm64",
+        "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU18 / GPU40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -2946,6 +2975,20 @@
         "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB unified memory",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-25-pi-strata-splash-repairdesk_CN.md"
+      }
+    },
+    {
+      "id": "2026-10-25-pi-visual-triad-three-engines",
+      "title": "Pi 视觉三题：MLTF、Splash、Strata，256K 上下文",
+      "path": "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md",
+      "format": "markdown",
+      "source": "new-report/CAP-04",
+      "environment": {
+        "scope": "local",
+        "testOS": "实验时采集：macOS27.0.1 build26A434 arm64",
+        "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU18 / GPU40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-25-pi-visual-triad-three-engines_CN.md"
       }
     }
   ],

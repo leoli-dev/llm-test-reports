@@ -1,0 +1,1752 @@
+{
+  "experiment": "CAP-04",
+  "date": "2026-10-25",
+  "completed_date": "2026-10-26",
+  "timezone": "America/Toronto",
+  "context": 262144,
+  "budget_s": 3600,
+  "reviewer": "Codex, identity-aware AI review, no human/blind panel",
+  "weights": {
+    "content": 40,
+    "visual": 25,
+    "usability": 20,
+    "technical": 10,
+    "handoff": 5
+  },
+  "cases": [
+    {
+      "id": "pelican-mltf",
+      "model": "local/Qwen3.8-27B-MLTF-q8c",
+      "port": 4201,
+      "snapshot_commit": "5f8b8e21944b504810e8f4bc40eb0a6615ddbb0a",
+      "index_sha256": "b0dc5d3c3ef9417f7b57d6e0c87bcf5e189d68627a7c1514453c68cf86621ea3",
+      "wall_s": 1575.158252791036,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 42,
+      "api_errors": 0,
+      "input_max": 87025,
+      "output_sum": 65221,
+      "unique_images": 15,
+      "image_occurrences": 241,
+      "decode_tok_s": 48.53733087190277,
+      "first_model_event_s": {
+        "n": 42,
+        "min": 0.5877165000420064,
+        "max": 23.441527209011838,
+        "mean": 4.14664593163789,
+        "median": 2.6380611670902
+      },
+      "resource": {
+        "samples_all": 1575,
+        "samples_development": 1565,
+        "sample_interval_s": {
+          "n": 1564,
+          "min": 0.9843320846557617,
+          "max": 1.0279819965362549,
+          "mean": 1.0068761380127325,
+          "median": 1.007311463356018
+        },
+        "first_sample_delay_s": 0.0753011703491211,
+        "last_sample_lag_s": 0.3286716938018799,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792974112.464073,
+        "development_end_unix": 1792975687.6223257,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 1565,
+            "min": 1157316608,
+            "max": 18490703872,
+            "mean": 7622570195.997444,
+            "median": 7134232576
+          },
+          "process_physical_footprint_bytes": {
+            "n": 1565,
+            "min": 2391706936,
+            "max": 23305403896,
+            "mean": 10703902679.759745,
+            "median": 10192887272
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 1565,
+            "min": 1822048256,
+            "max": 19402752000,
+            "mean": 8279659069.178275,
+            "median": 7755677696
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 1565,
+            "min": 2968622120,
+            "max": 24049010280,
+            "mean": 11213040097.635782,
+            "median": 10658440528
+          },
+          "process_cpu_percent": {
+            "n": 1565,
+            "min": 0.03496722190925896,
+            "max": 37.92848917840169,
+            "mean": 1.7481706738566358,
+            "median": 1.4957000657365653
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 1565,
+            "min": 100892672,
+            "max": 1396260864,
+            "mean": 194140077.55654952,
+            "median": 159170560
+          },
+          "system_cpu_percent": {
+            "n": 1564,
+            "min": 3.8567493112947657,
+            "max": 27.591881513987932,
+            "mean": 6.740221514949994,
+            "median": 6.10834438276051
+          },
+          "gpu_device_utilization_percent": {
+            "n": 1565,
+            "min": 0,
+            "max": 100,
+            "mean": 93.80063897763578,
+            "median": 99
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 1565,
+            "min": 1114587136,
+            "max": 35508535296,
+            "mean": 32065476755.87476,
+            "median": 33012924416
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 1565,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0
+          },
+          "engine_allocated_bytes": {
+            "n": 1565,
+            "min": 33165213696,
+            "max": 53298921472,
+            "mean": 41224951809.308624,
+            "median": 40763850752
+          },
+          "swap_used_bytes": {
+            "n": 1565,
+            "min": 2936662917.12,
+            "max": 2936662917.12,
+            "mean": 2936662917.12,
+            "median": 2936662917.12
+          },
+          "swap_delta_bytes": {
+            "n": 1565,
+            "min": -5242.880000114441,
+            "max": -5242.880000114441,
+            "mean": -5242.880000114441,
+            "median": -5242.880000114441
+          },
+          "native_status_local_age_seconds": {
+            "n": 1565,
+            "min": 0.05353525001555681,
+            "max": 0.08906258293427527,
+            "mean": 0.06152638107681046,
+            "median": 0.06112149986438453
+          }
+        },
+        "pressure": {
+          "normal": 1565
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 93725,
+            "start_abstime": 44240195396865,
+            "samples": 1565
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 42,
+          "message_start": 97,
+          "message_end": 97,
+          "message_update": 51784,
+          "tool_execution_start": 51,
+          "tool_execution_end": 51,
+          "turn_end": 42,
+          "tool_execution_update": 55,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 39,
+          "stop": 3
+        },
+        "tool_starts": 51,
+        "tool_error_flags": 2,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 20,
+          "bash": 18,
+          "write": 4,
+          "edit": 9
+        }
+      },
+      "scores": {
+        "content": 40,
+        "visual": 17,
+        "usability": 20,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 92
+    },
+    {
+      "id": "pelican-splash",
+      "model": "mlx-community/Qwen3.8-27B-8bit",
+      "port": 4202,
+      "snapshot_commit": "b0466e9ce3a096c4ad60a7ce980ad7e6625532b3",
+      "index_sha256": "352e1222032d4f2fb31d1468109a4edfbfe72d234b8ff96616d310f3dd337fb8",
+      "wall_s": 1754.2273481248412,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 54,
+      "api_errors": 0,
+      "input_max": 102938,
+      "output_sum": 64250,
+      "unique_images": 16,
+      "image_occurrences": 430,
+      "decode_tok_s": 43.38755367982424,
+      "first_model_event_s": {
+        "n": 54,
+        "min": 0.5943373329937458,
+        "max": 33.408044249983504,
+        "mean": 4.060994942801901,
+        "median": 2.1533948534633964
+      },
+      "resource": {
+        "samples_all": 1751,
+        "samples_development": 1741,
+        "sample_interval_s": {
+          "n": 1740,
+          "min": 0.9777388572692871,
+          "max": 1.038266897201538,
+          "mean": 1.007696391385177,
+          "median": 1.0083284378051758
+        },
+        "first_sample_delay_s": 0.09807515144348145,
+        "last_sample_lag_s": 0.7375519275665283,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792975729.487547,
+        "development_end_unix": 1792977483.714895,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 1741,
+            "min": 3864641536,
+            "max": 14701002752,
+            "mean": 8035830488.151637,
+            "median": 6864322560
+          },
+          "process_physical_footprint_bytes": {
+            "n": 1741,
+            "min": 33787196352,
+            "max": 46957286712,
+            "mean": 38862850408.505455,
+            "median": 37609733312
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 1741,
+            "min": 4678713344,
+            "max": 15574368256,
+            "mean": 8801490992.229753,
+            "median": 7614889984
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 1741,
+            "min": 34358656360,
+            "max": 47520309056,
+            "mean": 39339815122.0448,
+            "median": 38078662248
+          },
+          "process_cpu_percent": {
+            "n": 1741,
+            "min": 0.028490098278930447,
+            "max": 3.6265099495823385,
+            "mean": 0.8220695215414053,
+            "median": 0.8268724093199307
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 1741,
+            "min": 109625344,
+            "max": 1708523520,
+            "mean": 190882126.0792648,
+            "median": 163446784
+          },
+          "system_cpu_percent": {
+            "n": 1741,
+            "min": 3.2435404068169325,
+            "max": 25.346644481419855,
+            "mean": 6.507837360796324,
+            "median": 6.028761061946903
+          },
+          "gpu_device_utilization_percent": {
+            "n": 1741,
+            "min": 0,
+            "max": 100,
+            "mean": 96.22515795519816,
+            "median": 99
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 1741,
+            "min": 34156740608,
+            "max": 48216276992,
+            "mean": 39625012670.4193,
+            "median": 38636240896
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 1741,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0
+          },
+          "engine_allocated_bytes": {
+            "n": 1741,
+            "min": 33009778688,
+            "max": 46016413696,
+            "mean": 37925977754.39403,
+            "median": 36676878336
+          },
+          "swap_used_bytes": {
+            "n": 1741,
+            "min": 2936662917.12,
+            "max": 2936662917.12,
+            "mean": 2936662917.12,
+            "median": 2936662917.12
+          },
+          "swap_delta_bytes": {
+            "n": 1741,
+            "min": -5242.880000114441,
+            "max": -5242.880000114441,
+            "mean": -5242.880000114441,
+            "median": -5242.880000114441
+          },
+          "native_status_local_age_seconds": {
+            "n": 1741,
+            "min": 0.05302016600035131,
+            "max": 0.09784970781765878,
+            "mean": 0.06117409919115775,
+            "median": 0.06066795811057091
+          }
+        },
+        "pressure": {
+          "normal": 1741
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 2935,
+            "start_abstime": 44278983460349,
+            "samples": 1741
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 54,
+          "message_start": 123,
+          "message_end": 123,
+          "message_update": 58725,
+          "tool_execution_start": 65,
+          "tool_execution_end": 65,
+          "turn_end": 54,
+          "tool_execution_update": 80,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 51,
+          "stop": 3
+        },
+        "tool_starts": 65,
+        "tool_error_flags": 3,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 23,
+          "bash": 27,
+          "write": 4,
+          "edit": 11
+        }
+      },
+      "scores": {
+        "content": 38,
+        "visual": 16,
+        "usability": 20,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 89
+    },
+    {
+      "id": "pelican-strata",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "port": 4203,
+      "snapshot_commit": "a2a56fde2762c58b728ccb9267484b107782bab5",
+      "index_sha256": "e96e5e8693069b411876f5653874bce04710b881ed7821cf001fadc8ec2323ae",
+      "wall_s": 882.4310751250014,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 61,
+      "api_errors": 0,
+      "input_max": 85357,
+      "output_sum": 63239,
+      "unique_images": 19,
+      "image_occurrences": 633,
+      "decode_tok_s": 84.55715165720063,
+      "first_model_event_s": {
+        "n": 61,
+        "min": 0.23573220800608397,
+        "max": 15.473740499932319,
+        "mean": 1.1412380989831796,
+        "median": 0.6886873750481755
+      },
+      "resource": {
+        "samples_all": 887,
+        "samples_development": 877,
+        "sample_interval_s": {
+          "n": 876,
+          "min": 0.9856808185577393,
+          "max": 1.0296001434326172,
+          "mean": 1.0068846698765341,
+          "median": 1.0075501203536987
+        },
+        "first_sample_delay_s": 0.12051701545715332,
+        "last_sample_lag_s": 0.2795872688293457,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792977526.509906,
+        "development_end_unix": 1792978408.9409811,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 877,
+            "min": 68779114496,
+            "max": 78162591744,
+            "mean": 76654884296.5382,
+            "median": 77884833792
+          },
+          "process_physical_footprint_bytes": {
+            "n": 877,
+            "min": 22132056128,
+            "max": 31636568680,
+            "mean": 30115513453.72862,
+            "median": 31345621416
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 856,
+            "min": 70257573888,
+            "max": 79746957312,
+            "mean": 78150016851.73831,
+            "median": 79378153472.0
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 856,
+            "min": 23539396104,
+            "max": 33270122736,
+            "mean": 31540879236.214954,
+            "median": 32764544904.0
+          },
+          "process_cpu_percent": {
+            "n": 877,
+            "min": 0.08404566192160916,
+            "max": 63.07342107665393,
+            "mean": 6.6811740018083094,
+            "median": 6.257056939749517
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 877,
+            "min": 118177792,
+            "max": 1479344128,
+            "mean": 243033567.89053592,
+            "median": 164773888
+          },
+          "system_cpu_percent": {
+            "n": 877,
+            "min": 4.164256795835743,
+            "max": 25.16304347826087,
+            "mean": 7.357235705028346,
+            "median": 6.756002233389168
+          },
+          "gpu_device_utilization_percent": {
+            "n": 877,
+            "min": 0,
+            "max": 100,
+            "mean": 88.51767388825542,
+            "median": 96
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 877,
+            "min": 1388494848,
+            "max": 69322194944,
+            "mean": 60906348030.24857,
+            "median": 63699386368
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 877,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0
+          },
+          "engine_allocated_bytes": {
+            "n": 0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null
+          },
+          "swap_used_bytes": {
+            "n": 877,
+            "min": 2936662917.12,
+            "max": 2936662917.12,
+            "mean": 2936662917.12,
+            "median": 2936662917.12
+          },
+          "swap_delta_bytes": {
+            "n": 877,
+            "min": -5242.880000114441,
+            "max": -5242.880000114441,
+            "mean": -5242.880000114441,
+            "median": -5242.880000114441
+          },
+          "native_status_local_age_seconds": {
+            "n": 877,
+            "min": 0.05409587500616908,
+            "max": 0.09117833292111754,
+            "mean": 0.06021951425989438,
+            "median": 0.059444624930620193
+          }
+        },
+        "pressure": {
+          "normal": 877
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 12259,
+            "start_abstime": 44322078046014,
+            "samples": 877
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 61,
+          "message_start": 135,
+          "message_end": 135,
+          "message_update": 43277,
+          "tool_execution_start": 70,
+          "tool_execution_update": 69,
+          "tool_execution_end": 70,
+          "turn_end": 61,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 58,
+          "stop": 3
+        },
+        "tool_starts": 70,
+        "tool_error_flags": 3,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 23,
+          "bash": 28,
+          "write": 4,
+          "edit": 15
+        }
+      },
+      "scores": {
+        "content": 40,
+        "visual": 19,
+        "usability": 19,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 93
+    },
+    {
+      "id": "courtyard-splash",
+      "model": "mlx-community/Qwen3.8-27B-8bit",
+      "port": 4204,
+      "snapshot_commit": "0cad523ac65333ea00ba8f8cdcbb9337af6cc636",
+      "index_sha256": "32f15fd7785bd09e17113232bd5defe003dee53d22f475ded08e66b789a2687e",
+      "wall_s": 1490.0130352918059,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 52,
+      "api_errors": 0,
+      "input_max": 90928,
+      "output_sum": 54988,
+      "unique_images": 25,
+      "image_occurrences": 612,
+      "decode_tok_s": 45.10754715332141,
+      "first_model_event_s": {
+        "n": 52,
+        "min": 0.35564900003373623,
+        "max": 30.570445167133585,
+        "mean": 3.693077354965051,
+        "median": 2.27236577111762
+      },
+      "resource": {
+        "samples_all": 1489,
+        "samples_development": 1479,
+        "sample_interval_s": {
+          "n": 1478,
+          "min": 0.9927499294281006,
+          "max": 1.0302059650421143,
+          "mean": 1.0077312015228892,
+          "median": 1.0083855390548706
+        },
+        "first_sample_delay_s": 0.09708309173583984,
+        "last_sample_lag_s": 0.48923635482788086,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792978434.637861,
+        "development_end_unix": 1792979924.6508963,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 1479,
+            "min": 3527393280,
+            "max": 14345076736,
+            "mean": 7620238346.385396,
+            "median": 6702268416
+          },
+          "process_physical_footprint_bytes": {
+            "n": 1479,
+            "min": 33309471512,
+            "max": 46891750904,
+            "mean": 38879705294.880325,
+            "median": 38032457136
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 1479,
+            "min": 4340318208,
+            "max": 15730475008,
+            "mean": 8482832273.222447,
+            "median": 7437238272
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 1479,
+            "min": 33877015744,
+            "max": 47965528496,
+            "mean": 39449341232.17309,
+            "median": 38478514008
+          },
+          "process_cpu_percent": {
+            "n": 1479,
+            "min": 0.03497303922729591,
+            "max": 4.385312094116431,
+            "mean": 0.8331316290851911,
+            "median": 0.8407011546157743
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 1479,
+            "min": 109166592,
+            "max": 1814151168,
+            "mean": 307585738.51521295,
+            "median": 187105280
+          },
+          "system_cpu_percent": {
+            "n": 1479,
+            "min": 3.6646307606885062,
+            "max": 24.542936288088644,
+            "mean": 6.729666340071811,
+            "median": 5.963556046383213
+          },
+          "gpu_device_utilization_percent": {
+            "n": 1479,
+            "min": 0,
+            "max": 100,
+            "mean": 94.98512508451657,
+            "median": 99
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 1479,
+            "min": 33668808704,
+            "max": 47767502848,
+            "mean": 39525162614.73969,
+            "median": 39057932288
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 1479,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0
+          },
+          "engine_allocated_bytes": {
+            "n": 1479,
+            "min": 32529661952,
+            "max": 45184368640,
+            "mean": 37813503990.30696,
+            "median": 37071929344
+          },
+          "swap_used_bytes": {
+            "n": 1479,
+            "min": 2943552061.44,
+            "max": 2943552061.44,
+            "mean": 2943552061.44,
+            "median": 2943552061.44
+          },
+          "swap_delta_bytes": {
+            "n": 1479,
+            "min": 2621.4400000572205,
+            "max": 2621.4400000572205,
+            "mean": 2621.4400000572205,
+            "median": 2621.4400000572205
+          },
+          "native_status_local_age_seconds": {
+            "n": 1479,
+            "min": 0.05320700001902878,
+            "max": 0.08222587499767542,
+            "mean": 0.06078074497304242,
+            "median": 0.06051379092969
+          }
+        },
+        "pressure": {
+          "normal": 1479
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 18202,
+            "start_abstime": 44344289513385,
+            "samples": 1479
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 52,
+          "message_start": 119,
+          "message_end": 119,
+          "message_update": 47435,
+          "tool_execution_start": 63,
+          "tool_execution_end": 63,
+          "turn_end": 52,
+          "tool_execution_update": 57,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 49,
+          "stop": 3
+        },
+        "tool_starts": 63,
+        "tool_error_flags": 1,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 29,
+          "bash": 18,
+          "write": 4,
+          "edit": 12
+        }
+      },
+      "scores": {
+        "content": 40,
+        "visual": 12,
+        "usability": 18,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 85
+    },
+    {
+      "id": "courtyard-strata",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "port": 4205,
+      "snapshot_commit": "be87304de4399612d1c45c0e8ddb4956da586b4a",
+      "index_sha256": "184ad076efb8a733fe495fdf88dd2a278968ff2d1c9e4bba39798f29b4d68682",
+      "wall_s": 1904.776875291951,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 156,
+      "api_errors": 0,
+      "input_max": 168095,
+      "output_sum": 112951,
+      "unique_images": 44,
+      "image_occurrences": 2872,
+      "decode_tok_s": 84.55852270119827,
+      "first_model_event_s": {
+        "n": 156,
+        "min": 0.19467420782893896,
+        "max": 2.8558985830750316,
+        "mean": 0.8900956805416335,
+        "median": 0.706142291543074
+      },
+      "resource": {
+        "samples_all": 1902,
+        "samples_development": 1892,
+        "sample_interval_s": {
+          "n": 1891,
+          "min": 0.9686782360076904,
+          "max": 1.0479011535644531,
+          "mean": 1.0071033550153516,
+          "median": 1.0076379776000977
+        },
+        "first_sample_delay_s": 0.10340189933776855,
+        "last_sample_lag_s": 0.2410290241241455,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792979949.182355,
+        "development_end_unix": 1792981853.9592302,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 1892,
+            "min": 65049477120,
+            "max": 79705063424,
+            "mean": 76900233709.59831,
+            "median": 78904033280.0
+          },
+          "process_physical_footprint_bytes": {
+            "n": 1892,
+            "min": 18004300984,
+            "max": 32779369832,
+            "mean": 29933723572.71459,
+            "median": 31879215864.0
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 1853,
+            "min": 66529230848,
+            "max": 81785290752,
+            "mean": 78480687431.14949,
+            "median": 80501719040
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 1853,
+            "min": 19412968112,
+            "max": 34853195192,
+            "mean": 31421438462.834324,
+            "median": 33393920360
+          },
+          "process_cpu_percent": {
+            "n": 1892,
+            "min": 0.07468926799681792,
+            "max": 102.72181288527206,
+            "mean": 5.713708779203223,
+            "median": 5.455233503824024
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 1892,
+            "min": 108412928,
+            "max": 2385510400,
+            "mean": 659596216.5581396,
+            "median": 333660160.0
+          },
+          "system_cpu_percent": {
+            "n": 1892,
+            "min": 3.8975501113585747,
+            "max": 31.968810916179336,
+            "mean": 9.791296756115665,
+            "median": 8.432732965097632
+          },
+          "gpu_device_utilization_percent": {
+            "n": 1892,
+            "min": 0,
+            "max": 100,
+            "mean": 76.64112050739958,
+            "median": 95.0
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 1892,
+            "min": 1958625280,
+            "max": 68889493504,
+            "mean": 51379029951.05286,
+            "median": 63357566976.0
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 1892,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "engine_allocated_bytes": {
+            "n": 0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null
+          },
+          "swap_used_bytes": {
+            "n": 1892,
+            "min": 2943552061.44,
+            "max": 2943552061.44,
+            "mean": 2943552061.44,
+            "median": 2943552061.44
+          },
+          "swap_delta_bytes": {
+            "n": 1892,
+            "min": 2621.4400000572205,
+            "max": 2621.4400000572205,
+            "mean": 2621.4400000572205,
+            "median": 2621.4400000572205
+          },
+          "native_status_local_age_seconds": {
+            "n": 1892,
+            "min": 0.05298954201862216,
+            "max": 0.12432812503539026,
+            "mean": 0.06059766145352664,
+            "median": 0.05998749996069819
+          }
+        },
+        "pressure": {
+          "normal": 1892
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 25897,
+            "start_abstime": 44380659122558,
+            "samples": 1892
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 156,
+          "message_start": 313,
+          "message_end": 313,
+          "message_update": 91532,
+          "tool_execution_start": 153,
+          "tool_execution_update": 131,
+          "tool_execution_end": 153,
+          "turn_end": 156,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 153,
+          "stop": 3
+        },
+        "tool_starts": 153,
+        "tool_error_flags": 7,
+        "unclosed_tools": [],
+        "tool_names": {
+          "bash": 50,
+          "write": 11,
+          "edit": 48,
+          "read": 44
+        }
+      },
+      "scores": {
+        "content": 40,
+        "visual": 20,
+        "usability": 20,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 95
+    },
+    {
+      "id": "courtyard-mltf",
+      "model": "local/Qwen3.8-27B-MLTF-q8c",
+      "port": 4206,
+      "snapshot_commit": "c73d7fee98b16c3113c71f809a58717b28c2e1ed",
+      "index_sha256": "b5471373e13974ce6e37e7ae09809635c1231013762ff7c9fef2e0488505a63b",
+      "wall_s": 3600.3936999998987,
+      "completed_phases": 0,
+      "stop_reason": "wall_timeout",
+      "requests": 34,
+      "api_errors": 0,
+      "input_max": 102364,
+      "output_sum": 76553,
+      "unique_images": 16,
+      "image_occurrences": 216,
+      "decode_tok_s": 44.182221937302145,
+      "first_model_event_s": {
+        "n": 34,
+        "min": 0.6936089170631021,
+        "max": 29.452518166974187,
+        "mean": 6.19912740692962,
+        "median": 3.489314458449371
+      },
+      "resource": {
+        "samples_all": 3584,
+        "samples_development": 3574,
+        "sample_interval_s": {
+          "n": 3573,
+          "min": 0.9385411739349365,
+          "max": 1.0828328132629395,
+          "mean": 1.0075599312482013,
+          "median": 1.007991075515747
+        },
+        "first_sample_delay_s": 0.10322380065917969,
+        "last_sample_lag_s": 0.2788417339324951,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792981875.762393,
+        "development_end_unix": 1792985476.156093,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 3574,
+            "min": 194674688,
+            "max": 13686079488,
+            "mean": 8722002302.782316,
+            "median": 12135268352.0
+          },
+          "process_physical_footprint_bytes": {
+            "n": 3574,
+            "min": 1604110856,
+            "max": 19620163728,
+            "mean": 13350843823.297146,
+            "median": 17782795280.0
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 3574,
+            "min": 1037631488,
+            "max": 14820425728,
+            "mean": 9580639631.400112,
+            "median": 13027401728.0
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 3574,
+            "min": 2174324816,
+            "max": 20393867592,
+            "mean": 13868654435.505316,
+            "median": 18318177348.0
+          },
+          "process_cpu_percent": {
+            "n": 3574,
+            "min": 0.029084364079113963,
+            "max": 31.083475945503096,
+            "mean": 0.8899532442975343,
+            "median": 1.1299445692926746
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 3574,
+            "min": 111001600,
+            "max": 1648558080,
+            "mean": 817843864.1387801,
+            "median": 282099712.0
+          },
+          "system_cpu_percent": {
+            "n": 3574,
+            "min": 2.6770775237032907,
+            "max": 28.74097007223942,
+            "mean": 6.688240275959824,
+            "median": 6.729178157749586
+          },
+          "gpu_device_utilization_percent": {
+            "n": 3574,
+            "min": 0,
+            "max": 100,
+            "mean": 59.9364857302742,
+            "median": 98.0
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 3574,
+            "min": 1154678784,
+            "max": 34987868160,
+            "mean": 18871162910.94348,
+            "median": 32614367232.0
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 3574,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "engine_allocated_bytes": {
+            "n": 3574,
+            "min": 32379830272,
+            "max": 49529946112,
+            "mean": 43667279227.91718,
+            "median": 47871623168.0
+          },
+          "swap_used_bytes": {
+            "n": 3574,
+            "min": 2943552061.44,
+            "max": 2943552061.44,
+            "mean": 2943552061.44,
+            "median": 2943552061.44
+          },
+          "swap_delta_bytes": {
+            "n": 3574,
+            "min": 2621.4400000572205,
+            "max": 2621.4400000572205,
+            "mean": 2621.4400000572205,
+            "median": 2621.4400000572205
+          },
+          "native_status_local_age_seconds": {
+            "n": 3574,
+            "min": 0.05237479112111032,
+            "max": 0.1312801248859614,
+            "mean": 0.06264024998328978,
+            "median": 0.061159916571341455
+          }
+        },
+        "pressure": {
+          "normal": 3574
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 38715,
+            "start_abstime": 44426970866837,
+            "samples": 3574
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 3,
+          "agent_start": 1,
+          "turn_start": 34,
+          "message_start": 81,
+          "message_end": 81,
+          "message_update": 65137,
+          "tool_execution_start": 46,
+          "tool_execution_update": 47,
+          "tool_execution_end": 45,
+          "turn_end": 33
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 34
+        },
+        "tool_starts": 46,
+        "tool_error_flags": 0,
+        "unclosed_tools": [
+          "call_4cda53625a242b29e189d6d09ba1d0fd_0"
+        ],
+        "tool_names": {
+          "read": 19,
+          "bash": 17,
+          "write": 1,
+          "edit": 9
+        }
+      },
+      "scores": {
+        "content": 40,
+        "visual": 16,
+        "usability": 19,
+        "technical": 10,
+        "handoff": 2.0
+      },
+      "total": 87.0
+    },
+    {
+      "id": "sun-strata",
+      "model": "qwen3.8-flash-next-iq3_s",
+      "port": 4207,
+      "snapshot_commit": "783d6d411cdb5782887c2bc5212efb7defeec9ab",
+      "index_sha256": "44c0c4fb204a84fcb7d3a12592f9514a8f200c5086ed368c20cfe148732f2076",
+      "wall_s": 1796.7870733330492,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 143,
+      "api_errors": 0,
+      "input_max": 161541,
+      "output_sum": 100897,
+      "unique_images": 44,
+      "image_occurrences": 3154,
+      "decode_tok_s": 88.58690985447608,
+      "first_model_event_s": {
+        "n": 143,
+        "min": 0.1592317500617355,
+        "max": 3.033359499881044,
+        "mean": 1.009702669298667,
+        "median": 0.9132093749940395
+      },
+      "resource": {
+        "samples_all": 1798,
+        "samples_development": 1788,
+        "sample_interval_s": {
+          "n": 1787,
+          "min": 0.9643149375915527,
+          "max": 1.0458030700683594,
+          "mean": 1.0050110319305148,
+          "median": 1.0049588680267334
+        },
+        "first_sample_delay_s": 0.10768914222717285,
+        "last_sample_lag_s": 0.7246701717376709,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792985499.245344,
+        "development_end_unix": 1792987296.0324173,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 1788,
+            "min": 58486538240,
+            "max": 68843651072,
+            "mean": 67098513829.51231,
+            "median": 68351574016.0
+          },
+          "process_physical_footprint_bytes": {
+            "n": 1788,
+            "min": 18004071632,
+            "max": 28477911448,
+            "mean": 26686218716.953022,
+            "median": 27892248672.0
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 1744,
+            "min": 59965030400,
+            "max": 71092748288,
+            "mean": 68721868687.26605,
+            "median": 69960876032.0
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 1744,
+            "min": 19411477192,
+            "max": 30623465984,
+            "mean": 28220138495.963303,
+            "median": 29405380280.0
+          },
+          "process_cpu_percent": {
+            "n": 1788,
+            "min": 0.057912597173405564,
+            "max": 100.37689866310274,
+            "mean": 5.224873794910824,
+            "median": 4.940884633623245
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 1788,
+            "min": 108789760,
+            "max": 3015426048,
+            "mean": 788258073.7718121,
+            "median": 509902848.0
+          },
+          "system_cpu_percent": {
+            "n": 1788,
+            "min": 2.5167785234899327,
+            "max": 27.61111111111111,
+            "mean": 7.214488714377858,
+            "median": 6.287920573634859
+          },
+          "gpu_device_utilization_percent": {
+            "n": 1788,
+            "min": 0,
+            "max": 100,
+            "mean": 71.64485458612975,
+            "median": 95.0
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 1788,
+            "min": 1072398336,
+            "max": 70057328640,
+            "mean": 47370689836.098434,
+            "median": 63076630528.0
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 1788,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "engine_allocated_bytes": {
+            "n": 0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null
+          },
+          "swap_used_bytes": {
+            "n": 1788,
+            "min": 2943552061.44,
+            "max": 2943552061.44,
+            "mean": 2943552061.44,
+            "median": 2943552061.44
+          },
+          "swap_delta_bytes": {
+            "n": 1788,
+            "min": 2621.4400000572205,
+            "max": 2621.4400000572205,
+            "mean": 2621.4400000572205,
+            "median": 2621.4400000572205
+          },
+          "native_status_local_age_seconds": {
+            "n": 1788,
+            "min": 0.05267441598698497,
+            "max": 0.10145070892758667,
+            "mean": 0.06325955979679179,
+            "median": 0.06027900008484721
+          }
+        },
+        "pressure": {
+          "normal": 1788
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 56831,
+            "start_abstime": 44513892087240,
+            "samples": 1788
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 143,
+          "message_start": 289,
+          "message_end": 289,
+          "message_update": 74211,
+          "tool_execution_start": 142,
+          "tool_execution_end": 142,
+          "turn_end": 143,
+          "tool_execution_update": 139,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 140,
+          "stop": 3
+        },
+        "tool_starts": 142,
+        "tool_error_flags": 4,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 51,
+          "bash": 49,
+          "write": 8,
+          "edit": 34
+        }
+      },
+      "scores": {
+        "content": 40,
+        "visual": 21,
+        "usability": 20,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 96
+    },
+    {
+      "id": "sun-mltf",
+      "model": "local/Qwen3.8-27B-MLTF-q8c",
+      "port": 4208,
+      "snapshot_commit": "e2e4a227cd3312d02f99fbe53cd2f5762328693e",
+      "index_sha256": "c758150ba34c2f3fc0d24803f1f2c03bc66d12958e2374ba855b27582c857c6c",
+      "wall_s": 1739.787742333021,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 58,
+      "api_errors": 0,
+      "input_max": 103196,
+      "output_sum": 54727,
+      "unique_images": 35,
+      "image_occurrences": 981,
+      "decode_tok_s": 41.156716979637025,
+      "first_model_event_s": {
+        "n": 58,
+        "min": 0.6620748750865459,
+        "max": 28.446286417078227,
+        "mean": 4.31219503660044,
+        "median": 2.52004468801897
+      },
+      "resource": {
+        "samples_all": 1739,
+        "samples_development": 1729,
+        "sample_interval_s": {
+          "n": 1728,
+          "min": 0.9699490070343018,
+          "max": 1.0515429973602295,
+          "mean": 1.0063145600811199,
+          "median": 1.0060144662857056
+        },
+        "first_sample_delay_s": 0.07680916786193848,
+        "last_sample_lag_s": 0.7993733882904053,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792987316.924887,
+        "development_end_unix": 1792989056.7126293,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 1729,
+            "min": 194805760,
+            "max": 24933924864,
+            "mean": 10976332201.235395,
+            "median": 10154360832
+          },
+          "process_physical_footprint_bytes": {
+            "n": 1729,
+            "min": 1604241928,
+            "max": 30281011144,
+            "mean": 14268479424.069405,
+            "median": 13459580480
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 1729,
+            "min": 1033207808,
+            "max": 26211057664,
+            "mean": 11961415245.288607,
+            "median": 11150934016
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 1729,
+            "min": 2165870696,
+            "max": 31206430920,
+            "mean": 14924050732.441874,
+            "median": 14025027272
+          },
+          "process_cpu_percent": {
+            "n": 1729,
+            "min": 0.026383874344073046,
+            "max": 32.45014847004562,
+            "mean": 1.5819543056018128,
+            "median": 1.3199191322234818
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 1729,
+            "min": 100384768,
+            "max": 1636925440,
+            "mean": 349356088.8559861,
+            "median": 241123328
+          },
+          "system_cpu_percent": {
+            "n": 1729,
+            "min": 2.782415136338342,
+            "max": 23.897264098269122,
+            "mean": 6.154623372401327,
+            "median": 5.082872928176796
+          },
+          "gpu_device_utilization_percent": {
+            "n": 1729,
+            "min": 0,
+            "max": 100,
+            "mean": 89.76807403123193,
+            "median": 99
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 1729,
+            "min": 132333568,
+            "max": 35371548672,
+            "mean": 29835235486.72296,
+            "median": 32200441856
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 1729,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0
+          },
+          "engine_allocated_bytes": {
+            "n": 1729,
+            "min": 32379830272,
+            "max": 58349518848,
+            "mean": 44143846840.04164,
+            "median": 43769200640
+          },
+          "swap_used_bytes": {
+            "n": 1729,
+            "min": 2943552061.44,
+            "max": 2943552061.44,
+            "mean": 2943552061.44,
+            "median": 2943552061.44
+          },
+          "swap_delta_bytes": {
+            "n": 1729,
+            "min": 2621.4400000572205,
+            "max": 2621.4400000572205,
+            "mean": 2621.4400000572205,
+            "median": 2621.4400000572205
+          },
+          "native_status_local_age_seconds": {
+            "n": 1729,
+            "min": 0.05257683317176998,
+            "max": 0.09313170914538205,
+            "mean": 0.05978462854903913,
+            "median": 0.05836274987086654
+          }
+        },
+        "pressure": {
+          "normal": 1729
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 69221,
+            "start_abstime": 44557580286332,
+            "samples": 1729
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 58,
+          "message_start": 143,
+          "message_end": 143,
+          "message_update": 47529,
+          "tool_execution_start": 81,
+          "tool_execution_end": 81,
+          "turn_end": 58,
+          "tool_execution_update": 98,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 55,
+          "stop": 3
+        },
+        "tool_starts": 81,
+        "tool_error_flags": 3,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 39,
+          "bash": 27,
+          "write": 4,
+          "edit": 11
+        }
+      },
+      "scores": {
+        "content": 38,
+        "visual": 14,
+        "usability": 19,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 86
+    },
+    {
+      "id": "sun-splash",
+      "model": "mlx-community/Qwen3.8-27B-8bit",
+      "port": 4209,
+      "snapshot_commit": "f2db95d954ca49774466033d62b7af0c9195cdb4",
+      "index_sha256": "8efcdb534c852593c191dd529042f0c8b8a5eb03301a809cca8674da55029ca9",
+      "wall_s": 2035.1016778340563,
+      "completed_phases": 3,
+      "stop_reason": "completed_phases",
+      "requests": 73,
+      "api_errors": 0,
+      "input_max": 106306,
+      "output_sum": 57602,
+      "unique_images": 34,
+      "image_occurrences": 1225,
+      "decode_tok_s": 37.66710364918681,
+      "first_model_event_s": {
+        "n": 73,
+        "min": 0.38573470897972584,
+        "max": 13.918535500066355,
+        "mean": 3.5387560729836816,
+        "median": 2.7950821660924703
+      },
+      "resource": {
+        "samples_all": 2028,
+        "samples_development": 2018,
+        "sample_interval_s": {
+          "n": 2017,
+          "min": 0.9517529010772705,
+          "max": 1.0578041076660156,
+          "mean": 1.0087755478190856,
+          "median": 1.0095291137695312
+        },
+        "first_sample_delay_s": 0.1188042163848877,
+        "last_sample_lag_s": 0.2825937271118164,
+        "sampling_filter": "stage=development within launch timestamp + measured wall_s; excludes post-settle process drain/cleanup",
+        "development_start_unix": 1792989080.626916,
+        "development_end_unix": 1792991115.7285938,
+        "metrics": {
+          "process_rss_bytes": {
+            "n": 2018,
+            "min": 3518988288,
+            "max": 18851168256,
+            "mean": 9742121408.570862,
+            "median": 9165307904.0
+          },
+          "process_physical_footprint_bytes": {
+            "n": 2018,
+            "min": 33301197520,
+            "max": 51419898600,
+            "mean": 41085301551.46085,
+            "median": 40531428656.0
+          },
+          "process_tree_rss_sum_bytes": {
+            "n": 2018,
+            "min": 4330881024,
+            "max": 20295581696,
+            "mean": 10654861090.759167,
+            "median": 10014392320.0
+          },
+          "process_tree_physical_footprint_sum_bytes": {
+            "n": 2018,
+            "min": 33870511200,
+            "max": 52605824720,
+            "mean": 41697694575.33399,
+            "median": 41082654436.0
+          },
+          "process_cpu_percent": {
+            "n": 2018,
+            "min": 0.033378554580950764,
+            "max": 5.828620186960585,
+            "mean": 0.6764302470879485,
+            "median": 0.6677093382589163
+          },
+          "pi_tree_rss_sum_bytes": {
+            "n": 2018,
+            "min": 118374400,
+            "max": 1780088832,
+            "mean": 388528795.78196234,
+            "median": 278511616.0
+          },
+          "system_cpu_percent": {
+            "n": 2018,
+            "min": 2.7131782945736433,
+            "max": 20.59800664451827,
+            "mean": 5.180872392617385,
+            "median": 4.180510024246572
+          },
+          "gpu_device_utilization_percent": {
+            "n": 2018,
+            "min": 0,
+            "max": 100,
+            "mean": 86.02973240832507,
+            "median": 99.0
+          },
+          "gpu_in_use_system_memory_bytes": {
+            "n": 2018,
+            "min": 33045938176,
+            "max": 50248548352,
+            "mean": 40558277480.784935,
+            "median": 40282464256.0
+          },
+          "gpu_in_use_driver_memory_bytes": {
+            "n": 2018,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "engine_allocated_bytes": {
+            "n": 2018,
+            "min": 32529661952,
+            "max": 48677044224,
+            "mean": 39738388589.60555,
+            "median": 39480377344.0
+          },
+          "swap_used_bytes": {
+            "n": 2018,
+            "min": 2943552061.44,
+            "max": 2943552061.44,
+            "mean": 2943552061.44,
+            "median": 2943552061.44
+          },
+          "swap_delta_bytes": {
+            "n": 2018,
+            "min": 2621.4400000572205,
+            "max": 2621.4400000572205,
+            "mean": 2621.4400000572205,
+            "median": 2621.4400000572205
+          },
+          "native_status_local_age_seconds": {
+            "n": 2018,
+            "min": 0.051626915810629725,
+            "max": 0.10603995784185827,
+            "mean": 0.060238043495317285,
+            "median": 0.05895677057560533
+          }
+        },
+        "pressure": {
+          "normal": 2018
+        },
+        "telemetry_errors": {},
+        "native_status_stale_samples": 0,
+        "native_engine_identities": [
+          {
+            "pid": 78880,
+            "start_abstime": 44599840562376,
+            "samples": 2018
+          }
+        ],
+        "native_engine_identity_count": 1,
+        "native_engine_unresolved_samples": 0,
+        "temperature": "unavailable; not zero-filled; no no-throttling claim"
+      },
+      "agent": {
+        "event_counts": {
+          "response": 5,
+          "agent_start": 3,
+          "turn_start": 73,
+          "message_start": 169,
+          "message_end": 169,
+          "message_update": 50830,
+          "tool_execution_start": 92,
+          "tool_execution_end": 92,
+          "turn_end": 73,
+          "tool_execution_update": 140,
+          "agent_end": 3,
+          "agent_settled": 3
+        },
+        "assistant_stop_reasons": {
+          "toolUse": 70,
+          "stop": 3
+        },
+        "tool_starts": 92,
+        "tool_error_flags": 7,
+        "unclosed_tools": [],
+        "tool_names": {
+          "read": 39,
+          "bash": 36,
+          "write": 6,
+          "edit": 11
+        }
+      },
+      "scores": {
+        "content": 38,
+        "visual": 19,
+        "usability": 19,
+        "technical": 10,
+        "handoff": 5
+      },
+      "total": 91
+    }
+  ],
+  "inputs_sha256": {
+    "review": "e2fa35669a4c5a27562a7888376d2dc1fad0e229b37fdb741e4e683da5e5dca3",
+    "analyses": "fe8455a6b916c3c62addd1a6dc9933b0dda8e5026c168e75e780c2601e99581d",
+    "protocol": "204432c6c78dda4f055d61c89f634021e73bfe010505fa72c44718e7e0a8d3fc"
+  },
+  "limits_en": "One sample per cell; different model/quantization/engine bundles; maximum input168095, not full-window saturation; overlapping memory counters; no temperature series.",
+  "limits_cn": "每格单次样本；模型/量化/引擎组合不同；最大输入168095，未压满窗口；内存计数重叠；没有温度序列。"
+}

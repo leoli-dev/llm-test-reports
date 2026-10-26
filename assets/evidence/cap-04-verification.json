@@ -1,0 +1,121 @@
+{
+  "experiment": "CAP-04",
+  "archive_count": 10,
+  "verified_members": 1036,
+  "scanned_text_members": 853,
+  "credential_signature_or_private_home_hits": [],
+  "screenshots_byte_identical": 42,
+  "standalone_chart_files_verified": 8,
+  "localization": {
+    "experiment": "CAP-04",
+    "table_rows_checked": 214,
+    "all_numeric_table_cells_equal": true,
+    "code_fences_equal": true,
+    "image_targets_equal": true,
+    "image_count": 46,
+    "science_epoch_translation": "4.6 billion years =46亿年; epoch/duration ambiguity retained in both editions",
+    "reports": {
+      "2026-10-25-pi-visual-triad-three-engines.md": "717279254f6abe8dd2e6775bff473939eddf6f198fae16a9474ebe92f5cd9c53",
+      "2026-10-25-pi-visual-triad-three-engines_CN.md": "de33609717e36df340d9b29a9b8a9237996d47a91e8497bda6dc4b5a1004d9cc"
+    }
+  },
+  "source_integrity": {
+    "cases": [
+      {
+        "id": "pelican-mltf",
+        "head": "5f8b8e21944b504810e8f4bc40eb0a6615ddbb0a",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "pelican-splash",
+        "head": "b0466e9ce3a096c4ad60a7ce980ad7e6625532b3",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "pelican-strata",
+        "head": "a2a56fde2762c58b728ccb9267484b107782bab5",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "courtyard-splash",
+        "head": "0cad523ac65333ea00ba8f8cdcbb9337af6cc636",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "courtyard-strata",
+        "head": "be87304de4399612d1c45c0e8ddb4956da586b4a",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "courtyard-mltf",
+        "head": "c73d7fee98b16c3113c71f809a58717b28c2e1ed",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "sun-strata",
+        "head": "783d6d411cdb5782887c2bc5212efb7defeec9ab",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "sun-mltf",
+        "head": "e2e4a227cd3312d02f99fbe53cd2f5762328693e",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      },
+      {
+        "id": "sun-splash",
+        "head": "f2db95d954ca49774466033d62b7af0c9195cdb4",
+        "snapshot_matches": true,
+        "author_worktree_clean": true,
+        "evaluation_copy_changed_files": []
+      }
+    ],
+    "pi_global_config_unchanged": true,
+    "mltf_config_restored": true,
+    "report_AGENTS_unchanged": true,
+    "services": {
+      "mltf": {
+        "available": false
+      },
+      "splash": {
+        "available": false
+      },
+      "strata": {
+        "available": true,
+        "ready": true,
+        "context": {
+          "native": 262144,
+          "max_positions": 262144
+        }
+      }
+    }
+  },
+  "publication_receipt_sha256": "51f1d750f4b72a169aa45f6d4eec5e3ab014d1e8c09bb09e0dd1765d707f84aa",
+  "archive_ui_v2": {
+    "checks": 25,
+    "all_pass": true,
+    "scope": "Chromium155 desktop/mobile, both languages, repository subpath; UI original-archive edition. Final changed archive bytes separately CRC/SHA verified."
+  },
+  "policy": "Report-only local commit; no push/deployment. Does not change candidate outcomes.",
+  "archive_ui_final": {
+    "checks": 25,
+    "all_pass": true,
+    "result_sha256": "b5c9cd4092d428e89385a3c8379b492ac5f168eb952d2cecec7671b52c5e4085",
+    "scope": "Final built report and all final archive downloads, Chromium155 under repository subpath"
+  }
+}

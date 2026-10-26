@@ -25,3 +25,13 @@ These are publication and regression checks. They do not create a new LLM run, n
 - Credential-pattern and private-key scans found no matches in the selected publishing text. Translation caches, local credentials and local devlog bindings are excluded from the publication.
 
 These checks verify the archive publication and preservation of evidence. They do not independently remeasure historical performance or certify every historical model claim.
+
+## CAP-04 visual triad · 2026-10-26
+
+- Registered one new full report pair: 57 experiments / 80 paired full reports per language. All nine candidate artifacts remain separately frozen local Git repositories.
+- Build and archive validators pass. A new localization audit compares214 table rows, all numeric cells after the label column, identical code fences and46 identical image targets (42 screenshots plus4 measurement figures).
+- Chromium155.0.8051.0 checked both languages under the repository subpath: combined CAP-04 search/Strata/local filters, selected report, language retention, all46 images per edition, byte-identical Markdown downloads,390px overflow and settled deep-section viewing. Page errors0. All10 evidence archive downloads matched their receipt hashes.
+- Corrected only plot layout and observer scroll/paint timing; kept original observer records. Each screenshot copy matches its source SHA256. ZIP CRC, all member hashes and publication transformations are verified. The package omits full sessions/auth/weights/cache/product implementation.
+- The benchmark itself records one timed-out MLTF courtyard agent, eight completed agents and nine renderable artifacts; publication checks do not turn the timeout into a pass. No push or deployment was performed.
+
+[Full report](../reports/originals/2026-10-25-pi-visual-triad-three-engines.md) · [Verification receipt](../assets/evidence/cap-04-verification.json)

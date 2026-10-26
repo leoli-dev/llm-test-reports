@@ -1,0 +1,67 @@
+{
+  "experiment": "CAP-04",
+  "archives": [
+    {
+      "file": "cap-04-evidence.zip",
+      "bytes": 14074711,
+      "sha256": "26fc17ce61cd0a2e768e89fbf2792fbd694161be1aa39edda3631e92213b4c37",
+      "entries": 871
+    },
+    {
+      "file": "cap-04-pelican-mltf-screenshots.zip",
+      "bytes": 2913135,
+      "sha256": "35253cb3d229974a08880b5d34049698d8247a95eccc11bc3522bcdcad3f7a8c",
+      "entries": 11
+    },
+    {
+      "file": "cap-04-pelican-splash-screenshots.zip",
+      "bytes": 2871412,
+      "sha256": "0b11a071c72904d63773eabfc5b9bc037bded330f7985bea003b7721fdf25576",
+      "entries": 12
+    },
+    {
+      "file": "cap-04-pelican-strata-screenshots.zip",
+      "bytes": 1336633,
+      "sha256": "4e11d80908e1148f92e180cc0ca236f8d536101f68cd7485dd3e25affd1b4368",
+      "entries": 12
+    },
+    {
+      "file": "cap-04-courtyard-splash-screenshots.zip",
+      "bytes": 12705681,
+      "sha256": "8124a55a8f1b4f26105fc5f41e4a1ee9ffa8524732c43d0755083f1889304b7b",
+      "entries": 19
+    },
+    {
+      "file": "cap-04-courtyard-strata-screenshots.zip",
+      "bytes": 13492373,
+      "sha256": "47021f167c074118b00eb1a2208bcfd32c663d27028d6e954ced99c730c4cc42",
+      "entries": 21
+    },
+    {
+      "file": "cap-04-courtyard-mltf-screenshots.zip",
+      "bytes": 8125368,
+      "sha256": "bcf35db08a465f7a17015fe1ba977a2a82a290c52ea28a050467a04495267891",
+      "entries": 19
+    },
+    {
+      "file": "cap-04-sun-strata-screenshots.zip",
+      "bytes": 13088062,
+      "sha256": "1b03315a733a32e7721b39403fbf17dd3a5293a0ad7363389677cf78f2bad9a4",
+      "entries": 27
+    },
+    {
+      "file": "cap-04-sun-mltf-screenshots.zip",
+      "bytes": 13573912,
+      "sha256": "3209a3caf950f0caf5edb80389a39cee17c3ef651f490ad3985d6571a93f6d3e",
+      "entries": 27
+    },
+    {
+      "file": "cap-04-sun-splash-screenshots.zip",
+      "bytes": 12902264,
+      "sha256": "a9ae2f57fb3227b6c2da6a2db80a2c2ffa1a28a3307ab23839985e926d9b7782",
+      "entries": 27
+    }
+  ],
+  "policy": "Curated metadata and nine original screenshot packs; no full sessions/auth/complete product source/weights/caches",
+  "transforms": "cap-04-evidence.zip/publication.json"
+}
