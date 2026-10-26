@@ -1,0 +1,1096 @@
+[
+  {
+    "run": "movie-splash",
+    "label": "splash",
+    "topic": "movie",
+    "wall_s": 1127.1188296668697,
+    "reason": "completed_phases",
+    "requests": 66,
+    "errors": [],
+    "tokens": {
+      "prompt_tokens": 2650681,
+      "cached_tokens": 2578752,
+      "uncached_tokens": 71929,
+      "output_tokens": 46178,
+      "total_tokens": 2696859,
+      "reasoning_tokens": 10809
+    },
+    "reasoning_token_count_available": true,
+    "tool_calls": 74,
+    "missing_usage_requests": 0,
+    "missing_timings_requests": 0,
+    "max_request_prompt_tokens": 70543,
+    "observer_pooled_decode_tps": 111.17238918976963,
+    "image_read_calls": 17,
+    "tool_errors": 3,
+    "tool_breakdown": {
+      "bash": 34,
+      "write": 10,
+      "edit": 12,
+      "read": 18
+    },
+    "compactions": 0,
+    "ttft": {
+      "n": 66,
+      "mean": 0.784926054265463,
+      "median": 0.47750420845113695,
+      "p95": 2.1707037079613656,
+      "max": 3.7336654581595212,
+      "min": 0.19850183301605284
+    },
+    "first_visible": {
+      "n": 20,
+      "mean": 3.799298170709517,
+      "median": 3.1143680416280404,
+      "p95": 10.788323207991198,
+      "max": 10.870387749979272,
+      "min": 0.6095364161301404
+    },
+    "pooled_native_prefill_tps": 1477.9278789112109,
+    "pooled_native_decode_tps": 111.01913820960597,
+    "native_interval_note": "prompt tokens use usage.prompt_tokens. Splash timings.prompt_n is total prompt; Strata timings.prompt_n is uncached processed tokens. cache_n must not be subtracted twice. Splash decode excludes first emitted batch; Strata native predicted_n interval retained. Native times are not identical isolated GPU measures.",
+    "resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1129,
+        "mean": 43.46412754650133,
+        "median": 20,
+        "p95": 100,
+        "max": 100,
+        "min": 0
+      },
+      "gpu_in_use_system_memory_bytes": {
+        "n": 1129,
+        "mean": 93560450524.1736,
+        "median": 92768436224,
+        "p95": 97502986240,
+        "max": 99081043968,
+        "min": 89116688384
+      },
+      "process_cpu_percent": {
+        "n": 1128,
+        "mean": 1.3113441971139723,
+        "median": 0.08673369853928822,
+        "p95": 3.6913913658158273,
+        "max": 4.878830559181313,
+        "min": 0.03134383871488691
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1129,
+        "mean": 92380562848.66608,
+        "median": 91368962408,
+        "p95": 96478791352,
+        "max": 97755548256,
+        "min": 88081625240
+      },
+      "process_rss_bytes": {
+        "n": 1129,
+        "mean": 34498572973.689995,
+        "median": 33720991744,
+        "p95": 38092210176,
+        "max": 39278985216,
+        "min": 30778703872
+      },
+      "process_tree_rss_sum_bytes": {
+        "n": 1129,
+        "mean": 34821171147.39416,
+        "median": 33968259072,
+        "p95": 38583746560,
+        "max": 39947026432,
+        "min": 31056609280
+      },
+      "system_cpu_percent": {
+        "n": 1128,
+        "mean": 6.98706786444944,
+        "median": 6.406685236768802,
+        "p95": 10.762574364521363,
+        "max": 26.904109589041095,
+        "min": 4.194260485651214
+      },
+      "swap_used_bytes": {
+        "n": 1129,
+        "mean": 2625047101.44,
+        "median": 2625047101.44,
+        "p95": 2625047101.44,
+        "max": 2625047101.44,
+        "min": 2625047101.44
+      },
+      "swap_delta_bytes": {
+        "n": 1129,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "min": 0.0
+      },
+      "sample_duration_seconds": {
+        "n": 1129,
+        "mean": 0.07438286691941189,
+        "median": 0.07637333311140537,
+        "p95": 0.0854882919229567,
+        "max": 0.09465545904822648,
+        "min": 0.05775933410041034
+      }
+    },
+    "inference_interval_resources": {
+      "gpu_device_utilization_percent": {
+        "n": 463,
+        "mean": 95.01295896328294,
+        "median": 97,
+        "p95": 100,
+        "max": 100,
+        "min": 0
+      },
+      "process_cpu_percent": {
+        "n": 463,
+        "mean": 3.029686073851772,
+        "median": 3.1415938577509275,
+        "p95": 3.9899753284785087,
+        "max": 4.878830559181313,
+        "min": 0.03134383871488691
+      },
+      "system_cpu_percent": {
+        "n": 463,
+        "mean": 6.905729966048869,
+        "median": 6.589147286821706,
+        "p95": 9.742441209406495,
+        "max": 16.037735849056602,
+        "min": 4.381586245146977
+      },
+      "process_physical_footprint_bytes": {
+        "n": 463,
+        "mean": 92468859222.65227,
+        "median": 92453059544,
+        "p95": 97171556528,
+        "max": 97755548256,
+        "min": 88352731384
+      }
+    },
+    "inference_interval_samples": 463,
+    "system_memory_used_bytes": {
+      "n": 1129,
+      "mean": 110883813726.10097,
+      "median": 110623408128,
+      "p95": 112823058432,
+      "max": 113848991744,
+      "min": 108059066368
+    },
+    "pressure_counts": {
+      "normal": 1129
+    },
+    "swap_start_bytes": 2625047101.44,
+    "samples": 1129,
+    "resource_errors": {}
+  },
+  {
+    "run": "movie-strata",
+    "label": "strata",
+    "topic": "movie",
+    "wall_s": 821.0566723330412,
+    "reason": "completed_phases",
+    "requests": 61,
+    "errors": [],
+    "tokens": {
+      "prompt_tokens": 2652738,
+      "cached_tokens": 2620680,
+      "uncached_tokens": 32058,
+      "output_tokens": 51177,
+      "total_tokens": 2703915,
+      "reasoning_tokens": null
+    },
+    "reasoning_token_count_available": false,
+    "tool_calls": 69,
+    "missing_usage_requests": 0,
+    "missing_timings_requests": 0,
+    "max_request_prompt_tokens": 67552,
+    "observer_pooled_decode_tps": 82.32967327996974,
+    "image_read_calls": 13,
+    "tool_errors": 1,
+    "tool_breakdown": {
+      "read": 16,
+      "bash": 29,
+      "write": 8,
+      "edit": 16
+    },
+    "compactions": 0,
+    "ttft": {
+      "n": 61,
+      "mean": 0.830108131194243,
+      "median": 0.5515948748216033,
+      "p95": 2.248494999948889,
+      "max": 9.584509375039488,
+      "min": 0.15248020901344717
+    },
+    "first_visible": {
+      "n": 30,
+      "mean": 4.9433959708316255,
+      "median": 2.8207200415199623,
+      "p95": 12.966658334014937,
+      "max": 21.166984250070527,
+      "min": 0.670203500194475
+    },
+    "pooled_native_prefill_tps": 721.9782447131951,
+    "pooled_native_decode_tps": 82.20096921876714,
+    "native_interval_note": "prompt tokens use usage.prompt_tokens. Splash timings.prompt_n is total prompt; Strata timings.prompt_n is uncached processed tokens. cache_n must not be subtracted twice. Splash decode excludes first emitted batch; Strata native predicted_n interval retained. Native times are not identical isolated GPU measures.",
+    "resources": {
+      "gpu_device_utilization_percent": {
+        "n": 826,
+        "mean": 77.71670702179176,
+        "median": 96.0,
+        "p95": 98,
+        "max": 100,
+        "min": 0
+      },
+      "gpu_in_use_system_memory_bytes": {
+        "n": 826,
+        "mean": 53767160740.2615,
+        "median": 63464775680.0,
+        "p95": 67223093248,
+        "max": 68464574464,
+        "min": 1236385792
+      },
+      "process_cpu_percent": {
+        "n": 825,
+        "mean": 6.219038451538712,
+        "median": 6.174328886520593,
+        "p95": 9.703994670416874,
+        "max": 88.9683614871698,
+        "min": 0.09317251652957936
+      },
+      "process_physical_footprint_bytes": {
+        "n": 826,
+        "mean": 26430742407.312347,
+        "median": 27468787280.0,
+        "p95": 27700522768,
+        "max": 27710271248,
+        "min": 18004464704
+      },
+      "process_rss_bytes": {
+        "n": 826,
+        "mean": 73843505851.19612,
+        "median": 74861510656.0,
+        "p95": 75092754432,
+        "max": 75096440832,
+        "min": 65492697088
+      },
+      "process_tree_rss_sum_bytes": {
+        "n": 809,
+        "mean": 75336259880.18788,
+        "median": 76338036736,
+        "p95": 76632014848,
+        "max": 76662571008,
+        "min": 66975301632
+      },
+      "system_cpu_percent": {
+        "n": 825,
+        "mean": 7.304616784885293,
+        "median": 6.666666666666667,
+        "p95": 11.846153846153847,
+        "max": 18.98173768677366,
+        "min": 4.7272727272727275
+      },
+      "swap_used_bytes": {
+        "n": 826,
+        "mean": 2625047101.44,
+        "median": 2625047101.44,
+        "p95": 2625047101.44,
+        "max": 2625047101.44,
+        "min": 2625047101.44
+      },
+      "swap_delta_bytes": {
+        "n": 826,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "min": 0.0
+      },
+      "sample_duration_seconds": {
+        "n": 826,
+        "mean": 0.06745168991351938,
+        "median": 0.06578997906763107,
+        "p95": 0.0809987080283463,
+        "max": 0.08908783295191824,
+        "min": 0.05596879217773676
+      }
+    },
+    "inference_interval_resources": {
+      "gpu_device_utilization_percent": {
+        "n": 665,
+        "mean": 94.41804511278195,
+        "median": 96,
+        "p95": 99,
+        "max": 100,
+        "min": 0
+      },
+      "process_cpu_percent": {
+        "n": 665,
+        "mean": 7.590367045683739,
+        "median": 6.83534326953922,
+        "p95": 10.136381325168218,
+        "max": 88.9683614871698,
+        "min": 0.10482689852101025
+      },
+      "system_cpu_percent": {
+        "n": 665,
+        "mean": 7.1427157660882665,
+        "median": 6.616161616161616,
+        "p95": 11.258278145695364,
+        "max": 16.20575221238938,
+        "min": 4.7272727272727275
+      },
+      "process_physical_footprint_bytes": {
+        "n": 665,
+        "mean": 26340142226.622555,
+        "median": 27468754512,
+        "p95": 27700621072,
+        "max": 27710271248,
+        "min": 22138183528
+      }
+    },
+    "inference_interval_samples": 665,
+    "system_memory_used_bytes": {
+      "n": 826,
+      "mean": 84130123547.89346,
+      "median": 90380804096.0,
+      "p95": 93217767424,
+      "max": 93897752576,
+      "min": 40913813504
+    },
+    "pressure_counts": {
+      "normal": 826
+    },
+    "swap_start_bytes": 2625047101.44,
+    "samples": 826,
+    "resource_errors": {}
+  },
+  {
+    "run": "voxel-strata",
+    "label": "strata",
+    "topic": "voxel",
+    "wall_s": 3121.1188915001694,
+    "reason": "completed_phases",
+    "requests": 149,
+    "errors": [],
+    "tokens": {
+      "prompt_tokens": 15160103,
+      "cached_tokens": 15114291,
+      "uncached_tokens": 45812,
+      "output_tokens": 145845,
+      "total_tokens": 15305948,
+      "reasoning_tokens": null
+    },
+    "reasoning_token_count_available": false,
+    "tool_calls": 161,
+    "missing_usage_requests": 0,
+    "missing_timings_requests": 0,
+    "max_request_prompt_tokens": 180625,
+    "observer_pooled_decode_tps": 83.11742427865836,
+    "image_read_calls": 21,
+    "tool_errors": 8,
+    "tool_breakdown": {
+      "read": 24,
+      "bash": 74,
+      "write": 14,
+      "edit": 49
+    },
+    "compactions": 0,
+    "ttft": {
+      "n": 149,
+      "mean": 0.6634595998290976,
+      "median": 0.5226623329799622,
+      "p95": 1.723650542087853,
+      "max": 5.040752083063126,
+      "min": 0.13743866700679064
+    },
+    "first_visible": {
+      "n": 34,
+      "mean": 16.64707059921998,
+      "median": 10.820578249986283,
+      "p95": 41.675200042082,
+      "max": 65.56043658289127,
+      "min": 0.6908319580834359
+    },
+    "pooled_native_prefill_tps": 570.1527310380534,
+    "pooled_native_decode_tps": 83.00933823039766,
+    "native_interval_note": "prompt tokens use usage.prompt_tokens. Splash timings.prompt_n is total prompt; Strata timings.prompt_n is uncached processed tokens. cache_n must not be subtracted twice. Splash decode excludes first emitted batch; Strata native predicted_n interval retained. Native times are not identical isolated GPU measures.",
+    "resources": {
+      "gpu_device_utilization_percent": {
+        "n": 3112,
+        "mean": 59.585796915167094,
+        "median": 94.0,
+        "p95": 97,
+        "max": 100,
+        "min": 0
+      },
+      "gpu_in_use_system_memory_bytes": {
+        "n": 3112,
+        "mean": 39421455689.04884,
+        "median": 62429904896.0,
+        "p95": 64316080128,
+        "max": 69017255936,
+        "min": 805306368
+      },
+      "process_cpu_percent": {
+        "n": 3111,
+        "mean": 4.544910255121568,
+        "median": 4.994924654413614,
+        "p95": 9.528771458985501,
+        "max": 91.0777949545571,
+        "min": 0.0
+      },
+      "process_physical_footprint_bytes": {
+        "n": 3112,
+        "mean": 27330594402.989716,
+        "median": 27481960016.0,
+        "p95": 27782524712,
+        "max": 27997712312,
+        "min": 18004153408
+      },
+      "process_rss_bytes": {
+        "n": 3112,
+        "mean": 74776562195.74294,
+        "median": 74874699776.0,
+        "p95": 75174903808,
+        "max": 75375329280,
+        "min": 65492385792
+      },
+      "process_tree_rss_sum_bytes": {
+        "n": 3049,
+        "mean": 76263266027.93309,
+        "median": 76372426752,
+        "p95": 76649086976,
+        "max": 76857507840,
+        "min": 66975416320
+      },
+      "system_cpu_percent": {
+        "n": 3111,
+        "mean": 15.589128389497477,
+        "median": 16.777408637873755,
+        "p95": 22.986577181208055,
+        "max": 42.51835121400339,
+        "min": 4.542936288088643
+      },
+      "swap_used_bytes": {
+        "n": 3112,
+        "mean": 2625047101.44,
+        "median": 2625047101.44,
+        "p95": 2625047101.44,
+        "max": 2625047101.44,
+        "min": 2625047101.44
+      },
+      "swap_delta_bytes": {
+        "n": 3112,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "min": 0.0
+      },
+      "sample_duration_seconds": {
+        "n": 3112,
+        "mean": 0.06728601330414817,
+        "median": 0.0659481460461393,
+        "p95": 0.07812516717240214,
+        "max": 0.10416866699233651,
+        "min": 0.05583929200656712
+      }
+    },
+    "inference_interval_resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1841,
+        "mean": 93.40847365562195,
+        "median": 95,
+        "p95": 98,
+        "max": 100,
+        "min": 0
+      },
+      "process_cpu_percent": {
+        "n": 1841,
+        "mean": 7.56124281871998,
+        "median": 6.790188186922972,
+        "p95": 10.208808050698718,
+        "max": 91.0777949545571,
+        "min": 0.0851499444011506
+      },
+      "system_cpu_percent": {
+        "n": 1841,
+        "mean": 15.035800809696724,
+        "median": 16.703417861080485,
+        "p95": 22.506963788300837,
+        "max": 34.9390919158361,
+        "min": 4.542936288088643
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1841,
+        "mean": 27330050982.818035,
+        "median": 27625008816,
+        "p95": 27782786856,
+        "max": 27997712312,
+        "min": 22140346192
+      }
+    },
+    "inference_interval_samples": 1841,
+    "system_memory_used_bytes": {
+      "n": 3112,
+      "mean": 77088120426.61183,
+      "median": 91569635328.0,
+      "p95": 93964206080,
+      "max": 95503253504,
+      "min": 43239948288
+    },
+    "pressure_counts": {
+      "normal": 3112
+    },
+    "swap_start_bytes": 2625047101.44,
+    "samples": 3112,
+    "resource_errors": {}
+  },
+  {
+    "run": "voxel-splash",
+    "label": "splash",
+    "topic": "voxel",
+    "wall_s": 3016.276950958185,
+    "reason": "completed_phases",
+    "requests": 182,
+    "errors": [],
+    "tokens": {
+      "prompt_tokens": 18585633,
+      "cached_tokens": 18381280,
+      "uncached_tokens": 204353,
+      "output_tokens": 149059,
+      "total_tokens": 18734692,
+      "reasoning_tokens": 52361
+    },
+    "reasoning_token_count_available": true,
+    "tool_calls": 179,
+    "missing_usage_requests": 0,
+    "missing_timings_requests": 0,
+    "max_request_prompt_tokens": 200541,
+    "observer_pooled_decode_tps": 115.78516752395574,
+    "image_read_calls": 15,
+    "tool_errors": 4,
+    "tool_breakdown": {
+      "bash": 104,
+      "write": 22,
+      "edit": 38,
+      "read": 15
+    },
+    "compactions": 0,
+    "ttft": {
+      "n": 182,
+      "mean": 0.7833641082762259,
+      "median": 0.5787847499595955,
+      "p95": 1.604962999932468,
+      "max": 7.038070291979238,
+      "min": 0.20961979101411998
+    },
+    "first_visible": {
+      "n": 3,
+      "mean": 3.1710884583493075,
+      "median": 2.089478790992871,
+      "p95": 2.089478790992871,
+      "max": 5.996357667027041,
+      "min": 1.42742891702801
+    },
+    "pooled_native_prefill_tps": 1618.521013329606,
+    "pooled_native_decode_tps": 115.65401236603708,
+    "native_interval_note": "prompt tokens use usage.prompt_tokens. Splash timings.prompt_n is total prompt; Strata timings.prompt_n is uncached processed tokens. cache_n must not be subtracted twice. Splash decode excludes first emitted batch; Strata native predicted_n interval retained. Native times are not identical isolated GPU measures.",
+    "resources": {
+      "gpu_device_utilization_percent": {
+        "n": 3002,
+        "mean": 45.45236508994004,
+        "median": 0.0,
+        "p95": 98,
+        "max": 100,
+        "min": 0
+      },
+      "gpu_in_use_system_memory_bytes": {
+        "n": 3002,
+        "mean": 97993438556.61026,
+        "median": 99472375808.0,
+        "p95": 101997494272,
+        "max": 102768934912,
+        "min": 87845289984
+      },
+      "process_cpu_percent": {
+        "n": 3001,
+        "mean": 1.4514514521699478,
+        "median": 0.09873800229060575,
+        "p95": 3.4476345603731846,
+        "max": 4.65943159761028,
+        "min": 0.03328789265544901
+      },
+      "process_physical_footprint_bytes": {
+        "n": 3002,
+        "mean": 97762598479.72018,
+        "median": 99011153752.0,
+        "p95": 101848946704,
+        "max": 102545463552,
+        "min": 88085819568
+      },
+      "process_rss_bytes": {
+        "n": 3002,
+        "mean": 39808104394.787476,
+        "median": 41162317824.0,
+        "p95": 43525652480,
+        "max": 43974230016,
+        "min": 30784339968
+      },
+      "process_tree_rss_sum_bytes": {
+        "n": 3002,
+        "mean": 40090978127.98934,
+        "median": 41361408000.0,
+        "p95": 43982569472,
+        "max": 44633899008,
+        "min": 31030067200
+      },
+      "system_cpu_percent": {
+        "n": 3001,
+        "mean": 7.070938999622824,
+        "median": 6.685082872928176,
+        "p95": 13.11111111111111,
+        "max": 33.68189323059989,
+        "min": 2.866593164277839
+      },
+      "swap_used_bytes": {
+        "n": 3002,
+        "mean": 2625047101.44,
+        "median": 2625047101.44,
+        "p95": 2625047101.44,
+        "max": 2625047101.44,
+        "min": 2625047101.44
+      },
+      "swap_delta_bytes": {
+        "n": 3002,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "min": 0.0
+      },
+      "sample_duration_seconds": {
+        "n": 3002,
+        "mean": 0.06962452947455573,
+        "median": 0.06585681263823062,
+        "p95": 0.08321308298036456,
+        "max": 0.10540370806120336,
+        "min": 0.05709891696460545
+      }
+    },
+    "inference_interval_resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1418,
+        "mean": 95.1755994358251,
+        "median": 97.0,
+        "p95": 100,
+        "max": 100,
+        "min": 0
+      },
+      "process_cpu_percent": {
+        "n": 1418,
+        "mean": 2.9174409906481484,
+        "median": 3.024885879993585,
+        "p95": 3.6215197338577685,
+        "max": 4.65943159761028,
+        "min": 0.038246699604815686
+      },
+      "system_cpu_percent": {
+        "n": 1418,
+        "mean": 5.510296581417606,
+        "median": 4.796030871003308,
+        "p95": 9.600443951165373,
+        "max": 27.940364439536168,
+        "min": 2.866593164277839
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1418,
+        "mean": 96670560574.00282,
+        "median": 97509968576.0,
+        "p95": 102039525248,
+        "max": 102545463552,
+        "min": 88356876512
+      }
+    },
+    "inference_interval_samples": 1418,
+    "system_memory_used_bytes": {
+      "n": 3002,
+      "mean": 112585006618.26515,
+      "median": 113531527168.0,
+      "p95": 115014959104,
+      "max": 115756957696,
+      "min": 106746626048
+    },
+    "pressure_counts": {
+      "normal": 2996,
+      "warn": 6
+    },
+    "swap_start_bytes": 2625047101.44,
+    "samples": 3002,
+    "resource_errors": {}
+  },
+  {
+    "run": "qingming-splash",
+    "label": "splash",
+    "topic": "qingming",
+    "wall_s": 1587.437512292061,
+    "reason": "completed_phases",
+    "requests": 92,
+    "errors": [],
+    "tokens": {
+      "prompt_tokens": 9903511,
+      "cached_tokens": 9731552,
+      "uncached_tokens": 171959,
+      "output_tokens": 133957,
+      "total_tokens": 10037468,
+      "reasoning_tokens": 67112
+    },
+    "reasoning_token_count_available": true,
+    "tool_calls": 115,
+    "missing_usage_requests": 0,
+    "missing_timings_requests": 0,
+    "max_request_prompt_tokens": 170037,
+    "observer_pooled_decode_tps": 99.85020656466038,
+    "image_read_calls": 25,
+    "tool_errors": 2,
+    "tool_breakdown": {
+      "read": 28,
+      "bash": 43,
+      "write": 10,
+      "edit": 34
+    },
+    "compactions": 0,
+    "ttft": {
+      "n": 92,
+      "mean": 1.3157081572495846,
+      "median": 0.8041974790394306,
+      "p95": 2.617455708095804,
+      "max": 11.661383958067745,
+      "min": 0.1919981250539422
+    },
+    "first_visible": {
+      "n": 16,
+      "mean": 22.23650374477438,
+      "median": 22.052543166442774,
+      "p95": 43.46146666700952,
+      "max": 58.38086133287288,
+      "min": 0.8762473340611905
+    },
+    "pooled_native_prefill_tps": 1544.3414800634155,
+    "pooled_native_decode_tps": 99.78563676278866,
+    "native_interval_note": "prompt tokens use usage.prompt_tokens. Splash timings.prompt_n is total prompt; Strata timings.prompt_n is uncached processed tokens. cache_n must not be subtracted twice. Splash decode excludes first emitted batch; Strata native predicted_n interval retained. Native times are not identical isolated GPU measures.",
+    "resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1586,
+        "mean": 85.48928121059268,
+        "median": 97.0,
+        "p95": 100,
+        "max": 100,
+        "min": 0
+      },
+      "gpu_in_use_system_memory_bytes": {
+        "n": 1586,
+        "mean": 93779089648.1816,
+        "median": 93292339200.0,
+        "p95": 100269211648,
+        "max": 101859590144,
+        "min": 87845289984
+      },
+      "process_cpu_percent": {
+        "n": 1585,
+        "mean": 2.57000156552965,
+        "median": 2.811243606489715,
+        "p95": 3.424034532668359,
+        "max": 6.090954433090611,
+        "min": 0.02785412726665561
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1586,
+        "mean": 93827022322.68349,
+        "median": 93443915240.0,
+        "p95": 101099393864,
+        "max": 102397253360,
+        "min": 88092143864
+      },
+      "process_rss_bytes": {
+        "n": 1586,
+        "mean": 35405721625.82597,
+        "median": 34847014912.0,
+        "p95": 41809248256,
+        "max": 42758586368,
+        "min": 30760976384
+      },
+      "process_tree_rss_sum_bytes": {
+        "n": 1586,
+        "mean": 35750117200.383354,
+        "median": 35143827456.0,
+        "p95": 42325295104,
+        "max": 43570364416,
+        "min": 30973427712
+      },
+      "system_cpu_percent": {
+        "n": 1585,
+        "mean": 5.979221433233143,
+        "median": 5.066079295154185,
+        "p95": 11.19194180190263,
+        "max": 19.23076923076923,
+        "min": 2.497225305216426
+      },
+      "swap_used_bytes": {
+        "n": 1586,
+        "mean": 2625047101.44,
+        "median": 2625047101.44,
+        "p95": 2625047101.44,
+        "max": 2625047101.44,
+        "min": 2625047101.44
+      },
+      "swap_delta_bytes": {
+        "n": 1586,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "min": 0.0
+      },
+      "sample_duration_seconds": {
+        "n": 1586,
+        "mean": 0.06465643589061298,
+        "median": 0.06296404148451984,
+        "p95": 0.07991820806637406,
+        "max": 0.10121945803985,
+        "min": 0.058045417070388794
+      }
+    },
+    "inference_interval_resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1450,
+        "mean": 92.78758620689655,
+        "median": 97.0,
+        "p95": 100,
+        "max": 100,
+        "min": 0
+      },
+      "process_cpu_percent": {
+        "n": 1450,
+        "mean": 2.7739269564144053,
+        "median": 2.837557981945885,
+        "p95": 3.4357455284650573,
+        "max": 6.090954433090611,
+        "min": 0.03432375228087221
+      },
+      "system_cpu_percent": {
+        "n": 1450,
+        "mean": 5.645389425745119,
+        "median": 4.938956714761376,
+        "p95": 10.033259423503326,
+        "max": 17.20604099244876,
+        "min": 2.497225305216426
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1450,
+        "mean": 93616744298.83586,
+        "median": 92493069128.0,
+        "p95": 101099377480,
+        "max": 102397253360,
+        "min": 88363282776
+      }
+    },
+    "inference_interval_samples": 1450,
+    "system_memory_used_bytes": {
+      "n": 1586,
+      "mean": 110487295093.5082,
+      "median": 109988552704.0,
+      "p95": 113880301568,
+      "max": 114914197504,
+      "min": 106664067072
+    },
+    "pressure_counts": {
+      "normal": 1581,
+      "warn": 5
+    },
+    "swap_start_bytes": 2625047101.44,
+    "samples": 1586,
+    "resource_errors": {}
+  },
+  {
+    "run": "qingming-strata",
+    "label": "strata",
+    "topic": "qingming",
+    "wall_s": 1707.8914919998497,
+    "reason": "completed_phases",
+    "requests": 64,
+    "errors": [],
+    "tokens": {
+      "prompt_tokens": 6244607,
+      "cached_tokens": 6214466,
+      "uncached_tokens": 30141,
+      "output_tokens": 118197,
+      "total_tokens": 6362804,
+      "reasoning_tokens": null
+    },
+    "reasoning_token_count_available": false,
+    "tool_calls": 80,
+    "missing_usage_requests": 0,
+    "missing_timings_requests": 0,
+    "max_request_prompt_tokens": 145625,
+    "observer_pooled_decode_tps": 78.2030017586792,
+    "image_read_calls": 24,
+    "tool_errors": 1,
+    "tool_breakdown": {
+      "read": 27,
+      "bash": 31,
+      "write": 7,
+      "edit": 15
+    },
+    "compactions": 0,
+    "ttft": {
+      "n": 64,
+      "mean": 0.9345148671491188,
+      "median": 0.6538368330802768,
+      "p95": 2.232111166929826,
+      "max": 3.88576029217802,
+      "min": 0.21761274989694357
+    },
+    "first_visible": {
+      "n": 22,
+      "mean": 21.13408066473097,
+      "median": 3.7894879169762135,
+      "p95": 25.81649720808491,
+      "max": 232.30594208301045,
+      "min": 0.4925470419693738
+    },
+    "pooled_native_prefill_tps": 700.93229739566,
+    "pooled_native_decode_tps": 78.15251234966665,
+    "native_interval_note": "prompt tokens use usage.prompt_tokens. Splash timings.prompt_n is total prompt; Strata timings.prompt_n is uncached processed tokens. cache_n must not be subtracted twice. Splash decode excludes first emitted batch; Strata native predicted_n interval retained. Native times are not identical isolated GPU measures.",
+    "resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1711,
+        "mean": 87.61133839859731,
+        "median": 96,
+        "p95": 98,
+        "max": 100,
+        "min": 0
+      },
+      "gpu_in_use_system_memory_bytes": {
+        "n": 1711,
+        "mean": 58766354102.83577,
+        "median": 63256707072,
+        "p95": 64048594944,
+        "max": 68676288512,
+        "min": 946421760
+      },
+      "process_cpu_percent": {
+        "n": 1710,
+        "mean": 5.334037389983215,
+        "median": 4.815870575297325,
+        "p95": 8.996485889539422,
+        "max": 90.010067325027,
+        "min": 0.06737774326115928
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1711,
+        "mean": 26774903188.03039,
+        "median": 27508862808,
+        "p95": 32522583376,
+        "max": 32578256232,
+        "min": 18004350208
+      },
+      "process_rss_bytes": {
+        "n": 1711,
+        "mean": 72880519185.9544,
+        "median": 74192568320,
+        "p95": 74762452992,
+        "max": 78938324992,
+        "min": 64701284352
+      },
+      "process_tree_rss_sum_bytes": {
+        "n": 1675,
+        "mean": 74372758348.87642,
+        "median": 75691442176,
+        "p95": 76170428416,
+        "max": 80586735616,
+        "min": 66183135232
+      },
+      "system_cpu_percent": {
+        "n": 1710,
+        "mean": 9.233899794424481,
+        "median": 8.175221441766205,
+        "p95": 17.338487023743788,
+        "max": 67.5187969924812,
+        "min": 3.104212860310421
+      },
+      "swap_used_bytes": {
+        "n": 1711,
+        "mean": 2625047101.44,
+        "median": 2625047101.44,
+        "p95": 2625047101.44,
+        "max": 2625047101.44,
+        "min": 2625047101.44
+      },
+      "swap_delta_bytes": {
+        "n": 1711,
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0,
+        "min": 0.0
+      },
+      "sample_duration_seconds": {
+        "n": 1711,
+        "mean": 0.06768987641652392,
+        "median": 0.06544450018554926,
+        "p95": 0.07934533408842981,
+        "max": 0.31349291699007154,
+        "min": 0.0536929159425199
+      }
+    },
+    "inference_interval_resources": {
+      "gpu_device_utilization_percent": {
+        "n": 1562,
+        "mean": 95.38668373879642,
+        "median": 96.0,
+        "p95": 98,
+        "max": 100,
+        "min": 0
+      },
+      "process_cpu_percent": {
+        "n": 1562,
+        "mean": 5.785467099240579,
+        "median": 5.021297218549931,
+        "p95": 9.251263121087263,
+        "max": 90.010067325027,
+        "min": 0.10457761607805356
+      },
+      "system_cpu_percent": {
+        "n": 1562,
+        "mean": 9.20161824031278,
+        "median": 8.133050375069676,
+        "p95": 17.338487023743788,
+        "max": 67.5187969924812,
+        "min": 3.104212860310421
+      },
+      "process_physical_footprint_bytes": {
+        "n": 1562,
+        "mean": 26543255125.99744,
+        "median": 27497099096.0,
+        "p95": 32522583376,
+        "max": 32578256232,
+        "min": 22140510224
+      }
+    },
+    "inference_interval_samples": 1562,
+    "system_memory_used_bytes": {
+      "n": 1711,
+      "mean": 91348002295.32204,
+      "median": 95517786112,
+      "p95": 97823358976,
+      "max": 100279599104,
+      "min": 37257805824
+    },
+    "pressure_counts": {
+      "normal": 1711
+    },
+    "swap_start_bytes": 2625047101.44,
+    "samples": 1711,
+    "resource_errors": {}
+  }
+]

@@ -6,7 +6,7 @@ My LLM test archive: models and inference engines observed through real tasks, f
 
 **[Browse the report site](https://leoli-dev.github.io/llm-test-reports/)** · **[Full Markdown reports](reports/originals/)** · [Add a report](CONTRIBUTING.md)
 
-The archive contains **58 experiment, parameter or comparison records and 81 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
+The archive contains **59 experiment, parameter or comparison records and 82 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
 
 ## Workstation and system
 
@@ -33,6 +33,7 @@ Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test sta
 
 | Date | Experiment / parameters | Model and runtime | Report |
 |---|---|---|---|
+| 2026-10-26 | Splash 1.4.1 Metal vs Strata: Flash Next IQ3_S coding triad | Qwen3.8-Flash-Next-GSQ-RCO IQ3_S | [CAP-05](reports/experiments/cap-05.md) |
 | 2026-10-26 | Strata cold-KV TTFT: ten 128K-input and ten 256K stress trials | Qwen3.8-Flash-Next GSQ-RCO IQ3_S | [PERF-13](reports/experiments/perf-13.md) |
 | 2026-10-25 | Pi visual triad: MLTF, Splash and Strata at 256K | Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S | [CAP-04](reports/experiments/cap-04.md) · [Code](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) · [Demo](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/) |
 | 2026-10-25 | RepairDesk / Pi on Strata and Splash at 256K | Qwen3.8-Flash-Next GSQ-RCO IQ3_S vs Qwen3.8-27B MLX affine8 | [CAP-03](reports/experiments/cap-03.md) |

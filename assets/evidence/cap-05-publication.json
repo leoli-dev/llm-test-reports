@@ -1,0 +1,121 @@
+{
+  "experiment": "CAP-05",
+  "local_only_no_push": true,
+  "transforms": [
+    "/Users/leo -> /Users/benchmark in textual evidence",
+    "temporary browser profile paths generalized",
+    "full process command inventories omitted",
+    "private Pi sessions/request bodies/SSE/auth/config secrets/DBs/weights/caches/full product source excluded",
+    "PNG pixels and numeric results unchanged",
+    "archive reader acceptance published separately to avoid a self-referential ZIP checksum"
+  ],
+  "zip": {
+    "bytes": 21029323,
+    "sha256": "d82f3a2d0ef7cb624b53c5ced0ec288e7db2e32336e4d2731600aa2783785cdc",
+    "entries": 280,
+    "manifest_verified": true
+  },
+  "figures": [
+    {
+      "file": "utilization.png",
+      "source": "analysis/figures/utilization.png",
+      "sha256": "5a3f7c9a116875c04699bb831dd3a666cc6c5603796a569659049724470be518"
+    },
+    {
+      "file": "performance.png",
+      "source": "analysis/figures/performance.png",
+      "sha256": "0606e9310114a62604158ba48ae72234b26b81e74192a0832f3ea4b1c4922848"
+    },
+    {
+      "file": "memory.png",
+      "source": "analysis/figures/memory.png",
+      "sha256": "9445a6b052a98ee731e8e0a00976fa04c83b77fd15950ba352583ce7ac659d12"
+    },
+    {
+      "file": "movie-splash-detail-reviewed.png",
+      "source": "scoring/movie-splash/independent/detail-reviewed.png",
+      "sha256": "47a85af4056e3cb0c86d7bbd474d0c76cefb972c05cc78ccd7097f87297f7945"
+    },
+    {
+      "file": "movie-splash-mobile-detail.png",
+      "source": "scoring/movie-splash/independent/mobile-detail.png",
+      "sha256": "7ad7a07083d6da6ae17cc0a67db9f2a6dea4400d37183cb1ebba40065b4b3707"
+    },
+    {
+      "file": "movie-strata-detail-reviewed.png",
+      "source": "scoring/movie-strata/independent/detail-reviewed.png",
+      "sha256": "5798a6917547e4f8d2fa0df7c190940d413580eea5c612d41a171b8193b6a7af"
+    },
+    {
+      "file": "movie-strata-mobile-detail.png",
+      "source": "scoring/movie-strata/independent/mobile-detail.png",
+      "sha256": "b6a0cbdc7d8993ea6ffb9ed055dc8baf95c11fc0e4debf3adb04270a14f560db"
+    },
+    {
+      "file": "voxel-splash-play-initial.png",
+      "source": "scoring/voxel-splash/independent/play-initial.png",
+      "sha256": "274e14c892ee37d0bf6bf48443b89d591fb4254befbbdd841be48298dfa9d92e"
+    },
+    {
+      "file": "voxel-splash-followup-water.png",
+      "source": "scoring/voxel-splash/independent/followup-water.png",
+      "sha256": "aa9b84602a14232b355027a35e8300bd78ffc04f241131e379067c04dbce43a7"
+    },
+    {
+      "file": "voxel-splash-high-world-400.png",
+      "source": "scoring/voxel-splash/independent/high-world-400.png",
+      "sha256": "b9f9c558d834360001df2084bd50ca14b7c0e6d1ba101a4ad98a5e8aefbb5c69"
+    },
+    {
+      "file": "voxel-splash-play-mobile.png",
+      "source": "scoring/voxel-splash/independent/play-mobile.png",
+      "sha256": "69a6b5d2c88b336dcb82595d1528efcbf31fa87c5e32d890dbc1ecbab9d2ad10"
+    },
+    {
+      "file": "voxel-strata-play-initial.png",
+      "source": "scoring/voxel-strata/independent/play-initial.png",
+      "sha256": "19fe0579688118044d89ed17e5bf4ed920372bc0db788da3ee80c4e7b8022a4c"
+    },
+    {
+      "file": "voxel-strata-high-world-400.png",
+      "source": "scoring/voxel-strata/independent/high-world-400.png",
+      "sha256": "5e2e935202a6c90420551a328403cf66c554d4aab68f093cdfcad5603fa0d0db"
+    },
+    {
+      "file": "voxel-strata-play-mobile.png",
+      "source": "scoring/voxel-strata/independent/play-mobile.png",
+      "sha256": "8f510adaebc91d142955157e4a32c2414602b24b32ff92570e4c991ad38e97ca"
+    },
+    {
+      "file": "qingming-splash-view-bridge.png",
+      "source": "scoring/qingming-splash/independent/view-bridge.png",
+      "sha256": "4e3417ca076d2c8301e33a998b1b186c2fd2bd803e4e17185ca98effbdd5d79b"
+    },
+    {
+      "file": "qingming-splash-view-city.png",
+      "source": "scoring/qingming-splash/independent/view-city.png",
+      "sha256": "5f1d83f3a7cfc6af7c64950cde15f48b29421db83e0e9921f4e0214ac6821825"
+    },
+    {
+      "file": "qingming-splash-view-mobile-bridge.png",
+      "source": "scoring/qingming-splash/independent/view-mobile-bridge.png",
+      "sha256": "e284049d28f9ff83a88713797228cc768d4703a2b4ba4898bd399676b3b25fd6"
+    },
+    {
+      "file": "qingming-strata-view-bridge.png",
+      "source": "scoring/qingming-strata/independent/view-bridge.png",
+      "sha256": "66f05cb390b97c46b8d1f7d95c376ed36b01e1749a7a4e53dd81c958709729c7"
+    },
+    {
+      "file": "qingming-strata-view-market.png",
+      "source": "scoring/qingming-strata/independent/view-market.png",
+      "sha256": "08752251597ef3138bfbce84bf1683a1e288fb6b9c00c41502a99748f00011af"
+    },
+    {
+      "file": "qingming-strata-view-mobile-bridge.png",
+      "source": "scoring/qingming-strata/independent/view-mobile-bridge.png",
+      "sha256": "c85514afd0c38391d5783365c6eef58eabf8b259f6ac4bab31772d53823cf037"
+    }
+  ],
+  "source_artifacts": "Separate local repositories, tar archives and Git bundles; no artifact was pushed"
+}

@@ -1,0 +1,258 @@
+{
+  "experiment": "CAP-05",
+  "status": "passed",
+  "local_only_no_push": true,
+  "build": "npm run build passed: 59 experiments / 82 complete reports per locale",
+  "validation": "npm run check passed: bilingual pairs, local links, sanitization, source-code audit and README indexes",
+  "browser": {
+    "experiment": "CAP-05",
+    "date": "2026-10-26T21:53:53.024Z",
+    "executable": "/Applications/Chromium.app/Contents/MacOS/Chromium",
+    "version": "155.0.8051.0",
+    "subpath": "/llm-test-reports/",
+    "checks": [
+      {
+        "name": "en:combined-search-engine-scope",
+        "pass": true
+      },
+      {
+        "name": "en:second-engine-also-matches",
+        "pass": true
+      },
+      {
+        "name": "en:report-selected",
+        "pass": true
+      },
+      {
+        "name": "en:85-score-rows",
+        "pass": true
+      },
+      {
+        "name": "en:20-original-figures",
+        "pass": true,
+        "detail": 20
+      },
+      {
+        "name": "en:asset:cap-05-scores.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-evidence.zip",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-source-review.txt",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-requests.csv",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-resources.csv",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-metrics.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-publication.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-localization-audit.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:asset:cap-05-archive-checks.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "en:markdown-download-bytes",
+        "pass": true
+      },
+      {
+        "name": "en:zip-download-bytes",
+        "pass": true
+      },
+      {
+        "name": "en:mobile-no-page-overflow",
+        "pass": true,
+        "detail": {
+          "scroll": 390,
+          "width": 390
+        }
+      },
+      {
+        "name": "en:language-switch-preserves-report",
+        "pass": true
+      },
+      {
+        "name": "en:language-switch-preserves-filters",
+        "pass": true
+      },
+      {
+        "name": "en:existing-multi-report-switch",
+        "pass": true,
+        "detail": 2
+      },
+      {
+        "name": "en:return-to-new-report",
+        "pass": true
+      },
+      {
+        "name": "cn:combined-search-engine-scope",
+        "pass": true
+      },
+      {
+        "name": "cn:second-engine-also-matches",
+        "pass": true
+      },
+      {
+        "name": "cn:report-selected",
+        "pass": true
+      },
+      {
+        "name": "cn:85-score-rows",
+        "pass": true
+      },
+      {
+        "name": "cn:20-original-figures",
+        "pass": true,
+        "detail": 20
+      },
+      {
+        "name": "cn:asset:cap-05-scores.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-evidence.zip",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-source-review.txt",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-requests.csv",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-resources.csv",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-metrics.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-publication.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-localization-audit.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:asset:cap-05-archive-checks.json",
+        "pass": true,
+        "detail": 200
+      },
+      {
+        "name": "cn:markdown-download-bytes",
+        "pass": true
+      },
+      {
+        "name": "cn:zip-download-bytes",
+        "pass": true
+      },
+      {
+        "name": "cn:mobile-no-page-overflow",
+        "pass": true,
+        "detail": {
+          "scroll": 390,
+          "width": 390
+        }
+      },
+      {
+        "name": "cn:language-switch-preserves-report",
+        "pass": true
+      },
+      {
+        "name": "cn:language-switch-preserves-filters",
+        "pass": true
+      },
+      {
+        "name": "cn:existing-multi-report-switch",
+        "pass": true,
+        "detail": 2
+      },
+      {
+        "name": "cn:return-to-new-report",
+        "pass": true
+      }
+    ],
+    "errors": [],
+    "failed": [],
+    "downloads": [
+      {
+        "lang": "en",
+        "kind": "markdown",
+        "sha256": "46105d99512164ff65beb2fa74a78fbb3242e133bfed8ec1ede3e8407dea00e5"
+      },
+      {
+        "lang": "en",
+        "kind": "evidence.zip",
+        "sha256": "d82f3a2d0ef7cb624b53c5ced0ec288e7db2e32336e4d2731600aa2783785cdc",
+        "bytes": 21029323
+      },
+      {
+        "lang": "cn",
+        "kind": "markdown",
+        "sha256": "a4f8d885a27f1e0527e3143f27a555d2ba92f3db04a9b4efd92ff22d4ad251c4"
+      },
+      {
+        "lang": "cn",
+        "kind": "evidence.zip",
+        "sha256": "d82f3a2d0ef7cb624b53c5ced0ec288e7db2e32336e4d2731600aa2783785cdc",
+        "bytes": 21029323
+      }
+    ]
+  },
+  "localization": {
+    "passed": 37,
+    "failed": 0
+  },
+  "source_integrity": "6/6 original commits and all tracked evaluation files unchanged; supervisor source edits 0",
+  "evidence": {
+    "bytes": 21029323,
+    "sha256": "d82f3a2d0ef7cb624b53c5ced0ec288e7db2e32336e4d2731600aa2783785cdc",
+    "entries": 280,
+    "manifest_verified": true
+  },
+  "initial_archive_setup_corrections": [
+    "Fixed preview port was occupied by an unrelated Node service; left untouched, then OS-assigned port used.",
+    "First multi-report fixture was actually single-document; changed observer fixture to existing TET-01 pair.",
+    "Report OS label adapted to archive validator exact historical-status label; content and OS unchanged."
+  ],
+  "preview_screenshots_local": "evaluation/screenshots/archive-{en,cn}-{desktop,mobile}.png",
+  "whitespace": "Passed Git whitespace check with cr-at-eol enabled; original CSV CRLF retained. The default check reported every CRLF as trailing whitespace, an observer-format mismatch."
+}

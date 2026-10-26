@@ -1754,6 +1754,34 @@
         "testOSSource": "reports/originals/2026-10-26-strata-cold-kv-128k-256k.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-05",
+      "title": "Splash 1.4.1 Metal vs Strata: Flash Next IQ3_S coding triad",
+      "date": "2026-10-26",
+      "sortDate": "2026-10-26",
+      "model": "Qwen3.8-Flash-Next-GSQ-RCO IQ3_S",
+      "engines": [
+        "Splash",
+        "Strata"
+      ],
+      "scope": "local",
+      "category": "Capability and performance",
+      "summary": "Same IQ3_S source on M5 Max. Controlled decode 157.42 vs 83.36 tok/s; six frozen products, 614 requests, independent browser/play/code review and 85 scored criteria.",
+      "caveat": "n=1 per task/engine; native conversions/speculation differ. One post-start tool timeout amendment; provider fixtures are not live TMDB acceptance. Local only; no push.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
+      ],
+      "markdown": "reports/experiments/cap-05.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 / build 26A434 / arm64, captured 2026-10-26",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3035,6 +3063,20 @@
         "inferenceHardware": "Local MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 137438953472 bytes (128 GiB) unified memory",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-26-strata-cold-kv-128k-256k.md"
+      }
+    },
+    {
+      "id": "2026-10-26-flash-next-iq3s-splash-strata-triad",
+      "title": "Splash 1.4.1 Metal vs Strata: Flash Next IQ3_S coding triad",
+      "path": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md",
+      "format": "markdown",
+      "source": "new-report/CAP-05",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.0.1 / build 26A434 / arm64, captured 2026-10-26",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
       }
     }
   ],

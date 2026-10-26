@@ -1,0 +1,206 @@
+{
+  "experiment": "CAP-05",
+  "checks": [
+    {
+      "name": "en:85 weighted criteria match structured source",
+      "pass": true,
+      "detail": 85
+    },
+    {
+      "name": "en:no private user path",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "en:complete heading structure",
+      "pass": true,
+      "detail": 17
+    },
+    {
+      "name": "cn:85 weighted criteria match structured source",
+      "pass": true,
+      "detail": 85
+    },
+    {
+      "name": "cn:no private user path",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "cn:complete heading structure",
+      "pass": true,
+      "detail": 17
+    },
+    {
+      "name": "table numeric parity:pretrial",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "table numeric parity:development",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "table numeric parity:tokens",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "table numeric parity:inference",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "table numeric parity:memory",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "table numeric parity:utilization",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "identical 20 figure references",
+      "pass": true,
+      "detail": 20
+    },
+    {
+      "name": "original source-code fences identical",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "64-character source hashes identical",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "model hashes match recorded provenance",
+      "pass": true,
+      "detail": [
+        "316b46f3a2dbd68c900f43136ab9449f9dcc3725dfd8c794847c204bc161e113",
+        "4c1eb2ceb4915e1192f4f386021897bde56a97f40a0bb78bb86465e0f7d2aca3",
+        "b1a82259702816a5330d7bd7607cd9676b11780e79ff7348c21103ff3ce49bd0",
+        "d6723f2a359eaf33ec0c95f22ae8edda896774020c552296a85e1913b4d3186f"
+      ]
+    },
+    {
+      "name": "unchanged PNG:utilization.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:performance.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:memory.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:movie-splash-detail-reviewed.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:movie-splash-mobile-detail.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:movie-strata-detail-reviewed.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:movie-strata-mobile-detail.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-splash-play-initial.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-splash-followup-water.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-splash-high-world-400.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-splash-play-mobile.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-strata-play-initial.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-strata-high-world-400.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:voxel-strata-play-mobile.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:qingming-splash-view-bridge.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:qingming-splash-view-city.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:qingming-splash-view-mobile-bridge.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:qingming-strata-view-bridge.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:qingming-strata-view-market.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "unchanged PNG:qingming-strata-view-mobile-bridge.png",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "no installed Splash credential in public text",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "passed": 37,
+  "failed": 0,
+  "report_sha256": {
+    "en": "46105d99512164ff65beb2fa74a78fbb3242e133bfed8ec1ede3e8407dea00e5",
+    "cn": "a4f8d885a27f1e0527e3143f27a555d2ba92f3db04a9b4efd92ff22d4ad251c4"
+  },
+  "complete_editions": {
+    "en_chars": 49866,
+    "cn_chars": 26338
+  },
+  "source_code_translation": "Original shell commands and source excerpts retain their original language; surrounding prose fully translated."
+}

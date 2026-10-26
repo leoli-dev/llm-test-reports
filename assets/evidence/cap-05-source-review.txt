@@ -1,0 +1,212 @@
+## F01 movie-splash/server.py:183
+Hidden TMDB search result leak
+在线隐藏影片仍出现在搜索中
+SHA256 a598ff24a4015c7e550c98cbc90be563108599c751373bdf22bba69285eecc72
+183:                 try:
+184:                     res = self.tmdb("/search/movie", {"query": term})
+185:                     results = []
+186:                     for it in res.get("results", [])[:20]:
+187:                         results.append(self.upsert_tmdb(it))
+188:                     return self.send_json({"results": results, "source": "tmdb"})
+189:                 except Exception as e:
+190:                     return self.send_json({"error": "TMDB 请求失败: %s" % e, "source": "tmdb"}, 502)
+
+## F02 movie-strata/server.py:171
+TMDB import has nine placeholders and ten bindings
+TMDB 导入 9 个占位符对应 10 个参数
+SHA256 f67b2ca39c06b7ed6343924989d4340d9ccb299910388ce2c7ed29f21083bb1f
+171:             c = db()
+172:             c.execute("""INSERT INTO movies(source,ext_id,title,zh,year,genres,director,cast,overview,hue,created_at)
+173:                 VALUES('tmdb',?,?,?,?,?,?,?,NULL,?,?)
+174:                 ON CONFLICT(source,ext_id) DO UPDATE SET title=excluded.title, overview=excluded.overview""",
+175:                 (str(tmdb_id), d.get("title") or d.get("name") or "?", None,
+176:                  int((d.get("release_date") or "0000")[:4]) if d.get("release_date") else None,
+177:                  json.dumps([g["name"] for g in d.get("genres", [])], ensure_ascii=False),
+178:                  ", ".join(x["name"] for x in cr.get("crew", []) if x.get("job") == "Director"),
+179:                  ", ".join(x["name"] for x in cr.get("cast", [])[:6]),
+180:                  d.get("overview") or "", (int(tmdb_id) % 360), time.time()))
+181:             c.commit()
+182:             row = c.execute("SELECT id FROM movies WHERE source='tmdb' AND ext_id=?", (str(tmdb_id),)).fetchone()
+183:             c.close()
+184:             return row["id"]
+
+## F03 movie-strata/server.py:271
+Same-site cross-origin state mutation accepted
+同站不同源请求可修改状态
+SHA256 f67b2ca39c06b7ed6343924989d4340d9ccb299910388ce2c7ed29f21083bb1f
+271:         c = db()
+272:         try:
+273:             if p == "/api/session":
+274:                 return self.send_json(200, {"user": user, "mode": MODE,
+275:                     "provider": "TMDB (api.themoviedb.org)" if MODE == "tmdb" else "演示目录（本地种子数据，非在线API）"})
+276:             if p == "/api/register" and method == "POST":
+277:                 b = self.read_body()
+278:                 un, pw = (b.get("username") or "").strip(), b.get("password") or ""
+279:                 if not re.fullmatch(r"[A-Za-z0-9_\u4e00-\u9fff]{2,20}", un): return self.send_json(400, {"error": "用户名需2-20位字母数字下划线或中文"})
+280:                 if len(pw) < 6: return self.send_json(400, {"error": "密码至少6位"})
+
+## F04 movie-strata/server.py:363
+Hidden film can still be rated and nonnumeric score becomes 500
+隐藏影片仍可评分，非数字评分返回 500
+SHA256 f67b2ca39c06b7ed6343924989d4340d9ccb299910388ce2c7ed29f21083bb1f
+363:             m = re.fullmatch(r"/api/movies/(\d+)/rate", p)
+364:             if m and method == "POST":
+365:                 if not user: return self.send_json(401, {"error": "请先登录"})
+366:                 mid = int(m.group(1)); score = int(self.read_body().get("score", 0))
+367:                 if not 1 <= score <= 10: return self.send_json(400, {"error": "评分需1-10"})
+368:                 if not c.execute("SELECT 1 FROM library WHERE movie_id=? AND user_id=?", (mid, user["id"])).fetchone():
+369:                     return self.send_json(403, {"error": "请先将电影加入“我看过的”再评分"})
+370:                 c.execute("INSERT OR REPLACE INTO ratings(user_id,movie_id,score,updated_at) VALUES(?,?,?,?)",
+371:                           (user["id"], mid, score, time.time()))
+372:                 c.commit()
+373:                 return self.send_json(200, {"ok": True})
+374:             m = re.fullmatch(r"/api/movies/(\d+)/comment", p)
+375:             if m and method == "POST":
+
+## F05 movie-splash/server.py:293
+Rating does not require watched membership
+评分不要求属于看过电影库
+SHA256 a598ff24a4015c7e550c98cbc90be563108599c751373bdf22bba69285eecc72
+293:             c.commit(); return self.send_json({"ok": True})
+294:         m = re.fullmatch(r"/api/movies/(\d+)/rate", p)
+295:         if m:
+296:             mid = int(m.group(1))
+297:             mv = c.execute("SELECT * FROM movies WHERE id=?", (mid,)).fetchone()
+298:             if not mv or (mv["hidden"] and not is_admin): return self.send_json({"error": "not found"}, 404)
+299:             try: score = int(body.get("score"))
+300:             except Exception: return self.send_json({"error": "score required"}, 400)
+301:             if not 1 <= score <= 10: return self.send_json({"error": "score 1-10"}, 400)
+302:             c.execute("""INSERT INTO ratings(user_id,movie_id,score,updated_at) VALUES(?,?,?,?)
+303:                          ON CONFLICT(user_id,movie_id) DO UPDATE SET score=?,updated_at=?""",
+304:                       (viewer["id"], mid, score, time.time(), score, time.time()))
+305:             c.commit(); return self.send_json({"ok": True})
+
+## F06 voxel-strata/js/main.js:570
+Reload discards saved enemy HP
+读档丢弃保存的敌人血量
+SHA256 5dbe5331ed6a317e608bcd8e9adabbef1e8fa8259f637ce71e4af134db3f03ed
+570:         const y = k % SIZE, xz = (k - y) / SIZE, x = xz % SIZE, z = xz / SIZE | 0;
+571:         this.world.set(x, y, z, v, true);
+572:       }
+573:       this.drainDirty();
+574:       const p = this.player;
+575:       Object.assign(p, { x: s.player.x, y: s.player.y, z: s.player.z, yaw: s.player.yaw, pitch: s.player.pitch, hp: s.player.hp, vx: 0, vy: 0, vz: 0 });
+576:       this.spawnPoint = s.spawn;
+577:       this.inv = s.inv; this.sel = s.sel; this.craftCount = s.craftCount || 0;
+578:       this.time = s.time; this.weather = s.weather;
+579:       for (const e of s.enemies || []) this.enemies.spawnAt(e.x, e.y, e.z);
+580:       for (const d of s.drops || []) this.spawnDrop(d.x, d.y, d.z, d.name, d.count);
+581:       this.uiDirty = true;
+582:       if (!silent) this.toast('Save loaded (seed ' + this.world.seed + ')');
+583:       return true;
+
+## F07 voxel-splash/js/main.js:195
+High edited blocks omitted from terrain-envelope rendering
+地表高度包络之外的修改方块不可见
+SHA256 23c4728ad6af382d804de5b9a7ad2bfb37909cb1b79d685ee06a2cc81c760c73
+195:         const cx = pcx + dx, cz = pcz + dz;
+196:         if (cx < 0 || cz < 0 || cx >= CHUNKS || cz >= CHUNKS) continue;
+197:         // terrain height envelope for this chunk column
+198:         let hmax = 0, hmin = WORLD;
+199:         for (let iz = 0; iz < CHUNK; iz += 4) for (let ix = 0; ix < CHUNK; ix += 4) {
+200:           const h = this.world.heightAt(cx * CHUNK + ix, cz * CHUNK + iz);
+201:           if (h > hmax) hmax = h;
+202:           if (h < hmin) hmin = h;
+203:         }
+204:         // include the water surface for flooded chunk columns
+205:         hmax = Math.min(WORLD - 1, Math.max(hmax + 12, this.world.sea + 1));
+206:         hmin = Math.max(0, hmin - 6);
+207:         const cy0 = clamp(Math.floor(hmin / CHUNK), 0, CHUNKS - 1);
+208:         const cy1 = clamp(Math.floor(hmax / CHUNK), 0, CHUNKS - 1);
+209:         for (let cy = cy0; cy <= cy1; cy++) {
+210:           const k = cx + ',' + cy + ',' + cz;
+211:           want.add(k);
+212:           if (!this.meshes.has(k)) queue.push({ k, cx, cy, cz, d: d + Math.abs(cy - pcy) * 0.6 });
+213:         }
+214:       }
+215:     }
+216:     queue.sort((a, b) => a.d - b.d);
+217:     for (const q of queue) {
+218:       if (performance.now() - t0 > budgetMs) break;
+219:       this.buildMesh(q.cx, q.cy, q.cz, q.k);
+220:       built++;
+221:     }
+222:     // drop far meshes
+223:     for (const [k, m] of this.meshes) {
+224:       const parts = k.split(',');
+225:       const d = Math.hypot(+parts[0] - pcx, +parts[2] - pcz);
+
+## F08 voxel-strata/js/main.js:50
+Two tested complete worlds contain no generated water
+两个完整测试世界均无生成水体
+SHA256 5dbe5331ed6a317e608bcd8e9adabbef1e8fa8259f637ce71e4af134db3f03ed
+50:   generate() {
+51:     const seed = this.seed, d = this.data, N = SIZE;
+52:     const heights = new Int16Array(N * N);
+53:     for (let z = 0; z < N; z++) {
+54:       for (let x = 0; x < N; x++) {
+55:         const cont = fbm2(x, z, seed, 4, 1 / 190);
+56:         const mount = fbm2(x, z, seed + 991, 3, 1 / 110);
+57:         const n = fbm2(x, z, seed + 77, 3, 1 / 70);
+58:         const m = Math.max(0, mount * 1.32 - 0.48);
+59:         let h = 62 + cont * 42 + m * m * 420 + n * 6;
+60:         h = Math.max(4, Math.min(470, h | 0));
+61:         heights[z * N + x] = h;
+62:         const base = (z * N + x) * N;
+63:         for (let y = 0; y <= h; y++) {
+64:           let id = B.STONE;
+65:           if (y === 0) id = B.BEDROCK;
+66:           else if (y > h - 4) {
+67:             if (h <= SEA + 2) id = B.SAND;
+68:             else if (h > 300) id = B.SNOW;
+69:             else id = B.GRASS;
+70:           } else if (y > h - 6) id = B.DIRT;
+71:           d[base + y] = id;
+72:         }
+73:         if (h < SEA) {
+74:           for (let y = h + 1; y <= SEA; y++) d[base + y] = B.WATER;
+75:           if (d[base + h] === B.GRASS) d[base + h] = B.SAND;
+
+## F09 voxel-splash/js/main.js:534
+Save silently stops at 60001 modifications (source finding)
+存档静默截断至 60001 处修改（源码发现）
+SHA256 23c4728ad6af382d804de5b9a7ad2bfb37909cb1b79d685ee06a2cc81c760c73
+534:   serialize() {
+535:     const mods = [];
+536:     for (const [k, v] of this.world.mods) {
+537:       const p = k.split(',');
+538:       mods.push([+p[0], +p[1], +p[2], v]);
+539:       if (mods.length > MAX_MODS) break;
+540:     }
+541:     return {
+542:       v: 2,
+543:       seedNum: this.world.seed, seedLabel: this.world.seedLabel,
+544:       player: {
+545:         x: this.player.pos.x, y: this.player.pos.y, z: this.player.pos.z,
+546:         yaw: this.player.yaw, pitch: this.player.pitch, hp: this.player.hp,
+547:         maxHp: this.player.maxHp, spawn: this.player.spawn,
+548:       },
+549:       inv: this.inv, sel: this.sel,
+550:       weather: this.weather.serialize(),
+551:       enemies: this.enemies.serialize(),
+552:       stats: this.stats,
+553:       mods,
+554:       savedAt: Date.now(),
+555:     };
+
+## F10 qingming-strata/main.js:815
+Boats draw over the already flattened bridge image
+船只覆盖已扁平化的桥面图层
+SHA256 2c42b4b9fc4e7cafa351d78882f9527fd9fef38fd73f6f2dae932cf4e396812b
+815:   const z = cam.zoom;
+816:   ctx.save();
+817:   ctx.translate(CW / 2, CH / 2); ctx.scale(z, z); ctx.translate(-cam.x, -cam.y);
+818:   const vw = CW / z, vh = CH / z, vx0 = cam.x - vw / 2, vy0 = cam.y - vh / 2, vx1 = cam.x + vw / 2, vy1 = cam.y + vh / 2;
+819:   const sx0 = clamp(vx0, 0, W), sy0 = clamp(vy0, 0, H), sx1 = clamp(vx1, 0, W), sy1 = clamp(vy1, 0, H);
+820:   if (sx1 > sx0 && sy1 > sy0) ctx.drawImage(staticCv, sx0, sy0, sx1 - sx0, sy1 - sy0, sx0, sy0, sx1 - sx0, sy1 - sy0);
+821:   const t = S.time;
+822:   if (sy0 < 950 && sy1 > 500 && sx1 > 1250) drawRipples(ctx, t);
+823:   for (const b of boats) if (b.path.pts[0][0] > vx1 + 200 || b.path.pts[b.path.pts.length - 1][0] < vx0 - 200) continue; else drawBoat(ctx, b, t);
+824:   for (const p of props) {
+825:     if (p.x < vx0 - 60 || p.x > vx1 + 60) continue;
+826:     if (p.kind === 'banner') drawBanner(ctx, p.x, p.y, p.h, p.txt, t);
