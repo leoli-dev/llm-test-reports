@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-27",
+  "updated": "2026-10-26",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1782,33 +1782,6 @@
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
       },
       "artifact": null
-    },
-    {
-      "id": "CAP-06",
-      "title": "ROSE supervised Splash trial",
-      "date": "2026-10-27",
-      "sortDate": "2026-10-27",
-      "model": "Qwen3.8 Flash Next IQ3_S",
-      "engines": [
-        "Splash 1.4.1"
-      ],
-      "scope": "local",
-      "category": "New experiment",
-      "summary": "Exploratory supervised ROSE run: 32 cards passed across 42 attempts; visual quality and monitoring costs remain material limitations.",
-      "caveat": "Preparation was incomplete; Strata was paused without attempts. This is not a paired or preregistered evaluation.",
-      "sourceStatus": "report-only",
-      "documents": [
-        "reports/originals/2026-10-27-rose-supervisor-splash.md"
-      ],
-      "markdown": "reports/experiments/cap-06.md",
-      "environment": {
-        "scope": "local",
-        "testOS": "Unknown: not independently recorded at test time",
-        "inferenceHardware": "Apple M5 Max, 128 GiB unified memory, 18 logical CPUs",
-        "hardwareStatus": "author-recorded",
-        "testOSSource": "reports/originals/2026-10-27-rose-supervisor-splash.md"
-      },
-      "artifact": null
     }
   ],
   "documents": [
@@ -3104,20 +3077,6 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
-      }
-    },
-    {
-      "id": "2026-10-27-rose-supervisor-splash",
-      "title": "ROSE supervised Splash trial",
-      "path": "reports/originals/2026-10-27-rose-supervisor-splash.md",
-      "format": "markdown",
-      "source": "new-report/CAP-06",
-      "environment": {
-        "scope": "local",
-        "testOS": "Unknown: not independently recorded at test time",
-        "inferenceHardware": "Apple M5 Max, 128 GiB unified memory, 18 logical CPUs",
-        "hardwareStatus": "author-recorded",
-        "testOSSource": "reports/originals/2026-10-27-rose-supervisor-splash.md"
       }
     }
   ],
