@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-26",
+  "updated": "2026-10-27",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1782,6 +1782,33 @@
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-06",
+      "title": "ROSE Splash 连续监督试跑",
+      "date": "2026-10-27",
+      "sortDate": "2026-10-27",
+      "model": "Qwen3.8 Flash Next IQ3_S",
+      "engines": [
+        "Splash 1.4.1"
+      ],
+      "scope": "local",
+      "category": "新增实验",
+      "summary": "ROSE 探索性监督试跑：42 次尝试完成 32 张卡；视觉效果与监督成本存在明显局限。",
+      "caveat": "准备未完成，Strata 按用户要求暂停且无尝试；此结果不是配对或预注册评测。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-27-rose-supervisor-splash_CN.md"
+      ],
+      "markdown": "reports/experiments/cap-06_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "未知：测试时未独立记录",
+        "inferenceHardware": "Apple M5 Max, 128 GiB unified memory, 18 logical CPUs",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-27-rose-supervisor-splash_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3077,6 +3104,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad_CN.md"
+      }
+    },
+    {
+      "id": "2026-10-27-rose-supervisor-splash",
+      "title": "ROSE Splash 连续监督试跑",
+      "path": "reports/originals/2026-10-27-rose-supervisor-splash_CN.md",
+      "format": "markdown",
+      "source": "new-report/CAP-06",
+      "environment": {
+        "scope": "local",
+        "testOS": "未知：测试时未独立记录",
+        "inferenceHardware": "Apple M5 Max, 128 GiB unified memory, 18 logical CPUs",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-27-rose-supervisor-splash_CN.md"
       }
     }
   ],
