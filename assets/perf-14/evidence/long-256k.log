@@ -1,0 +1,56 @@
+Checking the already running DeepSeek service...
+Count: 3 records = 223 tokens (target 260096)
+Count: 8128 records = 216052 tokens (target 260096)
+Count: 16256 records = 431898 tokens (target 260096)
+Count: 12192 records = 323944 tokens (target 260096)
+Count: 10160 records = 269957 tokens (target 260096)
+Count: 9144 records = 243039 tokens (target 260096)
+Count: 9652 records = 256506 tokens (target 260096)
+Count: 9906 records = 263240 tokens (target 260096)
+Count: 9779 records = 259864 tokens (target 260096)
+Count: 9842 records = 261532 tokens (target 260096)
+Count: 9810 records = 260690 tokens (target 260096)
+Count: 9794 records = 260265 tokens (target 260096)
+Count: 9786 records = 260051 tokens (target 260096)
+Count: 9790 records = 260157 tokens (target 260096)
+Count: 9788 records = 260104 tokens (target 260096)
+Count: 9787 records = 260078 tokens (target 260096)
+Sending 260078 input tokens; this can take many minutes...
+Waiting: 31s, 0 output characters
+Waiting: 61s, 0 output characters
+Waiting: 91s, 0 output characters
+Waiting: 121s, 0 output characters
+Waiting: 151s, 0 output characters
+Waiting: 181s, 0 output characters
+Waiting: 211s, 0 output characters
+Waiting: 241s, 0 output characters
+Waiting: 271s, 0 output characters
+Waiting: 301s, 0 output characters
+Waiting: 331s, 0 output characters
+Waiting: 361s, 0 output characters
+Waiting: 391s, 0 output characters
+Waiting: 421s, 0 output characters
+Waiting: 451s, 0 output characters
+Waiting: 481s, 0 output characters
+Waiting: 511s, 0 output characters
+Waiting: 541s, 0 output characters
+Waiting: 571s, 0 output characters
+Waiting: 601s, 0 output characters
+Waiting: 631s, 0 output characters
+Waiting: 661s, 0 output characters
+Waiting: 691s, 0 output characters
+Waiting: 721s, 0 output characters
+Waiting: 751s, 0 output characters
+Waiting: 781s, 0 output characters
+Waiting: 811s, 0 output characters
+Waiting: 841s, 0 output characters
+Waiting: 871s, 0 output characters
+Waiting: 901s, 0 output characters
+Waiting: 932s, 0 output characters
+First text after 957.087s
+Waiting: 962s, 26 output characters
+Retrieval passed=True; wall=965.115s
+Checking the short continuation...
+First text after 2.284s
+Follow-up passed=True; overall passed=True
+Record: $HOME/local_llms/strata/records/deepseek-2026-10-28/long-262144-20261029-000256-587890.json

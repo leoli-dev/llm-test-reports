@@ -1,0 +1,24 @@
+Checking the already running DeepSeek service...
+Count: 3 records = 226 tokens (target 30720)
+Count: 960 records = 25639 tokens (target 30720)
+Count: 1920 records = 51145 tokens (target 30720)
+Count: 1440 records = 38402 tokens (target 30720)
+Count: 1200 records = 32002 tokens (target 30720)
+Count: 1080 records = 28820 tokens (target 30720)
+Count: 1140 records = 30416 tokens (target 30720)
+Count: 1170 records = 31206 tokens (target 30720)
+Count: 1155 records = 30812 tokens (target 30720)
+Count: 1147 records = 30599 tokens (target 30720)
+Count: 1151 records = 30705 tokens (target 30720)
+Count: 1153 records = 30759 tokens (target 30720)
+Count: 1152 records = 30731 tokens (target 30720)
+Sending 30705 input tokens; this can take many minutes...
+Waiting: 30s, 0 output characters
+Waiting: 60s, 0 output characters
+Waiting: 93s, 0 output characters
+First text after 92.548s
+Retrieval passed=True; wall=96.349s
+Checking the short continuation...
+First text after 1.662s
+Follow-up passed=True; overall passed=True
+Record: $HOME/local_llms/strata/records/deepseek-2026-10-28/long-32768-20261028-234910-947945.json

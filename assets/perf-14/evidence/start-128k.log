@@ -1,0 +1,26 @@
+128K 是 Mac 长上下文实验配置：上游 Mac 实测仅到约 32K，启动成功仍需长输入验证。
+    DeepSeek runs on its own engine package, so the Strata engine is not downloaded for it.
+    Getting deepseek41 IST-DAS-2.00bpw ready (a download may be large; it continues where it stopped if interrupted)…
+    Checking your computer
+    Getting the helper packages ready
+    Checking the engine for this PC
+    Getting the model files: 256.8 of 256.8 GB
+    Preparing your model for Strata (one time)
+    Saving the model's settings
+    deepseek41 IST-DAS-2.00bpw is ready.
+    Writing this launch's settings…
+    DeepSeek engine: $HOME/.local/share/strata/install/engine-dsv41/0.1.53-macos-arm64-metal/strata-dsv41 (the install the model's settings came from).
+    Settings are saved.
+    Starting the engine and loading the model. The first start can take a few minutes.
+    Loading the model… 15 s
+    The model is loaded and answering.
+    Ready: http://127.0.0.1:8086
+    Strata is serving.
+
+Strata is serving.
+  This computer  http://127.0.0.1:8086/v1
+  Anthropic apps http://127.0.0.1:8086   (Claude Code: ANTHROPIC_BASE_URL, no /v1 at the end)
+  Speed          Full quality (default on this PC): all 6 experts per word
+  Engine log     $HOME/.local/state/strata/launch/deepseek-1017-2-00-128k.engine.log   (follow it: strata logs --follow)
+  Watch it:    strata monitor --url http://127.0.0.1:8086
+  Connect an app:  strata connect opencode      Stop:  strata launch --stop --preset "DeepSeek 1017 2.00 128K"

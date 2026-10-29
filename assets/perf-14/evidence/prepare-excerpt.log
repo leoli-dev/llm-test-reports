@@ -1,0 +1,6 @@
+Deployment log excerpts; full local log is not published. SHA256 of the complete source is in publication-provenance.json.
+  [ok] Apple M5 Max, 128 GB unified memory, macOS 27.2
+  DeepSeek engine 0.1.53 installed: $HOME/.local/share/strata/components/control/0.1.53/engine-dsv41/0.1.53-macos-arm64-metal
+deepseek-v4.1-flash-IST-DAS-2.00bpw: 48488 tensors in 6 files (BF16 0.4 GB, F32 0.2 GB, IQ1_M 59.5 GB, IQ2_XS 23.6 GB, IQ2_XXS 49.0 GB, IQ4_NL 110.6 GB, MXFP4 7.2 GB, Q5_K 5.3 GB, Q8_0 1.0 GB), Engram 2 layers x 24 hash columns, the DSpark drafter -> $HOME/local_llms/models/strata/packs/deepseek-v4.1-flash-ist-das-2.00bpw
+  [ok] pack: $HOME/local_llms/models/strata/packs/deepseek-v4.1-flash-ist-das-2.00bpw (checked: every file the engine needs is there)
+  [!]  the 16-word test run was skipped (STRATA_DSV41_NO_SMOKE=1)

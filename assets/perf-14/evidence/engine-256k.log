@@ -1,0 +1,14 @@
+[strata] 2026-10-29 00:01:47 engine started: $HOME/.local/share/strata/install/engine-dsv41/0.1.53-macos-arm64-metal/strata-dsv41 --serve --pack $HOME/local_llms/models/strata/packs/deepseek-v4.1-flash-ist-das-2.00bpw --max-context 262144 --eos 1 --vision off --dspark none --experts 6
+ds4: tensor parallel 2 -> 1: the experts' 256-value blocks split n_ff 2304 no other way (each GPU its own layers)
+ds4: experts per word: 6 (full quality)
+ds4: the experts VRAM leaves over (~29.0 GB) are read in place from the model's files (--mmap-experts off copies them into RAM) (0.0 GB of RAM free to keep them: the most-routed 29.0 GB read ahead; prompts in chunks of 8192)
+ds4: other programs hold 40.0 GB of anonymous memory: 19.4 GB less for the experts
+ds4: expert share: 49.5 GB of VRAM experts (the RAM cap leaves 49.5 GB; --vram-experts sets it)
+ds4: prompt path: the chunked pass from 96 tokens, windows of 16 below
+ds4: CUDA0 layers [0, 39] + head: weights 5.86 GB, experts 49.49 GB (5719 of 15360 in VRAM), caches 0.24 GB, 51595 MiB free
+ds4: 9641 routed experts on the CPU lane (82.9 GB, in place in the model's files), 9 threads
+maya ds4 serve: GEN <max_new> [keys] <ids>; GENI <max_new> [keys] <pictures> <ids>; STOP, QUIT
+ds4 slots: folder $HOME/.local/state/strata/launch/ds4-slots: 2 conversation(s) kept from earlier runs (0.17 GB)
+maya ds4 serve: prompt 31 tokens = 0 reused + 31 read in 1898 ms (16.3 tok/s), 1 generated in 0 ms (2030.97 tok/s); CPU lane 42.4% of the experts
+maya ds4 serve: prompt 260078 tokens = 0 reused + 260078 read in 956804 ms (271.8 tok/s), 42 generated in 8028 ms (5.23 tok/s); CPU lane 0.0% of the experts
+maya ds4 serve: prompt 260145 tokens = 260119 reused + 26 read in 2006 ms (13.0 tok/s), 15 generated in 1973 ms (7.60 tok/s); CPU lane 0.0% of the experts
