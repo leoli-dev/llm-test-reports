@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-26",
+  "updated": "2026-10-29",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1782,6 +1782,33 @@
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
       },
       "artifact": null
+    },
+    {
+      "id": "PERF-14",
+      "title": "DeepSeek Flash 1017 / Strata: M5 Max evaluation and retirement",
+      "date": "2026-10-28",
+      "sortDate": "2026-10-28",
+      "model": "DeepSeek-V4.1-Flash-1017 GSQ-RCO IQ2_XXS / backbone average 2.00 bpw",
+      "engines": [
+        "Strata"
+      ],
+      "scope": "local",
+      "category": "Performance and retirement",
+      "summary": "32K, 128K and 256K synthetic retrieval passed; first 260,078-token input took 957.087s to first token. Short generation fell from 15.0 to 2.3 token/s after the long-context sequence and measured 4.6 after restart. The owner requested retirement after publication.",
+      "caveat": "One sample per performance point, uncontrolled run history and system load. Cached follow-ups are not independent retrieval tests. Swap is whole-system; the slowdown cause was not located. This edition records a retirement request, not completed uninstall.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md"
+      ],
+      "markdown": "reports/experiments/perf-14.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2; OS build not recorded; arm64 (signed engine package target)",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU cores / 40 GPU cores / 128GiB unified memory / internal SSD",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3077,6 +3104,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad.md"
+      }
+    },
+    {
+      "id": "2026-10-28-strata-deepseek41-flash1017-2bpw-m5max",
+      "title": "DeepSeek Flash 1017 / Strata: M5 Max evaluation and retirement",
+      "path": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
+      "format": "markdown",
+      "source": "new-report/PERF-14",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2; OS build not recorded; arm64 (signed engine package target)",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU cores / 40 GPU cores / 128GiB unified memory / internal SSD",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md"
       }
     }
   ],

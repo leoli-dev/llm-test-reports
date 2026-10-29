@@ -1690,5 +1690,26 @@
       "review": "数值与源码保留校验，以及文字抽查；没有重跑历史模型测评。",
       "method": "结合本地 MLTF 翻译与 Codex 直接校译进行全文本地化；保留源码、字面量与链接证据；环境背景以注明日期的独立区块补充。"
     }
+  },
+  {
+    "path": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
+    "source": "local-test-records/REPORT.md",
+    "sourceSha256": "10cd7cdb9bcbd1c75518fe5da051da3853efa4b1ae892af0d1f678d5edb1400f",
+    "publishedSha256": "1f10a4ffedf3a433d5bc0272aa225e9fb906106753d736f5f8c304c29a7d44b6",
+    "changes": [
+      "完整双语报告正文",
+      "私人 home 路径统一为 $HOME",
+      "本地报告链接迁移到选定归档资产",
+      "新增注明日期的实验时环境与退役请求背景",
+      "显式白名单及原始／公开证据哈希"
+    ],
+    "localization": {
+      "date": "2026-10-29",
+      "english": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
+      "chinese": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md",
+      "chineseSha256": "030774c4ce8cbc29004dac3432116f72d7428845e741551bdc1d5ecf8cd41c8f",
+      "translationModel": "Codex 直接校译",
+      "review": "逐项配对表格数值、代码块与行内字面量，核对原始证据哈希；没有重跑推理测量。"
+    }
   }
 ]

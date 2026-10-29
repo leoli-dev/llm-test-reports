@@ -6,7 +6,7 @@
 
 **[浏览中文报告站](https://leoli-dev.github.io/llm-test-reports/index_CN.html)** · **[完整 Markdown 报告](reports/originals/)** · [新增报告](CONTRIBUTING_CN.md)
 
-当前收录 **59 项实验、参数组或对照记录，82 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
+当前收录 **60 项实验、参数组或对照记录，83 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
 
 ## 本机配置与系统
 
@@ -33,6 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
+| 2026-10-28 | DeepSeek Flash 1017／Strata：M5 Max 初测与退役决定 | DeepSeek-V4.1-Flash-1017 GSQ-RCO IQ2_XXS / backbone average 2.00 bpw | [PERF-14](reports/experiments/perf-14_CN.md) |
 | 2026-10-26 | Splash 1.4.1 Metal 对比 Strata：Flash Next IQ3_S 三项产品测试 | Qwen3.8-Flash-Next-GSQ-RCO IQ3_S | [CAP-05](reports/experiments/cap-05_CN.md) |
 | 2026-10-26 | Strata冷KV首字实测：十次128K输入与十次256K满窗压力 | Qwen3.8-Flash-Next GSQ-RCO IQ3_S | [PERF-13](reports/experiments/perf-13_CN.md) |
 | 2026-10-25 | Pi 视觉三题：MLTF、Splash、Strata，256K 上下文 | Qwen3.8-27B MLTF q8c / MLX affine8; Qwen3.8 Flash Next GSQ-RCO IQ3_S | [CAP-04](reports/experiments/cap-04_CN.md) · [代码](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) · [演示](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html) |

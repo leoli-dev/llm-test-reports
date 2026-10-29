@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-29",
+  "source": "Owner instruction in the authoring conversation; full personal conversation not published",
+  "decision": "The owner considers this model unsuitable for this local machine and requests report archive/push before removal.",
+  "requestedRemoval": [
+    "DeepSeek model weights",
+    "DeepSeek-specific Pi provider/settings",
+    "DeepSeek-specific Strata settings"
+  ],
+  "requestedPreservation": [
+    "Strata general/Qwen inference components",
+    "Qwen Flash Next model and settings"
+  ],
+  "executionStatus": "requested; actual uninstall not yet asserted"
+}

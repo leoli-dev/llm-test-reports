@@ -1,0 +1,13 @@
+# PERF-14 evidence: DeepSeek-V4.1-Flash-1017 on M5 Max
+
+[English](README.md) | [简体中文](README_CN.md)
+
+This is the selected, sanitized evidence for local Strata testing on 2026-10-28–29 (America/Toronto), on an M5 Max with 128GiB unified memory. [Full report](../../reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md).
+
+- `evidence/` contains the synthetic API, Pi and tool smoke records; all three short-generation samples; initial and cached long-retrieval records at 32K / 128K / 256K; frozen engine/start logs; whole-system swap point samples; the verified weight manifest; architecture metadata; and a selected deployment-log excerpt. `environment-evidence.json` labels author-recorded environment context rather than pretending to be a raw hardware export. `retirement-request.json` records the owner's decision, not completed deletion.
+- `source/long_context.py` preserves the retrieval algorithm. Only the hardcoded private home path was generalized to `Path.home() / 'local_llms'`. It requires separately installed matching weights and runtime; this archive is not a model distribution.
+- `publication-provenance.json` records source and published hashes, exact source selection, exclusions and transformations. Numerical evidence and synthetic prompts / responses are preserved. The complete preparation log is not published; its source hash is retained with the selected excerpt.
+- `translation-check.json` checks paired table numeric cells, code fences and inline literals in both full editions. This is a publication check, not another inference run.
+- `SHA256SUMS.json` hashes the published reports and every included asset except itself and the ZIP. `deepseek1017-m5max-evidence.zip` contains this evidence directory, source, both guides, provenance, translation check and the SHA manifest. There are no weights, runtime caches, client credentials, global Pi configuration or full private sessions.
+
+Historical service status and commands describe the time of measurement. The owner requested report publication followed by retirement on 2026-10-29. See the dated report updates for actual removal status. Short generation fell from 15.0 to 2.3 token/s after the long-context sequence, then measured 4.6 token/s after restart; the samples were uncontrolled and do not locate the cause. Initial long retrieval passed in every window; cached follow-ups are not independent retrieval replications.

@@ -1,0 +1,17 @@
+{
+  "experimentId": "PERF-14",
+  "date": "2026-10-29",
+  "method": "Complete editorial translation; paired numeric table cells, fenced code and inline literals; no model measurement rerun.",
+  "reports": [
+    "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
+    "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md"
+  ],
+  "checks": {
+    "fencedCodeIdentical": true,
+    "numericTableCellsIdentical": true,
+    "inlineLiteralsIdentical": true
+  },
+  "fencedCodeBlocks": 1,
+  "numericTableRows": 9,
+  "inlineLiteralCount": 25
+}

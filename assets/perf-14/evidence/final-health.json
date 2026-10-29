@@ -1,0 +1,141 @@
+{
+  "at": "2026-10-29T00:37:31.078693-04:00",
+  "ready": true,
+  "default_context": 262144,
+  "base_url": "http://127.0.0.1:8086/v1",
+  "web_url": "http://127.0.0.1:8086",
+  "ports_listening": {
+    "8084": false,
+    "8085": false,
+    "8086": true
+  },
+  "status": {
+    "service": "strata",
+    "model": "deepseek-v4.1-flash",
+    "loaded": true,
+    "auto_load": true,
+    "structured_output": {
+      "formats": [
+        "json_object",
+        "json_schema"
+      ],
+      "method": "prompt_and_validate",
+      "constrained_decoding": false,
+      "stream_buffered": true
+    },
+    "engine": "ds4-0.1",
+    "started": 1793248180,
+    "uptime_s": 470,
+    "cache_max_tokens": 262144,
+    "context": {
+      "native": 262144,
+      "max_positions": 262144
+    },
+    "concurrency": {
+      "serving": 1,
+      "requested": 1
+    },
+    "dialects": [
+      "/v1/chat/completions",
+      "/v1/messages",
+      "/v1/responses"
+    ],
+    "vision": {
+      "enabled": false,
+      "available": false,
+      "error": null
+    },
+    "image_generation": {
+      "enabled": false
+    },
+    "activity": {
+      "requests": 2,
+      "in_flight": 0,
+      "last_request_at": 1793248417
+    },
+    "last_timings": {
+      "cache_n": 0,
+      "prompt_n": 42,
+      "prompt_ms": 6702.7,
+      "prompt_per_token_ms": 159.588,
+      "prompt_per_second": 6.3,
+      "predicted_n": 256,
+      "predicted_ms": 55770.3,
+      "predicted_per_token_ms": 217.853,
+      "predicted_per_second": 4.6,
+      "draft_n": 0,
+      "draft_n_accepted": 0,
+      "at": 1793248417
+    },
+    "vram": {
+      "elastic": false
+    },
+    "machine": {
+      "at": 1793248651,
+      "gpu": {
+        "name": "Apple M5 Max",
+        "used_mib": 683.0,
+        "total_mib": 110100.0,
+        "util_pct": 0,
+        "temp_c": null,
+        "power_w": null
+      },
+      "ram": {
+        "used_gib": 84.5,
+        "total_gib": 128.0
+      }
+    }
+  },
+  "models": {
+    "object": "list",
+    "data": [
+      {
+        "id": "deepseek-v4.1-flash",
+        "object": "model",
+        "status": {
+          "value": "loaded"
+        },
+        "meta": {
+          "n_ctx": 262144
+        },
+        "architecture": {
+          "input_modalities": [
+            "text"
+          ],
+          "output_modalities": [
+            "text"
+          ]
+        }
+      }
+    ]
+  },
+  "long_context_tests": [
+    {
+      "context": 32768,
+      "record": "long-32768-20261028-234910-947945.json",
+      "passed": true,
+      "input_tokens": 30705
+    },
+    {
+      "context": 131072,
+      "record": "long-131072-20261028-235311-357133.json",
+      "passed": true,
+      "input_tokens": 129000
+    },
+    {
+      "context": 262144,
+      "record": "long-262144-20261029-000256-587890.json",
+      "passed": true,
+      "input_tokens": 260078
+    }
+  ],
+  "pi_provider": "strata-deepseek",
+  "pi_verified": true,
+  "api_tools_verified": true,
+  "swap": "vm.swapusage: total = 9216.00M  used = 8802.38M  free = 413.62M  (encrypted)",
+  "disk_free_gib": 655.2,
+  "limitations": [
+    "Single synthetic retrieval and cached continuation per window; no broad quality or sustained-load claim",
+    "Post-long short generation fell to2.3tok/s with increased systemswap; fresh256K sample4.6tok/s; cause not established"
+  ]
+}

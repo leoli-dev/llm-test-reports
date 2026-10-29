@@ -1,0 +1,186 @@
+{
+  "started_at": "2026-10-29T00:22:20.414831-04:00",
+  "passed": true,
+  "request": {
+    "model": "deepseek-v4.1-flash",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Compute17 multiplied by23. Call report_number with the integer result in value."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "report_number",
+          "description": "Record the integer result of an arithmetic operation.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "tool_choice": {
+      "type": "function",
+      "function": {
+        "name": "report_number"
+      }
+    },
+    "reasoning_effort": "none",
+    "temperature": 0,
+    "max_tokens": 256
+  },
+  "first_response": {
+    "id": "chatcmpl-304d7b90cca44ec4a4665967",
+    "object": "chat.completion",
+    "created": 1793247740,
+    "model": "deepseek-v4.1-flash",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_784f3ab3997049ccaade51de",
+              "type": "function",
+              "function": {
+                "name": "report_number",
+                "arguments": "{\"value\":391}"
+              }
+            }
+          ]
+        },
+        "finish_reason": "tool_calls"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 299,
+      "completion_tokens": 25,
+      "total_tokens": 324,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 299,
+      "prompt_ms": 25080.5,
+      "prompt_per_token_ms": 83.881,
+      "prompt_per_second": 11.9,
+      "predicted_n": 25,
+      "predicted_ms": 10642.6,
+      "predicted_per_token_ms": 425.704,
+      "predicted_per_second": 2.3,
+      "draft_n": 0,
+      "draft_n_accepted": 0
+    }
+  },
+  "first_wall_s": 35.729,
+  "follow_request": {
+    "model": "deepseek-v4.1-flash",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Compute17 multiplied by23. Call report_number with the integer result in value."
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "call_784f3ab3997049ccaade51de",
+            "type": "function",
+            "function": {
+              "name": "report_number",
+              "arguments": "{\"value\":391}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_784f3ab3997049ccaade51de",
+        "content": "Accepted value391."
+      },
+      {
+        "role": "user",
+        "content": "The operation succeeded. Reply with exactly DONE."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "report_number",
+          "description": "Record the integer result of an arithmetic operation.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "integer"
+              }
+            },
+            "required": [
+              "value"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "tool_choice": "none",
+    "reasoning_effort": "none",
+    "temperature": 0,
+    "max_tokens": 64
+  },
+  "follow_response": {
+    "id": "chatcmpl-55658bf135db4ccfa4f8304c",
+    "object": "chat.completion",
+    "created": 1793247776,
+    "model": "deepseek-v4.1-flash",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "DONE"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 82,
+      "completion_tokens": 3,
+      "total_tokens": 85,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 82,
+      "prompt_ms": 6717.9,
+      "prompt_per_token_ms": 81.926,
+      "prompt_per_second": 12.2,
+      "predicted_n": 3,
+      "predicted_ms": 717.6,
+      "predicted_per_token_ms": 239.2,
+      "predicted_per_second": 4.2,
+      "draft_n": 0,
+      "draft_n_accepted": 0
+    }
+  },
+  "follow_wall_s": 7.442
+}

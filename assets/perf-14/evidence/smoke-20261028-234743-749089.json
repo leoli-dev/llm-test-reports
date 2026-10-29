@@ -1,0 +1,245 @@
+{
+  "started_at": "2026-10-28T23:47:43.749089-04:00",
+  "initial_status": {
+    "service": "strata",
+    "model": "deepseek-v4.1-flash",
+    "loaded": true,
+    "auto_load": true,
+    "structured_output": {
+      "formats": [
+        "json_object",
+        "json_schema"
+      ],
+      "method": "prompt_and_validate",
+      "constrained_decoding": false,
+      "stream_buffered": true
+    },
+    "engine": "ds4-0.1",
+    "started": 1793245620,
+    "uptime_s": 43,
+    "cache_max_tokens": 32768,
+    "context": {
+      "native": 32768,
+      "max_positions": 32768
+    },
+    "concurrency": {
+      "serving": 1,
+      "requested": 1
+    },
+    "dialects": [
+      "/v1/chat/completions",
+      "/v1/messages",
+      "/v1/responses"
+    ],
+    "vision": {
+      "enabled": false,
+      "available": false,
+      "error": null
+    },
+    "image_generation": {
+      "enabled": false
+    },
+    "activity": {
+      "requests": 1,
+      "in_flight": 0,
+      "last_request_at": 1793245622
+    },
+    "last_timings": {
+      "cache_n": 0,
+      "prompt_n": 31,
+      "prompt_ms": 2068.9,
+      "prompt_per_token_ms": 66.739,
+      "prompt_per_second": 15.0,
+      "predicted_n": 1,
+      "predicted_ms": 0.6,
+      "predicted_per_token_ms": 0.6,
+      "predicted_per_second": 1666.7,
+      "draft_n": 0,
+      "draft_n_accepted": 0,
+      "at": 1793245622
+    },
+    "vram": {
+      "elastic": false
+    },
+    "machine": {
+      "at": 1793245663,
+      "gpu": {
+        "name": "Apple M5 Max",
+        "used_mib": 783.0,
+        "total_mib": 110100.0,
+        "util_pct": 26,
+        "temp_c": null,
+        "power_w": null
+      },
+      "ram": {
+        "used_gib": 73.7,
+        "total_gib": 128.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "json",
+      "passed": true,
+      "elapsed_s": 2.916,
+      "response": {
+        "id": "chatcmpl-3929b04beb1c4a20a0a17108",
+        "object": "chat.completion",
+        "created": 1793245663,
+        "model": "deepseek-v4.1-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "{\"ready\":true,\"model\":\"deepseek\"}"
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 24,
+          "completion_tokens": 11,
+          "total_tokens": 35,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 24,
+          "prompt_ms": 2132.2,
+          "prompt_per_token_ms": 88.842,
+          "prompt_per_second": 11.3,
+          "predicted_n": 11,
+          "predicted_ms": 780.6,
+          "predicted_per_token_ms": 70.964,
+          "predicted_per_second": 14.1,
+          "draft_n": 0,
+          "draft_n_accepted": 0
+        }
+      }
+    },
+    {
+      "name": "arithmetic",
+      "passed": true,
+      "elapsed_s": 4.735,
+      "response": {
+        "id": "chatcmpl-66df69cf7a4d4d0ea31bbad1",
+        "object": "chat.completion",
+        "created": 1793245666,
+        "model": "deepseek-v4.1-flash",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "391",
+              "reasoning_content": "We need answer simple. Need final integer. 17*23 = 391. Ensure final only integer? User says final answer as one integer. We can just output 391."
+            },
+            "finish_reason": "stop"
+          }
+        ],
+        "usage": {
+          "prompt_tokens": 47,
+          "completion_tokens": 40,
+          "total_tokens": 87,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 47,
+          "prompt_ms": 1969.8,
+          "prompt_per_token_ms": 41.911,
+          "prompt_per_second": 23.9,
+          "predicted_n": 40,
+          "predicted_ms": 2761.3,
+          "predicted_per_token_ms": 69.032,
+          "predicted_per_second": 14.5,
+          "draft_n": 0,
+          "draft_n_accepted": 0
+        }
+      }
+    }
+  ],
+  "final_status": {
+    "service": "strata",
+    "model": "deepseek-v4.1-flash",
+    "loaded": true,
+    "auto_load": true,
+    "structured_output": {
+      "formats": [
+        "json_object",
+        "json_schema"
+      ],
+      "method": "prompt_and_validate",
+      "constrained_decoding": false,
+      "stream_buffered": true
+    },
+    "engine": "ds4-0.1",
+    "started": 1793245620,
+    "uptime_s": 51,
+    "cache_max_tokens": 32768,
+    "context": {
+      "native": 32768,
+      "max_positions": 32768
+    },
+    "concurrency": {
+      "serving": 1,
+      "requested": 1
+    },
+    "dialects": [
+      "/v1/chat/completions",
+      "/v1/messages",
+      "/v1/responses"
+    ],
+    "vision": {
+      "enabled": false,
+      "available": false,
+      "error": null
+    },
+    "image_generation": {
+      "enabled": false
+    },
+    "activity": {
+      "requests": 3,
+      "in_flight": 0,
+      "last_request_at": 1793245671
+    },
+    "last_timings": {
+      "cache_n": 0,
+      "prompt_n": 47,
+      "prompt_ms": 1969.8,
+      "prompt_per_token_ms": 41.911,
+      "prompt_per_second": 23.9,
+      "predicted_n": 40,
+      "predicted_ms": 2761.3,
+      "predicted_per_token_ms": 69.032,
+      "predicted_per_second": 14.5,
+      "draft_n": 0,
+      "draft_n_accepted": 0,
+      "at": 1793245671
+    },
+    "vram": {
+      "elastic": false
+    },
+    "machine": {
+      "at": 1793245671,
+      "gpu": {
+        "name": "Apple M5 Max",
+        "used_mib": 55084.0,
+        "total_mib": 110100.0,
+        "util_pct": 54,
+        "temp_c": null,
+        "power_w": null
+      },
+      "ram": {
+        "used_gib": 100.2,
+        "total_gib": 128.0
+      }
+    }
+  },
+  "passed": true
+}

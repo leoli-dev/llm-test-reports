@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-26",
+  "updated": "2026-10-29",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1782,6 +1782,33 @@
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "PERF-14",
+      "title": "DeepSeek Flash 1017／Strata：M5 Max 初测与退役决定",
+      "date": "2026-10-28",
+      "sortDate": "2026-10-28",
+      "model": "DeepSeek-V4.1-Flash-1017 GSQ-RCO IQ2_XXS / backbone average 2.00 bpw",
+      "engines": [
+        "Strata"
+      ],
+      "scope": "local",
+      "category": "性能与退役",
+      "summary": "32K、128K、256K 合成检索通过；260,078-token 首次输入的首字等待 957.087 秒。长窗序列后短生成从 15.0 降至 2.3 token/s，重启后为 4.6；用户要求发布报告后退役。",
+      "caveat": "各性能点一次采样，运行历史与系统负载未受控；缓存跟进非独立检索。swap 为全系统读数，掉速原因未定位。本版记录退役请求，未提前声明完成卸载。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md"
+      ],
+      "markdown": "reports/experiments/perf-14_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2；OS build 未记录；arm64（签名引擎包目标）",
+        "inferenceHardware": "MacBook Pro／Apple M5 Max／18 核 CPU／40 核 GPU／128GiB 统一内存／内置 SSD",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3077,6 +3104,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-26-flash-next-iq3s-splash-strata-triad_CN.md"
+      }
+    },
+    {
+      "id": "2026-10-28-strata-deepseek41-flash1017-2bpw-m5max",
+      "title": "DeepSeek Flash 1017／Strata：M5 Max 初测与退役决定",
+      "path": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md",
+      "format": "markdown",
+      "source": "new-report/PERF-14",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2；OS build 未记录；arm64（签名引擎包目标）",
+        "inferenceHardware": "MacBook Pro／Apple M5 Max／18 核 CPU／40 核 GPU／128GiB 统一内存／内置 SSD",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md"
       }
     }
   ],

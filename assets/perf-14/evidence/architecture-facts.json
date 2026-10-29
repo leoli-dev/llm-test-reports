@@ -1,0 +1,18 @@
+{
+  "official_model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "observed_revision": "1bae0e1088993b9b82de08f59de5be5a34e42170",
+  "source": "https://huggingface.co/api/models/deepseek-ai/DeepSeek-V4.1-Flash-1017?blobs=true",
+  "safetensors_files": 48,
+  "safetensors_total_bytes": 510296708312,
+  "reported_parameters": 763205315794,
+  "backbone_parameters_approx": 552000000000,
+  "engram_parameters_approx": 196600000000,
+  "full_bf16_theoretical_bytes": 1526410631588,
+  "full_bf16_is_theoretical": true,
+  "official_precision": "mixed FP4 routed experts, FP8 and BF16/F32 tensors",
+  "ista_backbone_average_bpw": 2.0,
+  "ista_engram_type": "IQ4_NL",
+  "ista_engram_effective_bpw": 4.5,
+  "dspark_file_label": "Q8_0 (mixed precision, not every tensor necessarily 8-bit)",
+  "mac_dspark_enabled": false
+}

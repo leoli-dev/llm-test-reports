@@ -1,0 +1,37 @@
+{
+  "evidenceKind": "Author-recorded test environment with test-time log excerpt and status corroboration; not a new hardware benchmark or a raw system_profiler export.",
+  "testDates": "2026-10-28 to 2026-10-29",
+  "timezone": "America/Toronto",
+  "inferenceLocation": "local",
+  "host": {
+    "computer": "MacBook Pro",
+    "chip": "Apple M5 Max",
+    "cpuCores": 18,
+    "gpuCores": 40,
+    "unifiedMemoryGiB": 128,
+    "storage": "internal SSD"
+  },
+  "testTimeOS": {
+    "productVersion": "27.2",
+    "build": null,
+    "buildStatus": "not recorded",
+    "architecture": "arm64",
+    "evidence": [
+      "prepare-excerpt.log captures macOS 27.2 during setup",
+      "final-health.json records Apple M5 Max and RAM total 128GiB",
+      "signed engine package target is macos-arm64/metal; CPU/GPU core counts are author-recorded deployment observations"
+    ]
+  },
+  "powerAndThermalState": "not recorded",
+  "engine": {
+    "controlVersion": "0.1.53",
+    "deepseekMetalPackageVersion": "0.1.53",
+    "buildId": "55a557bb6d77",
+    "apiInternalEngineLabel": "ds4-0.1"
+  },
+  "agent": {
+    "name": "Pi",
+    "version": "1.4.0",
+    "versionEvidence": "Local installation/source inspected during the test; the smoke JSON itself does not contain a version string."
+  }
+}
