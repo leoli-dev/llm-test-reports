@@ -1718,19 +1718,21 @@
     "path": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
     "source": "local-test-records/REPORT.md",
     "sourceSha256": "10cd7cdb9bcbd1c75518fe5da051da3853efa4b1ae892af0d1f678d5edb1400f",
-    "publishedSha256": "1f10a4ffedf3a433d5bc0272aa225e9fb906106753d736f5f8c304c29a7d44b6",
+    "publishedSha256": "26a09ce83acda5afde7206c36d46b45d92337c80c5ca37b2d7192251dd15a9e5",
     "changes": [
       "full bilingual report prose",
       "private home paths generalized to $HOME",
       "local report links relocated to selected archive assets",
       "dated test-time environment and retirement-request context",
-      "explicit allowlist with original and published evidence hashes"
+      "explicit allowlist with original and published evidence hashes",
+      "dated retirement completion and Qwen availability smoke",
+      "initial ignored-log omission and complete follow-up publication repair disclosed"
     ],
     "localization": {
       "date": "2026-10-29",
       "english": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
       "chinese": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md",
-      "chineseSha256": "030774c4ce8cbc29004dac3432116f72d7428845e741551bdc1d5ecf8cd41c8f",
+      "chineseSha256": "9c11a247d01163c290d8bafba555a7732fe324b426448a148828e000024e0c08",
       "translationModel": "Codex editorial translation",
       "review": "Numeric table cells, fenced code and inline literals paired; source evidence hashes checked; measured inference not repeated."
     }

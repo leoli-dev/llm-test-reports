@@ -11,8 +11,8 @@
 | Inference hardware | MacBook Pro / Apple M5 Max / 18 CPU cores / 40 GPU cores / 128GiB unified memory / internal SSD |
 | Test-time OS | macOS 27.2; OS build not recorded; arm64 (signed engine package target) |
 
-32K, 128K and 256K synthetic retrieval passed; first 260,078-token input took 957.087s to first token. Short generation fell from 15.0 to 2.3 token/s after the long-context sequence and measured 4.6 after restart. The owner requested retirement after publication.
+32K, 128K and 256K synthetic retrieval passed; first 260,078-token input took 957.087s to first token. Short generation fell from 15.0 to 2.3 token/s after the long-context sequence and measured 4.6 after restart. Retirement completed after publication; Qwen API and Pi availability smoke passed.
 
 [Full report](../originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md)
 
-One sample per performance point, uncontrolled run history and system load. Cached follow-ups are not independent retrieval tests. Swap is whole-system; the slowdown cause was not located. This edition records a retirement request, not completed uninstall.
+One sample per performance point, uncontrolled run history and system load. Cached follow-ups are not independent retrieval tests. Swap is whole-system; the slowdown cause was not located. A dated update confirms retirement and Qwen availability only; no new Qwen performance or quality test.

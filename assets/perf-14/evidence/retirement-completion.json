@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-29",
+  "evidenceKind": "Author-recorded concise retirement summary; full receipt with private local paths is excluded.",
+  "archiveRemoteCommitBeforeDeletion": "bfff8e2f31c82af7b9a459c9ec63676eb7642811",
+  "removed": {
+    "topLevelPaths": 41,
+    "files": 106,
+    "logicalBytes": 257252688366,
+    "logicalGB": 257.25,
+    "logicalGiB": 239.585,
+    "scope": [
+      "DeepSeek model weights",
+      "DeepSeek-specific Pi provider",
+      "DeepSeek-specific Strata window settings",
+      "DeepSeek runtime and slot/cache components"
+    ]
+  },
+  "preserved": {
+    "qwenFileSizesUnchangedAgainstBeforeDeletionBaseline": true,
+    "selectedQwenConfigurationComponentSha256Unchanged": true,
+    "piSettingsByteUnchanged": true,
+    "strataQwenComponentsRetained": true
+  },
+  "postRemovalSmoke": {
+    "evidence": "qwen-retained-smoke.json",
+    "verifiedAt": "2026-10-29T10:38:45.920896+00:00",
+    "apiAndPiArithmeticPassed": true,
+    "deepseekProviderAbsent": true,
+    "deepseekPort8086Closed": true,
+    "scope": "Availability smoke only; no new vision-quality, Pi-tool, long-context or performance measurement."
+  },
+  "publicationCorrection": {
+    "initialCommit": "bad8f452e7be6dda0e477268bcaa4695ce5dcd45",
+    "issue": "Repository ignore rules excluded 14 reviewed evidence logs from the first commit; its Pages workflow failed.",
+    "completeFollowupCommit": "bfff8e2f31c82af7b9a459c9ec63676eb7642811",
+    "pagesWorkflowRun": 40859039500,
+    "pagesWorkflowConclusion": "success",
+    "frozenMeasurementsChanged": false
+  }
+}

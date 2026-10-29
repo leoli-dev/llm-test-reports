@@ -10,8 +10,8 @@
       "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md"
     ],
     "publishedSha256": {
-      "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md": "1f10a4ffedf3a433d5bc0272aa225e9fb906106753d736f5f8c304c29a7d44b6",
-      "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md": "030774c4ce8cbc29004dac3432116f72d7428845e741551bdc1d5ecf8cd41c8f"
+      "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md": "26a09ce83acda5afde7206c36d46b45d92337c80c5ca37b2d7192251dd15a9e5",
+      "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md": "9c11a247d01163c290d8bafba555a7732fe324b426448a148828e000024e0c08"
     }
   },
   "selection": "Explicit allowlist only; no recursive copy of the local record directory.",
@@ -31,9 +31,10 @@
     "long_context.py hardcoded private root changed to Path.home() / 'local_llms' only; retrieval algorithm unchanged.",
     "Historical absolute local report links relocated to relative archive assets.",
     "Full English translation and expanded environment/method/retirement/publication notes added; no historical generation experiment repeated.",
-    "Public GitHub/Hugging Face URLs and loopback 127.0.0.1 endpoints retained; no private LAN host is published."
+    "Public GitHub/Hugging Face URLs and loopback 127.0.0.1 endpoints retained; no private LAN host is published.",
+    "Dated retirement-completion and Qwen availability smoke added after deletion; concise authored deletion facts exclude the private receipt. The initial ignored-log publication omission and follow-up repair are disclosed."
   ],
-  "retirementStatus": "Owner requested retirement on 2026-10-29. Actual uninstall was not yet completed when this publication set was prepared.",
+  "retirementStatus": "Retirement completed on 2026-10-29 after complete archive commit bfff8e2f31c82af7b9a459c9ec63676eb7642811; Qwen API and Pi availability smoke passed. Original retrieval and generation evidence remains unchanged.",
   "entries": [
     {
       "source": "local-test-records/architecture-facts.json",
@@ -317,6 +318,13 @@
         "hardcoded-private-home-to-Path.home"
       ],
       "algorithmChanged": false
+    },
+    {
+      "source": "local-test-records/retirement-2026-10-29/qwen-smoke.json",
+      "sourceSha256": "68b9d56f4b1836e01d5556a5d304b6e9befcef3ea4580cf17460c3d43f94bc3b",
+      "published": "assets/perf-14/evidence/qwen-retained-smoke.json",
+      "publishedSha256": "68b9d56f4b1836e01d5556a5d304b6e9befcef3ea4580cf17460c3d43f94bc3b",
+      "changes": []
     }
   ]
 }

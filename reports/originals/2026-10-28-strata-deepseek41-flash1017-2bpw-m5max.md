@@ -4,7 +4,7 @@
 
 Experiment ID: **PERF-14**. Testing began on **2026-10-28** and continued into **2026-10-29**, in **America/Toronto**. Both editions are complete reports. Archiving, translation and site validation did not repeat the model measurements.
 
-> **Owner decision, 2026-10-29: this model setup is unsuitable for their local machine. They requested that the report be archived and pushed first, followed by deletion of the DeepSeek weights and its Pi / Strata settings, while retaining Strata and Qwen Flash Next.** This is the owner's practical acceptance decision for this machine, not a general model-quality ranking. This edition records the uninstall request; completion will be confirmed by a later dated update.
+> **Owner decision, 2026-10-29: this model setup is unsuitable for their local machine. They requested that the report be archived and pushed first, followed by deletion of the DeepSeek weights and its Pi / Strata settings, while retaining Strata and Qwen Flash Next.** This is the owner's practical acceptance decision for this machine, not a general model-quality ranking. The original request is preserved below; the dated completion update now confirms removal and a Qwen availability smoke.
 
 ## Question, criteria and experiment type
 
@@ -104,7 +104,17 @@ The [long-input harness](../../assets/perf-14/source/long_context.py) preserves 
 
 After reviewing the results, the owner explicitly judged this model unsuitable for their machine and requested saving the report in `llm-test-reports`, pushing it, then deleting the model and removing its Pi / Strata configuration while keeping Strata and Qwen Flash Next. The earlier 9/9 recovered hidden codes and 3/3 successful cached follow-ups remain recorded. Their limited passing scope does not overturn the owner's rejection of the wait, speed and system-resource costs.
 
-When this archive was written, the main task still had to perform uninstall after the report push. This edition therefore does not claim deletion, reclaimed space or a successful Qwen acceptance check. A subsequent dated uninstall record should retain the measured findings in this report.
+At first publication, the main task still had to perform uninstall after the report push. That initial edition did not claim deletion, reclaimed space or a successful Qwen acceptance check. The dated completion below records subsequent work while retaining the measured findings.
+
+## 2026-10-29: retirement completed and Qwen availability verified
+
+After the complete report and evidence reached remote commit `bfff8e2f31c82af7b9a459c9ec63676eb7642811`, the DeepSeek weights, its Pi provider, three Strata window settings, and its runtime / slot-cache components were removed. The removal covered 41 top-level paths and 106 files, totaling **257252688366 bytes of logical data (257.25GB / 239.585GiB)**. This is a logical file-size total, not a measurement of physical SSD space reclaimed. The full deletion receipt contains private local paths and is excluded; a [concise retirement record](../../assets/perf-14/evidence/retirement-completion.json) preserves the relevant facts.
+
+All Qwen file sizes and selected configuration-component SHA256 values matched their pre-deletion baseline. Pi settings were byte-for-byte unchanged. The Qwen service loaded `qwen3.8-flash-next-iq3_s` with engine `0.1.52-metal`, context 262144, one serving slot, vision enabled / available, and local port 8085. At **2026-10-29T10:38:45.920896+00:00**, both a direct API arithmetic call and the original Pi `strata` provider returned `391`. The DeepSeek provider was absent and port 8086 was closed. [Qwen smoke evidence](../../assets/perf-14/evidence/qwen-retained-smoke.json).
+
+This confirms post-removal availability only. Vision-quality, Pi tools, long-context behavior and performance were not retested; the timings retained in the smoke JSON are incidental diagnostics, not a new Qwen benchmark.
+
+Publication correction: initial commit `bad8f452e7be6dda0e477268bcaa4695ce5dcd45` omitted 14 already-reviewed log files because of the repository ignore rule, and its Pages workflow failed. Follow-up commit `bfff8e2f31c82af7b9a459c9ec63676eb7642811` explicitly included them; [Pages workflow 40859039500](https://github.com/leoli-dev/llm-test-reports/actions/runs/40859039500) succeeded. Before deletion, all required report / evidence files were checked against the committed tree, with matching bytes. This publication repair did not change the frozen measurements or their hashes.
 
 ## Publication handling
 

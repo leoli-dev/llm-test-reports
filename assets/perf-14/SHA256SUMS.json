@@ -8,11 +8,11 @@
   "files": [
     {
       "path": "assets/perf-14/README.md",
-      "sha256": "03237d23a2b3280e3eed19572bb19c7c526ada3a6c20b70cbbcec702987a456e"
+      "sha256": "7ed32f5728b649f6cf8cf7f8b07b0871d43a4bf70e4569090b30f3aae9d59780"
     },
     {
       "path": "assets/perf-14/README_CN.md",
-      "sha256": "57299b7e8a12bd49fd1143e2fa734b1b9c4ccfbc5f849b1139e0bf2644b2b5fb"
+      "sha256": "af8f23a981bdf56ca5a4aec56aa520afdd24e4a0d3005cf28fbdb68374e7c092"
     },
     {
       "path": "assets/perf-14/evidence/architecture-facts.json",
@@ -81,6 +81,14 @@
     {
       "path": "assets/perf-14/evidence/prepare-excerpt.log",
       "sha256": "0de7e81686c8c45c03241b85e7df03d23e0a1005926420ed0204ca8c73966346"
+    },
+    {
+      "path": "assets/perf-14/evidence/qwen-retained-smoke.json",
+      "sha256": "68b9d56f4b1836e01d5556a5d304b6e9befcef3ea4580cf17460c3d43f94bc3b"
+    },
+    {
+      "path": "assets/perf-14/evidence/retirement-completion.json",
+      "sha256": "87b204ba7e99d69dba32b6fb9bfcd1027efcd9ed3f1fbb29360cbc77ea8dd6f1"
     },
     {
       "path": "assets/perf-14/evidence/retirement-request.json",
@@ -164,7 +172,7 @@
     },
     {
       "path": "assets/perf-14/publication-provenance.json",
-      "sha256": "cadd727fbd8f59b3bdb03f1b6c36adc27212c0d14fc7c43b07bd35eaaf00a517"
+      "sha256": "a43f4e4170db935246f136435e06257116dd450be999fc0df045212336300706"
     },
     {
       "path": "assets/perf-14/source/long_context.py",
@@ -172,15 +180,15 @@
     },
     {
       "path": "assets/perf-14/translation-check.json",
-      "sha256": "f954a2eff3cd4cc7f5f7f4770913f0d01753e7bf0c82dfc2294f9281f01c1f4c"
+      "sha256": "b21f07d0debd8d3fb3dfeb98aca9663038ea7ba4b0aa8113f24c64945d0097f8"
     },
     {
       "path": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md",
-      "sha256": "1f10a4ffedf3a433d5bc0272aa225e9fb906106753d736f5f8c304c29a7d44b6"
+      "sha256": "26a09ce83acda5afde7206c36d46b45d92337c80c5ca37b2d7192251dd15a9e5"
     },
     {
       "path": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max_CN.md",
-      "sha256": "030774c4ce8cbc29004dac3432116f72d7428845e741551bdc1d5ecf8cd41c8f"
+      "sha256": "9c11a247d01163c290d8bafba555a7732fe324b426448a148828e000024e0c08"
     }
   ]
 }

@@ -4,7 +4,7 @@
 
 实验 ID：**PERF-14**。测试从 **2026-10-28** 开始，持续至 **2026-10-29**，时区 **America/Toronto**。英文与中文均为完整报告；本次归档、翻译和站点校验没有重跑模型测量。
 
-> **2026-10-29 用户决定：这套模型不适合其本机使用，要求先归档并推送报告，再删除 DeepSeek 权重和相关 Pi／Strata 设置；保留 Strata 与 Qwen Flash Next。** 这是用户对本机实用性的判断，不是模型通用质量排名。此版本记录卸载请求；实际删除完成状态将由后续有日期的更新确认。
+> **2026-10-29 用户决定：这套模型不适合其本机使用，要求先归档并推送报告，再删除 DeepSeek 权重和相关 Pi／Strata 设置；保留 Strata 与 Qwen Flash Next。** 这是用户对本机实用性的判断，不是模型通用质量排名。原卸载请求保留如下；本次有日期的完成附记确认删除和 Qwen 可用性冒烟。
 
 ## 问题、标准与实验性质
 
@@ -104,7 +104,17 @@ pi --provider strata-deepseek --model deepseek-v4.1-flash
 
 用户阅览结果后明确认为该模型不适合本机，并要求保存报告到 `llm-test-reports`、push 后再删除模型，以及撤销 Pi／Strata 中该 DeepSeek 的配置，同时保留 Strata 与 Qwen Flash Next。此前 9/9 隐藏码找回和 3/3 缓存跟进通过的事实保留；其通过范围不能推翻用户对等待、速度和系统资源代价的否定评价。
 
-本归档编写时，主线程尚待报告推送后执行卸载，因此此处不提前声称已删除、已释放空间或 Qwen 已验收。后续实际卸载记录应带日期并保留本报告的测量结论。
+首次归档时，主线程尚待报告推送后执行卸载，因此初版未提前声称已删除、已释放空间或 Qwen 已验收。下方有日期的完成附记记录后续操作，并保留本报告的测量结论。
+
+## 2026-10-29：退役完成与 Qwen 可用性验证
+
+完整报告与证据到达远端提交 `bfff8e2f31c82af7b9a459c9ec63676eb7642811` 后，才删除 DeepSeek 权重、其 Pi provider、Strata 三档窗口设置及对应运行时／slot 缓存组件。删除范围为 41 个顶层路径、106 个文件，合计 **257252688366 bytes 逻辑数据（257.25GB／239.585GiB）**。这是文件逻辑大小总和，不是 SSD 实际释放容量测量。完整删除收据含私人本机路径，不予公开；[精简退役记录](../../assets/perf-14/evidence/retirement-completion.json) 保留相关事实。
+
+全部 Qwen 文件大小与选定配置组件的 SHA256 均与删除前基线一致，Pi settings 逐字节不变。Qwen 服务加载 `qwen3.8-flash-next-iq3_s`，引擎 `0.1.52-metal`，context 262144，单个 serving slot，vision enabled／available，本机端口 8085。在 **2026-10-29T10:38:45.920896+00:00**，直接 API 算术与原 Pi `strata` provider 均返回 `391`。DeepSeek provider 已缺席，8086 端口关闭。[Qwen 冒烟证据](../../assets/perf-14/evidence/qwen-retained-smoke.json)。
+
+这里仅确认删除后的可用性。未重测视觉质量、Pi 工具、长文行为或性能；smoke JSON 中保留的 timings 属于附带诊断，不构成新的 Qwen benchmark。
+
+发布修正：初次提交 `bad8f452e7be6dda0e477268bcaa4695ce5dcd45` 因仓库 ignore 规则漏入 14 个已审查的日志文件，Pages workflow 失败。后续提交 `bfff8e2f31c82af7b9a459c9ec63676eb7642811` 显式补齐，且 [Pages workflow 40859039500](https://github.com/leoli-dev/llm-test-reports/actions/runs/40859039500) 成功。删除前已将全部必需报告／证据文件与提交树核对，字节相符。本次发布修正没有改变冻结测量或其哈希。
 
 ## 发布处理
 
