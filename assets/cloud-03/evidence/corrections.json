@@ -1,0 +1,45 @@
+{
+  "note": "Correct counts selector; capture settled clear weather and fresh portrait view; original functional.json remains unchanged.",
+  "apps": {
+    "snowglobe-park": {
+      "errors": [],
+      "attractions": 60,
+      "characters": 82,
+      "empty": "没有找到匹配的名字",
+      "lina": "米奇卡通城\n玲娜贝儿\nLinaBell",
+      "spaceOnMiniButton": {
+        "mini": false,
+        "shakeT": 0.016700000000000728
+      },
+      "mobile": {
+        "width": 390,
+        "viewport": 390,
+        "download": "snowglobe-1795183039667.jpg"
+      },
+      "offlineErrors": [],
+      "offlineRequests": [
+        "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=ZCOOL+XiaoWei&display=swap"
+      ],
+      "offlineReady": true,
+      "noWebGL": "这个浏览器无法启用 WebGL 2，请换用最新版 Chrome、Edge、Safari 或 Firefox 打开。"
+    },
+    "noel-globe": {
+      "errors": [],
+      "attractions": 47,
+      "characters": 62,
+      "empty": "没有找到匹配项",
+      "lina": "玲娜贝儿\n迪士尼朋友",
+      "spaceOnMiniButton": {
+        "label": "缩微漫游"
+      },
+      "mobile": {
+        "width": 390,
+        "viewport": 390,
+        "download": "Noel-Atelier-1795183054291.jpg"
+      },
+      "offlineErrors": [],
+      "offlineReady": true,
+      "noWebGL": "无法启动 3D 预览，请启用浏览器的图形加速后刷新。"
+    }
+  }
+}

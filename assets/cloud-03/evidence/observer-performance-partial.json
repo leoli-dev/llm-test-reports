@@ -1,0 +1,28 @@
+{
+  "browser": "156.0.8078.28",
+  "start": "2026-11-20T14:05:16.706Z",
+  "method": "ABBA x2; 1280x800 viewport/DPR1; CSS fullscreen for noel; clear noon;1.5s warmup after6.5s weather settle;4s rAF samples; uncapped; fresh page each; no GPU timestamps",
+  "runs": [
+    {
+      "name": "snowglobe-park",
+      "n": 2070,
+      "elapsed": 4001.9000000000015,
+      "fps": 517.2543042055022,
+      "p50": 1.8000000000010914,
+      "p95": 2.7000000000007276,
+      "buffer": [
+        1280,
+        800
+      ],
+      "rect": [
+        1280,
+        800
+      ],
+      "sg": {
+        "pr": 1,
+        "calls": 819,
+        "tris": 2314801
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "started": "2026-11-20T13:59:29.974Z",
+  "apps": {
+    "snowglobe-park": {
+      "errors": [],
+      "failed": [],
+      "status": 200,
+      "ready": true,
+      "weatherClick": true,
+      "title": "雪境乐园"
+    },
+    "noel-globe": {
+      "errors": [],
+      "failed": [],
+      "status": 200,
+      "ready": true,
+      "weatherClick": true,
+      "title": "Noël Atelier · 圣诞奇境玻璃球"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "reportPair": "CLOUD-03",
+  "tableRows": 72,
+  "numericCellsCompared": 172,
+  "identicalCodeFences": 2,
+  "identicalImageTargets": 19,
+  "result": "pass",
+  "note": "Full prose translated; per-table-cell numeric multisets preserve values/signs; literal Chinese source prompts are unchanged."
+}

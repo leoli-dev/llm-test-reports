@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-11-20",
+  "kind": "task-specific extracts and attributed process summaries; full private sessions excluded",
+  "sharedReadmePromptSHA256": "f208903be06a3b179ae920dabbfd773876a27c32be23104cf7126dccb45be062",
+  "snowglobe-park": {
+    "model": "claude-opus-5-5",
+    "effort": "max",
+    "source": "pinned README and original builder Claude-mbp's explicit statement during joint review",
+    "originalFirstLine": "在本folder下新建一子文件夹，在里面用 js 来构建一个 3D 圣诞玻璃球",
+    "remainingTaskLines": "Identical to shared five-line README prompt after its first line",
+    "inference": "Anthropic API/cloud, confirmed by original builder; server hardware/OS/revision not visible",
+    "generationClientOS": "Builder reports session environment Platform darwin / OS Version Darwin 27.2.0; build number not recorded; not replaced by evaluation sw_vers",
+    "agent": "Orca Claude Agent SDK / Claude Code session; exact generation versions not recorded",
+    "process": "No user interruption during first build and no manual source edits reported; model performed multiple screenshot/debug/rebuild iterations. Subsequent user publication request led to model moving Duffy family away from a pillar and adding social metadata/favicon, serve/media scripts, README/license and Pages workflow. README prompt wording was user-specified in later documentation request.",
+    "tools": "Artifact publication tool, artifact-capabilities skill for photo downloads, one automatic impeccable image-src design hook reported; exact versions not recorded",
+    "timing": "Only approximate file times reported; not accepted as generation latency measurements",
+    "tokensCost": "Not recorded"
+  },
+  "noel-globe": {
+    "model": "GPT-6.2-Astra",
+    "effort": "High",
+    "source": "Pinned README plus direct read-only inspection of original Orca conversation's user/assistant message history (history returned not limited); tool bodies/full trace not obtained",
+    "originalOpening": "听说你3D建模能力很厉害，来给我展示一个DEMO",
+    "originalTaskFirstLine": "在本folder下新建一子文件夹，在里面用 js 来构建一个 3D 圣诞玻璃球",
+    "remainingTaskLines": "Identical to shared five-line README prompt after its first line",
+    "inference": "Cloud model-service attribution; inference host hardware/OS/serving revision not recorded",
+    "agent": "Orca Codex session; exact generation agent version not recorded",
+    "generationClientOS": "Not recorded in inspected message history",
+    "process": "User then requested public GitHub repository and Pages publication and specified five-line README prompt and model/effort. Assistant messages describe iterative model construction, screenshots and photo/download/offline testing. Failed shell invocations exist in tool-status metadata; no first-attempt-success claim and no failure-rate estimate. No manual user source edits are visible in message history; full tool trace not independently audited.",
+    "tools": "Assistant announced frontend-design and technical-documentation skills, used web search and Thorium; exact skill package/version not recorded",
+    "timingTokensCost": "Not recorded"
+  },
+  "interpretation": "Same task body and identical README prompt, but original full conversational messages differ. Published snapshots include agent self-correction and publication preparation. This is an artifact comparison, not a controlled one-shot or single-variable model benchmark."
+}

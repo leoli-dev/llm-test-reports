@@ -40,3 +40,15 @@ These checks verify the archive publication and preservation of evidence. They d
 ## CAP-04 artifact release · 2026-10-26
 
 Published the nine frozen projects in [Visual Triad](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad), with a [Pages gallery](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/) and a full bilingual README report. Application code is unchanged; only observer dependency imports and documentation paths are generalised. Local and live Chromium checks passed25/25 each, with nine entry links/source hashes and mobile navigation. The first configure-pages attempt ran before Pages enablement; attempt2 deployed the same commit successfully. Original CAP-04 report text remains an exact prefix at c55c157; the dated publication addendum changes no scores. [Publication receipt](../assets/evidence/cap-04-artifact-publication.json).
+
+## CLOUD-03 Christmas globe comparison · 2026-11-20
+
+- Added the full English/Chinese report pair, paired experiment entry, both catalogs and README indexes: 61 experiments / 84 report pairs. Product code remains in the two pinned public repositories.
+- Codex-mbp and original Snowglobe builder Claude-mbp independently reviewed the final artifacts, exchanged evidence and agreed the conditional verdict. Creator conflict, original prompt-framing differences, model-led publication changes and missing inference/generation data are explicit.
+- Both candidate lockfile installs and builds passed in scratch copies; public Pages HTML matched their clean builds. Actual evaluation host/OS were captured separately from unknown cloud inference hardware/OS and historical generation-client evidence.
+- All 19 report figures match original screenshot bytes. The selected evidence ZIP has 200 members with CRC and every member SHA256 verified. Frozen and corrected independent notes, observer failures, scripts and follow-up evidence are preserved; private full sessions/dependencies/credentials are excluded.
+- Localization audit passed 72 paired table rows / 172 numeric cells, identical 2 source-code fences and 19 image targets. Archive build and validators passed.
+- Thorium 156.0.8078.28 passed 29 repository-subpath reader checks: both languages, search/no-result and combined filters, retained selection/filter language switching, report switching, all 19 images per edition, byte-identical Markdown/ZIP downloads and 390px top/deep overflow. Page errors, HTTP errors and non-cancellation request failures were 0. Two ZIP document navigations became downloads (`net::ERR_ABORTED`), with downloaded bytes verified; those expected cancellations are recorded separately.
+- These are artifact/publication checks, not repeated model generations. No candidate source was changed. This update was prepared locally; no push or Pages deployment was performed.
+
+[Full report](../reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md) · [Reader verification](../assets/cloud-03/evidence/site-verification.json) · [Evidence hashes](../assets/cloud-03/evidence-manifest.json)

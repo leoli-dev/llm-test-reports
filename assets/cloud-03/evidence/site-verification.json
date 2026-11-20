@@ -1,0 +1,174 @@
+{
+  "at": "2026-11-20T14:22:37.632Z",
+  "browser": "156.0.8078.28",
+  "checks": [
+    {
+      "name": "index loaded ",
+      "pass": true
+    },
+    {
+      "name": "combined filters ",
+      "pass": true
+    },
+    {
+      "name": "selected CLOUD-03 ",
+      "pass": true
+    },
+    {
+      "name": "all19 images ",
+      "pass": true
+    },
+    {
+      "name": "language preserves selection and filters ",
+      "pass": true
+    },
+    {
+      "name": "Markdown download exact ",
+      "pass": true
+    },
+    {
+      "name": "evidence ZIP download exact ",
+      "pass": true
+    },
+    {
+      "name": "390px overflow ",
+      "pass": true
+    },
+    {
+      "name": "deep report overflow ",
+      "pass": true
+    },
+    {
+      "name": "switch previous report ",
+      "pass": true
+    },
+    {
+      "name": "switch back ",
+      "pass": true
+    },
+    {
+      "name": "actual language switch ",
+      "pass": true
+    },
+    {
+      "name": "empty search ",
+      "pass": true
+    },
+    {
+      "name": "index loaded _CN",
+      "pass": true
+    },
+    {
+      "name": "combined filters _CN",
+      "pass": true
+    },
+    {
+      "name": "selected CLOUD-03 _CN",
+      "pass": true
+    },
+    {
+      "name": "all19 images _CN",
+      "pass": true
+    },
+    {
+      "name": "language preserves selection and filters _CN",
+      "pass": true
+    },
+    {
+      "name": "Markdown download exact _CN",
+      "pass": true
+    },
+    {
+      "name": "evidence ZIP download exact _CN",
+      "pass": true
+    },
+    {
+      "name": "390px overflow _CN",
+      "pass": true
+    },
+    {
+      "name": "deep report overflow _CN",
+      "pass": true
+    },
+    {
+      "name": "switch previous report _CN",
+      "pass": true
+    },
+    {
+      "name": "switch back _CN",
+      "pass": true
+    },
+    {
+      "name": "actual language switch _CN",
+      "pass": true
+    },
+    {
+      "name": "empty search _CN",
+      "pass": true
+    },
+    {
+      "name": "no page errors",
+      "pass": true
+    },
+    {
+      "name": "no non-cancellation request failures",
+      "pass": true
+    },
+    {
+      "name": "no HTTP errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "failed": [
+    {
+      "url": "http://127.0.0.1:8462/llm-test-reports/assets/cloud-03/cloud-03-evidence.zip",
+      "failure": "net::ERR_ABORTED",
+      "type": "document"
+    },
+    {
+      "url": "http://127.0.0.1:8462/llm-test-reports/assets/cloud-03/cloud-03-evidence.zip",
+      "failure": "net::ERR_ABORTED",
+      "type": "document"
+    }
+  ],
+  "httpErrors": [],
+  "expectedCancellations": [
+    {
+      "url": "http://127.0.0.1:8462/llm-test-reports/assets/cloud-03/cloud-03-evidence.zip",
+      "failure": "net::ERR_ABORTED",
+      "type": "document"
+    },
+    {
+      "url": "http://127.0.0.1:8462/llm-test-reports/assets/cloud-03/cloud-03-evidence.zip",
+      "failure": "net::ERR_ABORTED",
+      "type": "document"
+    }
+  ],
+  "nonCancellationFailures": [],
+  "total": 29,
+  "finalPayloadCheck": {
+    "at": "2026-11-20T14:25:24.147402+00:00",
+    "files": [
+      {
+        "path": "assets/cloud-03/cloud-03-evidence.zip",
+        "bytes": 18474741,
+        "sha256": "af3d7c84c332fd49396d45adff6b8926138a93b56486feb4191ed4c6e8b584b0",
+        "matchesServedFinal": true
+      },
+      {
+        "path": "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md",
+        "bytes": 34913,
+        "sha256": "e32f55b56e59908e60f8808767fda527f4bbbe00fa88ae21a34e32aa1c9a69a2",
+        "matchesServedFinal": true
+      },
+      {
+        "path": "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe_CN.md",
+        "bytes": 30412,
+        "sha256": "590c039593691dd89b618233380a03f5abd84cc5c4f33e699be42c1836ff48d3",
+        "matchesServedFinal": true
+      }
+    ],
+    "note": "Rechecked final ZIP after adding portable reader-check script and refreshing source evidence; report content matches the tested final drafts."
+  }
+}

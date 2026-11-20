@@ -1,0 +1,7 @@
+
+> llm-test-reports@1.0.0 check
+> node scripts/validate.mjs
+
+Validated en: 61 experiments, 84 reports, environment context and local links.
+Validated cn: 61 experiments, 84 reports, environment context and local links.
+Validated language pairs, Markdown sanitization, README indexes and immutable source-code audit.

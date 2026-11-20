@@ -1,0 +1,63 @@
+snowglobe-park 517.2543042055022 [ 1280, 800 ]
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('[data-w="sun"]')
+    - locator resolved to <button data-w="sun" aria-pressed="false">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <canvas id="world" tabindex="0" width="1280" height="800" data-engine="three.js r187" aria-label="可旋转和缩放的三维迪士尼乐园圣诞玻璃球"></canvas> from <div id="stage">…</div> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <canvas id="world" tabindex="0" width="1280" height="800" data-engine="three.js r187" aria-label="可旋转和缩放的三维迪士尼乐园圣诞玻璃球"></canvas> from <div id="stage">…</div> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    59 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <canvas id="world" tabindex="0" width="1280" height="800" data-engine="three.js r187" aria-label="可旋转和缩放的三维迪士尼乐园圣诞玻璃球"></canvas> from <div id="stage">…</div> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+    at <scratch>/performance.mjs:4:699 {
+  log: [
+    `  - waiting for locator('[data-w="sun"]')`,
+    '    - locator resolved to <button data-w="sun" aria-pressed="false">…</button>',
+    '  - attempting click action',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <canvas id="world" tabindex="0" width="1280" height="800" data-engine="three.js r187" aria-label="可旋转和缩放的三维迪士尼乐园圣诞玻璃球"></canvas> from <div id="stage">…</div> subtree intercepts pointer events',
+    '    - retrying click action',
+    '    - waiting 20ms',
+    '    2 × waiting for element to be visible, enabled and stable',
+    '      - element is visible, enabled and stable',
+    '      - scrolling into view if needed',
+    '      - done scrolling',
+    '      - <canvas id="world" tabindex="0" width="1280" height="800" data-engine="three.js r187" aria-label="可旋转和缩放的三维迪士尼乐园圣诞玻璃球"></canvas> from <div id="stage">…</div> subtree intercepts pointer events',
+    '    - retrying click action',
+    '      - waiting 100ms',
+    '    59 × waiting for element to be visible, enabled and stable',
+    '       - element is visible, enabled and stable',
+    '       - scrolling into view if needed',
+    '       - done scrolling',
+    '       - <canvas id="world" tabindex="0" width="1280" height="800" data-engine="three.js r187" aria-label="可旋转和缩放的三维迪士尼乐园圣诞玻璃球"></canvas> from <div id="stage">…</div> subtree intercepts pointer events',
+    '     - retrying click action',
+    '       - waiting 500ms'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v22.23.1

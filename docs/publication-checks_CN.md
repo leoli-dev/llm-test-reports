@@ -40,3 +40,15 @@
 ## CAP-04 作品公开发布 · 2026-10-26
 
 九份冻结作品已在 [Visual Triad](https://github.com/leoli-dev/llm-test-2026-10-25-visual-triad) 公开，提供 [Pages导航](https://leoli-dev.github.io/llm-test-2026-10-25-visual-triad/index_CN.html) 及完整双语README报告。应用代码未变，仅泛化自测依赖导入和文档路径。本机及线上Chromium各25/25，覆盖九个入口/源码哈希及手机导航。首次configure-pages先于Pages启用，第二次用同一提交成功部署。c55c157原报告全文仍为当前报告的字节一致前缀，带日期发布附录不改评分。[发布核对收据](../assets/evidence/cap-04-artifact-publication.json)。
+
+## CLOUD-03 圣诞玻璃球对照 · 2026-11-20
+
+- 新增完整中英文全文、配对实验入口、两份目录及README索引：61项实验 / 84对报告。产品源码保留于两个固定公开仓库。
+- Codex-mbp与Snowglobe原作者Claude-mbp先独立评审最终作品，再交换证据并同意条件化结论；明确创作者利益冲突、原始prompt开场差异、模型参与的发布改动和推理/生成证据缺口。
+- 两候选临时副本的锁文件安装、构建均通过，线上Pages HTML与干净构建一致。实际评测主机/系统和未知云端推理主机/系统、历史生成客户端证据分开记录。
+- 19张报告图与原截图字节相同；精选证据ZIP共200成员，CRC及每成员SHA256均核验。保留冻结/修订独立笔记、观察失败、脚本和补证；不含完整私人会话/依赖/凭据。
+- 本地化审计通过72行配对表格 / 172个数字单元格、2个相同源码围栏及19个图片目标；档案build和校验通过。
+- Thorium156.0.8078.28通过29项仓库子路径阅读器检查：双语、搜索/空结果及组合筛选、保留选择/筛选的语言切换、报告切换、每语言全部19图、逐字节相同的Markdown/ZIP下载及390px顶部/深部无溢出。页面错误、HTTP错误和非取消请求失败均为0；两次ZIP文档导航转为下载（`net::ERR_ABORTED`），下载字节已核验，这类预期取消另行记录。
+- 这是作品/发布检查，不是模型重复生成。未改候选源码。本次仅本地准备，未push或部署Pages。
+
+[完整报告](../reports/originals/2026-11-20-snowglobe-park-vs-noel-globe_CN.md) · [阅读器验收](../assets/cloud-03/evidence/site-verification.json) · [证据哈希](../assets/cloud-03/evidence-manifest.json)

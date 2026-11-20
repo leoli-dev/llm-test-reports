@@ -1,0 +1,415 @@
+{
+  "browser": "156.0.8078.28",
+  "started": "2026-11-20T13:53:38.780Z",
+  "apps": {
+    "snowglobe-park": {
+      "errors": [],
+      "warnings": [],
+      "requests": [],
+      "checks": [],
+      "loadMs": 659,
+      "default": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "canvas": [
+          1440,
+          900
+        ],
+        "canvasRect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "scrollWidth": 1440,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": {
+          "stats": {
+            "calls": 819,
+            "tris": 2314801
+          },
+          "pixelRatio": 1,
+          "memory": {
+            "geometries": 418,
+            "textures": 45
+          },
+          "weather": "snow",
+          "mini": false,
+          "dist": 760.0000000000001
+        }
+      },
+      "defaultPerf": {
+        "n": 181,
+        "durationMs": 3016.6000000000004,
+        "fps": 60.001325996154605,
+        "p50": 16.699999999999818,
+        "p95": 16.700000000000728,
+        "over33": 0
+      },
+      "weather": [
+        {
+          "key": "clear",
+          "state": null
+        },
+        {
+          "key": "cloudy",
+          "state": null
+        },
+        {
+          "key": "snow",
+          "state": null
+        },
+        {
+          "key": "blizzard",
+          "state": null
+        },
+        {
+          "key": "rain",
+          "state": null
+        },
+        {
+          "key": "storm",
+          "state": null
+        },
+        {
+          "key": "fog",
+          "state": null
+        },
+        {
+          "key": "aurora",
+          "state": null
+        }
+      ],
+      "attractions": 0,
+      "guideText": "城堡\n童话城堡\nFairy-tale Castle\n美国小镇大街\n美国小镇大街\nMain Street, U.S.A.\n小镇广场圣诞树\nTown Square Christmas Tree\n小镇大街火车站\nMain Street Station\n米奇花坛\nFloral Mickey\n马拉有轨电车 & 双层巴士\nHorse-drawn Streetcar & Omnibus\n中央花园·米奇雕像\nCentral Plaza\n米奇气球小贩\nBalloon vendor\n探险世界\n◎ 探险世界\nAdventureland\n瑞士家庭树屋\nSwiss Family Treehouse\n魔幻提基屋\nEnchanted Tiki Room\n丛林巡航\nJungle Cruise\n荣耀石（狮子王）\nPride Rock\n夺宝奇兵神庙\nIndiana Jones Adventure\n阿拉丁飞毯\nMagic Carpets of Aladdin\n加勒比海盗\nPirates of the Caribbean\n边域世界\n◎ 边域世界\nFrontierland\n巨雷山矿山车\nBig Thunder Mountain Railroad\n飞溅山\nSplash Mountain\n美国河 · 马克·吐温号\nRivers of America\n汤姆·索亚岛\nTom Sawyer Island\n乡村熊剧场\nCountry Bear Jamboree\n自由广场\n幽灵公馆\nHaunted Mansion\n自由之树 · 总统堂\nLiberty Square\n梦幻世界\n◎ 梦幻世界\nFantasyland\n白马王子旋转木马\nPrince Charming Regal Carrousel\n疯帽子旋转茶杯\nMad Tea Party\n小飞象\nDumbo the Flying Elephant\n小飞侠天空奇遇\nPeter Pan's Flight\n小小世界\nit's a small world\n七个小矮人矿山车\nSeven Dwarfs Mine Train\n小熊维尼蜂蜜罐\nHundred Acre Wood\n长发公主之塔\nRapunzel's Tower\n爱丽丝梦游仙境迷宫\nAlice in Wonderland Maze\n冰雪奇缘 · 艾莎冰宫\nElsa's Ice Palace\n马特洪峰雪橇\nMatterhorn Bobsleds\n米奇卡通城\n◎ 米奇卡通城\nMickey's Toontown\n米奇的家\nMickey's House\n米妮的家\nMinnie's House\n高飞游乐屋\nGoofy's Playhouse\n奇奇蒂蒂树屋\nChip 'n' Dale Treehouse\n唐老鸭的船\nDonald's Boat\n橡果过山车\nGadget's Go Coaster\n达菲和朋友们\nDuffy & Friends\n玩具总动员乐园\n◎ 玩具总动员乐园\nToy Story Land\n弹簧狗过山车\nSlinky Dog Dash\n三眼仔旋转飞碟\nAlien Swirling Saucers\n遥控车 RC Racer\nRC Racer\n明日世界\n◎ 明日世界\nTomorrowland\n太空山\nSpace Mountain\n创极速光轮\nTRON Lightcycle Power Run\n宇宙飞行器（天文飞行器）\nAstro Orbiter\n明日世界飞跃车\nPeopleMover\n巴斯光年星际营救\nBuzz Lightyear's Space Ranger Spin\n月球火箭 Moonliner\nMoonliner\n明日世界赛车场\nTomorrowland Speedway\n皮克斯米奇摩天轮\nPixar Pal-A-Round\n乐园环线\n乐园环线蒸汽火车\nPark Railroad\n单轨列车\nMonorail\n天空\n飞屋环游记\nUp House",
+      "characters": 0,
+      "characterText": "城堡\n灰姑娘\nCinderella\n爱洛公主\nAurora\n贝儿\nBelle\n花木兰\nMulan\n小美人鱼爱丽儿\nAriel\n小叮当\nTinker Bell\n美国小镇大街\n圣诞米奇\nSanta Mickey\n米妮\nMinnie Mouse\n布鲁托\nPluto\n高飞\nGoofy\n唐老鸭\nDonald Duck\n黛丝\nDaisy Duck\n奇奇\nChip\n蒂蒂\nDale\n米奇铜像\nMickey Mouse\n玛丽猫\nMarie\n探险世界\n阿拉丁\nAladdin\n茉莉公主\nJasmine\n精灵\nGenie\n莫阿娜\nMoana\n杰克船长\nCaptain Jack Sparrow\n辛巴\nSimba\n边域世界\n蒂安娜\nTiana\n宝嘉康蒂\nPocahontas\n梦幻世界\n白雪公主\nSnow White\n万事通\nDoc\n爱生气\nGrumpy\n开心果\nHappy\n瞌睡虫\nSleepy\n害羞鬼\nBashful\n喷嚏精\nSneezy\n糊涂蛋\nDopey\n小飞侠彼得潘\nPeter Pan\n虎克船长\nCaptain Hook\n爱丽丝\nAlice\n疯帽子\nMad Hatter\n柴郡猫\nCheshire Cat\n小熊维尼\nWinnie the Pooh\n跳跳虎\nTigger\n小猪皮杰\nPiglet\n屹耳\nEeyore\n乐佩\nRapunzel\n梅莉达\nMerida\n艾莎\nElsa\n安娜\nAnna\n雪宝\nOlaf\n驯鹿斯文\nSven\n匹诺曹\nPinocchio\n米奇卡通城\n米奇\nMickey Mouse\n星黛露\nStellaLou\n玲娜贝儿\nLinaBell\n达菲\nDuffy\n雪莉玫\nShellieMay\n杰拉多尼\nGelatoni\n可琦安\nCookieAnn\n奥乐米拉\nOluMel\n玩具总动员乐园\n巨型胡迪\nWoody\n巨型抱抱龙\nRex\n胡迪\nWoody\n翠丝\nJessie\n红心\nBullseye\n巴斯光年\nBuzz Lightyear\n三眼仔\nLittle Green Men\n三眼仔\nLittle Green Men\n三眼仔\nLittle Green Men\n草莓熊\nLotso\n明日世界\n史迪奇\nStitch\n大白\nBaymax\n大眼仔\nMike Wazowski\n毛怪\nSulley\n瓦力\nWALL-E\n伊娃\nEVE\n朱迪\nJudy Hopps\n尼克\nNick Wilde\n达斯·维达\nDarth Vader\n帝国白兵\nStormtrooper\n帝国白兵\nStormtrooper\nR2-D2\nR2-D2\nBB-8\nBB-8\n蜘蛛侠\nSpider-Man\n巴斯光年巨像\nBuzz Lightyear\n钢铁侠\nIron Man",
+      "searchText": "美国小镇大街\n圣诞米奇\nSanta Mickey\n米奇铜像\nMickey Mouse\n米奇卡通城\n米奇\nMickey Mouse\n星黛露\nStellaLou\n玲娜贝儿\nLinaBell\n达菲\nDuffy\n雪莉玫\nShellieMay\n杰拉多尼\nGelatoni\n可琦安\nCookieAnn\n奥乐米拉\nOluMel",
+      "zoom": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "canvas": [
+          1440,
+          900
+        ],
+        "canvasRect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "scrollWidth": 1440,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": {
+          "stats": {
+            "calls": 815,
+            "tris": 2316993
+          },
+          "pixelRatio": 1,
+          "memory": {
+            "geometries": 426,
+            "textures": 45
+          },
+          "weather": "clear",
+          "mini": false,
+          "dist": 517.7118517747482
+        }
+      },
+      "mini": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "canvas": [
+          1440,
+          900
+        ],
+        "canvasRect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 900,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "left": 0
+        },
+        "scrollWidth": 1440,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": {
+          "stats": {
+            "calls": 625,
+            "tris": 2128734
+          },
+          "pixelRatio": 1,
+          "memory": {
+            "geometries": 438,
+            "textures": 45
+          },
+          "weather": "clear",
+          "mini": true,
+          "dist": 110.04682879723535
+        }
+      },
+      "download": {
+        "suggested": "snowglobe-1795182835595.jpg",
+        "bytes": 225934
+      },
+      "photoCountAfterReload": 0,
+      "mobile": {
+        "viewport": [
+          390,
+          844
+        ],
+        "canvas": [
+          390,
+          844
+        ],
+        "canvasRect": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "scrollWidth": 390,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": {
+          "stats": {
+            "calls": 547,
+            "tris": 2105899
+          },
+          "pixelRatio": 1,
+          "memory": {
+            "geometries": 418,
+            "textures": 45
+          },
+          "weather": "snow",
+          "mini": false,
+          "dist": 185.87353460123606
+        }
+      },
+      "mobileMini": {
+        "viewport": [
+          390,
+          844
+        ],
+        "canvas": [
+          390,
+          844
+        ],
+        "canvasRect": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "scrollWidth": 390,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": {
+          "stats": {
+            "calls": 448,
+            "tris": 1919448
+          },
+          "pixelRatio": 1,
+          "memory": {
+            "geometries": 418,
+            "textures": 45
+          },
+          "weather": "snow",
+          "mini": true,
+          "dist": 95
+        },
+        "shutter": {
+          "x": 164,
+          "y": 760,
+          "width": 62,
+          "height": 62
+        }
+      }
+    },
+    "noel-globe": {
+      "errors": [],
+      "warnings": [],
+      "requests": [],
+      "checks": [],
+      "loadMs": 1749,
+      "default": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "canvas": [
+          890,
+          522
+        ],
+        "canvasRect": {
+          "x": 101.90625,
+          "y": 213.796875,
+          "width": 890.1875,
+          "height": 522,
+          "top": 213.796875,
+          "right": 992.09375,
+          "bottom": 735.796875,
+          "left": 101.90625
+        },
+        "scrollWidth": 1440,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": null
+      },
+      "defaultPerf": {
+        "n": 181,
+        "durationMs": 3016.5999999999995,
+        "fps": 60.00132599615462,
+        "p50": 16.699999999999818,
+        "p95": 16.799999999999272,
+        "over33": 0
+      },
+      "weather": [
+        {
+          "key": "sun",
+          "state": "true"
+        },
+        {
+          "key": "snow",
+          "state": "true"
+        },
+        {
+          "key": "rain",
+          "state": "true"
+        },
+        {
+          "key": "cloud",
+          "state": "true"
+        }
+      ],
+      "attractions": 47,
+      "guideText": "奇妙梦想城堡\n幻想世界\n米奇摩天轮\n幻想世界\n灰姑娘旋转木马\n幻想世界\n乐园蒸汽铁路\n美国小镇大街\n圣诞许愿树\n美国小镇大街\n小镇百货店\n美国小镇大街\n小镇电影院\n美国小镇大街\n小镇烘焙坊\n美国小镇大街\n玩具商店\n美国小镇大街\n糖果屋\n美国小镇大街\n达菲与好友游玩屋\n美国小镇大街\n小镇铁路车站\n美国小镇大街\n动画艺术教室\n美国小镇大街\n小熊维尼历险之旅\n幻想世界\n疯帽子旋转杯\n幻想世界\n小飞象旋转世界\n幻想世界\n灰熊山极速矿车\n灰熊山谷\n北山冰宫\n冰雪奇缘世界\n雪岭滑雪橇\n冰雪奇缘世界\n魔雪奇幻之旅\n冰雪奇缘世界\n森林小天地\n冰雪奇缘世界\n迷离大宅\n迷离庄园\n迷离庄园货运站\n迷离庄园\n森林河流之旅\n探险世界\n加勒比海盗船\n探险世界\n转转弹弓狗\n玩具总动员大本营\n太空飞碟\n明日世界\n星战极速穿梭\n明日世界\n玩具兵团跳降伞\n玩具总动员大本营\n冲天遥控车\n玩具总动员大本营\n小小世界\n幻想世界\n米奇幻想曲\n幻想世界\n皇室礼宾庭\n幻想世界\n铁甲奇侠飞行之旅\n明日世界\n蚁侠与黄蜂女\n明日世界\n幸运黄金石小镇\n灰熊山谷\n玩具桶\n玩具总动员大本营\n狮子王庆典\n探险世界\n米奇故事剧场\n幻想世界\n幻想世界火车站\n幻想世界\n童话园林\n幻想世界\n梦想花园\n幻想世界\n奇幻庭园\n迷离庄园\n间歇泉山谷\n灰熊山谷\n泰山树屋\n探险世界\n圣诞星光巡游\n美国小镇大街\n城堡夜空烟花\n幻想世界",
+      "characters": 62,
+      "characterText": "米奇\n迪士尼朋友\n米妮\n迪士尼朋友\n唐老鸭\n迪士尼朋友\n黛丝\n迪士尼朋友\n高飞\n迪士尼朋友\n布鲁托\n迪士尼朋友\n奇奇\n迪士尼朋友\n蒂蒂\n迪士尼朋友\n艾莎\n迪士尼朋友\n安娜\n迪士尼朋友\n雪宝\n迪士尼朋友\n克里斯托夫\n迪士尼朋友\n斯文\n迪士尼朋友\n胡迪\n迪士尼朋友\n巴斯光年\n迪士尼朋友\n翠丝\n迪士尼朋友\n抱抱龙\n迪士尼朋友\n火腿\n迪士尼朋友\n三眼仔\n迪士尼朋友\n小熊维尼\n迪士尼朋友\n跳跳虎\n迪士尼朋友\n小猪\n迪士尼朋友\n屹耳\n迪士尼朋友\n白雪公主\n迪士尼朋友\n灰姑娘\n迪士尼朋友\n贝儿\n迪士尼朋友\n爱洛\n迪士尼朋友\n爱丽儿\n迪士尼朋友\n茉莉\n迪士尼朋友\n长发公主\n迪士尼朋友\n花木兰\n迪士尼朋友\n蒂安娜\n迪士尼朋友\n莫阿娜\n迪士尼朋友\n小叮当\n迪士尼朋友\n达菲\n迪士尼朋友\n雪莉玫\n迪士尼朋友\n星黛露\n迪士尼朋友\n玲娜贝儿\n迪士尼朋友\n杰拉多尼\n迪士尼朋友\n可琦安\n迪士尼朋友\n奥乐米拉\n迪士尼朋友\n史迪奇\n迪士尼朋友\n小飞象\n迪士尼朋友\n爱丽丝\n迪士尼朋友\n疯帽子\n迪士尼朋友\n彼得潘\n迪士尼朋友\n虎克船长\n迪士尼朋友\n杰克船长\n迪士尼朋友\n阿拉丁\n迪士尼朋友\n神灯精灵\n迪士尼朋友\n钢铁侠\n迪士尼朋友\n蚁人\n迪士尼朋友\n黄蜂女\n迪士尼朋友\n蜘蛛侠\n迪士尼朋友\n黑豹\n迪士尼朋友\n美国队长\n迪士尼朋友\n辛巴\n迪士尼朋友\n丁满\n迪士尼朋友\n彭彭\n迪士尼朋友\n朱迪\n迪士尼朋友\n尼克\n迪士尼朋友\n小美人鱼朋友赛巴斯丁\n迪士尼朋友",
+      "searchText": "米奇\n迪士尼朋友",
+      "zoom": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "canvas": [
+          890,
+          522
+        ],
+        "canvasRect": {
+          "x": 101.90625,
+          "y": 213.796875,
+          "width": 890.1875,
+          "height": 522,
+          "top": 213.796875,
+          "right": 992.09375,
+          "bottom": 735.796875,
+          "left": 101.90625
+        },
+        "scrollWidth": 1440,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": null
+      },
+      "mini": {
+        "viewport": [
+          1440,
+          900
+        ],
+        "canvas": [
+          890,
+          522
+        ],
+        "canvasRect": {
+          "x": 101.90625,
+          "y": 213.796875,
+          "width": 890.1875,
+          "height": 522,
+          "top": 213.796875,
+          "right": 992.09375,
+          "bottom": 735.796875,
+          "left": 101.90625
+        },
+        "scrollWidth": 1440,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": null
+      },
+      "download": {
+        "suggested": "Noel-Atelier-1795182858779.jpg",
+        "bytes": 168035
+      },
+      "photoCountAfterReload": 1,
+      "mobile": {
+        "viewport": [
+          390,
+          844
+        ],
+        "canvas": [
+          358,
+          374
+        ],
+        "canvasRect": {
+          "x": 16,
+          "y": 173.890625,
+          "width": 358,
+          "height": 374.390625,
+          "top": 173.890625,
+          "right": 374,
+          "bottom": 548.28125,
+          "left": 16
+        },
+        "scrollWidth": 390,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": null
+      },
+      "mobileMini": {
+        "viewport": [
+          390,
+          844
+        ],
+        "canvas": [
+          358,
+          374
+        ],
+        "canvasRect": {
+          "x": 16,
+          "y": 173.890625,
+          "width": 358,
+          "height": 374.390625,
+          "top": 173.890625,
+          "right": 374,
+          "bottom": 548.28125,
+          "left": 16
+        },
+        "scrollWidth": 390,
+        "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+        "sg": null,
+        "shutter": {
+          "x": 204,
+          "y": 452.28125,
+          "width": 70,
+          "height": 34
+        }
+      }
+    }
+  }
+}

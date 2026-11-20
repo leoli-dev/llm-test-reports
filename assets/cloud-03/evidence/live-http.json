@@ -1,0 +1,19 @@
+{
+  "capturedAt": "2026-11-20T13:59:29.365646+00:00",
+  "pages": [
+    {
+      "url": "https://leoli-dev.github.io/snowglobe-park/",
+      "httpStatus": 200,
+      "bytes": 1063950,
+      "sha256": "39bfe4f8e097ec8bcf62ce788b6e70187df875793f76c957f3b857275427d15f",
+      "matchesCleanBuild": true
+    },
+    {
+      "url": "https://leoli-dev.github.io/noel-globe/",
+      "httpStatus": 200,
+      "bytes": 845285,
+      "sha256": "a578b64033b4766165c0c60c8cb33811bb06eb200f7342df37be1c8c9cc597a5",
+      "matchesCleanBuild": true
+    }
+  ]
+}

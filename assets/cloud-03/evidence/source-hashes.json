@@ -1,0 +1,197 @@
+{
+  "scripts": [
+    {
+      "name": "evaluate.mjs",
+      "sourceSHA256": "4fcaec88925efe111905ffe0e347e77126c8f60da37fc3da768e694297d1b473",
+      "publicSHA256": "433798b2eb6840a827c1e8128a4b1efc1fea36e32ce160b5f98e33da7eeebc65"
+    },
+    {
+      "name": "correct-and-probe.mjs",
+      "sourceSHA256": "c7311c823dd72878ad55d0927e4963308731bbcbb9ae5bffe353c6046cc058d4",
+      "publicSHA256": "f5bfc8c7ec38b48712ebfe41bb523c4e1b626bad60cb74cd2efc7de873048cf3"
+    },
+    {
+      "name": "stress.mjs",
+      "sourceSHA256": "2dcadabe9857474539556137ca522158c17f3883b880c8cea76f021acb56fc4d",
+      "publicSHA256": "d87c4f67277db8bd746ed923b2a98de6c42c342970be05640c499013cbccf228"
+    },
+    {
+      "name": "focus-probe.mjs",
+      "sourceSHA256": "bb07d87e537ebde4e60b7c9ddc49b89a4de81358fcae5bb26fc5d25e337f9dbb",
+      "publicSHA256": "1a4dff478b192e9dd39908650fd492d37a17bd1ce86f2ebe61b5c7319e9a5d23"
+    },
+    {
+      "name": "joint-probes.mjs",
+      "sourceSHA256": "e81fedbbf8e57ad2382b78d74a34adf9a36969acc9419256f407c2ae1fbfd9b2",
+      "publicSHA256": "5e27f7b193bd6c2007709fe918198e5eb4fe225cadc03dbb247cd18ff4a5343f"
+    },
+    {
+      "name": "performance.mjs",
+      "sourceSHA256": "9b0e4764ada6a75feecdad0ddb2c17a90b1f7a4503d762774ae67348a8f88f62",
+      "publicSHA256": "5031615d3c04db9e94c4fd19f4919004e41c404a7352e599b2f5967937a95bbd"
+    },
+    {
+      "name": "live-smoke.mjs",
+      "sourceSHA256": "ea977303d9ba9b21baac86ff48c2bfb2e3293ecace01c04e5ef2cc0619827fe6",
+      "publicSHA256": "c49a292f65b3be9751570409d820dc00c847d340a49deddd8058dd83fb2a82a9"
+    },
+    {
+      "name": "site-verify.mjs",
+      "sourceSHA256": "02d7717e52436c0118d23c570acb69a663c850a06189585cd34af50d2c4ef873",
+      "publicSHA256": "b27716ccab82faa55562cba1484b79068dcbda81830fae731c962aa63e0d1f84"
+    },
+    {
+      "name": "claude/recheck.mjs",
+      "sourceSHA256": "1476d0eaad4083c8d2e7826e303781adfb649e068b4dcccd4d4f667d0e08f385",
+      "publicSHA256": "05444bbbc98027e0615ebbd62b275b626e34847bee3959c425d3c02e9c87c0c8"
+    },
+    {
+      "name": "claude/run.mjs",
+      "sourceSHA256": "9063d900f10f03ac145da95cbf2743f47262fed4c5916e7f12d843b2097d7b94",
+      "publicSHA256": "837289c7f3a527fb8edf012d7794ffd161e3ce23698e7e36fdafe24c618e8d52"
+    },
+    {
+      "name": "claude/noel-shows.mjs",
+      "sourceSHA256": "50fc483eaae9307aec7bc40e7b2be73bdd28b0d2258145aeb7665487c64ce6e8",
+      "publicSHA256": "659cfb18cb78d3ee41db3b45c68891d6e439c858ec49c87672154d4b22c47d8a"
+    },
+    {
+      "name": "claude/probe-label.mjs",
+      "sourceSHA256": "6c8c1928bb6d72a432b6588da5b9f63dab693b7a5d1fe155ba92cd46e9d8b8da",
+      "publicSHA256": "3e0f93e6007aa6c07ee1f00c2f345bb6aa1b194ad9a376f5f520e9b9cbc8ba67"
+    }
+  ],
+  "reviews": [
+    {
+      "name": "codex-review.md",
+      "sourceSHA256": "029094bd72835b390a5d3785084dff479961f97626a8643be3d7666ff89f2197",
+      "publicSHA256": "029094bd72835b390a5d3785084dff479961f97626a8643be3d7666ff89f2197"
+    },
+    {
+      "name": "claude-review.md",
+      "sourceSHA256": "726f16c1afe2827a8948add7932fcae234672cd21bf9b97ffd42e96e87fb76fb",
+      "publicSHA256": "d0af94fc5d6f18597b5706160d957860113f34a61a2ee5e9444008d32dd36513"
+    },
+    {
+      "name": "claude-review-initial-frozen.md",
+      "sourceSHA256": "b90497012e5c3b9f1883bfcbd27ff9483540de7b04406e63940873405732c762",
+      "publicSHA256": "1f6c108a1c6b358aadbd12e5253af1faacc5c3e5651a184e6f1dc60c44c2a7f9"
+    }
+  ],
+  "figures": [
+    {
+      "name": "noel-fireworks-confirmed.jpg",
+      "sourceSHA256": "e0013dee823a4d3ca1eeaced61e12ff8706ede36a7dd694b1ce0cae73f7a10b1",
+      "publicSHA256": "e0013dee823a4d3ca1eeaced61e12ff8706ede36a7dd694b1ce0cae73f7a10b1",
+      "unchanged": true
+    },
+    {
+      "name": "noel-focus-grizzly.jpg",
+      "sourceSHA256": "69f0aa679e823580f1bd19b533c824eedac21854e2a59eae8bcbc5176d073fc0",
+      "publicSHA256": "69f0aa679e823580f1bd19b533c824eedac21854e2a59eae8bcbc5176d073fc0",
+      "unchanged": true
+    },
+    {
+      "name": "noel-focus-small-world.jpg",
+      "sourceSHA256": "b79e8abb787364fe1548966c6af919a80fc0c96de76aa8498c28c3d029ba5907",
+      "publicSHA256": "b79e8abb787364fe1548966c6af919a80fc0c96de76aa8498c28c3d029ba5907",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-character.jpg",
+      "sourceSHA256": "c6fa7d073892791d2ca9bad9e06dc4d4ead8664ba3ee8b982cec040ed7b4e938",
+      "publicSHA256": "c6fa7d073892791d2ca9bad9e06dc4d4ead8664ba3ee8b982cec040ed7b4e938",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-day-settled.jpg",
+      "sourceSHA256": "e9fad04a13a87c713026d6c6de0ee388ae6ddfb3b1c7ba9e52547650d33d7f14",
+      "publicSHA256": "e9fad04a13a87c713026d6c6de0ee388ae6ddfb3b1c7ba9e52547650d33d7f14",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-default.jpg",
+      "sourceSHA256": "cc4bb0e58526925d05faa0bf7db768cdb6f617658598acb8637477203ca724a9",
+      "publicSHA256": "cc4bb0e58526925d05faa0bf7db768cdb6f617658598acb8637477203ca724a9",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-mini.jpg",
+      "sourceSHA256": "f99e334deea9d14097ce4d5a6f905a3e3af1faf1e0515a321621b2e201a70274",
+      "publicSHA256": "f99e334deea9d14097ce4d5a6f905a3e3af1faf1e0515a321621b2e201a70274",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-mobile-fresh.jpg",
+      "sourceSHA256": "24e0fe7b8652cdfadd0addfa48646c13a4b880d426a4a9694c0c181db9ef3a10",
+      "publicSHA256": "24e0fe7b8652cdfadd0addfa48646c13a4b880d426a4a9694c0c181db9ef3a10",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-mobile-mini.jpg",
+      "sourceSHA256": "946ae8bde3f3f9a3bdb04a114f3b7926fae61a17253af1673b6eec544cd98895",
+      "publicSHA256": "946ae8bde3f3f9a3bdb04a114f3b7926fae61a17253af1673b6eec544cd98895",
+      "unchanged": true
+    },
+    {
+      "name": "noel-globe-photo.jpg",
+      "sourceSHA256": "0a94f2982cdf9843156760f48fd3ce7a56343c56a0a95935154600a38ba3b08c",
+      "publicSHA256": "0a94f2982cdf9843156760f48fd3ce7a56343c56a0a95935154600a38ba3b08c",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-character-settled.jpg",
+      "sourceSHA256": "ec476ee2479445b389e90a121a3df551daeb3aac3c3b6476fe32f10a635a9469",
+      "publicSHA256": "ec476ee2479445b389e90a121a3df551daeb3aac3c3b6476fe32f10a635a9469",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-label-wheel-block.jpg",
+      "sourceSHA256": "7298fc2ce56f1970177dc46fe75d6a617106832e938ab46ecf39c07a782426ef",
+      "publicSHA256": "7298fc2ce56f1970177dc46fe75d6a617106832e938ab46ecf39c07a782426ef",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-parade-confirmed.jpg",
+      "sourceSHA256": "e1a72087aa12067dace135c0ff21cd2e37c137eb1728ca62d985d6f100d89e37",
+      "publicSHA256": "e1a72087aa12067dace135c0ff21cd2e37c137eb1728ca62d985d6f100d89e37",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-park-day-settled.jpg",
+      "sourceSHA256": "a2a29c0f6b381e66e712aab4d253a6d203950c219b5728b5b46e7149aacd8433",
+      "publicSHA256": "a2a29c0f6b381e66e712aab4d253a6d203950c219b5728b5b46e7149aacd8433",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-park-default.jpg",
+      "sourceSHA256": "dc0088e18f35ef76b472600ecc98ba7aeef8657345dde7bde8d67ff77bafbf6b",
+      "publicSHA256": "dc0088e18f35ef76b472600ecc98ba7aeef8657345dde7bde8d67ff77bafbf6b",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-park-mini.jpg",
+      "sourceSHA256": "d45839a209432c24573a550c40bd7446d973d1dab94c8177dc03842ab121cc4b",
+      "publicSHA256": "d45839a209432c24573a550c40bd7446d973d1dab94c8177dc03842ab121cc4b",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-park-mobile-fresh.jpg",
+      "sourceSHA256": "6bb4968afb3658c00dc20f8d60726ef156c1c8af902aa8522b7cdc5f5912c55c",
+      "publicSHA256": "6bb4968afb3658c00dc20f8d60726ef156c1c8af902aa8522b7cdc5f5912c55c",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-park-mobile-mini.jpg",
+      "sourceSHA256": "7aaad28ff04af33f7c2328cb0034c2119aad10c47668d193dfbe306bec383341",
+      "publicSHA256": "7aaad28ff04af33f7c2328cb0034c2119aad10c47668d193dfbe306bec383341",
+      "unchanged": true
+    },
+    {
+      "name": "snowglobe-park-photo.jpg",
+      "sourceSHA256": "615a864c90b71b5624a284bf7bcbabc6c136194f71d3d5b510e5b9d8fbe93b95",
+      "publicSHA256": "615a864c90b71b5624a284bf7bcbabc6c136194f71d3d5b510e5b9d8fbe93b95",
+      "unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "capturedAt": "2026-11-20T13:57:06.038249+00:00",
+  "purpose": "evaluation host only; generation test-time OS not established",
+  "observations": {
+    "os": {
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t27.2\nBuildVersion:\t\t26B123",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "architecture": {
+      "stdout": "arm64",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "chip": {
+      "stdout": "Apple M5 Max",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "memoryBytes": {
+      "stdout": "137438953472",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "cpuCores": {
+      "stdout": "18",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "power": {
+      "stdout": "Now drawing from 'AC Power'; InternalBattery-0:100%,charged;0:00 remaining,present:true (battery identifier omitted)",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "thermal": {
+      "stdout": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "node": {
+      "stdout": "v22.23.1",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "npm": {
+      "stdout": "10.9.8",
+      "stderr": "",
+      "exitCode": 0
+    },
+    "thorium": {
+      "stdout": "Thorium 156.0.8078.28",
+      "stderr": "",
+      "exitCode": 0
+    }
+  },
+  "gpu": "Apple M5 Max,40 GPU cores;system_profiler SPDisplaysDataType observed",
+  "artifacts": {
+    "snowglobe-park": {
+      "commit": "2eee3d5c4110dde4a351b758975f480594875684",
+      "promptSHA256": "f208903be06a3b179ae920dabbfd773876a27c32be23104cf7126dccb45be062",
+      "lockSHA256": "cfcc10e9ea81396b2fb89297f6483c77abdddc39390b78be8066cfbe5b92d714",
+      "singleHTMLBytes": 1063950,
+      "gzipHTMLBytes": 297357,
+      "singleHTMLSHA256": "39bfe4f8e097ec8bcf62ce788b6e70187df875793f76c957f3b857275427d15f",
+      "dependencies": {
+        "node_modules/esbuild": "0.28.2",
+        "node_modules/playwright-core": "1.65.1",
+        "node_modules/three": "0.187.0"
+      },
+      "sourceJSFiles": 38,
+      "sourceJSLines": 8323
+    },
+    "noel-globe": {
+      "commit": "239e9bba12bb20a01513e7a9189d422905ed1232",
+      "promptSHA256": "f208903be06a3b179ae920dabbfd773876a27c32be23104cf7126dccb45be062",
+      "lockSHA256": "da69c2278128f8a6b31727fa0dc3751190b20cd617e123f82a7b8678102f1f9a",
+      "singleHTMLBytes": 845285,
+      "gzipHTMLBytes": 289544,
+      "singleHTMLSHA256": "a578b64033b4766165c0c60c8cb33811bb06eb200f7342df37be1c8c9cc597a5",
+      "dependencies": {
+        "node_modules/@playwright/test": "1.65.1",
+        "node_modules/lucide-static": "1.76.0",
+        "node_modules/playwright-core": "1.65.1",
+        "node_modules/three": "0.187.0",
+        "node_modules/vite": "8.3.8"
+      },
+      "sourceJSFiles": 9,
+      "sourceJSLines": 3258
+    }
+  }
+}

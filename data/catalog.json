@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-10-29",
+  "updated": "2026-11-20",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1809,6 +1809,45 @@
         "testOSSource": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CLOUD-03",
+      "title": "Christmas globe: Opus 5.5 vs GPT-6.2-Astra",
+      "date": "2026-11-20",
+      "sortDate": "2026-11-20",
+      "model": "Claude Opus 5.5 (max) / GPT-6.2-Astra (High)",
+      "engines": [
+        "Claude Code",
+        "Codex"
+      ],
+      "scope": "cloud",
+      "category": "Cloud artifact comparison",
+      "summary": "Snowglobe offers broader weather, park scope and tilt-shift; Noel offers clearer default composition and persistent photos. Joint review documents wheel-input and guide-camera defects.",
+      "caveat": "One published snapshot per model; task body matches but full framing, tools and effort differ. Known creator conflict; not a controlled model ranking.",
+      "sourceStatus": "located",
+      "documents": [
+        "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md"
+      ],
+      "markdown": "reports/experiments/cloud-03.md",
+      "environment": {
+        "scope": "cloud",
+        "testOS": "Inference OS not recorded. Evaluation: macOS 27.2 build 26B123 arm64; generation client evidence is separate.",
+        "inferenceHardware": "Cloud inference hardware not recorded; evaluation client: Apple M5 Max, 18 CPU / 40 GPU cores, 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md"
+      },
+      "artifact": {
+        "url": "https://github.com/leoli-dev/snowglobe-park",
+        "name": "Snow Globe Kingdom",
+        "play": "https://leoli-dev.github.io/snowglobe-park/"
+      },
+      "searchAliases": [
+        "snowglobe-park",
+        "noel-globe",
+        "Noel Atelier",
+        "Noël Atelier",
+        "Snow Globe Kingdom"
+      ]
     }
   ],
   "documents": [
@@ -3118,6 +3157,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU cores / 40 GPU cores / 128GiB unified memory / internal SSD",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-10-28-strata-deepseek41-flash1017-2bpw-m5max.md"
+      }
+    },
+    {
+      "id": "2026-11-20-snowglobe-park-vs-noel-globe",
+      "title": "Christmas globe: Opus 5.5 vs GPT-6.2-Astra",
+      "path": "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md",
+      "format": "markdown",
+      "source": "new-report/CLOUD-03",
+      "environment": {
+        "scope": "cloud",
+        "testOS": "Inference OS not recorded. Evaluation: macOS 27.2 build 26B123 arm64; generation client evidence is separate.",
+        "inferenceHardware": "Cloud inference hardware not recorded; evaluation client: Apple M5 Max, 18 CPU / 40 GPU cores, 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md"
       }
     }
   ],

@@ -1,0 +1,57 @@
+{
+  "description": "Instrumented WebGL live resource counts; 20 weather/time cycles and6 resizes, screenshot character focus; no injected source changes.",
+  "apps": {
+    "snowglobe-park": {
+      "errors": [],
+      "warm": {
+        "Buffer": 1736,
+        "Texture": 49,
+        "Program": 101,
+        "Framebuffer": 62,
+        "Renderbuffer": 6
+      },
+      "after20": {
+        "Buffer": 1736,
+        "Texture": 49,
+        "Program": 101,
+        "Framebuffer": 62,
+        "Renderbuffer": 6
+      },
+      "afterResize": {
+        "Buffer": 1736,
+        "Texture": 49,
+        "Program": 101,
+        "Framebuffer": 62,
+        "Renderbuffer": 6
+      },
+      "finite": true,
+      "note": "camera finite verified"
+    },
+    "noel-globe": {
+      "errors": [],
+      "warm": {
+        "Buffer": 1263,
+        "Texture": 35,
+        "Program": 26,
+        "Framebuffer": 40,
+        "Renderbuffer": 0
+      },
+      "after20": {
+        "Buffer": 1263,
+        "Texture": 35,
+        "Program": 26,
+        "Framebuffer": 40,
+        "Renderbuffer": 0
+      },
+      "afterResize": {
+        "Buffer": 1263,
+        "Texture": 35,
+        "Program": 26,
+        "Framebuffer": 40,
+        "Renderbuffer": 0
+      },
+      "finite": null,
+      "note": "no public camera handle; only resource/error/visible render validation"
+    }
+  }
+}

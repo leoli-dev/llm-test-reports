@@ -1,0 +1,26 @@
+# Codex independent review — 2026-11-20 (before Claude findings)
+
+Disclosure: README identities were read, so this is not blind. Codex-mbp is in GPT family; no claim of independence from vendor interests. This review session did not generate either artifact. Claude reviewer wrote snowglobe and this conflict must be explicit in final report.
+
+Initial judgment based on fresh 1440×900 DPR1 Thorium screenshots and UI flow:
+- Noël wins default composition and accessible product UI: castle/train/wheel give clear hierarchy and occupy enough of the globe; cream/green page is coherent. Snowglobe's room/music-box, glass rim and Christmas props are more immersive, but globe has much empty sky, many giant bokeh discs, low-angle snow rim hides park, individual rides unreadable until zoom. This is subjective.
+- Snowglobe is richer simulation/sandbox: 8 vs 4 weather presets, manual and automatic snow/wetness, moving time and shows, large park and visitors. Noël is a compact curated toy with good architectural silhouettes and visible Mickey/Minnie at street-level. Counts alone do not validate complete Disney coverage.
+- Miniature is a semantic trade-off: snowglobe implements actual adjustable tilt-shift band/blur/saturation/toy speed/dated photo; Noël implements first-person walking and JPEG capture, no tilt-shift. The original prompt does not disambiguate miniature; do not mark either wrong solely by interpretation.
+- Photo download worked in both. Reload lost Snowglobe's photo (in-memory array); Noël's IndexedDB album persisted. Persistence is an extra not explicit original requirement, so this is a product limitation rather than failed mandatory acceptance.
+- Main smoke produced zero page errors and warnings. Both about 60 rAF fps at default but unequal canvas sizes; performance comparison pending.
+- Mobile mini controls fit, but Snowglobe's settings obscure large part of scene and full expanded dock covers much scene. Noël dedicates small live canvas in a scrollable page. No horizontal overflow at390. Need clean mobile load (previous screenshot carried camera state).
+- Engineering: Snowglobe has more modular subsystems and shipped screenshot/geometry tooling; Noël has conventional readable app/model modules, no QA scripts despite Playwright dependency. Both lock Three0.187.0. No shipped test suite. Both animation loops ignore CSS reduced-motion preference. Snowglobe photo blob URLs never revoked, unbounded session gallery storage; repeated capture must be evaluated as static retention risk, not measured leak.
+
+Harness corrections required: `.poi` selector doesn't exist; use #guideList button.g-item for counts. SG day screenshot taken1.4s after clear transition retains snow/clouds; re-capture after settle. Mobile default screenshot must reload at390 to remove camera carry-over. These are observer mistakes, not candidate defects; preserve raw run and correction record.
+
+Independent follow-up before Claude review:
+- Corrected UI counts:60 attraction/group entries and82 character entries vs47/62, matched each README. No-result and LinaBell search work.
+- SG focused mini button Space reproduces global shortcut hijack (mini=false and shakeT≈0.0167), Noël enters walk mode. Low/moderate keyboard interaction defect, Enter remains usable.
+- Offline file:// with offline context succeeds both; SG fails external Google Fonts request and uses fallback. No WebGL2 shows readable startup fallback both (a thrown startup error is expected in that intentional fault injection).
+- Fresh390 portrait SG starts dock collapsed. Earlier resized-desktop screenshot was an expanded panel, not mobile initial state. Corrected fresh screenshot; opening panel allows actual photo download on both. Observer first follow-up timed out because it tried clicking a correctly collapsed button; preserve this as observer error, then click panel toggle normally.
+-8 warm-up weather/time cycles then20 more and6 resizes: live GL resource counts unchanged (SG buffers1736/textures49/programs101/framebuffers62/renderbuffers6;Noël1263/35/26/40/0). This is bounded stability coverage, not long-term memory proof. Photo retention risk not exercised here.
+- Character focus screenshot originally taken1.8s into SG flight can be transitional; final evaluation must wait flight completion (up to3.6s), so do not label obstruction a defect without recheck.
+
+Settled character follow-up: SG 5s after selecting LinaBell shows LinaBell clearly at the gazebo, flight=null, camera-target distance5.5; center ray first hits linabell:std. The earlier castle-filled frame was an in-flight observer capture and is NOT a candidate defect. Noël target screenshot shows LinaBell partly occluded by foreground architecture beside visible StellaLou; treat framing limitation, not absent character.
+
+Dated reconciliation after reading Claude review (2026-11-20): the initial reduced-motion observation was incomplete: Noël disables fireworks in shows.js, while other continuous motion remains. Final report corrects this. Equal-canvas throughput run never enters miniature; SG tilt-shift pass is disabled there. The published conditional verdict and defect priorities were agreed with Claude after these corrections.

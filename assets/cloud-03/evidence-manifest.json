@@ -1,0 +1,362 @@
+{
+  "zip": {
+    "path": "assets/cloud-03/cloud-03-evidence.zip",
+    "bytes": 18474741,
+    "sha256": "af3d7c84c332fd49396d45adff6b8926138a93b56486feb4191ed4c6e8b584b0",
+    "memberCount": 200,
+    "crc": "pass",
+    "memberHashes": "pass"
+  },
+  "files": [
+    {
+      "path": "evidence/README.md",
+      "bytes": 3557,
+      "sha256": "d9fbe235cd781e53f585b04aa82ad02c5d43673b8c318f88e5fa36216f12d5fc"
+    },
+    {
+      "path": "evidence/README_CN.md",
+      "bytes": 3033,
+      "sha256": "9046e179d9674795ff2fb362b34fdc9e29bafb99cff47611caa74d8f66f55d89"
+    },
+    {
+      "path": "evidence/archive-build.log",
+      "bytes": 168,
+      "sha256": "500ff8aa03b7491fb5275755dc47d416dc8413a47a0e100b9005a1a95a820f04"
+    },
+    {
+      "path": "evidence/archive-check.log",
+      "bytes": 316,
+      "sha256": "526d0a1b8f202ebe0039076570fe8d8b9f1671810f3752762bdf8821b8e0dd13"
+    },
+    {
+      "path": "evidence/candidate-integrity.json",
+      "bytes": 221,
+      "sha256": "20de4ea774ee5d22d686da5e51ac97cd632eae64a3ec21545dc1de7e590bec2f"
+    },
+    {
+      "path": "evidence/claude-review-initial-frozen.md",
+      "bytes": 16126,
+      "sha256": "1f6c108a1c6b358aadbd12e5253af1faacc5c3e5651a184e6f1dc60c44c2a7f9"
+    },
+    {
+      "path": "evidence/claude-review.md",
+      "bytes": 21650,
+      "sha256": "d0af94fc5d6f18597b5706160d957860113f34a61a2ee5e9444008d32dd36513"
+    },
+    {
+      "path": "evidence/codex-independent-review.md",
+      "bytes": 5223,
+      "sha256": "029094bd72835b390a5d3785084dff479961f97626a8643be3d7666ff89f2197"
+    },
+    {
+      "path": "evidence/consensus.md",
+      "bytes": 3312,
+      "sha256": "d88f07245388190902ce6cec4b09418227b17b70ccdebb79a5ecd7a776f29cc2"
+    },
+    {
+      "path": "evidence/consensus_CN.md",
+      "bytes": 2599,
+      "sha256": "646e8f2c83d94c46e880e320f2fd432ec19d15066d92a622bf0cdb8c4a7c14ef"
+    },
+    {
+      "path": "evidence/corrections.json",
+      "bytes": 1480,
+      "sha256": "5fe694aff1f72291a6f040e427abc6c59646984a4c7500b0196e22646cbc3a6b"
+    },
+    {
+      "path": "evidence/corrections.log",
+      "bytes": 1081,
+      "sha256": "ee4b90569f994e29e6986fe2001ab0e6b47ce6459038cd108a89ddbd8d1b273b"
+    },
+    {
+      "path": "evidence/environment.json",
+      "bytes": 2878,
+      "sha256": "1f0a605bae97c88d71f386b6c1deb6f0bb0f79e0c77d713d3738f072463c64dd"
+    },
+    {
+      "path": "evidence/focus-probe.json",
+      "bytes": 475,
+      "sha256": "d5f656bf5037e6d31d076b1075e248fbde2e5b9eddee9432c83f926722afe37e"
+    },
+    {
+      "path": "evidence/focus-probe.log",
+      "bytes": 420,
+      "sha256": "9f5be4ea1056467f02b2e3d8f5c67baac7c6acbc5b1310edea552b9ca450da2f"
+    },
+    {
+      "path": "evidence/functional.json",
+      "bytes": 17299,
+      "sha256": "e43a96c50b4e7c4bc297fe1a27449c1801c7905256f86dd7fe77e41fadeb8ed1"
+    },
+    {
+      "path": "evidence/functional.log",
+      "bytes": 330,
+      "sha256": "7bf9f7b8b40ed7ef1dc2e124e4b5847eb9379a42b35f0576dd6b81eb12226c82"
+    },
+    {
+      "path": "evidence/generation-provenance.json",
+      "bytes": 3522,
+      "sha256": "b660840b3e99ff5b56841f0049ffaf5b8925dcf0225b8ef4ee1628945a741d46"
+    },
+    {
+      "path": "evidence/joint-probes.json",
+      "bytes": 3299,
+      "sha256": "8b2810c82dd2d7f5992397d90550c86250486739942eb6163b8cdad246519f69"
+    },
+    {
+      "path": "evidence/joint-probes.log",
+      "bytes": 3300,
+      "sha256": "005a3e70478bb1d7771678ba7954e438eb910f2fea1d399f7383b70f8d7a5bbc"
+    },
+    {
+      "path": "evidence/live-http.json",
+      "bytes": 543,
+      "sha256": "94b7941e9232e145012b6e601201f3dce5fc73be81b397a480107b7a73b7eed4"
+    },
+    {
+      "path": "evidence/live-smoke.json",
+      "bytes": 423,
+      "sha256": "35e5e69f6b724f9d157e0bc0338555a3830d946f78f36900496629ab22438da2"
+    },
+    {
+      "path": "evidence/live-smoke.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/localization-audit.json",
+      "bytes": 298,
+      "sha256": "40e5fc1bd021c2a1e8aa2f908a8ebd3693efa3482895adbe2669f4ec74dfe508"
+    },
+    {
+      "path": "evidence/noel-globe-build.log",
+      "bytes": 784,
+      "sha256": "f35534a29fac67398689386a1111b60de1a846457f9513a67da3b24a95331d4d"
+    },
+    {
+      "path": "evidence/noel-globe-install.log",
+      "bytes": 143,
+      "sha256": "6afc6e6374923acdb72aea1d869281c7521b5c579f8951ba78ca72a644f01b2c"
+    },
+    {
+      "path": "evidence/noel-globe-prompt.txt",
+      "bytes": 328,
+      "sha256": "f208903be06a3b179ae920dabbfd773876a27c32be23104cf7126dccb45be062"
+    },
+    {
+      "path": "evidence/observer-mobile-collapsed-dock.log",
+      "bytes": 2311,
+      "sha256": "671da718ad25b9a02e611d506100ca5a69d19bae09aa28d690fc961be2767ec3"
+    },
+    {
+      "path": "evidence/observer-performance-overlay.log",
+      "bytes": 3512,
+      "sha256": "7d561f7e468300ccf9c603a33906ec510db098179e939b9f67784c8930d46d4d"
+    },
+    {
+      "path": "evidence/observer-performance-partial.json",
+      "bytes": 655,
+      "sha256": "ddbc1ad03cbb49afa61c70358aad90783c2408e418da510b7f11f1a81295c0f9"
+    },
+    {
+      "path": "evidence/performance.json",
+      "bytes": 3040,
+      "sha256": "b1172863185bed4f227525aed538701f9f27a63dac5873c1c1fe8084ecbf314b"
+    },
+    {
+      "path": "evidence/performance.log",
+      "bytes": 360,
+      "sha256": "8154755e3a701a3a9c1f4d3c346a1f1e920f7da84ab426d429063e939efa1dff"
+    },
+    {
+      "path": "evidence/scripts/claude/noel-shows.mjs",
+      "bytes": 1190,
+      "sha256": "659cfb18cb78d3ee41db3b45c68891d6e439c858ec49c87672154d4b22c47d8a"
+    },
+    {
+      "path": "evidence/scripts/claude/probe-label.mjs",
+      "bytes": 1487,
+      "sha256": "3e0f93e6007aa6c07ee1f00c2f345bb6aa1b194ad9a376f5f520e9b9cbc8ba67"
+    },
+    {
+      "path": "evidence/scripts/claude/recheck.mjs",
+      "bytes": 5694,
+      "sha256": "05444bbbc98027e0615ebbd62b275b626e34847bee3959c425d3c02e9c87c0c8"
+    },
+    {
+      "path": "evidence/scripts/claude/run.mjs",
+      "bytes": 12353,
+      "sha256": "837289c7f3a527fb8edf012d7794ffd161e3ce23698e7e36fdafe24c618e8d52"
+    },
+    {
+      "path": "evidence/scripts/correct-and-probe.mjs",
+      "bytes": 4533,
+      "sha256": "f5bfc8c7ec38b48712ebfe41bb523c4e1b626bad60cb74cd2efc7de873048cf3"
+    },
+    {
+      "path": "evidence/scripts/evaluate.mjs",
+      "bytes": 6197,
+      "sha256": "433798b2eb6840a827c1e8128a4b1efc1fea36e32ce160b5f98e33da7eeebc65"
+    },
+    {
+      "path": "evidence/scripts/focus-probe.mjs",
+      "bytes": 1675,
+      "sha256": "1a4dff478b192e9dd39908650fd492d37a17bd1ce86f2ebe61b5c7319e9a5d23"
+    },
+    {
+      "path": "evidence/scripts/joint-probes.mjs",
+      "bytes": 2189,
+      "sha256": "5e27f7b193bd6c2007709fe918198e5eb4fe225cadc03dbb247cd18ff4a5343f"
+    },
+    {
+      "path": "evidence/scripts/live-smoke.mjs",
+      "bytes": 1209,
+      "sha256": "c49a292f65b3be9751570409d820dc00c847d340a49deddd8058dd83fb2a82a9"
+    },
+    {
+      "path": "evidence/scripts/performance.mjs",
+      "bytes": 2390,
+      "sha256": "5031615d3c04db9e94c4fd19f4919004e41c404a7352e599b2f5967937a95bbd"
+    },
+    {
+      "path": "evidence/scripts/site-verify.mjs",
+      "bytes": 5075,
+      "sha256": "b27716ccab82faa55562cba1484b79068dcbda81830fae731c962aa63e0d1f84"
+    },
+    {
+      "path": "evidence/scripts/stress.mjs",
+      "bytes": 2467,
+      "sha256": "d87c4f67277db8bd746ed923b2a98de6c42c342970be05640c499013cbccf228"
+    },
+    {
+      "path": "evidence/site-verification.json",
+      "bytes": 3931,
+      "sha256": "71b7a845dd99651f26346c5650c06e67bf05893aaa9a42ee09c2d9b7b8ada35d"
+    },
+    {
+      "path": "evidence/snowglobe-park-build.log",
+      "bytes": 90,
+      "sha256": "645b88eb22720bf484bd2858df094a6edcabfa0d9f530f6e47e8d8c251b6627b"
+    },
+    {
+      "path": "evidence/snowglobe-park-install.log",
+      "bytes": 76,
+      "sha256": "25262be99c7630685746c00593c483a4e7e8aadf616af21b333d60a443c5f97d"
+    },
+    {
+      "path": "evidence/snowglobe-park-prompt.txt",
+      "bytes": 328,
+      "sha256": "f208903be06a3b179ae920dabbfd773876a27c32be23104cf7126dccb45be062"
+    },
+    {
+      "path": "evidence/source-hashes.json",
+      "bytes": 8426,
+      "sha256": "56b52ce7a24e396d3e48abd2f4bb549a8f19c7c52ddbeafa83b2eaddc5300354"
+    },
+    {
+      "path": "evidence/stress.json",
+      "bytes": 1351,
+      "sha256": "69b7f03072e7c20b08f63aa5d60b9f684f7304a08e3d4fd2f2709596420f0e48"
+    },
+    {
+      "path": "evidence/stress.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "figures/noel-fireworks-confirmed.jpg",
+      "bytes": 85225,
+      "sha256": "e0013dee823a4d3ca1eeaced61e12ff8706ede36a7dd694b1ce0cae73f7a10b1"
+    },
+    {
+      "path": "figures/noel-focus-grizzly.jpg",
+      "bytes": 105503,
+      "sha256": "69f0aa679e823580f1bd19b533c824eedac21854e2a59eae8bcbc5176d073fc0"
+    },
+    {
+      "path": "figures/noel-focus-small-world.jpg",
+      "bytes": 146002,
+      "sha256": "b79e8abb787364fe1548966c6af919a80fc0c96de76aa8498c28c3d029ba5907"
+    },
+    {
+      "path": "figures/noel-globe-character.jpg",
+      "bytes": 146683,
+      "sha256": "c6fa7d073892791d2ca9bad9e06dc4d4ead8664ba3ee8b982cec040ed7b4e938"
+    },
+    {
+      "path": "figures/noel-globe-day-settled.jpg",
+      "bytes": 176362,
+      "sha256": "e9fad04a13a87c713026d6c6de0ee388ae6ddfb3b1c7ba9e52547650d33d7f14"
+    },
+    {
+      "path": "figures/noel-globe-default.jpg",
+      "bytes": 195616,
+      "sha256": "cc4bb0e58526925d05faa0bf7db768cdb6f617658598acb8637477203ca724a9"
+    },
+    {
+      "path": "figures/noel-globe-mini.jpg",
+      "bytes": 207298,
+      "sha256": "f99e334deea9d14097ce4d5a6f905a3e3af1faf1e0515a321621b2e201a70274"
+    },
+    {
+      "path": "figures/noel-globe-mobile-fresh.jpg",
+      "bytes": 83860,
+      "sha256": "24e0fe7b8652cdfadd0addfa48646c13a4b880d426a4a9694c0c181db9ef3a10"
+    },
+    {
+      "path": "figures/noel-globe-mobile-mini.jpg",
+      "bytes": 83951,
+      "sha256": "946ae8bde3f3f9a3bdb04a114f3b7926fae61a17253af1673b6eec544cd98895"
+    },
+    {
+      "path": "figures/noel-globe-photo.jpg",
+      "bytes": 168035,
+      "sha256": "0a94f2982cdf9843156760f48fd3ce7a56343c56a0a95935154600a38ba3b08c"
+    },
+    {
+      "path": "figures/snowglobe-character-settled.jpg",
+      "bytes": 123805,
+      "sha256": "ec476ee2479445b389e90a121a3df551daeb3aac3c3b6476fe32f10a635a9469"
+    },
+    {
+      "path": "figures/snowglobe-label-wheel-block.jpg",
+      "bytes": 215820,
+      "sha256": "7298fc2ce56f1970177dc46fe75d6a617106832e938ab46ecf39c07a782426ef"
+    },
+    {
+      "path": "figures/snowglobe-parade-confirmed.jpg",
+      "bytes": 179642,
+      "sha256": "e1a72087aa12067dace135c0ff21cd2e37c137eb1728ca62d985d6f100d89e37"
+    },
+    {
+      "path": "figures/snowglobe-park-day-settled.jpg",
+      "bytes": 159703,
+      "sha256": "a2a29c0f6b381e66e712aab4d253a6d203950c219b5728b5b46e7149aacd8433"
+    },
+    {
+      "path": "figures/snowglobe-park-default.jpg",
+      "bytes": 170971,
+      "sha256": "dc0088e18f35ef76b472600ecc98ba7aeef8657345dde7bde8d67ff77bafbf6b"
+    },
+    {
+      "path": "figures/snowglobe-park-mini.jpg",
+      "bytes": 177470,
+      "sha256": "d45839a209432c24573a550c40bd7446d973d1dab94c8177dc03842ab121cc4b"
+    },
+    {
+      "path": "figures/snowglobe-park-mobile-fresh.jpg",
+      "bytes": 54173,
+      "sha256": "6bb4968afb3658c00dc20f8d60726ef156c1c8af902aa8522b7cdc5f5912c55c"
+    },
+    {
+      "path": "figures/snowglobe-park-mobile-mini.jpg",
+      "bytes": 53762,
+      "sha256": "7aaad28ff04af33f7c2328cb0034c2119aad10c47668d193dfbe306bec383341"
+    },
+    {
+      "path": "figures/snowglobe-park-photo.jpg",
+      "bytes": 225934,
+      "sha256": "615a864c90b71b5624a284bf7bcbabc6c136194f71d3d5b510e5b9d8fbe93b95"
+    }
+  ]
+}

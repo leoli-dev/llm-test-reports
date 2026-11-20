@@ -1,0 +1,6 @@
+
+> llm-test-reports@1.0.0 build
+> node scripts/build.mjs
+
+Built en: 61 experiments and 84 full Markdown reports.
+Built cn: 61 experiments and 84 full Markdown reports.
