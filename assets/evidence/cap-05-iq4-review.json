@@ -1,0 +1,96 @@
+{
+  "movie": {
+    "initial": {
+      "register_replay_alice": true,
+      "login_replay_alice": true,
+      "register_replay_bob": true,
+      "login_replay_bob": true,
+      "login_admin": true,
+      "regular_admin_request_status": 403,
+      "labeled_demo_search": true,
+      "watched_added": true,
+      "rating_statuses": [
+        200,
+        200,
+        200
+      ],
+      "mean_and_count": [
+        8.0,
+        2,
+        7.5,
+        4
+      ],
+      "two_new_scores_mean_correct": true,
+      "comments_visible": true,
+      "disable_comments_status": 200,
+      "comment_disabled_in_detail": true,
+      "ordinary_review_status_while_disabled": 403,
+      "hide_status": 200,
+      "status_while_hidden": 404,
+      "search_filtered_after_hide": true,
+      "restore_status": 200,
+      "enable_comments_status": 200,
+      "id": "demo-006",
+      "restored_summary": {
+        "avg": 7.5,
+        "count": 4,
+        "my_rating": 10,
+        "my_comment": "Replay note from user A, revised",
+        "in_library": true
+      },
+      "audit_entries": 5
+    },
+    "after_restart": {
+      "login_replay_alice": true,
+      "login_admin": true,
+      "summary_identical_after_restart": true,
+      "audit_entries_after_restart": 5
+    },
+    "browser_checks": 25
+  },
+  "voxel": {
+    "worldSize": 512,
+    "activeChunks": 1067,
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5 Max, Unspecified Version)",
+    "keyboardDisplacementUnits": 4.599999999999994,
+    "inventoryVisible": true,
+    "clockMovedWithInventory": true,
+    "craftedWithGrantedWood": true,
+    "newSeed": true,
+    "savedSeedRestored": true,
+    "savedInventoryRestored": true,
+    "activeFor60s": true,
+    "mobileTouchControls": true,
+    "mobileNoPageOverflow": true,
+    "pageErrors": []
+  },
+  "qingming": {
+    "world": {
+      "W": 8600,
+      "H": 1150
+    },
+    "actorCounts": {
+      "people": 143,
+      "bridgeWalkers": 28,
+      "animals": 16,
+      "carts": 2,
+      "sedans": 2,
+      "boats": 16,
+      "buildings": 20,
+      "trees": 35
+    },
+    "autoplayAdvance": 2.166,
+    "seekChangedCamera": true,
+    "scenePixelsChangedWithCameraFixed": true,
+    "dragChangedCamera": true,
+    "zoomButton": true,
+    "speedButton": true,
+    "pauseButton": true,
+    "replayButton": true,
+    "clockAdvanceOver60s": 119.995,
+    "cameraAdvanceOver60s": 1488.9,
+    "mobileNoPageOverflow": true,
+    "mobileTouchSeek": true,
+    "pageErrors": []
+  }
+}

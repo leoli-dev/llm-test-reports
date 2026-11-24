@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-11-20",
+  "updated": "2026-11-24",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1848,6 +1848,33 @@
         "Noël Atelier",
         "Snow Globe Kingdom"
       ]
+    },
+    {
+      "id": "CAP-05-IQ4",
+      "title": "Flash Next UD-IQ4_XS on Splash: CAP-05 replay",
+      "date": "2026-11-24",
+      "sortDate": "2026-11-24",
+      "model": "Qwen3.8-Flash-Next UD-IQ4_XS / GSQ-RCO IQ3_S",
+      "engines": [
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "Capability",
+      "summary": "Matched Splash 1.7.0 cold probe: IQ4 4.017 s / 157.88 tok/s versus IQ3 4.258 s / 163.20 tok/s. Two of three product tasks completed all phases.",
+      "caveat": "Three cold trials per profile and one run per product. Voxel reached the 60-minute limit. Historical product results use different runtime and client versions.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md"
+      ],
+      "markdown": "reports/experiments/cap-05-iq4.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3171,6 +3198,20 @@
         "inferenceHardware": "Cloud inference hardware not recorded; evaluation client: Apple M5 Max, 18 CPU / 40 GPU cores, 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-11-20-snowglobe-park-vs-noel-globe.md"
+      }
+    },
+    {
+      "id": "2026-11-24-flash-next-iq4xs-splash-cap05-replay",
+      "title": "Flash Next UD-IQ4_XS on Splash: CAP-05 replay",
+      "path": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md",
+      "format": "markdown",
+      "source": "new-report/CAP-05-IQ4",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md"
       }
     }
   ],
