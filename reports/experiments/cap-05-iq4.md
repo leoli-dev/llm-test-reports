@@ -11,7 +11,7 @@
 | Inference hardware | MacBook Pro Mac17,6 / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB |
 | Test-time OS | macOS 27.2.1 (26B131), arm64 |
 
-Matched Splash 1.7.0 cold probe: IQ4 4.017 s / 157.88 tok/s versus IQ3 4.258 s / 163.20 tok/s. Two of three product tasks completed all phases.
+In the matched cold probe, IQ4 first-event latency fell 5.6%, decode fell 3.3%, and peak Splash allocation rose 8.68 GiB. Both builds completed the movie and scroll tasks. IQ4 hit the voxel deadline where historical IQ3 finished.
 
 [Full report](../originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md)
 

@@ -1860,7 +1860,7 @@
       ],
       "scope": "local",
       "category": "Capability",
-      "summary": "Matched Splash 1.7.0 cold probe: IQ4 4.017 s / 157.88 tok/s versus IQ3 4.258 s / 163.20 tok/s. Two of three product tasks completed all phases.",
+      "summary": "In the matched cold probe, IQ4 first-event latency fell 5.6%, decode fell 3.3%, and peak Splash allocation rose 8.68 GiB. Both builds completed the movie and scroll tasks. IQ4 hit the voxel deadline where historical IQ3 finished.",
       "caveat": "Three cold trials per profile and one run per product. Voxel reached the 60-minute limit. Historical product results use different runtime and client versions.",
       "sourceStatus": "report-only",
       "documents": [

@@ -11,7 +11,7 @@
 | 推理主机硬件 | MacBook Pro Mac17,6 / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB |
 | 实验时系统 | macOS 27.2.1（26B131），arm64 |
 
-同版 Splash 1.7.0 冷探针，IQ4 为 4.017 秒 / 157.88 tok/s，IQ3 为 4.258 秒 / 163.20 tok/s。三个产品任务中两个完成全部阶段。
+同版冷探针中，IQ4 首事件耗时低 5.6%、解码慢 3.3%，Splash 峰值多 8.68 GiB。对照历史 IQ3，电影和清明均完成三轮，方块题从完成变为到限。
 
 [完整报告](../originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay_CN.md)
 

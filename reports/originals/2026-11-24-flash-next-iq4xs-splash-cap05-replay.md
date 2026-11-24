@@ -6,6 +6,27 @@ Local test starting November 24, 2026, America/Toronto.
 
 The downloaded Unsloth build reached Ready at 262,144 tokens using the existing 96 GiB budget. The original cold probe was reproduced at exactly 8,851 uncached input and 512 output tokens per trial. The three CAP-05 tasks were run once per topic on the IQ4 model, with 2/3 finishing all three phases.
 
+## What changed from IQ3_S to IQ4_XS?
+
+**On Splash 1.7.0, IQ4_XS started streaming 0.241 seconds earlier on average, decoded about 3% more slowly, and used 8.68 GiB more peak memory.** The clearest product difference was the voxel game. Historical IQ3_S finished all three phases in 50.27 minutes. IQ4_XS reached the 60-minute limit in phase 2.
+
+| Matched Splash 1.7.0 · PLE auto | IQ3_S | UD-IQ4_XS | IQ4 vs. IQ3 |
+|---|---:|---:|---:|
+| Mean time to first event | 4.258 s | 4.017 s | −5.6% |
+| Cold prefill | 2,084.44 tok/s | 2,210.61 tok/s | +6.1% |
+| Native decode | 163.20 tok/s | 157.88 tok/s | −3.3% |
+| Peak Splash allocation | 55.71 GiB | 64.39 GiB | +8.68 GiB |
+
+Three trials per build used the same 8,851 input and 512 output tokens. The first-event ranges overlap (3.940–4.445 s for IQ3 and 3.722–4.302 s for IQ4), as do the decode-rate ranges. The small speed differences describe these trials. Memory figures are the peaks recorded for this probe.
+
+| Product | Historical IQ3_S · Splash 1.4.1 | Replay IQ4_XS · Splash 1.7.0 | Observed difference |
+|---|---|---|---|
+| Movie site | Finished three phases in 18.79 min. Library, reviews, rating aggregation, moderation and restart persistence passed. A TMDB response fixture exposed incomplete credits. | Finished three phases in 11.80 min. Two-user ratings, comment lock, hiding and restart persistence passed. Testing used the OMDb demo catalog. | Both completed the core workflow. The replay was about 7 minutes shorter, and the historical time included a 300-second stalled tool. Online metadata coverage was evaluated differently. |
+| Voxel game | Finished three phases in 50.27 min. Mining, placement, crafting, combat and reload were exercised. The high-altitude platform had collision and its geometry was invisible. | Reached the 60-minute limit in phase 2. Movement, assisted crafting and inventory restoration passed on the frozen build. The terrain capture showed visible gaps. | IQ3 had higher task completion and broader verified gameplay. Independent mining, combat and high-altitude rendering checks are unavailable for IQ4. |
+| Qingming scroll | Finished three phases in 26.46 min. Autoplay, navigation and mobile worked. The bridge was stiff and the riverbanks straight. | Finished three phases in 25.88 min. Comparable controls passed and the scene changed with the camera fixed. Riverbanks and figures remained simplified. | The runs were about 35 seconds apart. The available reviews do not establish which version was more faithful to the original scroll. |
+
+Each product was run once per build. The historical and replay runs used different Splash, Pi, macOS and browser versions, along with different review coverage. The table records differences between the delivered products. A matched, identically scored pair is still needed to isolate the quality difference. The images below show each build's recorded test scene.
+
 ## Historical tests and replay scope
 
 The direct baseline is [CAP-05](2026-10-26-flash-next-iq3s-splash-strata-triad.md), which used Flash Next IQ3_S on Splash and Strata for the cold coding probe and three product tasks. [CAP-03](2026-10-25-pi-strata-splash-repairdesk.md), [CAP-04](2026-10-25-pi-visual-triad-three-engines.md), and [PERF-13](2026-10-26-strata-cold-kv-128k-256k.md) also contain IQ3_S, on Strata. This replay follows the Splash branch of CAP-05. PERF-13 used a separate Strata protocol for full-window stress.
@@ -70,15 +91,21 @@ Whole-system memory and native footprint overlap. Tool failures are separate fro
 
 **MovieShelf.** The original README command started the frozen site and the Thorium browser rerun passed 25 checks. Independent local API verification used two new test accounts. Ratings 8 and 4, then an update to 10, produced the expected 7.5 average over four ratings including two demo scores. A regular user received 403 at the admin screen endpoint. The admin hide and comment lock affected ordinary user-facing paths, and watched state, review state and five audit entries persisted after restart. At 390 px the document fit its viewport. The runtime used its explicitly labeled demo catalog and placeholder posters. Live OMDb, full credits and the privacy of shared community libraries were outside the passed acceptance evidence.
 
-![MovieShelf demo results in Thorium](../../assets/figures/cap-05-iq4/movie-demo.png)
+| IQ3_S (historical CAP-05) | IQ4_XS (replay) |
+|---|---|
+| ![IQ3 movie detail](../../assets/figures/cap-05/movie-splash-detail-reviewed.png) | ![IQ4 movie detail](../../assets/figures/cap-05-iq4/movie-detail-reviewed.png) |
 
 **Voxel Isle.** The 60-minute wall budget expired in phase 2, with only phase 1 settled. The 300-second Bash watchdog intervened three times. The frozen snapshot was still launched and separately inspected in Thorium. Normal keyboard input moved 4.60 units, inventory stayed live, and real crafting buttons made a wooden pickaxe after a test fixture granted wood. Save, new seed, reload and inventory restoration passed. The 60-second clock check and 390 px touch controls passed. The desktop capture shows visible terrain gaps. The evaluator first hit pointer lock and a test-grant UI refresh issue, then used the documented E key and granted wood before opening inventory. These are review-harness corrections. Independent acceptance covered the listed behaviors and left mining, combat and high-altitude rendering unscored.
 
-![Voxel terrain and HUD in Thorium](../../assets/figures/cap-05-iq4/voxel-desktop.png)
+| IQ3_S (historical CAP-05) | IQ4_XS (replay) |
+|---|---|
+| ![IQ3 voxel opening view](../../assets/figures/cap-05/voxel-splash-play-initial.png) | ![IQ4 voxel terrain and HUD](../../assets/figures/cap-05-iq4/voxel-desktop.png) |
 
 **Qingming scroll.** The frozen 8,600 × 1,150 Canvas2D scene advanced automatically and its rendered pixels changed with the camera held fixed. Independent visible inputs verified seek, drag, zoom, speed, pause, replay and mobile touch seek. At 2× the clock advanced 119.995 seconds over 60 wall seconds, and the camera advanced 1,488.9 units. No page errors were observed. The scene reports 143 general figures and 28 bridge walkers, 16 boats and 20 buildings. These are program counts. The matte earth tones, timber bridge and shop signs are readable, while the straight shoreline, repetitive figures and flat buildings remain stylized compared with the source scroll.
 
-![Bridge scene in the IQ4-generated Qingming scroll](../../assets/figures/cap-05-iq4/qingming-bridge.png)
+| IQ3_S (historical CAP-05) | IQ4_XS (replay) |
+|---|---|
+| ![IQ3 scroll bridge](../../assets/figures/cap-05/qingming-splash-view-bridge.png) | ![IQ4 scroll bridge](../../assets/figures/cap-05-iq4/qingming-bridge.png) |
 
 ## Evidence and comparison limits
 
