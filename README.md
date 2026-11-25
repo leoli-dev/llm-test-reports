@@ -6,7 +6,7 @@ My LLM test archive: models and inference engines observed through real tasks, f
 
 **[Browse the report site](https://leoli-dev.github.io/llm-test-reports/)** · **[Full Markdown reports](reports/originals/)** · [Add a report](CONTRIBUTING.md)
 
-The archive contains **62 experiment, parameter or comparison records and 85 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
+The archive contains **63 experiment, parameter or comparison records and 86 reports, each in full English and Chinese editions**. Multiple review rounds belong to one test chain; different models can share a report. These counts are not independent sample counts.
 
 ## Workstation and system
 
@@ -33,6 +33,7 @@ Artifact repositories use `llm-test-YYYY-MM-DD-{type}-{name}`, dated by test sta
 
 | Date | Experiment / parameters | Model and runtime | Report |
 |---|---|---|---|
+| 2026-11-24 | Flash-Next IQ3_S vs IQ4_XS — paired local coding quality | Qwen3.8-Flash-Next GSQ-RCO IQ3_S and UD-IQ4_XS | [CAP-IQ-PAIR](reports/experiments/cap-iq-pair.md) |
 | 2026-11-24 | Flash Next UD-IQ4_XS on Splash: CAP-05 replay | Qwen3.8-Flash-Next UD-IQ4_XS / GSQ-RCO IQ3_S | [CAP-05-IQ4](reports/experiments/cap-05-iq4.md) |
 | 2026-11-20 | Christmas globe: Opus 5.5 vs GPT-6.2-Astra | Claude Opus 5.5 (max) / GPT-6.2-Astra (High) | [CLOUD-03](reports/experiments/cloud-03.md) |
 | 2026-10-28 | DeepSeek Flash 1017 / Strata: M5 Max evaluation and retirement | DeepSeek-V4.1-Flash-1017 GSQ-RCO IQ2_XXS / backbone average 2.00 bpw | [PERF-14](reports/experiments/perf-14.md) |

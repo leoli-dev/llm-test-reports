@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1875,6 +1875,33 @@
         "testOSSource": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-IQ-PAIR",
+      "title": "Flash-Next IQ3_S 与 IQ4_XS — 本机代码质量配对评测",
+      "date": "2026-11-24",
+      "sortDate": "2026-11-24",
+      "model": "Qwen3.8-Flash-Next GSQ-RCO IQ3_S and UD-IQ4_XS",
+      "engines": [
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "新增实验",
+      "summary": "IQ3_S 72/120，IQ4_XS 73/120。这次实验未能证实在这台 Mac 上换 IQ4_XS 有实际代码质量收益。区间仍对差距的方向和幅度留有不确定性。",
+      "caveat": "",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality_CN.md"
+      ],
+      "markdown": "reports/experiments/cap-iq-pair_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1（26B131），arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3212,6 +3239,20 @@
         "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay_CN.md"
+      }
+    },
+    {
+      "id": "2026-11-24-flash-next-iq3s-iq4xs-paired-quality",
+      "title": "Flash-Next IQ3_S 与 IQ4_XS — 本机代码质量配对评测",
+      "path": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality_CN.md",
+      "format": "markdown",
+      "source": "new-report/CAP-IQ-PAIR",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1（26B131），arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality_CN.md"
       }
     }
   ],

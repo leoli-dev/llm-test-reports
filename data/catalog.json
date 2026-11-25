@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-11-24",
+  "updated": "2026-11-25",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1875,6 +1875,33 @@
         "testOSSource": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-IQ-PAIR",
+      "title": "Flash-Next IQ3_S vs IQ4_XS — paired local coding quality",
+      "date": "2026-11-24",
+      "sortDate": "2026-11-24",
+      "model": "Qwen3.8-Flash-Next GSQ-RCO IQ3_S and UD-IQ4_XS",
+      "engines": [
+        "Splash"
+      ],
+      "scope": "local",
+      "category": "New experiment",
+      "summary": "IQ3_S 72/120, IQ4_XS 73/120. The observed coding scores did not establish that IQ4_XS offers a practical gain on this Mac. The interval leaves uncertainty about the size and direction of the difference.",
+      "caveat": "",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality.md"
+      ],
+      "markdown": "reports/experiments/cap-iq-pair.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3212,6 +3239,20 @@
         "inferenceHardware": "MacBook Pro Mac17,6 / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-11-24-flash-next-iq4xs-splash-cap05-replay.md"
+      }
+    },
+    {
+      "id": "2026-11-24-flash-next-iq3s-iq4xs-paired-quality",
+      "title": "Flash-Next IQ3_S vs IQ4_XS — paired local coding quality",
+      "path": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality.md",
+      "format": "markdown",
+      "source": "new-report/CAP-IQ-PAIR",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality.md"
       }
     }
   ],

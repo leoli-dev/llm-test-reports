@@ -6,7 +6,7 @@
 
 **[浏览中文报告站](https://leoli-dev.github.io/llm-test-reports/index_CN.html)** · **[完整 Markdown 报告](reports/originals/)** · [新增报告](CONTRIBUTING_CN.md)
 
-当前收录 **62 项实验、参数组或对照记录，85 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
+当前收录 **63 项实验、参数组或对照记录，86 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
 
 ## 本机配置与系统
 
@@ -33,6 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
+| 2026-11-24 | Flash-Next IQ3_S 与 IQ4_XS — 本机代码质量配对评测 | Qwen3.8-Flash-Next GSQ-RCO IQ3_S and UD-IQ4_XS | [CAP-IQ-PAIR](reports/experiments/cap-iq-pair_CN.md) |
 | 2026-11-24 | Splash 上的 Flash Next UD-IQ4_XS：CAP-05 复测 | Qwen3.8-Flash-Next UD-IQ4_XS / GSQ-RCO IQ3_S | [CAP-05-IQ4](reports/experiments/cap-05-iq4_CN.md) |
 | 2026-11-20 | 圣诞玻璃球：Opus 5.5 与 GPT-6.2-Astra 联合评测 | Claude Opus 5.5 (max) / GPT-6.2-Astra (High) | [CLOUD-03](reports/experiments/cloud-03_CN.md) |
 | 2026-10-28 | DeepSeek Flash 1017／Strata：M5 Max 初测与退役决定 | DeepSeek-V4.1-Flash-1017 GSQ-RCO IQ2_XXS / backbone average 2.00 bpw | [PERF-14](reports/experiments/perf-14_CN.md) |
