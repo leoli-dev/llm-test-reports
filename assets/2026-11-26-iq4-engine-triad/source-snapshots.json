@@ -1,0 +1,42 @@
+{
+  "splash/llm-test-2026-11-26-art-snow-white": {
+    "commit": "22d8efed816fe7e6636275fb5639405d3045d188",
+    "files": 4,
+    "entry": true
+  },
+  "splash/llm-test-2026-11-26-game-tank": {
+    "commit": "1897f6c790bce5157b9789d18af87db2c0f85941",
+    "files": 0,
+    "entry": false
+  },
+  "splash/llm-test-2026-11-26-pos-retail": {
+    "commit": "06d1f5c948095fe1fb98682c6386423bc1ba1180",
+    "files": 32,
+    "entry": false
+  },
+  "strata/llm-test-2026-11-26-art-snow-white": {
+    "commit": "49de2afa15acc73af30cd75d53094e38439f45a7",
+    "files": 4,
+    "entry": true
+  },
+  "strata/llm-test-2026-11-26-game-tank": {
+    "commit": "113711c5257390aab5cd65fad262cee660088df2",
+    "files": 6,
+    "entry": true
+  },
+  "strata/llm-test-2026-11-26-pos-retail": {
+    "commit": "a72b093016232957eb2124509abae7f49af0b987",
+    "files": 26,
+    "entry": false
+  },
+  "recovery/splash/llm-test-2026-11-26-game-tank": {
+    "commit": "336f1f94a9f04414b4fc2acfa955e882cc4a7cd9",
+    "files": 14,
+    "entry": true
+  },
+  "recovery/strata/llm-test-2026-11-26-game-tank": {
+    "commit": "45faed47c1f5629b00c6638181f9e251cce26de2",
+    "files": 6,
+    "entry": true
+  }
+}

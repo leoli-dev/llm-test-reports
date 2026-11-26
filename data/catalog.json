@@ -1,6 +1,6 @@
 {
   "title": "LLM Test Reports",
-  "updated": "2026-11-25",
+  "updated": "2026-11-26",
   "author": "leoli-dev",
   "experiments": [
     {
@@ -1902,6 +1902,34 @@
         "testOSSource": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-IQ4-ENGINE",
+      "title": "Strata and Splash on shared IQ4 weights",
+      "date": "2026-11-26",
+      "sortDate": "2026-11-26",
+      "model": "Unsloth Qwen3.8 Flash Next UD-IQ4_XS",
+      "engines": [
+        "Splash 1.7.3",
+        "Strata 0.2.22 / Metal 0.1.69"
+      ],
+      "scope": "local",
+      "category": "Paired capability and inference",
+      "summary": "Three paired software briefs, native inference timing and resource telemetry, and independent Codex and Claude code/UI review.",
+      "caveat": "Each case ran once. The thinking-off tank rerun is scored separately and native timing boundaries differ.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-11-26-iq4-engine-triad.md"
+      ],
+      "markdown": "reports/experiments/cap-iq4-engine.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-26-iq4-engine-triad.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3253,6 +3281,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / CPU 18 / GPU 40 / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-11-24-flash-next-iq3s-iq4xs-paired-quality.md"
+      }
+    },
+    {
+      "id": "2026-11-26-iq4-engine-triad",
+      "title": "Strata and Splash on shared IQ4 weights",
+      "path": "reports/originals/2026-11-26-iq4-engine-triad.md",
+      "format": "markdown",
+      "source": "new-report/CAP-IQ4-ENGINE",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-26-iq4-engine-triad.md"
       }
     }
   ],

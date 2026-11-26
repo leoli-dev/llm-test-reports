@@ -1,0 +1,301 @@
+{
+  "browser": "Thorium",
+  "version": "156.0.8078.28",
+  "captures": [
+    "desktop-register.png",
+    "desktop-receipt.png",
+    "mobile-register.png"
+  ],
+  "checks": [
+    {
+      "view": "desktop",
+      "action": "navigate",
+      "ok": true,
+      "status": 200,
+      "title": "Corner POS — Neighborhood Retail"
+    },
+    {
+      "view": "desktop",
+      "action": "inspect",
+      "ok": true,
+      "value": {
+        "title": "Corner POS — Neighborhood Retail",
+        "headings": [
+          "Corner POS",
+          "Arabica Coffee Beans 12oz",
+          "Baby Spinach 5oz",
+          "Bananas (per lb)",
+          "Bar Soap Lavender",
+          "Bronze-Cut Penne Pasta 16oz",
+          "Craft Cola 6-pack",
+          "Dark Chocolate Bar 70%",
+          "Extra Virgin Olive Oil 500ml",
+          "Fresh Orange Juice 52oz",
+          "Granola Bars 6-pack",
+          "Greek Yogurt 32oz",
+          "Hand Sanitizer 8oz",
+          "Hass Avocados (each)",
+          "Honeycrisp Apples (per lb)",
+          "Large Eggs (dozen)",
+          "Lemon Dish Soap 16oz",
+          "Mint Toothpaste 4.6oz",
+          "Organic Green Tea 20ct",
+          "Paper Towels 6-roll",
+          "Salted Butter 8oz",
+          "Sea Salt Potato Chips 8oz",
+          "Sourdough Bread Loaf",
+          "Sparkling Water 12-pack",
+          "Trail Mix 12oz",
+          "Trash Bags 40ct",
+          "Whole Milk 1gal",
+          "Current sale"
+        ],
+        "buttons": [
+          "Recent sales",
+          "All",
+          "Bakery",
+          "Beverages",
+          "Dairy",
+          "Household",
+          "Pantry",
+          "Personal Care",
+          "Produce",
+          "Snacks",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "scrollWidth": 1440,
+        "viewportWidth": 1440,
+        "graphics": []
+      }
+    },
+    {
+      "view": "desktop",
+      "action": "screenshot",
+      "name": "register",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "key",
+      "key": "/",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "state",
+      "expression": "document.activeElement.tagName",
+      "expect": "INPUT",
+      "ok": true,
+      "value": "INPUT"
+    },
+    {
+      "view": "desktop",
+      "action": "fill",
+      "css": "input[type=search]",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "click",
+      "role": "button",
+      "name": "Add Arabica Coffee Beans",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "click",
+      "role": "button",
+      "name": "Increase quantity of Arabica Coffee Beans",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "value",
+      "css": ".cart input[type=number]",
+      "expect": "2",
+      "ok": true,
+      "value": "2"
+    },
+    {
+      "view": "desktop",
+      "action": "key",
+      "key": "F2",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "visible",
+      "role": "heading",
+      "name": "Take payment",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "fill",
+      "css": "#tendered",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "click",
+      "role": "button",
+      "name": "Charge",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "visible",
+      "role": "heading",
+      "name": "Receipt",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "screenshot",
+      "name": "receipt",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "key",
+      "key": "Escape",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "visible",
+      "role": "button",
+      "name": "Recent sales",
+      "ok": true
+    },
+    {
+      "view": "mobile",
+      "action": "navigate",
+      "ok": true,
+      "status": 200,
+      "title": "Corner POS — Neighborhood Retail"
+    },
+    {
+      "view": "mobile",
+      "action": "inspect",
+      "ok": true,
+      "value": {
+        "title": "Corner POS — Neighborhood Retail",
+        "headings": [
+          "Corner POS",
+          "Arabica Coffee Beans 12oz",
+          "Baby Spinach 5oz",
+          "Bananas (per lb)",
+          "Bar Soap Lavender",
+          "Bronze-Cut Penne Pasta 16oz",
+          "Craft Cola 6-pack",
+          "Dark Chocolate Bar 70%",
+          "Extra Virgin Olive Oil 500ml",
+          "Fresh Orange Juice 52oz",
+          "Granola Bars 6-pack",
+          "Greek Yogurt 32oz",
+          "Hand Sanitizer 8oz",
+          "Hass Avocados (each)",
+          "Honeycrisp Apples (per lb)",
+          "Large Eggs (dozen)",
+          "Lemon Dish Soap 16oz",
+          "Mint Toothpaste 4.6oz",
+          "Organic Green Tea 20ct",
+          "Paper Towels 6-roll",
+          "Salted Butter 8oz",
+          "Sea Salt Potato Chips 8oz",
+          "Sourdough Bread Loaf",
+          "Sparkling Water 12-pack",
+          "Trail Mix 12oz",
+          "Trash Bags 40ct",
+          "Whole Milk 1gal",
+          "Current sale"
+        ],
+        "buttons": [
+          "Recent sales",
+          "All",
+          "Bakery",
+          "Beverages",
+          "Dairy",
+          "Household",
+          "Pantry",
+          "Personal Care",
+          "Produce",
+          "Snacks",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "scrollWidth": 390,
+        "viewportWidth": 390,
+        "graphics": []
+      }
+    },
+    {
+      "view": "mobile",
+      "action": "state",
+      "expression": "document.documentElement.scrollWidth <= innerWidth",
+      "expect": true,
+      "ok": true,
+      "value": true
+    },
+    {
+      "view": "mobile",
+      "action": "screenshot",
+      "name": "register",
+      "ok": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "externalRequests": []
+}

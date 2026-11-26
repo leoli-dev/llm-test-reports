@@ -1,0 +1,135 @@
+[
+  {
+    "check": "quantity zero rejected",
+    "ok": true,
+    "evidence": {
+      "status": 400,
+      "body": {
+        "error": {
+          "code": "invalid_quantity",
+          "message": "quantity must be a whole number of 1 or more",
+          "sku": "BAK-002",
+          "requested": 0,
+          "available": 0
+        }
+      }
+    }
+  },
+  {
+    "check": "insufficient stock rejected",
+    "ok": true,
+    "evidence": {
+      "status": 409,
+      "body": {
+        "error": {
+          "code": "insufficient_stock",
+          "message": "not enough stock of Butter Croissant",
+          "sku": "BAK-002",
+          "requested": 29,
+          "available": 28
+        }
+      }
+    }
+  },
+  {
+    "check": "rejections leave inventory unchanged",
+    "ok": true,
+    "evidence": {
+      "stock": 28
+    }
+  },
+  {
+    "check": "cash sale returns receipt",
+    "ok": true,
+    "evidence": {
+      "status": 201,
+      "body": {
+        "id": "s_c30bdc352d",
+        "number": 2,
+        "receipt_no": "20261126-0002",
+        "created_at": "2026-11-26T15:02:46.505982502Z",
+        "items": [
+          {
+            "sku": "BAK-002",
+            "name": "Butter Croissant",
+            "qty": 1,
+            "unit_price_cents": 325,
+            "line_total_cents": 325,
+            "stock_remaining": 27
+          }
+        ],
+        "totals": {
+          "subtotal_cents": 325,
+          "tax_bps": 825,
+          "tax_cents": 27,
+          "total_cents": 352,
+          "item_count": 1
+        },
+        "payment": {
+          "method": "cash",
+          "tendered_cents": 2000,
+          "change_cents": 1648,
+          "provider": "MOCK - no real payment taken"
+        }
+      }
+    }
+  },
+  {
+    "check": "card sale returns receipt",
+    "ok": true,
+    "evidence": {
+      "status": 201,
+      "body": {
+        "id": "s_75818ce8c1",
+        "number": 3,
+        "receipt_no": "20261126-0003",
+        "created_at": "2026-11-26T15:02:46.510854127Z",
+        "items": [
+          {
+            "sku": "BAK-002",
+            "name": "Butter Croissant",
+            "qty": 1,
+            "unit_price_cents": 325,
+            "line_total_cents": 325,
+            "stock_remaining": 26
+          }
+        ],
+        "totals": {
+          "subtotal_cents": 325,
+          "tax_bps": 825,
+          "tax_cents": 27,
+          "total_cents": 352,
+          "item_count": 1
+        },
+        "payment": {
+          "method": "card",
+          "last4": "4242",
+          "change_cents": 0,
+          "provider": "MOCK - no real payment taken"
+        }
+      }
+    }
+  },
+  {
+    "check": "inventory decremented twice",
+    "ok": true,
+    "evidence": {
+      "stock": 26,
+      "was": 28
+    }
+  },
+  {
+    "check": "sales survive backend restart",
+    "ok": true,
+    "evidence": {
+      "status": 200
+    }
+  },
+  {
+    "check": "inventory survives backend restart",
+    "ok": true,
+    "evidence": {
+      "stock": 26
+    }
+  }
+]

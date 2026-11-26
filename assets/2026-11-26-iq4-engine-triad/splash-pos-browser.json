@@ -1,0 +1,238 @@
+{
+  "browser": "Thorium",
+  "version": "156.0.8078.28",
+  "captures": [
+    "desktop-register.png",
+    "desktop-receipt.png",
+    "mobile-register.png"
+  ],
+  "checks": [
+    {
+      "view": "desktop",
+      "action": "navigate",
+      "ok": true,
+      "status": 200,
+      "title": "Corner Cart POS"
+    },
+    {
+      "view": "desktop",
+      "action": "inspect",
+      "ok": true,
+      "value": {
+        "title": "Corner Cart POS",
+        "headings": [
+          "Corner Cart POS",
+          "Current sale"
+        ],
+        "buttons": [
+          "Recent sales",
+          "Shortcuts\n?",
+          "All",
+          "Bakery",
+          "Beverages",
+          "Dairy",
+          "Household",
+          "Pantry",
+          "Produce",
+          "Snacks",
+          "Alt+1\nButter Croissant\nBAKERY\n$3.25\nBAK-002\n30 in stock",
+          "Alt+2\nChocolate Muffin\nBAKERY\n$3.75\nBAK-004\n18 in stock",
+          "Alt+3\nSeeded Bagel\nBAKERY\n$2.75\nBAK-003\n26 in stock",
+          "Alt+4\nSourdough Loaf\nBAKERY\n$6.25\nBAK-001\n12 in stock",
+          "Alt+5\nCold Brew Coffee 250ml\nBEVERAGES\n$3.95\nBEV-001\n48 in stock",
+          "Alt+6\nFresh Orange Juice 1L\nBEVERAGES\n$6.49\nBEV-003\n24 in stock",
+          "Alt+7\nLocal Craft Cola 330ml\nBEVERAGES\n$2.50\nBEV-005\n72 in stock",
+          "Alt+8\nLoose Leaf Green Tea 100g\nBEVERAGES\n$8.99\nBEV-004\n15 in stock",
+          "Alt+9\nSparkling Water 500ml\nBEVERAGES\n$1.75\nBEV-002\n60 in stock",
+          "Aged Cheddar 200g\nDAIRY\n$7.45\nDLY-001\n16 in stock",
+          "Free Range Eggs (6)\nDAIRY\n$4.65\nDLY-004\n28 in stock",
+          "Greek Yoghurt 500g\nDAIRY\n$4.25\nDLY-003\n22 in stock",
+          "Salted Butter 250g\nDAIRY\n$3.95\nDLY-005\n20 in stock",
+          "Whole Milk 1L\nDAIRY\n$1.89\nDLY-002\n40 in stock",
+          "Beeswax Wraps (3 pack)\nHOUSEHOLD\n$13.50\nHSE-003\n8 in stock",
+          "Dish Soap 500ml\nHOUSEHOLD\n$4.15\nHSE-002\n19 in stock",
+          "Kitchen Paper (4 roll)\nHOUSEHOLD\n$5.45\nHSE-001\n17 in stock",
+          "Basmati Rice 1kg\nPANTRY\n$4.49\nPAN-003\n21 in stock",
+          "Extra Virgin Olive Oil 500ml\nPANTRY\n$11.95\nPAN-004\n14 in stock",
+          "Passata Tomatoes 700g\nPANTRY\n$2.65\nPAN-002\n33 in stock",
+          "Penne Rigate 500g\nPANTRY\n$2.19\nPAN-001\n38 in stock",
+          "Roasted Peanuts 300g\nPANTRY\n$5.25\nPAN-005\n27 in stock",
+          "Baby Spinach 200g\nPRODUCE\n$3.49\nPRD-002\n19 in stock",
+          "Bananas (per kg)\nPRODUCE\n$2.49\nPRD-004\n25 in stock",
+          "Hass Avocado\nPRODUCE\n$2.15\nPRD-003\n44 in stock",
+          "Roma Tomatoes 500g\nPRODUCE\n$2.99\nPRD-001\n34 in stock",
+          "Yukon Potatoes 1kg\nPRODUCE\n$3.29\nPRD-005\n30 in stock",
+          "Dark Chocolate 70% 100g\nSNACKS\n$4.95\nSNK-001\n36 in stock",
+          "Dried Mango 150g\nSNACKS\n$5.75\nSNK-003\nOut of stock",
+          "Sea Salt Pretzels 200g\nSNACKS\n$3.85\nSNK-002\n29 in stock"
+        ],
+        "scrollWidth": 1440,
+        "viewportWidth": 1440,
+        "graphics": []
+      }
+    },
+    {
+      "view": "desktop",
+      "action": "screenshot",
+      "name": "register",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "key",
+      "key": "/",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "state",
+      "expression": "document.activeElement.tagName",
+      "expect": "INPUT",
+      "ok": true,
+      "value": "INPUT"
+    },
+    {
+      "view": "desktop",
+      "action": "fill",
+      "css": ".catalogue input[type=search]",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "click",
+      "role": "button",
+      "name": "Butter Croissant",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "click",
+      "role": "button",
+      "name": "Increase quantity",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "value",
+      "css": ".register input[type=number]",
+      "expect": "2",
+      "ok": true,
+      "value": "2"
+    },
+    {
+      "view": "desktop",
+      "action": "click",
+      "role": "button",
+      "name": "Take payment",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "visible",
+      "role": "heading",
+      "name": "Receipt",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "screenshot",
+      "name": "receipt",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "key",
+      "key": "Escape",
+      "ok": true
+    },
+    {
+      "view": "desktop",
+      "action": "visible",
+      "role": "button",
+      "name": "Recent sales",
+      "ok": true
+    },
+    {
+      "view": "mobile",
+      "action": "navigate",
+      "ok": true,
+      "status": 200,
+      "title": "Corner Cart POS"
+    },
+    {
+      "view": "mobile",
+      "action": "inspect",
+      "ok": true,
+      "value": {
+        "title": "Corner Cart POS",
+        "headings": [
+          "Corner Cart POS",
+          "Current sale"
+        ],
+        "buttons": [
+          "Recent sales\n1",
+          "Shortcuts\n?",
+          "All",
+          "Bakery",
+          "Beverages",
+          "Dairy",
+          "Household",
+          "Pantry",
+          "Produce",
+          "Snacks",
+          "Alt+1\nButter Croissant\nBAKERY\n$3.25\nBAK-002\n28 in stock",
+          "Alt+2\nChocolate Muffin\nBAKERY\n$3.75\nBAK-004\n18 in stock",
+          "Alt+3\nSeeded Bagel\nBAKERY\n$2.75\nBAK-003\n26 in stock",
+          "Alt+4\nSourdough Loaf\nBAKERY\n$6.25\nBAK-001\n12 in stock",
+          "Alt+5\nCold Brew Coffee 250ml\nBEVERAGES\n$3.95\nBEV-001\n48 in stock",
+          "Alt+6\nFresh Orange Juice 1L\nBEVERAGES\n$6.49\nBEV-003\n24 in stock",
+          "Alt+7\nLocal Craft Cola 330ml\nBEVERAGES\n$2.50\nBEV-005\n72 in stock",
+          "Alt+8\nLoose Leaf Green Tea 100g\nBEVERAGES\n$8.99\nBEV-004\n15 in stock",
+          "Alt+9\nSparkling Water 500ml\nBEVERAGES\n$1.75\nBEV-002\n60 in stock",
+          "Aged Cheddar 200g\nDAIRY\n$7.45\nDLY-001\n16 in stock",
+          "Free Range Eggs (6)\nDAIRY\n$4.65\nDLY-004\n28 in stock",
+          "Greek Yoghurt 500g\nDAIRY\n$4.25\nDLY-003\n22 in stock",
+          "Salted Butter 250g\nDAIRY\n$3.95\nDLY-005\n20 in stock",
+          "Whole Milk 1L\nDAIRY\n$1.89\nDLY-002\n40 in stock",
+          "Beeswax Wraps (3 pack)\nHOUSEHOLD\n$13.50\nHSE-003\n8 in stock",
+          "Dish Soap 500ml\nHOUSEHOLD\n$4.15\nHSE-002\n19 in stock",
+          "Kitchen Paper (4 roll)\nHOUSEHOLD\n$5.45\nHSE-001\n17 in stock",
+          "Basmati Rice 1kg\nPANTRY\n$4.49\nPAN-003\n21 in stock",
+          "Extra Virgin Olive Oil 500ml\nPANTRY\n$11.95\nPAN-004\n14 in stock",
+          "Passata Tomatoes 700g\nPANTRY\n$2.65\nPAN-002\n33 in stock",
+          "Penne Rigate 500g\nPANTRY\n$2.19\nPAN-001\n38 in stock",
+          "Roasted Peanuts 300g\nPANTRY\n$5.25\nPAN-005\n27 in stock",
+          "Baby Spinach 200g\nPRODUCE\n$3.49\nPRD-002\n19 in stock",
+          "Bananas (per kg)\nPRODUCE\n$2.49\nPRD-004\n25 in stock",
+          "Hass Avocado\nPRODUCE\n$2.15\nPRD-003\n44 in stock",
+          "Roma Tomatoes 500g\nPRODUCE\n$2.99\nPRD-001\n34 in stock",
+          "Yukon Potatoes 1kg\nPRODUCE\n$3.29\nPRD-005\n30 in stock",
+          "Dark Chocolate 70% 100g\nSNACKS\n$4.95\nSNK-001\n36 in stock",
+          "Dried Mango 150g\nSNACKS\n$5.75\nSNK-003\nOut of stock",
+          "Sea Salt Pretzels 200g\nSNACKS\n$3.85\nSNK-002\n29 in stock"
+        ],
+        "scrollWidth": 494,
+        "viewportWidth": 390,
+        "graphics": []
+      }
+    },
+    {
+      "view": "mobile",
+      "action": "state",
+      "expression": "document.documentElement.scrollWidth <= innerWidth",
+      "expect": true,
+      "ok": false,
+      "value": false
+    },
+    {
+      "view": "mobile",
+      "action": "screenshot",
+      "name": "register",
+      "ok": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "externalRequests": []
+}

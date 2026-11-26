@@ -1,0 +1,105 @@
+[
+  {
+    "check": "quantity zero rejected",
+    "ok": true,
+    "evidence": {
+      "status": 400,
+      "body": {
+        "error": "invalid quantity 0 for \"granola-bars\": quantity must be at least 1"
+      }
+    }
+  },
+  {
+    "check": "insufficient stock rejected",
+    "ok": true,
+    "evidence": {
+      "status": 409,
+      "body": {
+        "error": "insufficient stock for Granola Bars 6-pack (SNK-504): requested 4, only 3 left"
+      }
+    }
+  },
+  {
+    "check": "rejections leave inventory unchanged",
+    "ok": true,
+    "evidence": {
+      "stock": 3
+    }
+  },
+  {
+    "check": "cash sale returns receipt",
+    "ok": true,
+    "evidence": {
+      "status": 201,
+      "body": {
+        "id": "e92d9b4295cfb145",
+        "number": "R000002",
+        "created_at": "2026-11-26T15:02:45.503675085Z",
+        "lines": [
+          {
+            "product_id": "granola-bars",
+            "sku": "SNK-504",
+            "name": "Granola Bars 6-pack",
+            "qty": 1,
+            "unit_price_cents": 449,
+            "line_total_cents": 449
+          }
+        ],
+        "subtotal_cents": 449,
+        "tax_cents": 39,
+        "total_cents": 488,
+        "payment_method": "cash",
+        "tendered_cents": 2000,
+        "change_cents": 1512
+      }
+    }
+  },
+  {
+    "check": "card sale returns receipt",
+    "ok": true,
+    "evidence": {
+      "status": 201,
+      "body": {
+        "id": "cbb113660326973c",
+        "number": "R000003",
+        "created_at": "2026-11-26T15:02:45.50888171Z",
+        "lines": [
+          {
+            "product_id": "granola-bars",
+            "sku": "SNK-504",
+            "name": "Granola Bars 6-pack",
+            "qty": 1,
+            "unit_price_cents": 449,
+            "line_total_cents": 449
+          }
+        ],
+        "subtotal_cents": 449,
+        "tax_cents": 39,
+        "total_cents": 488,
+        "payment_method": "card"
+      }
+    }
+  },
+  {
+    "check": "inventory decremented twice",
+    "ok": true,
+    "evidence": {
+      "stock": 1,
+      "was": 3
+    }
+  },
+  {
+    "check": "sales survive backend restart",
+    "ok": true,
+    "evidence": {
+      "status": 200
+    }
+  },
+  {
+    "check": "inventory survives backend restart",
+    "ok": true,
+    "evidence": {
+      "stock": 1
+    }
+  }
+]
