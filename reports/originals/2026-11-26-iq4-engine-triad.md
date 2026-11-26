@@ -296,3 +296,9 @@ Two oversized illustration writes in recovery hit the output limit before execut
 ### Claude independent review
 
 Claude Opus 5.5 through Orca scored the recovery submissions **2/10 code and 2/10 UI** for IRON RALLY, and **7/10 code and 7/10 UI** for Snowfall. Both reviewers reproduced the tank deployment failure. The code score difference reflects the credit given to the inactive modules and their structure. Claude reached wave two in the diagnostic build and observed 90-degree rotation of the controls, the player leaving the arena, and enemies stuck on walls. Game-over and restart remained unobserved. Both reviewers verified the seven story scenes and mobile caption problem. Claude also reproduced the frame covering the previous and next buttons at 1024×640 and in mobile landscape. [Independent review, screenshots and probes](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/evidence.zip)
+
+## 2026-11-26 addendum · Human evaluation
+
+These are the user's firsthand impressions of the visual output. Haiku, Luna and DS Flash are points of reference from the user's own experience.
+
+> I haven't personally checked the code quality. Judging by the visual results, both the 4-bit and 8-bit versions of 27B are far behind Flash-Next. They're in different leagues. Flash-Next is a tier below today's Haiku, Luna and DS Flash, but it's still usable and its visual output is workable. The 27B results feel like toys and have no practical use for me.
