@@ -158,3 +158,47 @@ Thorium 156.0.8078.28 通过 37 项中的 36 项。桌面使用 `/` 搜索、Ent
 [桌面现金小票](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/desktop-cash-receipt.png) · [手机收银台](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/mobile-register.png) · [手机刷卡小票](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/mobile-card-receipt.png)
 
 Orca 派发的 Claude Opus 5.5 独立给出代码 **7/10**、UI **8/10**。它在临时副本重跑 Go 测试，在 Thorium 完成两笔模拟销售，并确认焦点会离开弹窗。它另复现了在付款弹窗聚焦「取消」后按 Enter 反而提交交易，以及弹窗标注为服务器确认的金额 $7.58 与后端小票的 $7.57 相差 1 美分。冷启动和重启证据由 Codex 采集。两位评审都认可权限初始化后的核心路径，也都因空卷首次启动失败和键盘问题扣分。Claude 进一步因开箱复现性和付款差错扣分。源码快照为本机提交 `5cef14325226b39f4ecfbd760c3591932d555869`。[独立评审原文和截图](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/evidence.zip)
+
+## 2026-11-26 追加 · Splash Qwen3.8-27B 4-bit POS
+
+同一台 M5 Max 上，27B 跑完这一轮 POS 用了 **569.5 秒**，比 Flash-Next 原测短 **22.8%**。它的生成吞吐低 **30.8%**，输出少 **44.0%**，原稿还有 Go 编译阻塞。端到端用时较短和交付质量较低在这次测试中同时出现。
+
+### 配置和可比性
+
+客户端与推理主机为同一台 Apple M5 Max 128 GiB Mac，macOS 27.2.1（26B131），Splash 1.7.3，Pi 1.5.2。27B 选择 Unsloth Dynamic v3.1 的 `UD-Q4_K_XL`，目标权重 17.66 GB，另配 BF16 视觉投影和 Inco 的 Qwen3.8-27B DFlash2。选择依据是这一 4-bit 档的量化质量，社区对照显示该权重相对 Q8 的 KL 偏差低于 IQ4_XS。该社区对照使用 AMD 设备。目标、投影和草稿均固定版本并与发布方 SHA-256 核对。[Unsloth 发布](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/143) · [社区量化对照](https://github.com/kr4ckhe4d/local-llm-benchmarks/blob/main/r9700%2Brx9070.md) · [权重校验和遥测](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+两轮均为 **262,144-token** 上下文，Pi **medium** thinking，温度 1、top-p 0.95、top-k 20、单请求上限 16,384 token、整题上限 40 分钟，复用了同一个 POS 提示词、系统提示词和 read/write/edit 工具。提示词哈希及实际请求字段已核对。运行沿用 INT8 KV、FP32 工作状态和 96 GiB Metal 上限，SSD 缓存关闭。保留 Splash 的自动草稿验证和长 prefill Neural Engine 分流。启动校准在 27B 的 687 行起启用约 24% 的 FFN 分流。启动、校准和后续 Docker/浏览器验收均在整题计时之外。[Splash 模型支持](https://github.com/incoai/splash/blob/1.7.3/docs/models.md) · [运行参数](https://github.com/incoai/splash/blob/1.7.3/docs/server.md)
+
+### 性能
+
+| Splash POS | 整题秒数 | 请求 / API 错误 | 输入 / 缓存 token | 输出 / 思考 token | Prefill tok/s | Generation tok/s | 工具调用 / 错误 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Flash-Next UD-IQ4_XS 原测 | 737.6 | 44 / 0 | 1,921,741 / 1,841,248 | 71,310 / 18,004 | 1,205.1 | 106.6 | 56 / 1 |
+| 27B UD-Q4_K_XL v3.1 | 569.5 | 15 / 0 | 425,207 / 407,712 | 39,946 / 13,181 | 627.5 | 73.8 | 29 / 0 |
+
+首请求的未缓存 prefill 分别为 1,992.8 和 1,140.0 tok/s，客户端首个流式增量为 0.60 和 1.05 秒。整题 prefill 吞吐按各请求扣除已缓存输入后加权，generation 吞吐按原生生成耗时加权。温度、模型架构、量化和不同生成轨迹共同限定了此次对照的结论范围，每个配置一轮。
+
+| Splash POS | 样本 | 原生进程 footprint GiB | 整机内存 GiB | GPU % | 整机 CPU % | 原生进程 CPU % | Swap GiB |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Flash-Next UD-IQ4_XS 原测 | 368 | 65.61 / 66.91 | 105.13 / 108.51 | 48.64 / 100.00 | 61.88 / 100.00 | 17.92 / 40.13 | 3.43 / 3.43 |
+| 27B UD-Q4_K_XL v3.1 | 284 | 22.07 / 23.71 | 68.88 / 73.24 | 98.92 / 99.00 | 11.07 / 36.46 | 1.37 / 2.30 | 3.72 / 3.73 |
+
+资源列为平均 / 采样峰值，沿用两秒采样。27B 的原生进程平均物理 footprint 低约 66%。整机内存、CPU 和 GPU 也包含当时的后台负载。Flash-Next 是当天较早一轮的原始基线。[逐请求与两秒资源数据](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+### POS 产品验收
+
+原稿已固定为本机提交 `e3cd696`，共 23 个文件。Go race 测试、`go vet` 和 Compose 的后端构建均因同一个错误失败。`backend/internal/store/store.go:69–70` 的 `Products`、`Sales` 字段与第 118、154 行的方法同名。生成的 Compose 接受端口变量，也配了 nginx 同源代理。两条发布规则缺少回环地址，容器名固定，会影响隔离部署。
+
+为检查其余功能，评审只在独立副本改了冲突的方法名及调用点，并加 Compose 覆盖，使用回环前端/API 端口 18401/18402 和独立子网。前端及业务逻辑沿用生成版本。诊断副本从空卷启动成功，Go race 的 12 个顶层测试中通过 11 个，搜索测试因「coffee」还匹配 Coffee & Tea 分类中的茶品而失败。API 8/8 通过，覆盖拒绝零数量和超库存、忽略客户端伪造价格、现金和模拟卡结账、库存扣减及后端重启后的保存。另从源码确认，保存失败前内存库存和销售记录已改动，错误路径缺少回滚。[源码快照标识、诊断补丁和验收记录](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+Thorium 156.0.8078.28 在诊断副本通过 36/38 项，桌面键盘和 390px 手机触控均完成模拟结账，无横向溢出或页面错误。两项失败都是金额不一致。Go 使用 750‰（75%），Vue 显示 7.5%。桌面现金流程从 **$19.33** 到小票 **$31.47**，手机刷卡小票为 **$4.36**，按显示税率应为 **$2.68**。Codex 对提交原稿给出代码 **4/10**、可运行 UI **0/10**，对解开编译阻塞后的诊断 UI 给 **7/10**。原 Splash Flash-Next 版为代码 **8/10**、UI **9/10**。两版自己的 Go 测试都未能原样通过，Flash-Next 的应用镜像可以构建并实际结账。
+
+![27B 的诊断副本 · 桌面收银台](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/desktop-register.png)
+
+[桌面现金小票](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/desktop-cash-receipt.png) · [手机收银台](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/mobile-register.png) · [手机刷卡小票](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/mobile-card-receipt.png)
+
+本机启动脚本无参数时仍选择 Flash-Next，`start.sh 27b` 选择 27B，共用服务端口。Pi 跑 27B 已验证该参数。随后无参数启动成功，认证模型列表包含 Flash-Next，256K 上下文下的测试请求返回 `391`。推理服务已停止。
+
+### Claude 独立复核
+
+Orca 启动的 Claude Opus 5.5 为提交原稿给出代码 **2/10**、可运行 UI **0/10**，为诊断 UI 给出 **6/10**。它独立确认原稿编译失败，并用两笔模拟交易重现 75% 税率。按界面显示的精确现金金额结账会被后端拒绝。它还实测小票打印抛出 TypeError、付款弹窗打开时全局快捷键仍能清空购物车，以及焦点会离开弹窗。在临时副本中，故障注入复现了写入失败后内存和磁盘状态分离，并行测试复现了写库存与读分类之间的数据竞争。两位评审都确认原稿无法交付、修开编译后税率仍错误。分数差距来自 Claude 对开箱运行、货款错误和结账交互给了更少分数。[独立复核与截图](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)

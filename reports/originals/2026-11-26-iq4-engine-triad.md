@@ -158,3 +158,47 @@ Thorium 156.0.8078.28 passed 36 of 37 checks. The desktop path used `/` to searc
 [Desktop cash receipt](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/desktop-cash-receipt.png) · [Mobile register](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/mobile-register.png) · [Mobile card receipt](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/mobile-card-receipt.png)
 
 Claude Opus 5.5 independently scored the candidate **7/10** for code and **8/10** for UI through Orca. It reran the Go tests in a disposable copy, completed two mock sales in Thorium and confirmed that focus leaves the dialog. It also reproduced Enter on the focused Cancel button submitting a sale, and a payment dialog that labeled $7.58 as server-confirmed while the backend receipt showed $7.57, a 1-cent difference. Codex gathered the cold-start and restart evidence. Both reviewers credited the core flow after the ownership setup and deducted for the fresh-volume startup and keyboard issues. Claude also deducted for out-of-box reproducibility and payment errors. The source snapshot is local commit `5cef14325226b39f4ecfbd760c3591932d555869`. [Independent review and screenshots](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/evidence.zip)
+
+## 2026-11-26 addendum · Splash Qwen3.8-27B 4-bit POS
+
+On the same M5 Max, 27B ended its POS run in **569.5 seconds**, **22.8%** sooner than the original Flash-Next run. Generation throughput was **30.8%** lower, it emitted **44.0%** fewer tokens, and the submitted Go code blocked the build. The faster session delivered a weaker product in this comparison.
+
+### Configuration and controls
+
+The client and inference host were the same Apple M5 Max Mac with 128 GiB, macOS 27.2.1 (26B131), Splash 1.7.3 and Pi 1.5.2. The 27B profile used Unsloth Dynamic v3.1 `UD-Q4_K_XL`, a 17.66 GB target, alongside a BF16 vision projector and Inco's Qwen3.8-27B DFlash2 draft. The choice prioritized quality within the 4-bit tier. The independent quantization comparison on AMD hardware measured lower KL divergence from Q8 for this target than for IQ4_XS. The downloaded target, projector and draft were pinned and verified against the publisher's SHA-256 checksums. [Unsloth release](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/143) · [Community quantization measurements](https://github.com/kr4ckhe4d/local-llm-benchmarks/blob/main/r9700%2Brx9070.md) · [Hashes and telemetry](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+Both runs used **262,144 tokens of context**, Pi **medium** thinking, temperature 1, top-p 0.95, top-k 20, a 16,384-token limit per request and a 40-minute task limit. The POS and system prompt hashes matched, along with the read/write/edit tools and captured request settings. Splash retained INT8 KV, FP32 working state, the 96 GiB Metal budget, and no disk cache. Splash's automatic draft verification and Neural Engine prefill remained enabled. Startup calibration used an approximately 24% FFN split from 687 rows on 27B. Startup, calibration, Docker and browser evaluation were outside task timing. [Splash model support](https://github.com/incoai/splash/blob/1.7.3/docs/models.md) · [Runtime settings](https://github.com/incoai/splash/blob/1.7.3/docs/server.md)
+
+### Performance
+
+| Splash POS | Task seconds | Requests / API failures | Input / cache tokens | Output / thinking tokens | Prefill tok/s | Generation tok/s | Tool calls / errors |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Original Flash-Next UD-IQ4_XS | 737.6 | 44 / 0 | 1,921,741 / 1,841,248 | 71,310 / 18,004 | 1,205.1 | 106.6 | 56 / 1 |
+| 27B UD-Q4_K_XL v3.1 | 569.5 | 15 / 0 | 425,207 / 407,712 | 39,946 / 13,181 | 627.5 | 73.8 | 29 / 0 |
+
+Uncached first-request prefill was 1,992.8 and 1,140.0 tok/s, respectively, and client time to the first streamed delta was 0.60 and 1.05 seconds. Whole-task rates divide total effective tokens by the corresponding total native prefill or decode time. Prefill excludes cached input tokens. Model architecture, quantization, and sampled generation paths differ across the two runs. Each configuration has one trial.
+
+| Splash POS | Samples | Native process footprint GiB | Host memory GiB | GPU % | Host CPU % | Native process CPU % | Swap GiB |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Original Flash-Next UD-IQ4_XS | 368 | 65.61 / 66.91 | 105.13 / 108.51 | 48.64 / 100.00 | 61.88 / 100.00 | 17.92 / 40.13 | 3.43 / 3.43 |
+| 27B UD-Q4_K_XL v3.1 | 284 | 22.07 / 23.71 | 68.88 / 73.24 | 98.92 / 99.00 | 11.07 / 36.46 | 1.37 / 2.30 | 3.72 / 3.73 |
+
+Resource columns show means and sampled peaks at two-second intervals, using the same collection method as the original run. The mean 27B native process footprint was about 66% lower. Host memory, CPU and GPU metrics also capture background activity. The Flash-Next baseline was collected earlier the same day. [Per-request and resource samples](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+### POS product evaluation
+
+The 23-file submission was frozen at local commit `e3cd696`. Go race tests, `go vet`, and the backend Compose build failed at the same blocker. The `Products` and `Sales` fields at `backend/internal/store/store.go:69–70` collide with methods on lines 118 and 154. The submitted Compose accepts custom ports and configures an nginx same-origin proxy. Its publication rules omit the loopback address and give both containers fixed names, impairing isolated deployments.
+
+To evaluate the remaining features, the diagnostic copy renamed the colliding Go methods and their call sites. An evaluation Compose override bound web/API ports 18401/18402 to loopback on a dedicated subnet. The submitted frontend and business logic ran intact. The diagnostic copy booted on a clean volume and passed 11 of 12 top-level Go race tests. The search test failed because “coffee” also matches teas in the Coffee & Tea category. Eight API checks passed, including rejection of zero quantity and insufficient stock, server pricing despite a forged client price, cash and mock card checkout, stock decrement, and persistence after backend restart. Source inspection also found that stock and the sales ledger change in memory before persistence, and the error path has no rollback. [Source identifier, diagnostic patch and acceptance evidence](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+Thorium 156.0.8078.28 passed 36 of 38 diagnostic checks, including desktop keyboard and 390px mobile touch checkout. Neither viewport overflowed and there were no page errors. Both failures were amount discrepancies. Go uses 750 per mille (75%), while the Vue UI displays 7.5%. The desktop cash preview showed **$19.33** and the receipt showed **$31.47**. The mobile card receipt showed **$4.36**, versus **$2.68** at the displayed rate. Codex scored the submission **4/10 code** and **0/10 runnable UI**, and the diagnostic UI **7/10**. The original Splash Flash-Next run scored **8/10 code** and **9/10 UI**. Both submitted Go suites failed as delivered, while the Flash-Next application itself built and processed sales.
+
+![27B diagnostic copy · desktop register](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/desktop-register.png)
+
+[Desktop cash receipt](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/desktop-cash-receipt.png) · [Mobile register](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/mobile-register.png) · [Mobile card receipt](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/mobile-card-receipt.png)
+
+The local launcher defaults to Flash-Next and selects 27B with `start.sh 27b`, using the same service port. The Pi run exercised the explicit argument. The subsequent argument-free smoke test exposed the Flash-Next model at 256K context and returned `391` on an authenticated request. Inference was stopped afterward.
+
+### Claude independent review
+
+Claude Opus 5.5 ran through Orca and scored the submission **2/10 code** and **0/10 runnable UI**, with **6/10** for the diagnostic UI. It independently reproduced the original compile failure and confirmed the 75% tax in two mock transactions. The backend rejected cash tendered at the displayed exact total. Claude also reproduced a Print TypeError, cart shortcuts firing behind the checkout dialog, and focus escaping the dialog. A failure-injection test on a disposable copy confirmed that a write failure leaves memory and disk out of sync. A concurrent probe reproduced a race between stock writes and category reads. Both reviewers found the submitted build blocked and the tax incorrect once the code ran. Claude gave less credit for out-of-the-box execution, amount correctness and checkout interactions. [Independent review and screenshots](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
