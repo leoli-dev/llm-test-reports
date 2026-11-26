@@ -240,3 +240,59 @@ Thorium 156.0.8078.28 passed **43 of 44** checks on desktop and at 390px mobile 
 ### Claude independent review
 
 Claude Opus 5.5 ran through Orca and scored Q8 **8/10 code** and **9/10 UI**, versus its **2/10 code** and **0/10 runnable UI** for the Q4 submission. Claude reran Go tests in a disposable copy and completed a desktop cash sale and a mobile card sale in Thorium. It independently confirmed the faulty generated stock assertion, the missing loopback binding, and Tab escaping the receipt dialog. It also measured the mobile cart at about 2,150px below the top on the unfiltered page and the quantity buttons at 30×30px. Both reviewers found the Q8 source buildable and the tested checkout amounts correct. [Independent review and screenshots](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/evidence.zip)
+
+## 2026-11-26 addendum · 27B Q8 creative reruns
+
+Both tasks used the same M5 Max Mac with 128 GiB, macOS 27.2.1 (26B131), Splash 1.7.3, Pi 1.5.2 and the verified 27B `UD-Q8_K_XL`. The formal runs reused the original task and system prompts, read/write/edit tools, 262,144-token context, `medium` thinking, temperature 1, top-p 0.95, top-k 20, 16,384 tokens per request and 40 minutes per task. Pi started each task in a separate session and empty project directory on the ready Splash instance.
+
+Both formal runs made a single successful HTTP request. All 16,384 output tokens were classified as reasoning, there were zero tool calls, and no source files were delivered. Pi exited with code 0. Both formal artifacts scored 0/10 for delivery. The earlier Splash Flash-Next formal tank run had the same outcome. Flash-Next and Strata both delivered working stories under formal settings.
+
+The two tasks also ran in fresh directories under `thinking off`, which sends `reasoning_effort: none` in the API request. Context, prompts, sampling and limits carried over. The tank recovery can be compared with the earlier tank recovery at the same settings. The story recovery examines the resulting artifact. The Flash-Next and Strata story data come from their formal medium runs. [Per-request telemetry, acceptance evidence and independent review](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/evidence.zip)
+
+### Performance
+
+| Run | Seconds | Requests / API failures | Output tokens | Prefill tok/s | Generation tok/s | Tool calls / errors |
+| --- |  ---: |  ---: |  ---: |  ---: |  ---: |  ---: |
+| Tank formal · 27B Q8 | 426.6 | 1 / 0 | 16,384 | 987.0 | 38.5 | 0 / 0 |
+| Tank formal · Splash Flash-Next | 251.2 | 1 / 0 | 16,384 | 2,012.2 | 65.5 | 0 / 0 |
+| Tank formal · Strata Flash-Next | 1,305.4 | 15 / 0 | 47,622 | 782.2 | 37.8 | 15 / 1 |
+| Tank recovery · 27B Q8 | 1,145.0 | 88 / 0 | 63,727 | 389.3 | 64.6 | 87 / 8 |
+| Tank recovery · Splash Flash-Next | 1,363.7 | 113 / 0 | 180,774 | 1,233.7 | 147.5 | 112 / 12 |
+| Tank recovery · Strata Flash-Next | 1,717.3 | 77 / 0 | 92,838 | 849.2 | 56.9 | 76 / 8 |
+| Story formal · 27B Q8 | 443.6 | 1 / 0 | 16,384 | 739.8 | 37.1 | 0 / 0 |
+| Story formal · Splash Flash-Next | 632.5 | 16 / 0 | 58,378 | 1,295.7 | 99.0 | 15 / 1 |
+| Story formal · Strata Flash-Next | 1,533.0 | 11 / 0 | 76,306 | 936.8 | 50.7 | 14 / 2 |
+| Story recovery · 27B Q8 | 1,386.9 | 36 / 0 | 75,501 | 511.8 | 58.3 | 36 / 4 |
+
+| 27B Q8 run | Samples | Native footprint GiB | Host memory GiB | GPU % | Host CPU % | Native CPU % |
+| --- |  ---: |  ---: |  ---: |  ---: |  ---: |  ---: |
+| Tank formal · 27B Q8 | 212 | 33.71 / 33.99 | 71.71 / 77.75 | 98.71 / 99.00 | 10.03 / 99.84 | 1.06 / 3.04 |
+| Tank recovery · 27B Q8 | 571 | 36.90 / 44.52 | 76.16 / 83.79 | 98.95 / 100.00 | 7.80 / 66.29 | 1.00 / 4.48 |
+| Story formal · 27B Q8 | 221 | 34.30 / 34.59 | 71.88 / 72.73 | 98.95 / 99.00 | 4.01 / 8.48 | 0.91 / 1.74 |
+| Story recovery · 27B Q8 | 691 | 46.52 / 51.11 | 85.64 / 91.06 | 98.85 / 100.00 | 4.91 / 21.56 | 0.97 / 1.98 |
+
+Resource values are means and sampled peaks at two-second intervals. Prefill excludes cached tokens and generation rates are weighted by native decode time. Reasoning tokens account for most of the elapsed time in the two formal failures. The evidence archive includes the request and resource samples.
+
+### 3D tank arcade · IRON RALLY
+
+The eight submitted files were frozen at `f7e68b8`. JavaScript syntax checks passed. Both Thorium viewports reproduced the stuck deploy screen. The four maps are arrays of rows, and `js/levels.js:114` calls `trim()` on the array. `Game.bootstrap()` throws before scheduling its first frame. The menu and instructions appear, but the submitted game never reaches the battlefield. Codex scored the recovery submission **4/10 code** and **2/10 UI**. In the earlier thinking-off recovery, Splash Flash-Next reached the battlefield before freezing and scored 5/10 and 5/10. Strata Flash-Next reached game-over and redeploy, scoring 8/10 and 8/10.
+
+A separate diagnostic copy added one line to join array rows before parsing. Thorium verified the WebGL battlefield, keyboard movement, rendered player shots, enemy spawns, and mobile touch fire. Game-over and restart were not reached in the 65-second observation window. The right edge of the lives HUD was about 545px on a 390px screen and part of the base HUD was clipped. Source inspection also found that enemy fire passes a fixed `0.28` as projectile depth and passes the intended depth as the angle. Scores use the submitted source. [Original and diagnostic evidence](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/evidence.zip)
+
+![IRON RALLY's submitted deploy screen](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/tank-menu.png)
+
+[Battlefield after the diagnostic join](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/tank-diagnostic-battle.png)
+
+### Snow White and the Seven Dwarfs · Snowfall
+
+The five submitted files were frozen at `a0a0e51`. Seven distinct inline SVG compositions cover the opening, mirror, escape into the forest, cottage, poisoned apple, glass coffin and spring resolution. The desktop checks covered navigation buttons, arrows, Space, number keys and Home/End. Mobile touch selected a scene via the progress dots. Thorium passed **56 of 58** checks with no page, console or HTTP errors and no external requests. The failed checks were scene-panel labels that point to missing element IDs and the clipped mobile apple caption. In that scene, the desktop caption spanned 360 of the artwork's 663 vertical pixels. On mobile, it covered the full 205px height of the artwork and approximately 94px of the caption was clipped at the top. Codex scored the recovery artifact **8/10 code** and **7/10 UI**. The formal medium Splash Flash-Next story scored 8/10 and 8/10.
+
+Two oversized illustration writes in recovery hit the output limit before execution. Pi subsequently completed the seven scenes in smaller pieces. Task timing includes the failed requests, and acceptance used the final frozen delivery. [Scene screenshots and test evidence](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/evidence.zip)
+
+![The poisoned apple in Snowfall](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/story-apple.png)
+
+[The cottage](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/story-cottage.png) · [Mobile apple scene](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/story-mobile-apple.png)
+
+### Claude independent review
+
+Claude Opus 5.5 through Orca scored the recovery submissions **2/10 code and 2/10 UI** for IRON RALLY, and **7/10 code and 7/10 UI** for Snowfall. Both reviewers reproduced the tank deployment failure. The code score difference reflects the credit given to the inactive modules and their structure. Claude reached wave two in the diagnostic build and observed 90-degree rotation of the controls, the player leaving the arena, and enemies stuck on walls. Game-over and restart remained unobserved. Both reviewers verified the seven story scenes and mobile caption problem. Claude also reproduced the frame covering the previous and next buttons at 1024×640 and in mobile landscape. [Independent review, screenshots and probes](../../assets/2026-11-26-iq4-engine-triad/splash-27b-q8-creative/evidence.zip)
