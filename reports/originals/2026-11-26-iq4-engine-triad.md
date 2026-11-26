@@ -202,3 +202,41 @@ The local launcher defaults to Flash-Next and selects 27B with `start.sh 27b`, u
 ### Claude independent review
 
 Claude Opus 5.5 ran through Orca and scored the submission **2/10 code** and **0/10 runnable UI**, with **6/10** for the diagnostic UI. It independently reproduced the original compile failure and confirmed the 75% tax in two mock transactions. The backend rejected cash tendered at the displayed exact total. Claude also reproduced a Print TypeError, cart shortcuts firing behind the checkout dialog, and focus escaping the dialog. A failure-injection test on a disposable copy confirmed that a write failure leaves memory and disk out of sync. A concurrent probe reproduced a race between stock writes and category reads. Both reviewers found the submitted build blocked and the tax incorrect once the code ran. Claude gave less credit for out-of-the-box execution, amount correctness and checkout interactions. [Independent review and screenshots](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b/evidence.zip)
+
+## 2026-11-26 addendum · Splash Qwen3.8-27B Q8 POS rerun
+
+The run used the same Apple M5 Max Mac with 128 GiB, macOS 27.2.1 (26B131), Splash 1.7.3 and Pi 1.5.2. The 27B target changed from `UD-Q4_K_XL` to the same Unsloth release's `UD-Q8_K_XL` (31.46 GB). This is the highest-precision 27B Q8 variant documented by Splash, retaining BF16 attention projections and output head. The target, reused DFlash2 draft and BF16 projector matched publisher SHA-256 checksums. After the Q8 alias was verified on the API, the old 17.66 GB 27B Q4 weights and installation were retired. The launcher defaults to Flash-Next, and `start.sh 27b` selects the Q8 profile registered in Pi. [Splash GGUF support](https://github.com/incoai/splash/blob/1.7.3/docs/models.md#gguf-targets) · [Pinned model revision](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/tree/4af51b3542f775b0a8e4b310bfb3f17e01c306c9)
+
+Both 27B runs shared the POS and system prompts, tools, 262,144-token context, `medium` thinking, 16,384-token request limit, and 40-minute task limit. Requests used temperature 1, top-p 0.95 and top-k 20. Splash retained INT8 KV, FP32 working state, the 96 GiB Metal budget, automatic draft verification and Neural Engine prefill. Task timing started after readiness and acceptance testing followed generation. The two quantizations were sampled once each. The earlier Flash-Next run is included for historical context. [Configuration, request timings and resource samples](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/evidence.zip)
+
+### Performance
+
+Q8 ended the task in **553.5 seconds**, **2.8%** sooner than 27B Q4. Generation throughput was **22.6%** lower and the session emitted **23.3%** fewer tokens. Mean physical footprint increased **56.5%**, from **22.07 GiB** to **34.55 GiB**. Uncached first-request prefill rose from 1,140.0 to 1,193.0 tok/s and time to first streamed delta fell from 1.05 to 1.00 seconds. Q8's Neural Engine split passed startup calibration. Splash paused it on request 16 after measuring a slowdown and used the GPU for subsequent prefill.
+
+| Splash POS | Task seconds | Requests / API failures | Input / cache tokens | Output / thinking tokens | Prefill tok/s | Generation tok/s | Tool calls / errors |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Original Flash-Next UD-IQ4_XS | 737.6 | 44 / 0 | 1,921,741 / 1,841,248 | 71,310 / 18,004 | 1,205.1 | 106.6 | 56 / 1 |
+| 27B UD-Q4_K_XL | 569.5 | 15 / 0 | 425,207 / 407,712 | 39,946 / 13,181 | 627.5 | 73.8 | 29 / 0 |
+| 27B UD-Q8_K_XL | 553.5 | 17 / 0 | 345,298 / 334,592 | 30,629 / 8,903 | 653.3 | 57.1 | 30 / 0 |
+
+| Splash POS | Samples | Native footprint GiB | Host memory GiB | GPU % | Host CPU % | Native process CPU % | Swap GiB |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Original Flash-Next UD-IQ4_XS | 368 | 65.61 / 66.91 | 105.13 / 108.51 | 48.64 / 100.00 | 61.88 / 100.00 | 17.92 / 40.13 | 3.43 / 3.43 |
+| 27B UD-Q4_K_XL | 284 | 22.07 / 23.71 | 68.88 / 73.24 | 98.92 / 99.00 | 11.07 / 36.46 | 1.37 / 2.30 | 3.72 / 3.73 |
+| 27B UD-Q8_K_XL | 275 | 34.55 / 35.91 | 75.13 / 85.06 | 98.28 / 99.00 | 18.56 / 70.97 | 1.64 / 4.70 | 3.71 / 3.72 |
+
+Rates use the original report's effective-token and native-time formulas. Resource figures are means and sampled peaks at two-second intervals. Host figures include background activity. [Per-request data and resource samples](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/evidence.zip)
+
+### POS product evaluation
+
+The 22-file Q8 submission was frozen at local commit `1bcc865`. Both Go and Vue images built and started from a fresh volume. The generated Compose file omitted loopback binding. The evaluation override supplied loopback binding, unique image tags and a dedicated subnet on web/API ports 18411/18412, running the frozen source. **12 of 12 API checks** passed, covering invalid quantities, stock limits including merged duplicate lines, authoritative prices, cash and mock card, correct 7.25% tax, and persisted sales and stock after backend restart. **12 of 13 generated Go race tests** passed and `go vet` passed. The failing test expects rejection for buying 3+3 against stock of 6. An independent API probe correctly rejected 5+2. Source inspection identified a persistence edge case. Checkout mutates in-memory state and then renames the catalog and sales JSON files separately, so a partial write can leave disk or memory state inconsistent. [Source snapshot, acceptance evidence and test logs](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/evidence.zip)
+
+Thorium 156.0.8078.28 passed **43 of 44** checks on desktop and at 390px mobile width, with no horizontal overflow. The desktop preview and cash receipt both showed **$10.70**, with exact tender and $0.00 change. The mobile card preview and receipt both showed **$4.17**. The receipt's initial focus was correct, but Tab escaped the dialog. Codex scored the Q8 submission **7/10 code** and **9/10 UI**, compared with **4/10 code** and **0/10 runnable UI** for the submitted Q4 version. This Q8 run delivered a buildable product with correct checkout amounts. One run per quantization leaves its effect on the long-run pass rate unresolved.
+
+![27B Q8 · Desktop register](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/desktop-register.png)
+
+[Desktop cash receipt](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/desktop-cash-receipt.png) · [Mobile register](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/mobile-register.png) · [Mobile card receipt](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/mobile-card-receipt.png)
+
+### Claude independent review
+
+Claude Opus 5.5 ran through Orca and scored Q8 **8/10 code** and **9/10 UI**, versus its **2/10 code** and **0/10 runnable UI** for the Q4 submission. Claude reran Go tests in a disposable copy and completed a desktop cash sale and a mobile card sale in Thorium. It independently confirmed the faulty generated stock assertion, the missing loopback binding, and Tab escaping the receipt dialog. It also measured the mobile cart at about 2,150px below the top on the unfiltered page and the quantity buttons at 30×30px. Both reviewers found the Q8 source buildable and the tested checkout amounts correct. [Independent review and screenshots](../../assets/2026-11-26-iq4-engine-triad/pos-splash-27b-q8/evidence.zip)
