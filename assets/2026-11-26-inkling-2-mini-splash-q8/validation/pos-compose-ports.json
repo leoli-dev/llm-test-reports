@@ -1,0 +1,18 @@
+{
+  "backend": [
+    {
+      "mode": "ingress",
+      "target": 8080,
+      "published": "18102",
+      "protocol": "tcp"
+    }
+  ],
+  "frontend": [
+    {
+      "mode": "ingress",
+      "target": 80,
+      "published": "18101",
+      "protocol": "tcp"
+    }
+  ]
+}

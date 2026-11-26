@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": "unsloth/Inkling-2-Mini-GGUF",
+      "context_length": 262144,
+      "max_model_len": 262144,
+      "input_modalities": [
+        "text",
+        "image",
+        "pdf"
+      ]
+    },
+    {
+      "id": "inkling-2-mini-ud-q8_k_xl",
+      "context_length": 262144,
+      "max_model_len": 262144,
+      "input_modalities": [
+        "text",
+        "image",
+        "pdf"
+      ]
+    }
+  ]
+}

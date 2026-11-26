@@ -1930,6 +1930,33 @@
         "testOSSource": "reports/originals/2026-11-26-iq4-engine-triad.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-INKLING-Q8",
+      "title": "Inkling 2 Mini on Splash at 256K: three paired coding tasks",
+      "date": "2026-11-26",
+      "sortDate": "2026-11-26",
+      "model": "Unsloth Inkling-2-Mini UD-Q8_K_XL",
+      "engines": [
+        "Splash 1.7.3"
+      ],
+      "scope": "local",
+      "category": "Paired capability and inference",
+      "summary": "Three CAP-IQ4-ENGINE briefs replayed at low and medium thinking. Low produced source for all three, while medium delivered only Snow White.",
+      "caveat": "One run per task and effort. The 256K service setting was verified, and the largest observed single input was 48,991 tokens.",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-11-26-inkling-2-mini-splash-q8.md"
+      ],
+      "markdown": "reports/experiments/cap-inkling-q8.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-26-inkling-2-mini-splash-q8.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3295,6 +3322,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-11-26-iq4-engine-triad.md"
+      }
+    },
+    {
+      "id": "2026-11-26-inkling-2-mini-splash-q8",
+      "title": "Inkling 2 Mini on Splash at 256K: three paired coding tasks",
+      "path": "reports/originals/2026-11-26-inkling-2-mini-splash-q8.md",
+      "format": "markdown",
+      "source": "new-report/CAP-INKLING-Q8",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1 (26B131), arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-26-inkling-2-mini-splash-q8.md"
       }
     }
   ],

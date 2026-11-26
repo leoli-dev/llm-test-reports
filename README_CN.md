@@ -6,7 +6,7 @@
 
 **[浏览中文报告站](https://leoli-dev.github.io/llm-test-reports/index_CN.html)** · **[完整 Markdown 报告](reports/originals/)** · [新增报告](CONTRIBUTING_CN.md)
 
-当前收录 **64 项实验、参数组或对照记录，87 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
+当前收录 **65 项实验、参数组或对照记录，88 份报告（各有中英全文）**。多轮评审属于同一实验链，不同模型可能共用报告；这些数字不等于独立样本数。
 
 ## 本机配置与系统
 
@@ -33,6 +33,7 @@
 
 | 日期 | 测试 / 参数组 | 模型与运行方式 | 报告 |
 |---|---|---|---|
+| 2026-11-26 | Inkling 2 Mini 在 Splash 256K 上的三题复测 | Unsloth Inkling-2-Mini UD-Q8_K_XL | [CAP-INKLING-Q8](reports/experiments/cap-inkling-q8_CN.md) |
 | 2026-11-26 | 同一 IQ4 权重下的 Strata 与 Splash 三题对照 | Unsloth Qwen3.8 Flash Next UD-IQ4_XS | [CAP-IQ4-ENGINE](reports/experiments/cap-iq4-engine_CN.md) |
 | 2026-11-24 | Flash-Next IQ3_S 与 IQ4_XS — 本机代码质量配对评测 | Qwen3.8-Flash-Next GSQ-RCO IQ3_S and UD-IQ4_XS | [CAP-IQ-PAIR](reports/experiments/cap-iq-pair_CN.md) |
 | 2026-11-24 | Splash 上的 Flash Next UD-IQ4_XS：CAP-05 复测 | Qwen3.8-Flash-Next UD-IQ4_XS / GSQ-RCO IQ3_S | [CAP-05-IQ4](reports/experiments/cap-05-iq4_CN.md) |

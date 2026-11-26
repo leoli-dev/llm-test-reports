@@ -1,0 +1,44 @@
+{
+  "browser": "Thorium",
+  "cdpProduct": "Chrome/156.0.8078.28",
+  "story-low": {
+    "initial": "Scene 1 of 6",
+    "afterArrowRight": "Scene 2 of 6",
+    "afterNextButtons": "Scene 6 of 6",
+    "sceneCount": 6,
+    "mobileOverflow": 0
+  },
+  "story-medium": {
+    "initial": "Scene 1 of 6 \u2014 A Morning in the Wood",
+    "afterArrowRight": "Scene 2 of 6 \u2014 The Mirror",
+    "afterNextButtons": "Scene 6 of 6 \u2014 Morning Returns",
+    "sceneCount": 6,
+    "mobileOverflow": 0
+  },
+  "tank-low": {
+    "start": {
+      "x": 480,
+      "y": 359.93603515625,
+      "shots": 0,
+      "overlayHidden": true,
+      "enemies": "7",
+      "wave": "1"
+    },
+    "inPlay": {
+      "x": 489.1607360839844,
+      "y": 329.80084228515625,
+      "shots": 111,
+      "overlayHidden": true,
+      "enemies": "7",
+      "wave": "1"
+    },
+    "afterRestart": {
+      "x": 468.5976867675781,
+      "y": 379.391845703125,
+      "shots": 147,
+      "overlayHidden": true,
+      "enemies": "7",
+      "wave": "1"
+    }
+  }
+}

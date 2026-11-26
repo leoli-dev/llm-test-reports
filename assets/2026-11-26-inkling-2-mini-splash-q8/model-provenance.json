@@ -1,0 +1,21 @@
+{
+  "target": "unsloth/Inkling-2-Mini-GGUF@8078d149286eec7193795413b9e0643da6d11fa1",
+  "draft": "incoai/Inkling-2-Mini-DFlash2@4f9088ea66c21f2b99ed657d1941c306b03e84d2",
+  "artifacts": {
+    "target/Inkling-2-Mini-UD-Q8_K_XL.gguf": {
+      "bytes": 22867452896,
+      "sha256": "2da51788d43a17e1f033bec420fa83ba9cb87ac1f0130dc9135a4d2ed2678b68"
+    },
+    "target/mmproj-BF16.gguf": {
+      "bytes": 641805760,
+      "sha256": "2c165c78790e78a3f45a2d1e9e931083e52ee69d45ff2a0dc9c281fdf1a666e7"
+    },
+    "draft/model.safetensors": {
+      "bytes": 989975616,
+      "sha256": "217980ab00d116693fa5946df7bbfd967caf5fac1f529afd541fbd470ddb54ee"
+    }
+  },
+  "family": "Inkling-2-Mini",
+  "target_format": "gguf",
+  "vision_format": "gguf"
+}

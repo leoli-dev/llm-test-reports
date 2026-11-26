@@ -1,0 +1,12 @@
+=== RUN   TestCheckoutHappyPath
+--- PASS: TestCheckoutHappyPath (0.00s)
+=== RUN   TestCheckoutRejectsInvalidQuantity
+--- PASS: TestCheckoutRejectsInvalidQuantity (0.00s)
+=== RUN   TestCheckoutRejectsInsufficientStock
+--- PASS: TestCheckoutRejectsInsufficientStock (0.00s)
+=== RUN   TestSearchProducts
+--- PASS: TestSearchProducts (0.00s)
+=== RUN   TestCheckoutPersistsAcrossReload
+--- PASS: TestCheckoutPersistsAcrossReload (0.00s)
+PASS
+ok  	pos-backend	1.176s

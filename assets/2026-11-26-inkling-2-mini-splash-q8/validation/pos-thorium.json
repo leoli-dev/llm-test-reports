@@ -1,0 +1,9 @@
+{
+  "browser": "Thorium",
+  "testSetup": "Go and Vite on loopback, isolated demo data",
+  "salesPersisted": 1,
+  "mockPayment": "cash",
+  "checkoutTotal": 9.16,
+  "receiptRendered": false,
+  "receiptIssue": "The frontend formats item.line while the API returns line_total"
+}

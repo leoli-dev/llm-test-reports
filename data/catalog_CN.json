@@ -1930,6 +1930,33 @@
         "testOSSource": "reports/originals/2026-11-26-iq4-engine-triad_CN.md"
       },
       "artifact": null
+    },
+    {
+      "id": "CAP-INKLING-Q8",
+      "title": "Inkling 2 Mini 在 Splash 256K 上的三题复测",
+      "date": "2026-11-26",
+      "sortDate": "2026-11-26",
+      "model": "Unsloth Inkling-2-Mini UD-Q8_K_XL",
+      "engines": [
+        "Splash 1.7.3"
+      ],
+      "scope": "local",
+      "category": "配对能力与推理性能",
+      "summary": "用 low 和 medium 重跑 CAP-IQ4-ENGINE 原三题。low 三题均写出源码，medium 只交付《白雪公主》。",
+      "caveat": "每题每档各跑一次。服务配置为 256K，测试中最大单请求实际输入为 48,991 tokens。",
+      "sourceStatus": "report-only",
+      "documents": [
+        "reports/originals/2026-11-26-inkling-2-mini-splash-q8_CN.md"
+      ],
+      "markdown": "reports/experiments/cap-inkling-q8_CN.md",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1（26B131），arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-26-inkling-2-mini-splash-q8_CN.md"
+      },
+      "artifact": null
     }
   ],
   "documents": [
@@ -3295,6 +3322,20 @@
         "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
         "hardwareStatus": "author-recorded",
         "testOSSource": "reports/originals/2026-11-26-iq4-engine-triad_CN.md"
+      }
+    },
+    {
+      "id": "2026-11-26-inkling-2-mini-splash-q8",
+      "title": "Inkling 2 Mini 在 Splash 256K 上的三题复测",
+      "path": "reports/originals/2026-11-26-inkling-2-mini-splash-q8_CN.md",
+      "format": "markdown",
+      "source": "new-report/CAP-INKLING-Q8",
+      "environment": {
+        "scope": "local",
+        "testOS": "macOS 27.2.1（26B131），arm64",
+        "inferenceHardware": "MacBook Pro / Apple M5 Max / 18 CPU / 40 GPU / 128 GiB",
+        "hardwareStatus": "author-recorded",
+        "testOSSource": "reports/originals/2026-11-26-inkling-2-mini-splash-q8_CN.md"
       }
     }
   ],

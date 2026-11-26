@@ -1,0 +1,28 @@
+{
+  "has_entry_point": true,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 774
+    },
+    {
+      "path": "game.js",
+      "bytes": 18384
+    },
+    {
+      "path": "index.html",
+      "bytes": 1768
+    },
+    {
+      "path": "style.css",
+      "bytes": 2502
+    }
+  ],
+  "syntax": [
+    {
+      "file": "game.js",
+      "ok": true,
+      "stderr": ""
+    }
+  ]
+}

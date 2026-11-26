@@ -1,0 +1,28 @@
+{
+  "has_entry_point": true,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1451
+    },
+    {
+      "path": "css/styles.css",
+      "bytes": 4714
+    },
+    {
+      "path": "index.html",
+      "bytes": 21889
+    },
+    {
+      "path": "js/story.js",
+      "bytes": 3355
+    }
+  ],
+  "syntax": [
+    {
+      "file": "js/story.js",
+      "ok": true,
+      "stderr": ""
+    }
+  ]
+}
