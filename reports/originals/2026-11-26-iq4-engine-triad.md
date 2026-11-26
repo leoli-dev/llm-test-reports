@@ -122,3 +122,39 @@ Codex completed its code and Thorium UI review first. Orca then launched Claude 
 Each task/configuration pair was sampled once. Eight sessions yielded 292 inference requests and 4,139 within-task resource samples. Splash ran first in the formal round. File cache, internal reasoning budgets and thermals could affect the outcome. Reported speed, resource footprint and product outcomes have separate evidence. The tank rerun uses its own common thinking configuration. Browser and Docker checks ran after generation for resource isolation. Game coverage reached the first loss and restart, and POS used mock products and payments.
 
 The local source archive is `qwen3.8-tests/2026-11-26-iq4-engine-triad/`, with a separate Git repository for each product.
+
+## 2026-11-26 update · Strata POS rerun with DFlash2
+
+Strata generated **35.6%** faster and Pi finished **18.3%** sooner while generating **10.7%** more tokens. The new product passed its Go tests, but fresh-volume permissions blocked the first startup and made the delivery weaker than the original Strata POS.
+
+The rerun used the same local M5 Max with 128 GiB, macOS 27.2.1 (26B131), and Pi 1.5.2. It reused the original POS and system prompts, tools, sampling parameters, medium thinking and 40-minute limit in a fresh directory and session. `drafting` was the only inference setting changed in the default `UD-IQ4_XS-v31 256K` preset. The Metal engine loaded the tuned IQ4 DFlash2 pack with `spec 6` and `draft-conf 0.7` and kept the default prefill chunk of 2048. Splash figures are historical. Background load and the model's sampled trajectory varied between runs. [Rerun evidence and per-request telemetry](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/evidence.zip)
+
+| POS run | Wall time, s | Requests | Input / cached tokens | Output tokens | Prefill tok/s | Generation tok/s | Tool calls / errors |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Splash original | 737.6 | 44 | 1,921,741 / 1,841,248 | 71,310 | 1,205.1 | 106.6 | 56 / 1 |
+| Strata original | 766.9 | 15 | 411,183 / 400,418 | 38,342 | 587.4 | 51.3 | 35 / 1 |
+| Strata DFlash2 | 626.6 | 18 | 542,876 / 533,155 | 42,457 | 636.2 | 69.6 | 37 / 0 |
+
+First-request generation rose from 50.2 to 65.1 tok/s. First-request prefill was 692.5 and 689.2 tok/s, and the aggregate prefill change includes differences in later requests. Splash's historical generation throughput remained higher. The rerun finished 111.0 seconds sooner than Splash and emitted 28,853 fewer tokens, so wall time and generation throughput describe different outcomes.
+
+| POS run | Samples | Native process footprint GiB | Host memory GiB | GPU % | Host CPU % | Native process CPU % |
+|---|---:|---:|---:|---:|---:|---:|
+| Splash original | 368 | 65.6 / 66.9 | 105.1 / 108.5 | 48.6 / 100.0 | 61.9 / 100.0 | 17.9 / 40.1 |
+| Strata original | 382 | 19.2 / 21.1 | 110.5 / 114.0 | 92.1 / 100.0 | 45.6 / 83.1 | 84.3 / 105.3 |
+| Strata DFlash2 | 312 | 20.0 / 22.0 | 107.9 / 110.2 | 91.9 / 100.0 | 56.3 / 100.0 | 55.1 / 92.5 |
+
+Resource values are mean / sampled maximum with the same two-second cadence and definitions. Swap was about 7.7 GiB in the rerun and 3.4 GiB in the original Strata POS run.
+
+### POS product acceptance
+
+Both images built. Docker's automatic network address pool was exhausted, so the evaluation applied a dedicated subnet as in the original review. The fresh volume was then mounted with root ownership. The `pos` user selected on line 16 could not write the `/data` volume declared in `backend/Dockerfile:14`, and the service exited while writing `/data/db.json.tmp`. The evaluator initialized ownership on the isolated test volume and preserved the generated source and runtime user.
+
+Follow-up checks used configurable web and API ports 18301 / 18302. All 11 Go race tests passed, and `go vet` produced no diagnostics. All 8 API checks passed, covering cash and mock card, server pricing, stock decrement, rejection of invalid quantities and insufficient stock, and persistence of inventory and sales after an API restart. On source inspection, `backend/checkout.go:128` mutates in-memory inventory and sales before writing the file. Its error path leaves those memory changes in place if saving fails.
+
+Thorium 156.0.8078.28 passed 36 of 37 checks. The desktop path used `/` to search, Enter to add, quantity editing and F2 to check out, with a $11.91 cash receipt. The 390px mobile viewport had no horizontal overflow and completed a card checkout by touch. The receipt opened with the intended focus, which left the dialog on Tab. Page, console and HTTP errors were all 0. Codex scores were **8/10** for code and **9/10** for UI. [Acceptance scripts, logs and screenshot evidence](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/evidence.zip)
+
+![Desktop register from the Strata DFlash2 rerun](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/desktop-register.png)
+
+[Desktop cash receipt](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/desktop-cash-receipt.png) · [Mobile register](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/mobile-register.png) · [Mobile card receipt](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/mobile-card-receipt.png)
+
+Claude Opus 5.5 independently scored the candidate **7/10** for code and **8/10** for UI through Orca. It reran the Go tests in a disposable copy, completed two mock sales in Thorium and confirmed that focus leaves the dialog. It also reproduced Enter on the focused Cancel button submitting a sale, and a payment dialog that labeled $7.58 as server-confirmed while the backend receipt showed $7.57, a 1-cent difference. Codex gathered the cold-start and restart evidence. Both reviewers credited the core flow after the ownership setup and deducted for the fresh-volume startup and keyboard issues. Claude also deducted for out-of-box reproducibility and payment errors. The source snapshot is local commit `5cef14325226b39f4ecfbd760c3591932d555869`. [Independent review and screenshots](../../assets/2026-11-26-iq4-engine-triad/pos-dflash2/evidence.zip)
